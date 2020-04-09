@@ -27,7 +27,7 @@ class SlotTest {
 
     @Test
     void incrementSeeds_aboveMax_should_fail() {
-        for(int i=0 ; i<20 ; i++)
+        for(int i=0 ; i<44 ; i++)
             s.incrementSeeds();
 
         Assertions.assertThrows(IllegalStateException.class, () -> {

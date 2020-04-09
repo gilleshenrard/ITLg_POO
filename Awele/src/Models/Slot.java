@@ -30,7 +30,7 @@ public class Slot {
      * @throws IllegalStateException
      */
     public void incrementSeeds() throws IllegalStateException{
-        if(this.nb_seeds >= 24)
+        if(this.nb_seeds >= 48)
             throw new IllegalStateException("A slot can have maximum 24 seeds");
 
         this.nb_seeds += 1;
