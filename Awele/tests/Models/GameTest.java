@@ -48,4 +48,10 @@ class GameTest {
             g.storeSeeds(1, 12);
             Assertions.assertEquals(g.getSeeds(1), 12);
     }
+
+    @Test
+    void getInstance_shouldnot_fail() {
+        Game g2 = new Game();
+        Assertions.assertEquals(g.getInstance(), g2.getInstance());
+    }
 }

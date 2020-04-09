@@ -3,9 +3,9 @@ package Models;
 import java.security.InvalidParameterException;
 
 public class Game {
-    int m_seedpl1;
-    int m_seedpl2;
-    Game m_instance;
+    private int m_seedpl1;
+    private int m_seedpl2;
+    private static Game m_instance;
 
     /**
      * Create a new Game
@@ -20,12 +20,12 @@ public class Game {
      * Create or return this instance of Game (DP singleton)
      * @return This instance of Game
      */
-    public Game getInstance(){
+    public static synchronized Game getInstance(){
         //if instance does not exist, create it
-        if (this.m_instance == null)
-            this.m_instance = new Game();
+        if (Game.m_instance == null)
+            Game.m_instance = new Game();
 
-        return this.m_instance;
+        return Game.m_instance;
     }
 
     /**
