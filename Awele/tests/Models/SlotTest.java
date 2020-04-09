@@ -3,10 +3,40 @@ package Models;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.security.InvalidParameterException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class SlotTest {
     Slot s = new Slot();
+
+    @Test
+    void setCoordinates_invalidX_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            s.setCoordinates(3, 5);
+        });
+    }
+
+    @Test
+    void setCoordinates_negativeX_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            s.setCoordinates(-3, 5);
+        });
+    }
+
+    @Test
+    void setCoordinates_invalidY_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            s.setCoordinates(0, 10);
+        });
+    }
+
+    @Test
+    void setCoordinates_negativeY_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            s.setCoordinates(0, -5);
+        });
+    }
 
     @Test
     void getNbSeeds_shouldnot_fail() {
