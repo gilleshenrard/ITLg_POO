@@ -83,6 +83,14 @@ public class Player {
     }
 
     /**
+     * Select the slot to harvest
+     * @return Slot to harvest
+     */
+    public int selectSlot(){
+        return this.m_behaviour.selectSlot();
+    }
+
+    /**
      * Tells if o is equal to the current Player
      * @param o Object to test
      * @return true if equal, false otherwise
