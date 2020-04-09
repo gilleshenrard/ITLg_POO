@@ -41,7 +41,7 @@ public class Game {
         if(nb_seeds < 0 || nb_seeds > 23)
             throw new InvalidParameterException("nb_seeds must be a positive number between 0 and 23");
 
-        if (ID == 0)
+        if (ID == 1)
             this.m_seedpl1 += nb_seeds;
         else
             this.m_seedpl2 += nb_seeds;
@@ -57,7 +57,7 @@ public class Game {
         if(ID != 1 && ID != 2)
             throw new InvalidParameterException("ID must be 1 or 2");
 
-        if(ID == 0)
+        if(ID == 1)
             return m_seedpl1;
         else
             return m_seedpl2;
