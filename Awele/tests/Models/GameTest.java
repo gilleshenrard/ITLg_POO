@@ -54,4 +54,35 @@ class GameTest {
         Game g2 = new Game();
         Assertions.assertEquals(g.getInstance(), g2.getInstance());
     }
+
+    @Test
+    void setPlayer_shouldnot_fail() {
+            g.setPlayer(1, new Player(1, "test"));
+    }
+
+    @Test
+    void setPlayer_invalidID_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            g.setPlayer(0, new Player(1, "test"));
+        });
+    }
+
+    @Test
+    void setPlayer_nullPlayer_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            g.setPlayer(1, null);
+        });
+    }
+
+    @Test
+    void setBoard_nullBoard_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            g.setBoard(null);
+        });
+    }
+
+    @Test
+    void setBoard_shouldnot_fail() {
+            g.setBoard(new Board());
+    }
 }

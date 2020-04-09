@@ -6,6 +6,9 @@ public class Game {
     private int m_seedpl1;
     private int m_seedpl2;
     private static Game m_instance;
+    private Player m_player1;
+    private Player m_player2;
+    private Board m_board;
 
     /**
      * Create a new Game
@@ -14,6 +17,9 @@ public class Game {
         this.m_seedpl1 = 0;
         this.m_seedpl2 = 0;
         this.m_instance = null;
+        this.m_player1 = null;
+        this.m_player2 = null;
+        this.m_board = null;
     }
 
     /**
@@ -26,6 +32,36 @@ public class Game {
             Game.m_instance = new Game();
 
         return Game.m_instance;
+    }
+
+    /**
+     * Set the instance of the player with regards to its ID
+     * @param ID ID of the player
+     * @param player Player to set
+     * @throws InvalidParameterException
+     */
+    public void setPlayer(int ID, Player player) throws InvalidParameterException{
+        if (ID != 1 && ID != 2)
+            throw new InvalidParameterException("ID must be 1 or 2");
+
+        if(player == null)
+            throw new InvalidParameterException("Player cannot be NULL");
+
+        if (ID == 1)
+            this.m_player1 = player;
+        else
+            this.m_player2 = player;
+    }
+
+    /**
+     * Set the board on which to play the current game
+     * @param board Board to set
+     * @throws InvalidParameterException
+     */
+    public void setBoard(Board board) throws InvalidParameterException{
+        if(board == null)
+            throw new InvalidParameterException("Board cannot be NULL");
+        this.m_board = board;
     }
 
     /**

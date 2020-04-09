@@ -6,6 +6,7 @@ public class Board {
     private Slot[][] m_slots;
     private int remSeedsPl1;
     private int remSeedsPl2;
+    private Game m_game;
 
     /**
      * Create new Board
@@ -20,6 +21,14 @@ public class Board {
 
         this.remSeedsPl1 = 24;
         this.remSeedsPl2 = 24;
+        this.m_game = Game.getInstance();
+    }
+
+    /**
+     * Set the Game instance
+     */
+    public void setGame(){
+        this.m_game = Game.getInstance();
     }
 
     /**
