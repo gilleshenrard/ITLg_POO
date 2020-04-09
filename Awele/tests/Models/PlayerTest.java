@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 class PlayerTest {
-    Player p = new Player((byte)1, "Testname");
+    Player p = new Player(1, "Testname");
 
     @Test
     void setBehaviour_null_should_fail() {

@@ -2,7 +2,7 @@ package Models;
 import Views.iSelectable;
 
 public class Player {
-    private byte m_id;
+    private int m_id;
     private String m_name;
     private iSelectable m_behaviour;
 
@@ -11,7 +11,7 @@ public class Player {
      * @param id Its ID
      * @param name Its name
      */
-    public Player(byte id, String name){
+    public Player(int id, String name){
         this.m_id = id;
         this.m_name = name;
         this.m_behaviour = null;
@@ -32,7 +32,7 @@ public class Player {
      * Returns the Player's ID
      * @return ID
      */
-    public byte getID() {
+    public int getID() {
         return this.m_id;
     }
 
