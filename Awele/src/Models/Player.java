@@ -1,6 +1,7 @@
 package Models;
 import Views.iSelectable;
 
+import java.security.InvalidParameterException;
 import java.util.Objects;
 
 public class Player {
@@ -14,14 +15,39 @@ public class Player {
      * @param name Its name
      */
     public Player(int id, String name){
-        this.m_id = id;
+        this.setID(id);
         this.m_name = name;
         this.m_behaviour = null;
     }
 
     /**
+     * Creates a new Player
+     * @param id Its ID
+     * @param name Its name
+     * @param behaviour Behaviour of the player
+     */
+    public Player(int id, String name, iSelectable behaviour){
+        this.setID(id);
+        this.m_name = name;
+        this.setBehaviour(behaviour);
+    }
+
+    /**
+     * Set the ID of the player
+     * @param m_id ID to give to the player
+     * @throws InvalidParameterException
+     */
+    public void setID(int m_id) {
+        if(m_id != 1 && m_id != 2)
+            throw new InvalidParameterException("ID must be 1 or 2");
+
+        this.m_id = m_id;
+    }
+
+    /**
      * Sets the way the player selects a slot
      * @param behaviour Behaviour to adopt
+     * @throws NullPointerException
      */
     public void setBehaviour(iSelectable behaviour) throws NullPointerException{
         if(behaviour == null)

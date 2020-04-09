@@ -10,6 +10,23 @@ class PlayerTest {
     Player p4 = new Player(1, "WrongName");
 
     @Test
+    void constructor_invalidBehaviour_should_fail() {
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            Player p5 = new Player(1, "test", null);
+        });
+    }
+
+    @Test
+    void getName_shouldnot_fail() {
+        Assertions.assertEquals(p.getName(), "Testname");
+    }
+
+    @Test
+    void getID_shouldnot_fail() {
+        Assertions.assertEquals(p.getID(), 1);
+    }
+
+    @Test
     void setBehaviour_null_should_fail() {
         Assertions.assertThrows(NullPointerException.class, () -> {
             p.setBehaviour(null);
