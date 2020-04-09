@@ -13,7 +13,7 @@ public class Board {
      */
     public Board(){
         this.m_slots = new Slot[2][6];
-        for (int l = 0 ; l < 1 ; l++){
+        for (int l = 0 ; l < 2 ; l++){
             for (int c = 0 ; c < 6 ; c++){
                 this.m_slots[l][c] = new Slot(c, l);
             }
