@@ -1,6 +1,6 @@
-package Models;
+package Controllers;
 
-import Models.RandomSelect;
+import Controllers.RandomSelect;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

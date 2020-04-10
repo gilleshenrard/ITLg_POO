@@ -1,6 +1,6 @@
 package Views;
 
-import Models.iSelectable;
+import Controllers.iSelectable;
 import java.util.Scanner;
 
 public class KeyboardSelect implements iSelectable {

@@ -1,5 +1,7 @@
 package Models;
 
+import Controllers.iSelectable;
+
 import java.security.InvalidParameterException;
 import java.util.Objects;
 
