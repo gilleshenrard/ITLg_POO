@@ -15,11 +15,11 @@ public class RandomSelect implements iSelectable {
     }
 
     /**
-     * Randomly select a slot (between 0 and 6)
+     * Randomly select a slot (between 1 and 6)
      * @return Random slot number
      */
     @Override
     public int selectSlot() {
-        return this.m_rand.nextInt(6);
+        return 1 + this.m_rand.nextInt(6);
     }
 }

@@ -13,6 +13,6 @@ class RandomSelectTest {
     @Test
     void selectSlot_shouldnot_fail() {
         int buffer = r.selectSlot();
-        Assertions.assertTrue(buffer >=0 && buffer <6);
+        Assertions.assertTrue(buffer >0 && buffer <=6);
     }
 }
