@@ -158,7 +158,7 @@ class BoardTest {
     @Test
     void playSlot_noCaptureNoStarve_shouldnot_fail() {
         int ret = b.playSlot(1, 6);
-        Assertions.assertEquals(ret, 0);
+        Assertions.assertEquals(0, ret);
         Assertions.assertEquals(5, b.getSlot(0, 1).getNbSeeds());
         Assertions.assertEquals(5, b.getSlot(1, 1).getNbSeeds());
         Assertions.assertEquals(5, b.getSlot(2, 1).getNbSeeds());
@@ -175,12 +175,30 @@ class BoardTest {
         b.getSlot(3, 1).setNbSeeds(1);
         b.getSlot(2, 1).setNbSeeds(2);
         int ret = b.playSlot(1, 6);
-        Assertions.assertEquals(ret, 0);
+        Assertions.assertEquals(0, ret);
         Assertions.assertEquals(5, b.getSlot(0, 1).getNbSeeds());
         Assertions.assertEquals(5, b.getSlot(1, 1).getNbSeeds());
         Assertions.assertEquals(0, b.getSlot(2, 1).getNbSeeds());
         Assertions.assertEquals(0, b.getSlot(3, 1).getNbSeeds());
         Assertions.assertEquals(4, b.getSlot(4, 1).getNbSeeds());
         Assertions.assertEquals(5, Game.getInstance().getSeeds(1));
+    }
+
+    /**
+     * Check if playSlot() processes a starvation properly
+     */
+    @Test
+    void playSlot_noCaptureStarve_shouldnot_fail() {
+        b.getSlot(3, 1).setNbSeeds(1);
+        b.getSlot(2, 1).setNbSeeds(2);
+        b.setRemainingSeeds(2, 5);
+        int ret = b.playSlot(1, 6);
+        Assertions.assertEquals(2, ret);
+        Assertions.assertEquals(4, b.getSlot(0, 1).getNbSeeds());
+        Assertions.assertEquals(4, b.getSlot(1, 1).getNbSeeds());
+        Assertions.assertEquals(2, b.getSlot(2, 1).getNbSeeds());
+        Assertions.assertEquals(1, b.getSlot(3, 1).getNbSeeds());
+        Assertions.assertEquals(4, b.getSlot(4, 1).getNbSeeds());
+        Assertions.assertEquals(0, Game.getInstance().getSeeds(1));
     }
 }
