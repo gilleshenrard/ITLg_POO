@@ -55,6 +55,22 @@ public class Game {
     }
 
     /**
+     * Return a player according to its ID
+     * @param ID ID of the player to return
+     * @return Player to return
+     * @throws InvalidParameterException
+     */
+    public Player getPlayer(int ID) throws InvalidParameterException{
+        if(ID != 1 && ID != 2)
+            throw new InvalidParameterException("ID must be 1 or 2");
+
+        if(ID == 1)
+            return this.m_player1;
+        else
+            return this.m_player2;
+    }
+
+    /**
      * Set the board on which to play the current game
      * @param board Board to set
      * @throws NullPointerException

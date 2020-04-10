@@ -106,6 +106,27 @@ class GameTest {
     }
 
     /**
+     * Check if getPlayer() throws an exception with an invalid ID
+     */
+    @Test
+    void getPlayer_invalidID_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            g.getPlayer(3);
+        });
+    }
+
+    /**
+     * Check if getPlayer() returns the right instance of Player
+     */
+    @Test
+    void getPlayer_shouldnot_fail() {
+        Player p = new Player(1, "Test"), p2;
+        g.setPlayer(1, p);
+        p2 = g.getPlayer(1);
+        Assertions.assertEquals(p, p2);
+    }
+
+    /**
      * Check if setBoard() throws an exception with a null instance
      */
     @Test
