@@ -10,14 +10,6 @@ public class Slot {
 
     /**
      * Create a new Slot
-     */
-    public Slot(){
-        this.nb_seeds = 4;
-        this.setCoordinates(0, 0);
-    }
-
-    /**
-     * Create a new Slot
      * @param x The X coordinate of the slot
      * @param y The Y coordinate of the slot
      */

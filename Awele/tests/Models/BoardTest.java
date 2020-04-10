@@ -13,7 +13,7 @@ class BoardTest {
     @Test
     void getSlots_shouldnot_fail() {
         Slot s[][] = b.getSlots();
-        Slot buffer = new Slot();
+        Slot buffer = new Slot(0,0);
 
         for(int l=0 ; l<1 ; l++){
             for(int c=0 ; c<6 ; c++){

@@ -8,7 +8,7 @@ import java.security.InvalidParameterException;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SlotTest {
-    Slot s = new Slot();
+    Slot s = new Slot(0, 0);
 
     @Test
     void setCoordinates_invalidX_should_fail() {
