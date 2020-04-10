@@ -37,6 +37,36 @@ class BoardTest {
     }
 
     /**
+     * Check if setRemainingSeeds() throws an exception with an invalid ID
+     */
+    @Test
+    void setRemainingSeeds_invalidID_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.setRemainingSeeds(0, 0);
+        });
+    }
+
+    /**
+     * Check if setRemainingSeeds() throws an exception with a negative value
+     */
+    @Test
+    void setRemainingSeeds_negativeValue_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.setRemainingSeeds(1, -1);
+        });
+    }
+
+    /**
+     * Check if setRemainingSeeds() throws an exception with a value above 24
+     */
+    @Test
+    void setRemainingSeeds_above24_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.setRemainingSeeds(1, 25);
+        });
+    }
+
+    /**
      * Check if getRemainingSeeds() returns the proper amount
      */
     @Test

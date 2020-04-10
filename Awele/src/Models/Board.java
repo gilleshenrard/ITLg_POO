@@ -57,6 +57,25 @@ public class Board {
     }
 
     /**
+     * Assigns a new value to m_remainingseeds regarding the player ID
+     * @param ID ID of the player for which assign the new value
+     * @param value New amount of remaining seeds for the player
+     * @throws InvalidParameterException
+     */
+    public void setRemainingSeeds(int ID, int value) throws InvalidParameterException{
+        if (ID != 1 && ID != 2)
+            throw new InvalidParameterException("ID must be 1 or 2");
+
+        if(value < 0 || value > 24)
+            throw new InvalidParameterException("Remaining seeds must be 0 <= seeds < 25");
+
+        if (ID == 1)
+            this.remSeedsPl1 = value;
+        else
+            this.remSeedsPl2 = value;
+    }
+
+    /**
      * Get the slot located at X,Y
      * @param x X coordinate of the slot
      * @param y Y coordinate of the slot
