@@ -85,8 +85,12 @@ public class Player {
     /**
      * Select the slot to harvest
      * @return Slot to harvest
+     * @throws NullPointerException
      */
-    public int selectSlot(){
+    public int selectSlot() throws NullPointerException{
+        if (this.m_behaviour == null)
+            throw new NullPointerException("Behaviour must be instantiated first (cannot be null)");
+
         return this.m_behaviour.selectSlot();
     }
 
