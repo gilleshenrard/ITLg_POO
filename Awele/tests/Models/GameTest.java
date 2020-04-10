@@ -183,4 +183,37 @@ class GameTest {
             g.getName(5);
         });
     }
+
+    /**
+     * Check if getSlot() throws an exception with an invalid ID
+     */
+    @Test
+    void playSlot_invalidID_should_fail() {
+        g.setBoard(new Board());
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            g.playSlot(3, 3);
+        });
+    }
+
+    /**
+     * Check if getSlot() throws an exception with a slot below 1
+     */
+    @Test
+    void playSlot_below1_should_fail() {
+        g.setBoard(new Board());
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            g.playSlot(1, 0);
+        });
+    }
+
+    /**
+     * Check if getSlot() throws an exception with a slot above 6
+     */
+    @Test
+    void playSlot_above6_should_fail() {
+        g.setBoard(new Board());
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            g.playSlot(1, 7);
+        });
+    }
 }

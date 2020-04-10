@@ -148,4 +148,15 @@ public class Game {
                 return this.m_player2.getName();
         }
     }
+
+    /**
+     * Harvest the seeds from a slot and, if necessary, scatter them
+     * @param id ID of the player harvesting
+     * @param slot Slot being harvested
+     * @return 0 if no futher action, 1 if victory, 2 if season cancelled
+     * @throws InvalidParameterException
+     */
+    public int playSlot(int id, int slot) throws InvalidParameterException{
+        return this.m_board.playSlot(id, slot);
+    }
 }
