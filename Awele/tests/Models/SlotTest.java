@@ -61,6 +61,16 @@ class SlotTest {
     }
 
     /**
+     * Check if getX() and getY() return the right values
+     */
+    @Test
+    void get_coordinates_shouldnot_fail() {
+        s.setCoordinates(3, 1);
+        Assertions.assertEquals(s.getX(), 3);
+        Assertions.assertEquals(s.getY(), 1);
+    }
+
+    /**
      * Check if getNbSeeds() returns the proper value
      */
     @Test

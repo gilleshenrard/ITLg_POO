@@ -45,6 +45,22 @@ public class Slot {
     }
 
     /**
+     * Return the X coordinate of the current Slot
+     * @return X coordinate
+     */
+    public int getX(){
+        return this.m_x;
+    }
+
+    /**
+     * Return the Y coordinate of the current Slot
+     * @return Y coordinate
+     */
+    public int getY(){
+        return this.m_y;
+    }
+
+    /**
      * Set the amount of seeds to 0
      */
     public void emptySeeds(){
