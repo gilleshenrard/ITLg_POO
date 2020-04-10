@@ -146,7 +146,7 @@ public class Board {
             //make sure not to add the slot harvested
             if(!sNext.equals(s)) {
                 sNext.incrementSeeds();
-                buffer.add(sNext);
+                buffer.add(sNext); //a slot can be added several times in the buffer
                 nbseeds--;
             }
 
