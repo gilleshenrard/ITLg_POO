@@ -10,6 +10,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class BoardTest {
     Board b = new Board();
 
+    /**
+     * Check that getSlots() returns a default Slot[2][6]
+     */
     @Test
     void getSlots_shouldnot_fail() {
         Slot s[][] = b.getSlots();
@@ -23,6 +26,9 @@ class BoardTest {
         }
     }
 
+    /**
+     * Check if getRemainingSeeds() throws an exception with an invalid ID
+     */
     @Test
     void getRemainingSeeds_invalidID_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
@@ -30,6 +36,9 @@ class BoardTest {
         });
     }
 
+    /**
+     * Check if getRemainingSeeds() returns the proper amount
+     */
     @Test
     void getRemainingSeeds_shouldnot_fail() {
         Assertions.assertEquals(b.getRemainingSeeds(1), 24);

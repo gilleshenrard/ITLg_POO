@@ -6,6 +6,10 @@ import org.junit.jupiter.api.Test;
 class KeyboardSelectTest {
     KeyboardSelect k = new KeyboardSelect();
 
+    /**
+     * Check if selectSlot() properly returns the value set by the user on the keyboard
+     * This test is disabled until a solution to test keyboard strokes is found
+     */
     @Disabled("Need to find a way to emulate user keyboard inputs")
     @Test
     void selectSlot_shouldnot_fail() {
