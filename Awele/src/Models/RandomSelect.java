@@ -1,4 +1,4 @@
-package Views;
+package Models;
 
 import java.util.Random;
 

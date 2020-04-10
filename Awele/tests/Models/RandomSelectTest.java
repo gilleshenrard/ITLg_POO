@@ -1,9 +1,8 @@
-package Views;
+package Models;
 
+import Models.RandomSelect;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class RandomSelectTest {
     RandomSelect r = new RandomSelect();
