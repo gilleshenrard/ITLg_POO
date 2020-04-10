@@ -168,6 +168,29 @@ class BoardTest {
     }
 
     /**
+     * Check if playSlot() properly skips the selected slot when scattering
+     */
+    @Test
+    void playSlot_skipSelected_shouldnot_fail() {
+        b.getSlot(3, 0).setNbSeeds(12);
+        int ret = b.playSlot(1, 4);
+        Assertions.assertEquals(0, ret);
+        Assertions.assertEquals(5, b.getSlot(0, 1).getNbSeeds());
+        Assertions.assertEquals(5, b.getSlot(1, 1).getNbSeeds());
+        Assertions.assertEquals(5, b.getSlot(2, 1).getNbSeeds());
+        Assertions.assertEquals(5, b.getSlot(3, 1).getNbSeeds());
+        Assertions.assertEquals(5, b.getSlot(4, 1).getNbSeeds());
+        Assertions.assertEquals(5, b.getSlot(5, 1).getNbSeeds());
+        Assertions.assertEquals(5, b.getSlot(0, 0).getNbSeeds());
+        Assertions.assertEquals(5, b.getSlot(1, 0).getNbSeeds());
+        Assertions.assertEquals(5, b.getSlot(2, 0).getNbSeeds());
+        Assertions.assertEquals(0, b.getSlot(3, 0).getNbSeeds());
+        Assertions.assertEquals(6, b.getSlot(4, 0).getNbSeeds());
+        Assertions.assertEquals(5, b.getSlot(5, 0).getNbSeeds());
+        Assertions.assertEquals(0, Game.getInstance().getSeeds(1));
+    }
+
+    /**
      * Check if playSlot() processes a simple scattering properly (2 captures, no starvation)
      */
     @Test
