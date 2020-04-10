@@ -173,10 +173,7 @@ public class Board {
                 //opponent not starved, capture
                 for (Slot tmp:buffer) {
                     if(tmp.getNbSeeds() == 2 || tmp.getNbSeeds() == 3) {
-                        if(id == 1)
-                            this.remSeedsPl2 -= tmp.getNbSeeds();
-                        else
-                            this.remSeedsPl1 -= tmp.getNbSeeds();
+                        this.setRemainingSeeds(id, getRemainingSeeds(id) - tmp.getNbSeeds());
                         this.m_game.storeSeeds(id, tmp.nb_seeds);
                         tmp.emptySeeds();
                     }
