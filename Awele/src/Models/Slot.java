@@ -12,8 +12,9 @@ public class Slot {
      * Create a new Slot
      * @param x The X coordinate of the slot
      * @param y The Y coordinate of the slot
+     * @throws InvalidParameterException
      */
-    public Slot(int x, int y){
+    public Slot(int x, int y) throws InvalidParameterException{
         this.nb_seeds = 4;
         this.setCoordinates(x, y);
     }
