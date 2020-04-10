@@ -6,7 +6,7 @@ import java.util.Objects;
 public class Slot {
     private int m_x;
     private int m_y;
-    byte nb_seeds;
+    int nb_seeds;
 
     /**
      * Create a new Slot
@@ -25,6 +25,17 @@ public class Slot {
      */
     public int getNbSeeds(){
         return this.nb_seeds;
+    }
+
+    /**
+     * Set the number of seeds in the current slot
+     * @param seeds Number of seeds to set
+     */
+    public void setNbSeeds(int seeds){
+        if (seeds < 0 || seeds > 48)
+            throw new InvalidParameterException("nb_seeds must be 0 <= seeds <= 48");
+
+        this.nb_seeds = seeds;
     }
 
     /**

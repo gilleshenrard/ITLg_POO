@@ -79,6 +79,35 @@ class SlotTest {
     }
 
     /**
+     * Check if setNbSeeds() throws an exception when giving a negative amount of seeds
+     */
+    @Test
+    void setNbSeeds_negative_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            s.setNbSeeds(-1);
+        });
+    }
+
+    /**
+     * Check if setNbSeeds() throws an exception when giving an amount of seeds above 48
+     */
+    @Test
+    void setNbSeeds_above48_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            s.setNbSeeds(49);
+        });
+    }
+
+    /**
+     * Check if setNbSeeds() properly sets m_nbseeds
+     */
+    @Test
+    void setNbSeeds_shouldnot_fail() {
+        s.setNbSeeds(24);
+        Assertions.assertEquals(s.getNbSeeds(), 24);
+    }
+
+    /**
      * Check if emptySeeds() properly sets m_nbseeds to 0
      */
     @Test
