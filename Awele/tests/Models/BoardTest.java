@@ -153,6 +153,36 @@ class BoardTest {
     }
 
     /**
+     * Check if getSlot() throws an exception with an invalid ID
+     */
+    @Test
+    void playSlot_invalidID_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.playSlot(3, 3);
+        });
+    }
+
+    /**
+     * Check if getSlot() throws an exception with a slot below 1
+     */
+    @Test
+    void playSlot_below1_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.playSlot(1, 0);
+        });
+    }
+
+    /**
+     * Check if getSlot() throws an exception with a slot above 6
+     */
+    @Test
+    void playSlot_above6_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.playSlot(1, 7);
+        });
+    }
+
+    /**
      * Check if playSlot() processes a simple scattering properly (no capture, no starvation)
      */
     @Test
