@@ -14,8 +14,9 @@ public class Player {
      * Creates a new Player
      * @param id Its ID
      * @param name Its name
+     * @throws InvalidParameterException
      */
-    public Player(int id, String name){
+    public Player(int id, String name) throws InvalidParameterException{
         this.setID(id);
         this.m_name = name;
         this.m_behaviour = null;
@@ -27,8 +28,10 @@ public class Player {
      * @param id Its ID
      * @param name Its name
      * @param behaviour Behaviour of the player
+     * @throws InvalidParameterException
+     * @throws NullPointerException
      */
-    public Player(int id, String name, iSelectable behaviour){
+    public Player(int id, String name, iSelectable behaviour) throws InvalidParameterException, NullPointerException{
         this.setID(id);
         this.m_name = name;
         this.setBehaviour(behaviour);
