@@ -24,7 +24,7 @@ class BoardTest {
     }
 
     @Test
-    void getRemainingSeeds_should_fail() {
+    void getRemainingSeeds_invalidID_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
             b.getRemainingSeeds(0);
         });
