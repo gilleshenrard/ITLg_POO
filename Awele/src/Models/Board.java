@@ -141,7 +141,7 @@ public class Board {
         if(seeds == 2 || seeds == 3){
             //check if this seasons risks to starve the opponent
             int sumseeds = this.getSumCapturable(buffer);
-            if((id == 1 && sumseeds == this.remSeedsPl2) || (id == 2 && sumseeds == this.remSeedsPl1)){
+            if(sumseeds == this.getRemainingSeeds(3 - id)){
                 //opponent starved, cancellation
                 for (Slot tmp:buffer) {
                     tmp.decrementSeeds();
@@ -153,8 +153,14 @@ public class Board {
             else{
                 //opponent not starved, capture
                 for (Slot tmp:buffer) {
-                    this.m_game.storeSeeds(id, tmp.nb_seeds);
-                    tmp.emptySeeds();
+                    if(tmp.getNbSeeds() == 2 || tmp.getNbSeeds() == 3) {
+                        if(id == 1)
+                            this.remSeedsPl2 -= tmp.getNbSeeds();
+                        else
+                            this.remSeedsPl1 -= tmp.getNbSeeds();
+                        this.m_game.storeSeeds(id, tmp.nb_seeds);
+                        tmp.emptySeeds();
+                    }
                 }
             }
 
