@@ -39,13 +39,14 @@ public class Game {
      * @param ID ID of the player
      * @param player Player to set
      * @throws InvalidParameterException
+     * @throws NullPointerException
      */
-    public void setPlayer(int ID, Player player) throws InvalidParameterException{
+    public void setPlayer(int ID, Player player) throws InvalidParameterException, NullPointerException{
         if (ID != 1 && ID != 2)
             throw new InvalidParameterException("ID must be 1 or 2");
 
         if(player == null)
-            throw new InvalidParameterException("Player cannot be NULL");
+            throw new NullPointerException("Player cannot be NULL");
 
         if (ID == 1)
             this.m_player1 = player;
@@ -56,11 +57,11 @@ public class Game {
     /**
      * Set the board on which to play the current game
      * @param board Board to set
-     * @throws InvalidParameterException
+     * @throws NullPointerException
      */
-    public void setBoard(Board board) throws InvalidParameterException{
+    public void setBoard(Board board) throws NullPointerException{
         if(board == null)
-            throw new InvalidParameterException("Board cannot be NULL");
+            throw new NullPointerException("Board cannot be NULL");
         this.m_board = board;
     }
 
@@ -97,5 +98,30 @@ public class Game {
             return m_seedpl1;
         else
             return m_seedpl2;
+    }
+
+    /**
+     * Fetch the name of a player via its ID
+     * @param ID ID of the player
+     * @return Name of the player
+     * @throws InvalidParameterException
+     * @throws NullPointerException
+     */
+    public String getName(int ID) throws InvalidParameterException, NullPointerException{
+        if(ID != 1 && ID != 2)
+            throw new InvalidParameterException("ID must be 1 or 2");
+
+        if(ID == 1) {
+            if (this.m_player1 == null)
+                throw new NullPointerException("Player 1 must be instantiated first (cannot be NULL)");
+            else
+                return this.m_player1.getName();
+        }
+        else{
+            if (this.m_player2 == null)
+                throw new NullPointerException("Player 2 must be instantiated first (cannot be NULL)");
+            else
+                return this.m_player2.getName();
+        }
     }
 }

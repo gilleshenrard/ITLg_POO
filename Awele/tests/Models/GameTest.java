@@ -23,9 +23,9 @@ class GameTest {
     }
 
     @Test
-    void storeSeeds_invalidSeedsNb_should_fail() {
+    void storeSeeds_SeedsAbove23_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            g.storeSeeds(1, 45);
+            g.storeSeeds(1, 24);
         });
     }
 
@@ -69,14 +69,14 @@ class GameTest {
 
     @Test
     void setPlayer_nullPlayer_should_fail() {
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
+        Assertions.assertThrows(NullPointerException.class, () -> {
             g.setPlayer(1, null);
         });
     }
 
     @Test
     void setBoard_nullBoard_should_fail() {
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
+        Assertions.assertThrows(NullPointerException.class, () -> {
             g.setBoard(null);
         });
     }
@@ -84,5 +84,25 @@ class GameTest {
     @Test
     void setBoard_shouldnot_fail() {
             g.setBoard(new Board());
+    }
+
+    @Test
+    void getName_shouldnot_fail() {
+        g.setPlayer(1, new Player(1, "Testname"));
+        Assertions.assertEquals(g.getName(1), "Testname");
+    }
+
+    @Test
+    void getName_nullPlayer_should_fail() {
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            g.getName(1);
+        });
+    }
+
+    @Test
+    void getName_invalidID_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            g.getName(5);
+        });
     }
 }
