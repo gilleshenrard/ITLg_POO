@@ -13,6 +13,13 @@ class BoardViewTest {
     BoardView bv = new BoardView(b);
 
     @Test
+    void boardView_nullBoard_should_fail() {
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            BoardView b2 = new BoardView(null);
+        });
+    }
+
+    @Test
     void displayBoard() {
         bv.displayBoard();
     }

@@ -8,8 +8,12 @@ public class BoardView {
     /**
      * create a new Board View
      * @param board Board to view
+     * @throws NullPointerException
      */
-    public BoardView(Board board){
+    public BoardView(Board board) throws NullPointerException{
+        if(board == null)
+            throw new NullPointerException("Board cannot be NULL");
+
         this.m_board = board;
     }
 
