@@ -127,6 +127,17 @@ class GameTest {
     }
 
     /**
+     * Check if getBoard() returns the right instance of Board
+     */
+    @Test
+    void getBoard_shouldnot_fail() {
+        Board b = new Board(), b2;
+        g.setBoard(b);
+        b2 = g.getBoard();
+        Assertions.assertEquals(b, b2);
+    }
+
+    /**
      * Check if setBoard() throws an exception with a null instance
      */
     @Test

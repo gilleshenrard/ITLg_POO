@@ -82,6 +82,14 @@ public class Game {
     }
 
     /**
+     * Return the board set in the current game
+     * @return Board to return
+     */
+    public Board getBoard(){
+        return this.m_board;
+    }
+
+    /**
      * Add nb_seeds to the seeds reserve of Player 1 or Player 2
      * @param ID ID of the player who receives the seeds
      * @param nb_seeds  Amount of seeds to store
