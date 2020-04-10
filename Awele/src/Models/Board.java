@@ -114,6 +114,9 @@ public class Board {
         int nbseeds = s.getNbSeeds();
         int backupseeds = s.getNbSeeds();
 
+        if(nbseeds == 0)
+            return 2;
+
         //empty the slot (it's been harvested)
         s.emptySeeds();
 
