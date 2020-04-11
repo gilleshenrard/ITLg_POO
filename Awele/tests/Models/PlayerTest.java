@@ -28,15 +28,16 @@ class PlayerTest {
             Player p5 = new Player(1, "test");
             p5.setID(1);
             p5.setID(2);
+            p5.setID(5);
     }
 
     /**
-     * Check if setID() throws an exception using an invalid ID
+     * Check if setID() throws an exception using a negative ID
      */
     @Test
     void setID_invalidID_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            p.setID(5);
+            p.setID(-1);
         });
     }
 

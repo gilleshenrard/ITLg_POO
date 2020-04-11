@@ -41,8 +41,8 @@ public class Player {
      * @throws InvalidParameterException
      */
     public void setID(int m_id) {
-        if(m_id != 1 && m_id != 2)
-            throw new InvalidParameterException("ID must be 1 or 2");
+        if(m_id < 0)
+            throw new InvalidParameterException("ID must not be negative");
 
         this.m_id = m_id;
     }
