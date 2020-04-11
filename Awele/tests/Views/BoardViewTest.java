@@ -1,6 +1,8 @@
 package Views;
 
 import Models.Board;
+import Models.Game;
+import Models.Player;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -27,6 +29,9 @@ class BoardViewTest {
      */
     @Test
     void displayBoard() {
+        Game g = Game.getInstance();
+        g.setPlayer(1, new Player(1, "test"));
+        g.setPlayer(2, new Player(2, "test"));
         bv.displayBoard();
     }
 
