@@ -20,8 +20,10 @@ public class BoardView {
 
     /**
      * Display the whole board and score of the two players
+     * @throws InvalidParameterException
+     * @throws NullPointerException
      */
-    public void displayBoard(){
+    public void displayBoard() throws InvalidParameterException, NullPointerException {
         //display the opponent side of the board (slots are inverted)
         //OPPONENT
         //|  0 |
@@ -30,7 +32,7 @@ public class BoardView {
         this.displaySlot(this.m_board.getStoredSeeds(2));
         System.out.println();
         for(int i=0 ; i<6 ; i++)
-            this.displaySlot(this.m_board.getSlot(5-i, 1).getNbSeeds());
+            this.displaySlot(this.m_board.getSlotSeeds(5-i, 1));
         System.out.println();
 
         //display the player side of the board
@@ -38,7 +40,7 @@ public class BoardView {
         //|  0 |
         //PLAYER
         for(int i=0 ; i<6 ; i++)
-            this.displaySlot(this.m_board.getSlot(i, 0).getNbSeeds());
+            this.displaySlot(this.m_board.getSlotSeeds(i, 0));
         System.out.println();
         this.displaySlot(this.m_board.getStoredSeeds(1));
         System.out.println();
