@@ -2,16 +2,24 @@ package Views;
 
 public class GameView {
     /**
-     * Tell which player won the game
-     * @param ID ID of the player
+     * Display a message in the out channel
+     * @param msg Message to display
      */
-    public void displayWin(String name){
-        System.out.println(name + " won the game !");
+    public void displayMessage(String msg){
+        System.out.println(msg);
     }
 
     /**
-     * Tell which player won the game
-     * @param ID ID of the player
+     * Display a warning message in the out channel
+     * @param msg Message to display
+     */
+    public void displayWarning(String msg){
+        this.displayMessage(msg);
+    }
+
+    /**
+     * Display an error message in the err channel
+     * @param msg Message to display
      */
     public void displayError(String msg){
         System.err.println(msg);
