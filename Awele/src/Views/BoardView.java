@@ -2,6 +2,8 @@ package Views;
 import Models.Board;
 import Models.Game;
 
+import java.security.InvalidParameterException;
+
 public class BoardView {
     private Board m_board;
 
@@ -17,6 +19,17 @@ public class BoardView {
         this.m_board = board;
     }
 
+
+    /**
+     * Get the name of a player regarding its ID
+     * @param ID ID of the player of which getting the name
+     * @return Name of the player
+     * @throws InvalidParameterException
+     */
+    public String getName(int ID) throws InvalidParameterException {
+        return this.m_board.getName(ID);
+    }
+
     /**
      * Display the whole board and score of the two players
      */
@@ -25,7 +38,7 @@ public class BoardView {
         //OPPONENT
         //|  0 |
         //|  6 ||  5 ||  4 ||  3 ||  2 ||  1 |
-        System.out.println("OPPONENT");
+        System.out.println(this.getName(2));
         this.displaySlot(Game.getInstance().getSeeds(2));
         System.out.println();
         for(int i=0 ; i<6 ; i++)
@@ -41,7 +54,7 @@ public class BoardView {
         System.out.println();
         this.displaySlot(Game.getInstance().getSeeds(1));
         System.out.println();
-        System.out.println("PLAYER");
+        System.out.println(this.getName(1));
     }
 
     /**
