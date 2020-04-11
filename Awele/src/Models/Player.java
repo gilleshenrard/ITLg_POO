@@ -40,7 +40,7 @@ public class Player {
      * @param m_id ID to give to the player
      * @throws InvalidParameterException
      */
-    public void setID(int m_id) {
+    public void setID(int m_id) throws InvalidParameterException{
         if(m_id < 0)
             throw new InvalidParameterException("ID must not be negative");
 
