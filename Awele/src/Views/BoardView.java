@@ -1,6 +1,5 @@
 package Views;
 import Models.Board;
-import Models.Game;
 
 import java.security.InvalidParameterException;
 
@@ -14,20 +13,9 @@ public class BoardView {
      */
     public BoardView(Board board) throws NullPointerException{
         if(board == null)
-            throw new NullPointerException("Board cannot be NULL");
+            throw new NullPointerException("BoardView() : NULL instance of Board");
 
         this.m_board = board;
-    }
-
-
-    /**
-     * Get the name of a player regarding its ID
-     * @param ID ID of the player of which getting the name
-     * @return Name of the player
-     * @throws InvalidParameterException
-     */
-    public String getName(int ID) throws InvalidParameterException {
-        return this.m_board.getName(ID);
     }
 
     /**
@@ -38,11 +26,11 @@ public class BoardView {
         //OPPONENT
         //|  0 |
         //|  6 ||  5 ||  4 ||  3 ||  2 ||  1 |
-        System.out.println(this.getName(2));
-        this.displaySlot(Game.getInstance().getSeeds(2));
+        System.out.println(this.m_board.getName(2));
+        this.displaySlot(this.m_board.getStoredSeeds(2));
         System.out.println();
         for(int i=0 ; i<6 ; i++)
-            this.displaySlot(this.m_board.getSlots()[1][5-i].getNbSeeds());
+            this.displaySlot(this.m_board.getSlot(5-i, 1).getNbSeeds());
         System.out.println();
 
         //display the player side of the board
@@ -50,11 +38,11 @@ public class BoardView {
         //|  0 |
         //PLAYER
         for(int i=0 ; i<6 ; i++)
-            this.displaySlot(this.m_board.getSlots()[0][i].getNbSeeds());
+            this.displaySlot(this.m_board.getSlot(i, 0).getNbSeeds());
         System.out.println();
-        this.displaySlot(Game.getInstance().getSeeds(1));
+        this.displaySlot(this.m_board.getStoredSeeds(1));
         System.out.println();
-        System.out.println(this.getName(1));
+        System.out.println(this.m_board.getName(1));
     }
 
     /**
