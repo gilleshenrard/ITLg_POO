@@ -28,6 +28,62 @@ class BoardTest {
     }
 
     /**
+     * Check if validateCoordinates() throws an exception with a negative X
+     */
+    @Test
+    void validateCoordinates_negativeX_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            Board.validateCoordinates(-1, 0);
+        });
+    }
+
+    /**
+     * Check if validateCoordinates() throws an exception with a negative Y
+     */
+    @Test
+    void validateCoordinates_negativeY_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            Board.validateCoordinates(0, -1);
+        });
+    }
+
+    /**
+     * Check if validateCoordinates() throws an exception with X above 5
+     */
+    @Test
+    void validateCoordinates_xAbove5_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            Board.validateCoordinates(6, 0);
+        });
+    }
+
+    /**
+     * Check if validateCoordinates() throws an exception with Y above 1
+     */
+    @Test
+    void validateCoordinates_yAbove1_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            Board.validateCoordinates(0, 2);
+        });
+    }
+
+    /**
+     * Check if validateCoordinates() fails to validate maximum values
+     */
+    @Test
+    void validateCoordinates_maxValues_shouldnot_fail() {
+            Board.validateCoordinates(5, 1);
+    }
+
+    /**
+     * Check if validateCoordinates() fails to validate minimum values
+     */
+    @Test
+    void validateCoordinates_minValues_shouldnot_fail() {
+        Board.validateCoordinates(0, 0);
+    }
+
+    /**
      * Check if getRemainingSeeds() throws an exception with an invalid ID
      */
     @Test

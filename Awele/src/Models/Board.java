@@ -26,10 +26,16 @@ public class Board {
     }
 
     /**
-     * Set the Game instance
+     * Throw an exception if not 0 <= x <= 5 of y != 1,2
+     * @param x X coordinate to validate
+     * @param y Y coordinate to validate
+     * @throws InvalidParameterException
      */
-    public void setGame(){
-        this.m_game = Game.getInstance();
+    public static void validateCoordinates(int x, int y) throws InvalidParameterException{
+        if(x < 0 || x > 5)
+            throw new InvalidParameterException("X value must be 0 <= x < 6");
+        if(y != 0 && y != 1)
+            throw new InvalidParameterException("Y value must be 0 or 1");
     }
 
     /**
@@ -47,8 +53,7 @@ public class Board {
      * @throws InvalidParameterException
      */
     public int getRemainingSeeds(int ID) throws InvalidParameterException{
-        if (ID != 1 && ID != 2)
-            throw new InvalidParameterException("ID must be 1 or 2");
+        Game.validateID(ID);
 
         if (ID == 1)
             return this.remSeedsPl1;
@@ -73,8 +78,7 @@ public class Board {
      * @throws InvalidParameterException
      */
     public void setRemainingSeeds(int ID, int value) throws InvalidParameterException{
-        if (ID != 1 && ID != 2)
-            throw new InvalidParameterException("ID must be 1 or 2");
+        Game.validateID(ID);
 
         if(value < 0 || value > 24)
             throw new InvalidParameterException("Remaining seeds must be 0 <= seeds < 25");
@@ -93,11 +97,7 @@ public class Board {
      * @throws InvalidParameterException
      */
     public Slot getSlot(int x, int y) throws InvalidParameterException{
-        if(x < 0 || x > 5)
-            throw new InvalidParameterException("X value must be 0 <= x < 6");
-        if(y != 0 && y != 1)
-            throw new InvalidParameterException("Y value must be 0 or 1");
-
+        Board.validateCoordinates(x, y);
         return this.m_slots[y][x];
     }
 
@@ -132,11 +132,8 @@ public class Board {
      * @throws InvalidParameterException
      */
     public int playSlot(int id, int slot) throws InvalidParameterException{
-        if(id != 1 && id != 2)
-            throw new InvalidParameterException("The ID must be 1 or 2");
-
-        if(slot < 1 || slot > 6)
-            throw new InvalidParameterException("The slot chosen must be between 1 and 6 included");
+        Game.validateID(id);
+        Board.validateCoordinates(slot - 1, 0);
 
         //get number of seeds in the slot harvested by the player
         Slot s = this.getSlot(slot-1, id-1);
