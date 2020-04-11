@@ -11,6 +11,34 @@ class SlotTest {
     Slot s = new Slot(0, 0);
 
     /**
+     * Check if validateNbSeeds() throws an exception when using a negative amount
+     */
+    @Test
+    void validateNbSeeds_negative_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            Slot.validateNbSeeds(-1);
+        });
+    }
+
+    /**
+     * Check if validateNbSeeds() throws an exception when using an amount above 48
+     */
+    @Test
+    void validateNbSeeds_above48_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            Slot.validateNbSeeds(49);
+        });
+    }
+
+    /**
+     * Check if validateNbSeeds() fails validating a proper amount of seeds
+     */
+    @Test
+    void validateNbSeeds_shouldnot_fail() {
+        Slot.validateNbSeeds(48);
+    }
+
+    /**
      * Check if setCoordinates() fails while setting coordinates
      */
     @Test
@@ -18,46 +46,6 @@ class SlotTest {
         for(int l=0 ; l<2 ; l++)
             for(int c=0 ; c<6 ; c++)
                 s.setCoordinates(c, l);
-    }
-
-    /**
-     * Check if setCoordinates() throws an exception when using an invalid X value
-     */
-    @Test
-    void setCoordinates_invalidX_should_fail() {
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            s.setCoordinates(3, 5);
-        });
-    }
-
-    /**
-     * Check if setCoordinates() throws an exception when using a negative X value
-     */
-    @Test
-    void setCoordinates_negativeX_should_fail() {
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            s.setCoordinates(-3, 5);
-        });
-    }
-
-    /**
-     * Check if setCoordinates() throws an exception when using an invalid Y value
-     */
-    @Test
-    void setCoordinates_invalidY_should_fail() {
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            s.setCoordinates(0, 10);
-        });
-    }
-
-    /**
-     * Check if setCoordinates() throws an exception when using a negative X value
-     */
-    @Test
-    void setCoordinates_negativeY_should_fail() {
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            s.setCoordinates(0, -5);
-        });
     }
 
     /**
@@ -133,7 +121,7 @@ class SlotTest {
         for(int i=0 ; i<44 ; i++)
             s.incrementSeeds();
 
-        Assertions.assertThrows(IllegalStateException.class, () -> {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
             s.incrementSeeds();
         });
     }
@@ -153,7 +141,7 @@ class SlotTest {
     @Test
     void decrementSeeds_negativeamount_should_fail() {
         s.emptySeeds();
-        Assertions.assertThrows(IllegalStateException.class, () -> {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
             s.decrementSeeds();
         });
     }

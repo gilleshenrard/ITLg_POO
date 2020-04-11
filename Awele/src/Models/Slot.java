@@ -20,6 +20,26 @@ public class Slot {
     }
 
     /**
+     * Throw an exception if not 0 <= seeds <= 48
+     * @param seeds Amount of seeds to validate
+     * @throws InvalidParameterException
+     */
+    public static void validateNbSeeds(int seeds) throws InvalidParameterException{
+        if (seeds < 0 || seeds > 48)
+            throw new InvalidParameterException("nb_seeds must be 0 <= seeds <= 48");
+    }
+
+    /**
+     * Set the number of seeds in the current slot
+     * @param seeds Number of seeds to set
+     * @throws InvalidParameterException
+     */
+    public void setNbSeeds(int seeds) throws InvalidParameterException{
+        Slot.validateNbSeeds(seeds);
+        this.nb_seeds = seeds;
+    }
+
+    /**
      * Return the amout of seeds in the slot
      * @return Amount of seeds
      */
@@ -28,29 +48,11 @@ public class Slot {
     }
 
     /**
-     * Set the number of seeds in the current slot
-     * @param seeds Number of seeds to set
-     */
-    public void setNbSeeds(int seeds){
-        if (seeds < 0 || seeds > 48)
-            throw new InvalidParameterException("nb_seeds must be 0 <= seeds <= 48");
-
-        this.nb_seeds = seeds;
-    }
-
-    /**
      * Set the X and Y coordinates of the Slot
      * @param x X coordinate of the slot
      * @param y Y coordinate of the slot
-     * @throws InvalidParameterException
      */
-    public void setCoordinates(int x, int y) throws InvalidParameterException{
-        if (x < 0 || x>5)
-            throw new InvalidParameterException("X must be between 0 and 5");
-
-        if (y != 0 && y!=1)
-            throw new InvalidParameterException("Y must be between 0 or 1");
-
+    public void setCoordinates(int x, int y){
         this.m_x = x;
         this.m_y = y;
     }
@@ -80,12 +82,10 @@ public class Slot {
 
     /**
      * Add one seed in the slot
-     * @throws IllegalStateException
+     * @throws InvalidParameterException
      */
-    public void incrementSeeds() throws IllegalStateException{
-        if(this.nb_seeds >= 48)
-            throw new IllegalStateException("A slot can have maximum 24 seeds");
-
+    public void incrementSeeds() throws InvalidParameterException{;
+        Slot.validateNbSeeds(this.nb_seeds + 1);
         this.nb_seeds += 1;
     }
 
@@ -94,8 +94,7 @@ public class Slot {
      * @throws IllegalStateException
      */
     public void decrementSeeds() throws IllegalStateException{
-        if (this.nb_seeds <= 0)
-            throw new IllegalStateException("The amount of seeds in a slot must be >= 0");
+        Slot.validateNbSeeds(this.nb_seeds - 1);
 
         this.nb_seeds -= 1;
     }
