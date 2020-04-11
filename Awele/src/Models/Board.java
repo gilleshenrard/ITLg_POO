@@ -59,6 +59,16 @@ public class Board {
     }
 
     /**
+     * Get the amount of seeds stored by a player
+     * @param ID ID of the player
+     * @return Amount of seeds
+     * @throws InvalidParameterException
+     */
+    public int getStoredSeeds(int ID) throws InvalidParameterException{
+        return Game.getInstance().getSeeds(ID);
+    }
+
+    /**
      * Get the name of a player regarding its ID
      * @param ID ID of the player of which getting the name
      * @return Name of the player

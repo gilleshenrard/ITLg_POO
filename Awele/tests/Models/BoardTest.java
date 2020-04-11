@@ -94,6 +94,16 @@ class BoardTest {
     }
 
     /**
+     * Check if getStoredSeeds() throws an exception with an invalid ID
+     */
+    @Test
+    void getStoredSeeds_invalidID_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.getStoredSeeds(0);
+        });
+    }
+
+    /**
      * Check if setRemainingSeeds() throws an exception with an invalid ID
      */
     @Test
