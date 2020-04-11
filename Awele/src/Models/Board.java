@@ -7,7 +7,6 @@ public class Board {
     private Slot[][] m_slots;
     private int remSeedsPl1;
     private int remSeedsPl2;
-    private Game m_game;
 
     /**
      * Create new Board
@@ -22,7 +21,6 @@ public class Board {
 
         this.remSeedsPl1 = 24;
         this.remSeedsPl2 = 24;
-        this.m_game = Game.getInstance();
     }
 
     /**
@@ -67,7 +65,7 @@ public class Board {
      * @throws InvalidParameterException
      */
     public String getName(int ID) throws InvalidParameterException{
-        return this.m_game.getName(ID);
+        return Game.getInstance().getName(ID);
     }
 
     /**
@@ -185,14 +183,14 @@ public class Board {
                 for (Slot tmp:buffer) {
                     if(tmp.getNbSeeds() == 2 || tmp.getNbSeeds() == 3) {
                         this.setRemainingSeeds(id, getRemainingSeeds(id) - tmp.getNbSeeds());
-                        this.m_game.storeSeeds(id, tmp.nb_seeds);
+                        Game.getInstance().storeSeeds(id, tmp.nb_seeds);
                         tmp.emptySeeds();
                     }
                 }
             }
 
             //if stored seeds > 24, the current player won the game
-            if(this.m_game.getSeeds(id) > 24)
+            if(Game.getInstance().getSeeds(id) > 24)
                 return 1;
         }
 
