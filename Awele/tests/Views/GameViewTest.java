@@ -6,19 +6,35 @@ class GameViewTest {
     GameView g = new GameView();
 
     /**
-     * Check if displayWin() fails displaying the winning message
+     * Check if displayMessage() fails displaying the winning message
      */
     @Test
-    void displayWin_shouldnot_fail() {
-        g.displayWin("Test");
+    void displayMessage_shouldnot_fail() {
+        g.displayMessage("Test");
     }
 
     /**
-     * Check if displayWin() throws an exception when given a null instance (should not)
+     * Check if displayMessage() throws an exception when given a null instance (should not)
      */
     @Test
-    void displayWin_nullName_shouldnot_fail() {
-        g.displayWin(null);
+    void displayMessage_nullName_shouldnot_fail() {
+        g.displayMessage(null);
+    }
+
+    /**
+     * Check if displayWarning() fails displaying the winning message
+     */
+    @Test
+    void displayWarning_shouldnot_fail() {
+        g.displayWarning("Test");
+    }
+
+    /**
+     * Check if displayWarning() throws an exception when given a null instance (should not)
+     */
+    @Test
+    void displayWarning_nullName_shouldnot_fail() {
+        g.displayWarning(null);
     }
 
     /**
