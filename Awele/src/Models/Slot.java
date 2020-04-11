@@ -14,7 +14,7 @@ public class Slot {
      * @param y The Y coordinate of the slot
      */
     public Slot(int x, int y){
-        this.nb_seeds = 4;
+        this.setNbSeeds(4);
         this.setCoordinates(x, y);
     }
 

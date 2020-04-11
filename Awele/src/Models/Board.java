@@ -12,15 +12,15 @@ public class Board {
      * Create new Board
      */
     public Board(){
+        this.setRemainingSeeds(1, 24);
+        this.setRemainingSeeds(2, 24);
+        
         this.m_slots = new Slot[2][6];
         for (int l = 0 ; l < 2 ; l++){
             for (int c = 0 ; c < 6 ; c++){
                 this.m_slots[l][c] = new Slot(c, l);
             }
         }
-
-        this.remSeedsPl1 = 24;
-        this.remSeedsPl2 = 24;
     }
 
     /**
