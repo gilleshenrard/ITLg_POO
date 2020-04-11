@@ -48,6 +48,14 @@ public class Player {
     }
 
     /**
+     * Returns the Player's ID
+     * @return ID
+     */
+    public int getID() {
+        return this.m_id;
+    }
+
+    /**
      * Sets the way the player selects a slot
      * @param behaviour Behaviour to adopt
      * @throws NullPointerException
@@ -57,14 +65,6 @@ public class Player {
             throw new NullPointerException("Cannot set a NULL behaviour");
 
         this.m_behaviour = behaviour;
-    }
-
-    /**
-     * Returns the Player's ID
-     * @return ID
-     */
-    public int getID() {
-        return this.m_id;
     }
 
     /**
