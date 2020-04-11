@@ -172,6 +172,52 @@ class BoardTest {
     }
 
     /**
+     * Check if getSlot() fails returning a slot
+     */
+    @Test
+    void getSlot_shouldnot_fail() {
+        b.getSlot(0, 0);
+    }
+
+    /**
+     * Check if getSlotSeeds() throws an exception with an X value over 5
+     */
+    @Test
+    void getSloSeeds_Xover5_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.getSlotSeeds(6, 0);
+        });
+    }
+
+    /**
+     * Check if getSlotSeeds() throws an exception with an invalid Y value
+     */
+    @Test
+    void getSlotSeeds_invalidY_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.getSlotSeeds(0, 3);
+        });
+    }
+
+    /**
+     * Check if getSlotSeeds() throws an exception with an X value below 0
+     */
+    @Test
+    void getSlotSeeds_Xbelow0_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.getSlotSeeds(-1, 0);
+        });
+    }
+
+    /**
+     * Check if getSlotSeeds() fails returning the amount of seeds
+     */
+    @Test
+    void getSlotSeeds_shouldnot_fail() {
+        Assertions.assertEquals(4, b.getSlot(0, 0).getNbSeeds());
+    }
+
+    /**
      * Check if getRemainingSeeds() returns the proper coordinates for next slot (within a row)
      */
     @Test
@@ -199,14 +245,6 @@ class BoardTest {
         Slot s = b.getSlot(5, 1);
         Assertions.assertEquals(b.getNext(s).getX(), 0);
         Assertions.assertEquals(b.getNext(s).getY(), 0);
-    }
-
-    /**
-     * Check if getSlot() fails returning a slot
-     */
-    @Test
-    void getSlot_shouldnot_fail() {
-        b.getSlot(0, 0);
     }
 
     /**

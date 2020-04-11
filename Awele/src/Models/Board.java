@@ -109,6 +109,17 @@ public class Board {
     }
 
     /**
+     * Get the amount of seeds contained in the slot located at X,Y
+     * @param x X coordinate of the slot
+     * @param y Y coordinate of the slot
+     * @return Amount of seeds
+     * @throws InvalidParameterException
+     */
+    public int getSlotSeeds(int x, int y) throws InvalidParameterException{
+        return this.getSlot(x, y).getNbSeeds();
+    }
+
+    /**
      * Get the next slot (increment x, and roll y when reached the end)
      * @param s Slot of which to find the next
      * @return Next slot to s
