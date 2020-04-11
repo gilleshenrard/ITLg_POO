@@ -16,7 +16,7 @@ class GameTest {
     @Test
     void validateIDs_wrong_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            Game.validateID(3);
+            Game.validateID(3, "");
         });
     }
 
@@ -25,8 +25,8 @@ class GameTest {
      */
     @Test
     void validateID_shouldnot_fail() {
-        Game.validateID(1);
-        Game.validateID(2);
+        Game.validateID(1, "");
+        Game.validateID(2, "");
     }
 
     /**

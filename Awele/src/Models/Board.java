@@ -29,13 +29,12 @@ public class Board {
      * Throw an exception if not 0 <= x <= 5 of y != 1,2
      * @param x X coordinate to validate
      * @param y Y coordinate to validate
+     * @param msg Name of the method in which the validation occurs
      * @throws InvalidParameterException
      */
-    public static void validateCoordinates(int x, int y) throws InvalidParameterException{
-        if(x < 0 || x > 5)
-            throw new InvalidParameterException("X value must be 0 <= x < 6");
-        if(y != 0 && y != 1)
-            throw new InvalidParameterException("Y value must be 0 or 1");
+    public static void validateCoordinates(int x, int y, String msg) throws InvalidParameterException{
+        if(x < 0 || x > 5 || (y != 0 && y != 1))
+            throw new InvalidParameterException(msg + " : incorrect coordinates (values : " + x + "," + y + ")");
     }
 
     /**
@@ -53,7 +52,7 @@ public class Board {
      * @throws InvalidParameterException
      */
     public int getRemainingSeeds(int ID) throws InvalidParameterException{
-        Game.validateID(ID);
+        Game.validateID(ID,"getRemainingSeeds()");
 
         if (ID == 1)
             return this.remSeedsPl1;
@@ -78,10 +77,10 @@ public class Board {
      * @throws InvalidParameterException
      */
     public void setRemainingSeeds(int ID, int value) throws InvalidParameterException{
-        Game.validateID(ID);
+        Game.validateID(ID, "setRemainingSeeds");
 
         if(value < 0 || value > 24)
-            throw new InvalidParameterException("Remaining seeds must be 0 <= seeds < 25");
+            throw new InvalidParameterException("setRemainingSeeds() : incorrect amount of seeds (value : " + value + ")");
 
         if (ID == 1)
             this.remSeedsPl1 = value;
@@ -97,7 +96,7 @@ public class Board {
      * @throws InvalidParameterException
      */
     public Slot getSlot(int x, int y) throws InvalidParameterException{
-        Board.validateCoordinates(x, y);
+        Board.validateCoordinates(x, y, "getSlot()");
         return this.m_slots[y][x];
     }
 
@@ -109,7 +108,7 @@ public class Board {
      */
     public Slot getNext(Slot s) throws NullPointerException{
         if (s == null)
-            throw new NullPointerException("Slot must not be null");
+            throw new NullPointerException("getNext() : NULL instance of Slot");
 
         //retrieve current coordinates
         int x = s.getX();
@@ -137,8 +136,8 @@ public class Board {
      * @throws InvalidParameterException
      */
     public int playSlot(int id, int slot) throws InvalidParameterException{
-        Game.validateID(id);
-        Board.validateCoordinates(slot - 1, 0);
+        Game.validateID(id, "playSlot()");
+        Board.validateCoordinates(slot - 1, id - 1, "playSlot()");
 
         //get number of seeds in the slot harvested by the player
         Slot s = this.getSlot(slot-1, id-1);
@@ -207,7 +206,7 @@ public class Board {
      */
     private int getSumCapturable(ArrayList<Slot> buffer) throws NullPointerException{
         if(buffer == null)
-            throw new NullPointerException("buffer must be instantiated");
+            throw new NullPointerException("getSumCapturable() : NULL instance of ArrayList<Slot>");
 
         int total = 0;
         for (Slot s: buffer) {

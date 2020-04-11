@@ -21,11 +21,12 @@ public class Slot {
     /**
      * Throw an exception if not 0 <= seeds <= 48
      * @param seeds Amount of seeds to validate
+     * @param msg Name of the method in which the validation occurs
      * @throws InvalidParameterException
      */
-    public static void validateNbSeeds(int seeds) throws InvalidParameterException{
+    public static void validateNbSeeds(int seeds, String msg) throws InvalidParameterException{
         if (seeds < 0 || seeds > 48)
-            throw new InvalidParameterException("nb_seeds must be 0 <= seeds <= 48");
+            throw new InvalidParameterException(msg + " : Incorrect amount of seeds (value : " + seeds + ")");
     }
 
     /**
@@ -34,7 +35,7 @@ public class Slot {
      * @throws InvalidParameterException
      */
     public void setNbSeeds(int seeds) throws InvalidParameterException{
-        Slot.validateNbSeeds(seeds);
+        Slot.validateNbSeeds(seeds, "setNbSeeds()");
         this.nb_seeds = seeds;
     }
 
@@ -84,7 +85,7 @@ public class Slot {
      * @throws InvalidParameterException
      */
     public void incrementSeeds() throws InvalidParameterException{;
-        Slot.validateNbSeeds(this.nb_seeds + 1);
+        Slot.validateNbSeeds(this.nb_seeds + 1, "incrementSeeds()");
         this.nb_seeds += 1;
     }
 
@@ -93,8 +94,7 @@ public class Slot {
      * @throws InvalidParameterException
      */
     public void decrementSeeds() throws InvalidParameterException{
-        Slot.validateNbSeeds(this.nb_seeds - 1);
-
+        Slot.validateNbSeeds(this.nb_seeds - 1, "decrementSeeds()");
         this.nb_seeds -= 1;
     }
 

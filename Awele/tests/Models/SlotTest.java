@@ -16,7 +16,7 @@ class SlotTest {
     @Test
     void validateNbSeeds_negative_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            Slot.validateNbSeeds(-1);
+            Slot.validateNbSeeds(-1, "");
         });
     }
 
@@ -26,7 +26,7 @@ class SlotTest {
     @Test
     void validateNbSeeds_above48_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            Slot.validateNbSeeds(49);
+            Slot.validateNbSeeds(49, "");
         });
     }
 
@@ -35,7 +35,7 @@ class SlotTest {
      */
     @Test
     void validateNbSeeds_shouldnot_fail() {
-        Slot.validateNbSeeds(48);
+        Slot.validateNbSeeds(48, "");
     }
 
     /**

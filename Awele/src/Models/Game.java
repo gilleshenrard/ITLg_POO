@@ -25,11 +25,12 @@ public class Game {
     /**
      * Throw an exception if ID != 1 or ID != 2
      * @param ID ID of the player
+     * @param msg Name of the method in which the validation occurs
      * @throws InvalidParameterException
      */
-    public static void validateID(int ID) throws InvalidParameterException{
+    public static void validateID(int ID, String msg) throws InvalidParameterException{
         if (ID != 1 && ID != 2)
-            throw new InvalidParameterException("ID must be 1 or 2");
+            throw new InvalidParameterException(msg + ": invalid ID provided (value : " + ID + ")");
     }
 
     /**
@@ -53,8 +54,8 @@ public class Game {
      */
     public void setPlayer(int ID, Player player) throws InvalidParameterException, NullPointerException{
         if(player == null)
-            throw new NullPointerException("Player cannot be NULL");
-        Game.validateID(ID);
+            throw new NullPointerException("setPlayer() : NULL instance of Player");
+        Game.validateID(ID, "setPlayer()");
 
         if (ID == 1)
             this.m_player1 = player;
@@ -69,7 +70,7 @@ public class Game {
      * @throws InvalidParameterException
      */
     public Player getPlayer(int ID) throws InvalidParameterException{
-        Game.validateID(ID);
+        Game.validateID(ID, "getPlayer()");
 
         if(ID == 1)
             return this.m_player1;
@@ -84,7 +85,7 @@ public class Game {
      */
     public void setBoard(Board board) throws NullPointerException{
         if(board == null)
-            throw new NullPointerException("Board cannot be NULL");
+            throw new NullPointerException("setBoard() : NULL instance of Board");
         this.m_board = board;
     }
 
@@ -103,10 +104,10 @@ public class Game {
      * @throws InvalidParameterException
      */
     public void storeSeeds(int ID, int nb_seeds) throws InvalidParameterException{
-        Game.validateID(ID);
+        Game.validateID(ID, "storeSeeds()");
 
         if(nb_seeds < 0 || nb_seeds > 23)
-            throw new InvalidParameterException("nb_seeds must be a positive number between 0 and 23");
+            throw new InvalidParameterException("storeSeeds() : incorrect amount of seeds (value : " + nb_seeds + ")");
 
         if (ID == 1)
             this.m_seedpl1 += nb_seeds;
@@ -121,7 +122,7 @@ public class Game {
      * @throws InvalidParameterException
      */
     public int getSeeds(int ID) throws InvalidParameterException {
-        Game.validateID(ID);
+        Game.validateID(ID, "getSeeds()");
 
         if(ID == 1)
             return m_seedpl1;
@@ -137,17 +138,17 @@ public class Game {
      * @throws NullPointerException
      */
     public String getName(int ID) throws InvalidParameterException, NullPointerException{
-        Game.validateID(ID);
+        Game.validateID(ID, "getName()");
 
         if(ID == 1) {
             if (this.m_player1 == null)
-                throw new NullPointerException("Player 1 must be instantiated first (cannot be NULL)");
+                throw new NullPointerException("getName() : Player 1 not instantiated");
             else
                 return this.m_player1.getName();
         }
         else{
             if (this.m_player2 == null)
-                throw new NullPointerException("Player 2 must be instantiated first (cannot be NULL)");
+                throw new NullPointerException("getName() : Player 2 not instantiated");
             else
                 return this.m_player2.getName();
         }
@@ -157,7 +158,7 @@ public class Game {
      * Harvest the seeds from a slot and, if necessary, scatter them
      * @param id ID of the player harvesting
      * @param slot Slot being harvested
-     * @return 0 if no futher action, 1 if victory, 2 if season cancelled
+     * @return 0 if no further action, 1 if victory, 2 if season cancelled
      * @throws InvalidParameterException
      */
     public int playSlot(int id, int slot) throws InvalidParameterException{

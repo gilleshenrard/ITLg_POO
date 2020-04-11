@@ -33,7 +33,7 @@ class BoardTest {
     @Test
     void validateCoordinates_negativeX_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            Board.validateCoordinates(-1, 0);
+            Board.validateCoordinates(-1, 0, "");
         });
     }
 
@@ -43,7 +43,7 @@ class BoardTest {
     @Test
     void validateCoordinates_negativeY_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            Board.validateCoordinates(0, -1);
+            Board.validateCoordinates(0, -1, "");
         });
     }
 
@@ -53,7 +53,7 @@ class BoardTest {
     @Test
     void validateCoordinates_xAbove5_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            Board.validateCoordinates(6, 0);
+            Board.validateCoordinates(6, 0, "");
         });
     }
 
@@ -63,7 +63,7 @@ class BoardTest {
     @Test
     void validateCoordinates_yAbove1_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            Board.validateCoordinates(0, 2);
+            Board.validateCoordinates(0, 2, "");
         });
     }
 
@@ -72,7 +72,7 @@ class BoardTest {
      */
     @Test
     void validateCoordinates_maxValues_shouldnot_fail() {
-            Board.validateCoordinates(5, 1);
+            Board.validateCoordinates(5, 1, "");
     }
 
     /**
@@ -80,7 +80,7 @@ class BoardTest {
      */
     @Test
     void validateCoordinates_minValues_shouldnot_fail() {
-        Board.validateCoordinates(0, 0);
+        Board.validateCoordinates(0, 0, "");
     }
 
     /**
