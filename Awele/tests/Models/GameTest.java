@@ -11,6 +11,25 @@ class GameTest {
     Game g = new Game();
 
     /**
+     * Check if validateID() throws an exception with an ID different than 1 or 2
+     */
+    @Test
+    void validateIDs_wrong_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            Game.validateID(3);
+        });
+    }
+
+    /**
+     * Check if validateID() fails to validate correct ID
+     */
+    @Test
+    void validateID_shouldnot_fail() {
+        Game.validateID(1);
+        Game.validateID(2);
+    }
+
+    /**
      * Check if storeSeeds() sets the proper value to stored seeds
      */
     @Test

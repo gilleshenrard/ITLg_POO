@@ -23,6 +23,16 @@ public class Game {
     }
 
     /**
+     * Throw an exception if ID != 1 or ID != 2
+     * @param ID ID of the player
+     * @throws InvalidParameterException
+     */
+    public static void validateID(int ID) throws InvalidParameterException{
+        if (ID != 1 && ID != 2)
+            throw new InvalidParameterException("ID must be 1 or 2");
+    }
+
+    /**
      * Create or return this instance of Game (DP singleton)
      * @return This instance of Game
      */
@@ -42,11 +52,9 @@ public class Game {
      * @throws NullPointerException
      */
     public void setPlayer(int ID, Player player) throws InvalidParameterException, NullPointerException{
-        if (ID != 1 && ID != 2)
-            throw new InvalidParameterException("ID must be 1 or 2");
-
         if(player == null)
             throw new NullPointerException("Player cannot be NULL");
+        Game.validateID(ID);
 
         if (ID == 1)
             this.m_player1 = player;
@@ -61,8 +69,7 @@ public class Game {
      * @throws InvalidParameterException
      */
     public Player getPlayer(int ID) throws InvalidParameterException{
-        if(ID != 1 && ID != 2)
-            throw new InvalidParameterException("ID must be 1 or 2");
+        Game.validateID(ID);
 
         if(ID == 1)
             return this.m_player1;
@@ -96,8 +103,7 @@ public class Game {
      * @throws InvalidParameterException
      */
     public void storeSeeds(int ID, int nb_seeds) throws InvalidParameterException{
-        if(ID != 1 && ID != 2)
-            throw new InvalidParameterException("ID must be 1 or 2");
+        Game.validateID(ID);
 
         if(nb_seeds < 0 || nb_seeds > 23)
             throw new InvalidParameterException("nb_seeds must be a positive number between 0 and 23");
@@ -115,8 +121,7 @@ public class Game {
      * @throws InvalidParameterException
      */
     public int getSeeds(int ID) throws InvalidParameterException {
-        if(ID != 1 && ID != 2)
-            throw new InvalidParameterException("ID must be 1 or 2");
+        Game.validateID(ID);
 
         if(ID == 1)
             return m_seedpl1;
@@ -132,8 +137,7 @@ public class Game {
      * @throws NullPointerException
      */
     public String getName(int ID) throws InvalidParameterException, NullPointerException{
-        if(ID != 1 && ID != 2)
-            throw new InvalidParameterException("ID must be 1 or 2");
+        Game.validateID(ID);
 
         if(ID == 1) {
             if (this.m_player1 == null)
