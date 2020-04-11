@@ -1,7 +1,6 @@
 package Models;
 
 import Controllers.iSelectable;
-
 import java.security.InvalidParameterException;
 import java.util.Objects;
 
@@ -9,7 +8,6 @@ public class Player {
     private int m_id;
     private String m_name;
     private iSelectable m_behaviour;
-    private Game m_game;
 
     /**
      * Creates a new Player
@@ -21,7 +19,6 @@ public class Player {
         this.setID(id);
         this.m_name = name;
         this.m_behaviour = null;
-        this.m_game = Game.getInstance();
     }
 
     /**
@@ -36,7 +33,6 @@ public class Player {
         this.setID(id);
         this.m_name = name;
         this.setBehaviour(behaviour);
-        this.m_game = Game.getInstance();
     }
 
     /**
@@ -61,13 +57,6 @@ public class Player {
             throw new NullPointerException("Cannot set a NULL behaviour");
 
         this.m_behaviour = behaviour;
-    }
-
-    /**
-     * Set the Game instance
-     */
-    public void setGame(){
-        this.m_game = Game.getInstance();
     }
 
     /**
