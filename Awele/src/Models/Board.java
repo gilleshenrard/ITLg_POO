@@ -115,12 +115,10 @@ public class Board {
         int y = s.getY();
 
         //increment X
-        x++;
-        x %= 6;
-
         //if end of row (X rolled back to 0), increment Y
         // if end of column, roll Y back to 0
-        if(x == 0){
+        x++;
+        if((x %= 6) == 0){
             y++;
             y %= 2;
         }
