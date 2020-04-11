@@ -140,15 +140,15 @@ public class Board {
         //get number of seeds in the slot harvested by the player
         Slot s = this.getSlot(slot-1, id-1);
         int nbseeds = s.getNbSeeds();
-        int backupseeds = s.getNbSeeds();
 
         if(nbseeds == 0)
             return 2;
 
-        //empty the slot (it's been harvested)
+        //backup seeds in the slot and empty it (it's been harvested)
+        int backupseeds = s.getNbSeeds();
         s.emptySeeds();
 
-        //save all the slots after the slot harvested in a buffer until there are no seeds left
+        //save all the slots after the slot harvested in a buffer until there are no seeds left to scatter
         Slot sNext = this.getNext(s);
         ArrayList<Slot> buffer = new ArrayList<Slot>();
         while (nbseeds > 0){
@@ -163,11 +163,11 @@ public class Board {
         }
 
         //get the amount of seeds in the last slot of the buffer
-        int seeds = buffer.get(buffer.size()-1).getNbSeeds();
+        nbseeds = buffer.get(buffer.size()-1).getNbSeeds();
 
         //if that amount is 2 or 3, a capture needs to be made
-        if(seeds == 2 || seeds == 3){
-            //check if this seasons risks to starve the opponent
+        if(nbseeds == 2 || nbseeds == 3){
+            //check if this seasons risks to starve the opponent (remaining seeds = 0)
             int sumseeds = this.getSumCapturable(buffer);
             if(sumseeds == this.getRemainingSeeds(3 - id)){
                 //opponent starved, cancellation
@@ -176,10 +176,12 @@ public class Board {
                 }
                 s.setNbSeeds(backupseeds);
 
+                //return code for starvation
                 return 2;
             }
             else{
                 //opponent not starved, capture
+                // (collect all seeds from the slots in the buffer which contain 2 or 3 seeds)
                 for (Slot tmp:buffer) {
                     if(tmp.getNbSeeds() == 2 || tmp.getNbSeeds() == 3) {
                         this.setRemainingSeeds(id, getRemainingSeeds(id) - tmp.getNbSeeds());
@@ -189,10 +191,12 @@ public class Board {
                 }
             }
 
+            //if stored seeds > 24, the current player won the game
             if(this.m_game.getSeeds(id) > 24)
                 return 1;
         }
 
+        //return code for normal end of season
         return 0;
     }
 
@@ -206,6 +210,7 @@ public class Board {
         if(buffer == null)
             throw new NullPointerException("getSumCapturable() : NULL instance of ArrayList<Slot>");
 
+        //count the sum of the seeds in the capturable slots (containing 2 or 3 seeds after scattering)
         int total = 0;
         for (Slot s: buffer) {
             if(s.getNbSeeds() == 2 || s.getNbSeeds()==3)
