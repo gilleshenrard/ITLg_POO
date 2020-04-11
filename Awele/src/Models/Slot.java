@@ -12,9 +12,8 @@ public class Slot {
      * Create a new Slot
      * @param x The X coordinate of the slot
      * @param y The Y coordinate of the slot
-     * @throws InvalidParameterException
      */
-    public Slot(int x, int y) throws InvalidParameterException{
+    public Slot(int x, int y){
         this.nb_seeds = 4;
         this.setCoordinates(x, y);
     }
@@ -91,9 +90,9 @@ public class Slot {
 
     /**
      * Remove one seed from the slot
-     * @throws IllegalStateException
+     * @throws InvalidParameterException
      */
-    public void decrementSeeds() throws IllegalStateException{
+    public void decrementSeeds() throws InvalidParameterException{
         Slot.validateNbSeeds(this.nb_seeds - 1);
 
         this.nb_seeds -= 1;
