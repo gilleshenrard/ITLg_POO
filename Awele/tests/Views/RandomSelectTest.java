@@ -1,6 +1,6 @@
-package Controllers;
+package Views;
 
-import Controllers.RandomSelect;
+import Views.RandomSelect;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

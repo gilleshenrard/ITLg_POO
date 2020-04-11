@@ -1,6 +1,6 @@
 package Models;
 
-import Controllers.RandomSelect;
+import Views.RandomSelect;
 import Views.KeyboardSelect;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

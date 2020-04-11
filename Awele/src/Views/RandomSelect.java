@@ -1,6 +1,6 @@
-package Controllers;
+package Views;
 
-import Controllers.iSelectable;
+import Views.iSelectable;
 
 import java.util.Random;
 

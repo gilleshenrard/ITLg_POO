@@ -1,6 +1,6 @@
 package Projet1.Awele;
 
-import Controllers.RandomSelect;
+import Views.RandomSelect;
 import Models.Board;
 import Models.Game;
 import Models.Player;
