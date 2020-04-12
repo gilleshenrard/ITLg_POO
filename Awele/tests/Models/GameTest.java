@@ -1,6 +1,7 @@
 package Models;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.security.InvalidParameterException;
@@ -13,6 +14,7 @@ class GameTest {
     /**
      * Check if validateID() throws an exception with an ID different than 1 or 2
      */
+    @DisplayName("validateID() with a wrong ID - should fail")
     @Test
     void validateIDs_wrong_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
@@ -23,6 +25,7 @@ class GameTest {
     /**
      * Check if validateID() fails to validate correct ID
      */
+    @DisplayName("validateID() - should not fail")
     @Test
     void validateID_shouldnot_fail() {
         Game.validateID(1, "");
@@ -32,6 +35,7 @@ class GameTest {
     /**
      * Check if storeSeeds() sets the proper value to stored seeds
      */
+    @DisplayName("storeSeeds() - should not fail")
     @Test
     void storeSeeds_shouldnot_fail() {
         g.storeSeeds(1, 15);
@@ -41,6 +45,7 @@ class GameTest {
     /**
      * Check if storeSeeds() throws an exception with an invalid ID
      */
+    @DisplayName("storeSeeds() with an invalid ID - should fail")
     @Test
     void storeSeeds_invalidID_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
@@ -51,6 +56,7 @@ class GameTest {
     /**
      * Check if storeSeeds() throws an exception with an amount of seeds above 23
      */
+    @DisplayName("storeSeeds() with an invalid ID - should fail")
     @Test
     void storeSeeds_SeedsAbove23_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
@@ -61,6 +67,7 @@ class GameTest {
     /**
      * Check if storeSeeds() throws an exception with a negative amount of seeds
      */
+    @DisplayName("storeSeeds() with negative nb_seeds - should fail")
     @Test
     void storeSeeds_negativeSeedsNb_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
@@ -71,6 +78,7 @@ class GameTest {
     /**
      * Check if getSeeds() throws an exception with an invalid ID
      */
+    @DisplayName("getSeeds() with an invalid ID - should fail")
     @Test
     void getSeeds_invalidID_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
@@ -81,6 +89,7 @@ class GameTest {
     /**
      * Check if getSeeds() returns the right amount of seeds
      */
+    @DisplayName("getSeeds() - should not fail")
     @Test
     void getSeeds_shouldnot_fail() {
             g.storeSeeds(1, 12);
@@ -90,6 +99,7 @@ class GameTest {
     /**
      * Check if getInstance() returns the right instance of Game
      */
+    @DisplayName("getInstance() - should not fail")
     @Test
     void getInstance_shouldnot_fail() {
         Game g2 = new Game();
@@ -99,6 +109,7 @@ class GameTest {
     /**
      * Check if setPlayer() fails setting an instance of Player
      */
+    @DisplayName("setPlayer() - should not fail")
     @Test
     void setPlayer_shouldnot_fail() {
         g.setPlayer(1, new Player(1, "test"));
@@ -107,6 +118,7 @@ class GameTest {
     /**
      * Check if setPlayer() throws an exception with an invalid ID
      */
+    @DisplayName("setPlayer() with an invalid ID - should fail")
     @Test
     void setPlayer_invalidID_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
@@ -117,6 +129,7 @@ class GameTest {
     /**
      * Check if setPlayer() throws an exception with a null instance
      */
+    @DisplayName("setPlayer() with a NULL instance - should fail")
     @Test
     void setPlayer_nullPlayer_should_fail() {
         Assertions.assertThrows(NullPointerException.class, () -> {
@@ -127,6 +140,7 @@ class GameTest {
     /**
      * Check if getPlayer() throws an exception with an invalid ID
      */
+    @DisplayName("getPlayer() with an invalid ID - should fail")
     @Test
     void getPlayer_invalidID_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
@@ -137,6 +151,7 @@ class GameTest {
     /**
      * Check if getPlayer() returns the right instance of Player
      */
+    @DisplayName("getPlayer() - should not fail")
     @Test
     void getPlayer_shouldnot_fail() {
         Player p = new Player(1, "Test"), p2;
@@ -148,6 +163,7 @@ class GameTest {
     /**
      * Check if getBoard() returns the right instance of Board
      */
+    @DisplayName("getBoard() - should not fail")
     @Test
     void getBoard_shouldnot_fail() {
         Board b = new Board(), b2;
@@ -159,6 +175,7 @@ class GameTest {
     /**
      * Check if setBoard() throws an exception with a null instance
      */
+    @DisplayName("setBoard() with a NULL instance - should fail")
     @Test
     void setBoard_nullBoard_should_fail() {
         Assertions.assertThrows(NullPointerException.class, () -> {
@@ -169,6 +186,7 @@ class GameTest {
     /**
      * Check if setBoard() fails setting an instance of Board
      */
+    @DisplayName("setBoard() - should not fail")
     @Test
     void setBoard_shouldnot_fail() {
             g.setBoard(new Board());
@@ -177,6 +195,7 @@ class GameTest {
     /**
      * Check if getName() returns the right player name
      */
+    @DisplayName("getName() - should not fail")
     @Test
     void getName_shouldnot_fail() {
         g.setPlayer(1, new Player(1, "Testname"));
@@ -186,6 +205,7 @@ class GameTest {
     /**
      * Check if getName() throws an exception while fetching a null instance
      */
+    @DisplayName("getName() with a NULL instance - should fail")
     @Test
     void getName_nullPlayer_should_fail() {
         Assertions.assertThrows(NullPointerException.class, () -> {
@@ -196,6 +216,7 @@ class GameTest {
     /**
      * Check if getName() throws an exception using an invalid ID
      */
+    @DisplayName("getName() with an invalid ID - should fail")
     @Test
     void getName_invalidID_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
@@ -206,6 +227,7 @@ class GameTest {
     /**
      * Check if getSlot() throws an exception with an invalid ID
      */
+    @DisplayName("getSlot() with an invalid ID - should fail")
     @Test
     void playSlot_invalidID_should_fail() {
         g.setBoard(new Board());
@@ -217,6 +239,7 @@ class GameTest {
     /**
      * Check if getSlot() throws an exception with a slot below 1
      */
+    @DisplayName("getSlot() with a slot below 1 - should fail")
     @Test
     void playSlot_below1_should_fail() {
         g.setBoard(new Board());
@@ -228,6 +251,7 @@ class GameTest {
     /**
      * Check if getSlot() throws an exception with a slot above 6
      */
+    @DisplayName("getSlot() with a slot above 6 - should fail")
     @Test
     void playSlot_above6_should_fail() {
         g.setBoard(new Board());
@@ -239,6 +263,7 @@ class GameTest {
     /**
      * Check if resetGame() sets the proper values
      */
+    @DisplayName("resetGame() - should not fail")
     @Test
     void resetGame_shouldnot_fail() {
         g.setBoard(new Board());
