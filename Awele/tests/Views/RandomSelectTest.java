@@ -1,7 +1,7 @@
 package Views;
 
-import Views.RandomSelect;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class RandomSelectTest {
@@ -10,6 +10,7 @@ class RandomSelectTest {
     /**
      * Verify that selectSlot() generates 0 <= value <= 5
      */
+    @DisplayName("selectSlot() - should not fail")
     @Test
     void selectSlot_shouldnot_fail() {
         int buffer = r.selectSlot();
