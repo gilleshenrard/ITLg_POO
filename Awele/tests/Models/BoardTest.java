@@ -10,23 +10,6 @@ class BoardTest {
     Board b = new Board();
 
     /**
-     * Check that getSlots() returns a default Slot[2][6]
-     */
-    @DisplayName("getSlots() with default values - should not fail")
-    @Test
-    void getSlots_shouldnot_fail() {
-        Slot s[][] = b.getSlots();
-        Slot buffer = new Slot(0,0);
-
-        for(int l=0 ; l<1 ; l++){
-            for(int c=0 ; c<6 ; c++){
-                buffer.setCoordinates(c, l);
-                Assertions.assertEquals(s[l][c], buffer);
-            }
-        }
-    }
-
-    /**
      * Check if validateCoordinates() throws an exception with a negative X
      */
     @DisplayName("validateCoordinates() with negative X - should fail")

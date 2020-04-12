@@ -36,14 +36,6 @@ public class Board {
     }
 
     /**
-     * Return the board slots
-     * @return Board slots
-     */
-    public Slot[][] getSlots(){
-        return this.m_slots;
-    }
-
-    /**
      * Return the remaining amount of seeds for a player
      * @param ID ID of the player
      * @return Amount of seeds remaining
