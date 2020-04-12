@@ -55,8 +55,10 @@ public class Main {
             gameView.displayMessage("--------------------------------------------------------------------");
 
             //Game is won by the current player.
-            if (outcome == 1)
-                gameView.displayMessage(game.getName(player+1) + " won the game !");
+            if (outcome == 1) {
+                b.displayBoard();
+                gameView.displayMessage(game.getName(player + 1) + " won the game !");
+            }
 
             //Select next player
             player++;
