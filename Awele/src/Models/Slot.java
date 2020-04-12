@@ -35,7 +35,7 @@ public class Slot {
      * @throws InvalidParameterException
      */
     public void setNbSeeds(int seeds) throws InvalidParameterException{
-        Slot.validateNbSeeds(seeds, "setNbSeeds()");
+        Slot.validateNbSeeds(seeds, "Slot.setNbSeeds()");
         this.nb_seeds = seeds;
     }
 
@@ -85,7 +85,7 @@ public class Slot {
      * @throws InvalidParameterException
      */
     public void incrementSeeds() throws InvalidParameterException{;
-        Slot.validateNbSeeds(this.nb_seeds + 1, "incrementSeeds()");
+        Slot.validateNbSeeds(this.nb_seeds + 1, "Slot.incrementSeeds()");
         this.nb_seeds += 1;
     }
 
@@ -94,7 +94,7 @@ public class Slot {
      * @throws InvalidParameterException
      */
     public void decrementSeeds() throws InvalidParameterException{
-        Slot.validateNbSeeds(this.nb_seeds - 1, "decrementSeeds()");
+        Slot.validateNbSeeds(this.nb_seeds - 1, "Slot.decrementSeeds()");
         this.nb_seeds -= 1;
     }
 

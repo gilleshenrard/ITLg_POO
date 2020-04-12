@@ -42,7 +42,7 @@ public class Player {
      */
     public void setID(int m_id) throws InvalidParameterException{
         if(m_id < 0)
-            throw new InvalidParameterException("setID() : negative ID (value : " + m_id + ")");
+            throw new InvalidParameterException("Player.setID() : negative ID (value : " + m_id + ")");
 
         this.m_id = m_id;
     }
@@ -62,7 +62,7 @@ public class Player {
      */
     public void setBehaviour(iSelectable behaviour) throws NullPointerException{
         if(behaviour == null)
-            throw new NullPointerException("setBehaviour() : NULL instance of behaviour");
+            throw new NullPointerException("Player.setBehaviour() : NULL instance of behaviour");
 
         this.m_behaviour = behaviour;
     }
@@ -82,7 +82,7 @@ public class Player {
      */
     public int selectSlot() throws NullPointerException{
         if (this.m_behaviour == null)
-            throw new NullPointerException("selectSlot() : NULL instance of behaviour");
+            throw new NullPointerException("Player.selectSlot() : NULL instance of behaviour");
 
         return this.m_behaviour.selectSlot();
     }

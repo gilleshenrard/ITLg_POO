@@ -50,7 +50,7 @@ public class Board {
      * @throws InvalidParameterException
      */
     public int getRemainingSeeds(int ID) throws InvalidParameterException{
-        Game.validateID(ID,"getRemainingSeeds()");
+        Game.validateID(ID,"Board.getRemainingSeeds()");
 
         if (ID == 1)
             return this.remSeedsPl1;
@@ -85,8 +85,8 @@ public class Board {
      * @throws InvalidParameterException
      */
     public void setRemainingSeeds(int ID, int value) throws InvalidParameterException{
-        Game.validateID(ID, "setRemainingSeeds");
-        Slot.validateNbSeeds(value, "setRemainingSeeds");
+        Game.validateID(ID, "Board.setRemainingSeeds()");
+        Slot.validateNbSeeds(value, "Board.setRemainingSeeds()");
 
         if (ID == 1)
             this.remSeedsPl1 = value;
@@ -102,7 +102,7 @@ public class Board {
      * @throws InvalidParameterException
      */
     public Slot getSlot(int x, int y) throws InvalidParameterException{
-        Board.validateCoordinates(x, y, "getSlot()");
+        Board.validateCoordinates(x, y, "Board.getSlot()");
         return this.m_slots[y][x];
     }
 
@@ -125,7 +125,7 @@ public class Board {
      */
     public Slot getNext(Slot s) throws NullPointerException{
         if (s == null)
-            throw new NullPointerException("getNext() : NULL instance of Slot");
+            throw new NullPointerException("Board.getNext() : NULL instance of Slot");
 
         //retrieve current coordinates
         int x = s.getX();
@@ -151,8 +151,8 @@ public class Board {
      * @throws InvalidParameterException
      */
     public int playSlot(int id, int slot) throws InvalidParameterException{
-        Game.validateID(id, "playSlot()");
-        Board.validateCoordinates(slot - 1, id - 1, "playSlot()");
+        Game.validateID(id, "Board.playSlot()");
+        Board.validateCoordinates(slot - 1, id - 1, "Board.playSlot()");
 
         //get number of seeds in the slot harvested by the player
         Slot s = this.getSlot(slot-1, id-1);
@@ -236,7 +236,7 @@ public class Board {
      */
     private int getSumCapturable(ArrayList<Slot> buffer) throws NullPointerException{
         if(buffer == null)
-            throw new NullPointerException("getSumCapturable() : NULL instance of ArrayList<Slot>");
+            throw new NullPointerException("Board.getSumCapturable() : NULL instance of ArrayList<Slot>");
 
         //count the sum of the seeds in the capturable slots (containing 2 or 3 seeds after scattering)
         int total = 0;
