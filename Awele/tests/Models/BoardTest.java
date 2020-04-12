@@ -375,4 +375,23 @@ class BoardTest {
         Assertions.assertEquals(5, b.getRemainingSeeds(2));
         Assertions.assertEquals(0, Game.getInstance().getSeeds(1));
     }
+
+    /**
+     * Check if playSlot() processes a victory season
+     */
+    @Disabled("getSeeds() fails only when other playSlot() tests are enabled")
+    @Test
+    void playSlot_victory_shouldnot_fail() {
+        b.getSlot(3, 1).setNbSeeds(1);
+        b.getSlot(1, 1).setNbSeeds(2);
+        Game.getInstance().storeSeeds(1, 20);
+        int ret = b.playSlot(1, 6);
+        Assertions.assertEquals(1, ret);
+        Assertions.assertEquals(5, b.getSlot(0, 1).getNbSeeds());
+        Assertions.assertEquals(0, b.getSlot(1, 1).getNbSeeds());
+        Assertions.assertEquals(5, b.getSlot(2, 1).getNbSeeds());
+        Assertions.assertEquals(0, b.getSlot(3, 1).getNbSeeds());
+        Assertions.assertEquals(4, b.getSlot(4, 1).getNbSeeds());
+        Assertions.assertEquals(25, Game.getInstance().getSeeds(1));
+    }
 }
