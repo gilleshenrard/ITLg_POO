@@ -124,12 +124,12 @@ class BoardTest {
     }
 
     /**
-     * Check if setRemainingSeeds() throws an exception with a value above 24
+     * Check if setRemainingSeeds() throws an exception with a value above 48
      */
     @Test
-    void setRemainingSeeds_above24_should_fail() {
+    void setRemainingSeeds_above48_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            b.setRemainingSeeds(1, 25);
+            b.setRemainingSeeds(1, 49);
         });
     }
 
@@ -294,12 +294,15 @@ class BoardTest {
     void playSlot_noCaptureNoStarve_shouldnot_fail() {
         int ret = b.playSlot(1, 6);
         Assertions.assertEquals(0, ret);
+        Assertions.assertEquals(0, b.getSlot(5, 0).getNbSeeds());
         Assertions.assertEquals(5, b.getSlot(0, 1).getNbSeeds());
         Assertions.assertEquals(5, b.getSlot(1, 1).getNbSeeds());
         Assertions.assertEquals(5, b.getSlot(2, 1).getNbSeeds());
         Assertions.assertEquals(5, b.getSlot(3, 1).getNbSeeds());
         Assertions.assertEquals(4, b.getSlot(4, 1).getNbSeeds());
         Assertions.assertEquals(0, Game.getInstance().getSeeds(1));
+        Assertions.assertEquals(20, b.getRemainingSeeds(1));
+        Assertions.assertEquals(28, b.getRemainingSeeds(2));
     }
 
     /**
@@ -309,6 +312,8 @@ class BoardTest {
     @Test
     void playSlot_skipSelected_shouldnot_fail() {
         b.getSlot(3, 0).setNbSeeds(12);
+        b.getSlot(2, 0).emptySeeds();
+        b.getSlot(1, 0).emptySeeds();
         int ret = b.playSlot(1, 4);
         Assertions.assertEquals(0, ret);
         Assertions.assertEquals(5, b.getSlot(0, 1).getNbSeeds());
@@ -318,12 +323,14 @@ class BoardTest {
         Assertions.assertEquals(5, b.getSlot(4, 1).getNbSeeds());
         Assertions.assertEquals(5, b.getSlot(5, 1).getNbSeeds());
         Assertions.assertEquals(5, b.getSlot(0, 0).getNbSeeds());
-        Assertions.assertEquals(5, b.getSlot(1, 0).getNbSeeds());
-        Assertions.assertEquals(5, b.getSlot(2, 0).getNbSeeds());
+        Assertions.assertEquals(1, b.getSlot(1, 0).getNbSeeds());
+        Assertions.assertEquals(1, b.getSlot(2, 0).getNbSeeds());
         Assertions.assertEquals(0, b.getSlot(3, 0).getNbSeeds());
         Assertions.assertEquals(6, b.getSlot(4, 0).getNbSeeds());
         Assertions.assertEquals(5, b.getSlot(5, 0).getNbSeeds());
         Assertions.assertEquals(0, Game.getInstance().getSeeds(1));
+        Assertions.assertEquals(30, b.getRemainingSeeds(2));
+        Assertions.assertEquals(18, b.getRemainingSeeds(2));
     }
 
     /**
@@ -332,15 +339,17 @@ class BoardTest {
     @Test
     void playSlot_CaptureNoStarve_shouldnot_fail() {
         b.getSlot(3, 1).setNbSeeds(1);
-        b.getSlot(2, 1).setNbSeeds(2);
+        b.getSlot(1, 1).setNbSeeds(2);
         int ret = b.playSlot(1, 6);
         Assertions.assertEquals(0, ret);
         Assertions.assertEquals(5, b.getSlot(0, 1).getNbSeeds());
-        Assertions.assertEquals(5, b.getSlot(1, 1).getNbSeeds());
-        Assertions.assertEquals(0, b.getSlot(2, 1).getNbSeeds());
+        Assertions.assertEquals(0, b.getSlot(1, 1).getNbSeeds());
+        Assertions.assertEquals(5, b.getSlot(2, 1).getNbSeeds());
         Assertions.assertEquals(0, b.getSlot(3, 1).getNbSeeds());
         Assertions.assertEquals(4, b.getSlot(4, 1).getNbSeeds());
         Assertions.assertEquals(5, Game.getInstance().getSeeds(1));
+        Assertions.assertEquals(18, b.getRemainingSeeds(2));
+        Assertions.assertEquals(20, b.getRemainingSeeds(1));
     }
 
     /**
@@ -348,16 +357,22 @@ class BoardTest {
      */
     @Test
     void playSlot_noCaptureStarve_shouldnot_fail() {
-        b.getSlot(3, 1).setNbSeeds(1);
-        b.getSlot(2, 1).setNbSeeds(2);
-        b.setRemainingSeeds(2, 5);
+        b.getSlot(0, 1).setNbSeeds(1);
+        b.getSlot(1, 1).setNbSeeds(2);
+        b.getSlot(2, 1).emptySeeds();
+        b.getSlot(3, 1).emptySeeds();
+        b.getSlot(4, 1).emptySeeds();
+        b.getSlot(5, 1).emptySeeds();
+        b.getSlot(5, 0).setNbSeeds(2);
         int ret = b.playSlot(1, 6);
         Assertions.assertEquals(2, ret);
-        Assertions.assertEquals(4, b.getSlot(0, 1).getNbSeeds());
-        Assertions.assertEquals(4, b.getSlot(1, 1).getNbSeeds());
-        Assertions.assertEquals(2, b.getSlot(2, 1).getNbSeeds());
-        Assertions.assertEquals(1, b.getSlot(3, 1).getNbSeeds());
-        Assertions.assertEquals(4, b.getSlot(4, 1).getNbSeeds());
+        Assertions.assertEquals(1, b.getSlot(0, 1).getNbSeeds());
+        Assertions.assertEquals(2, b.getSlot(1, 1).getNbSeeds());
+        Assertions.assertEquals(0, b.getSlot(2, 1).getNbSeeds());
+        Assertions.assertEquals(0, b.getSlot(3, 1).getNbSeeds());
+        Assertions.assertEquals(0, b.getSlot(4, 1).getNbSeeds());
+        Assertions.assertEquals(0, b.getSlot(4, 1).getNbSeeds());
+        Assertions.assertEquals(5, b.getRemainingSeeds(2));
         Assertions.assertEquals(0, Game.getInstance().getSeeds(1));
     }
 }

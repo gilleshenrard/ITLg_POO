@@ -86,9 +86,7 @@ public class Board {
      */
     public void setRemainingSeeds(int ID, int value) throws InvalidParameterException{
         Game.validateID(ID, "setRemainingSeeds");
-
-        if(value < 0 || value > 24)
-            throw new InvalidParameterException("setRemainingSeeds() : incorrect amount of seeds (value : " + value + ")");
+        Slot.validateNbSeeds(value, "setRemainingSeeds");
 
         if (ID == 1)
             this.remSeedsPl1 = value;
@@ -194,6 +192,8 @@ public class Board {
 
         //if that amount is 2 or 3, a capture needs to be made
         if(nbseeds == 2 || nbseeds == 3){
+            this.updateRemainingSeeds();
+
             //check if this seasons risks to starve the opponent (remaining seeds = 0)
             int sumseeds = this.getSumCapturable(buffer);
             if(sumseeds == this.getRemainingSeeds(3 - id)){
@@ -224,6 +224,7 @@ public class Board {
         }
 
         //return code for normal end of season
+        this.updateRemainingSeeds();
         return 0;
     }
 
@@ -245,5 +246,23 @@ public class Board {
         }
 
         return total;
+    }
+
+    /**
+     * Refresh the amount of remaining seeds for both players
+     */
+    private void updateRemainingSeeds(){
+        int totalPlayer1 = 0, totalPlayer2 = 0;
+
+        for (int l = 0 ; l < 2 ; l++){
+            for (int c = 0 ; c < 6 ; c++){
+                if(l == 0)
+                    totalPlayer1 += getSlot(c, l).getNbSeeds();
+                else
+                    totalPlayer2 += getSlot(c, l).getNbSeeds();
+            }
+        }
+        this.setRemainingSeeds(1, totalPlayer1);
+        this.setRemainingSeeds(2, totalPlayer2);
     }
 }
