@@ -30,8 +30,8 @@ public class Main {
             do {
                 try {
                     choice = game.getPlayer(player + 1).selectSlot();
-                    outcome = game.playSlot(player + 1, choice);
                     gameView.displayMessage(game.getName(player+1) + " harvests the slot " + game.getLastSlotPlayed());
+                    outcome = game.playSlot(player + 1, choice);
 
                     //player starved
                     if (outcome == 2)
