@@ -308,9 +308,11 @@ class BoardTest {
     /**
      * Check if playSlot() properly skips the selected slot when scattering
      */
-    @Disabled("getSeeds() fails only when other playSlot() tests are enabled")
     @Test
     void playSlot_skipSelected_shouldnot_fail() {
+        Game g = Game.getInstance();
+        g.setBoard(b);
+        g.resetGame();
         b.getSlot(3, 0).setNbSeeds(12);
         b.getSlot(2, 0).emptySeeds();
         b.getSlot(1, 0).emptySeeds();
@@ -330,7 +332,7 @@ class BoardTest {
         Assertions.assertEquals(5, b.getSlot(5, 0).getNbSeeds());
         Assertions.assertEquals(0, Game.getInstance().getSeeds(1));
         Assertions.assertEquals(30, b.getRemainingSeeds(2));
-        Assertions.assertEquals(18, b.getRemainingSeeds(2));
+        Assertions.assertEquals(18, b.getRemainingSeeds(1));
     }
 
     /**
@@ -338,17 +340,20 @@ class BoardTest {
      */
     @Test
     void playSlot_CaptureNoStarve_shouldnot_fail() {
-        b.getSlot(3, 1).setNbSeeds(1);
         b.getSlot(1, 1).setNbSeeds(2);
+        b.getSlot(3, 1).setNbSeeds(1);
+        b.getSlot(4, 1).setNbSeeds(9);
         int ret = b.playSlot(1, 6);
         Assertions.assertEquals(0, ret);
         Assertions.assertEquals(5, b.getSlot(0, 1).getNbSeeds());
         Assertions.assertEquals(0, b.getSlot(1, 1).getNbSeeds());
         Assertions.assertEquals(5, b.getSlot(2, 1).getNbSeeds());
         Assertions.assertEquals(0, b.getSlot(3, 1).getNbSeeds());
-        Assertions.assertEquals(4, b.getSlot(4, 1).getNbSeeds());
+        Assertions.assertEquals(9, b.getSlot(4, 1).getNbSeeds());
+        Assertions.assertEquals(4, b.getSlot(5, 1).getNbSeeds());
+        Assertions.assertEquals(0, b.getSlot(5, 0).getNbSeeds());
         Assertions.assertEquals(5, Game.getInstance().getSeeds(1));
-        Assertions.assertEquals(18, b.getRemainingSeeds(2));
+        Assertions.assertEquals(23, b.getRemainingSeeds(2));
         Assertions.assertEquals(20, b.getRemainingSeeds(1));
     }
 
@@ -371,15 +376,14 @@ class BoardTest {
         Assertions.assertEquals(0, b.getSlot(2, 1).getNbSeeds());
         Assertions.assertEquals(0, b.getSlot(3, 1).getNbSeeds());
         Assertions.assertEquals(0, b.getSlot(4, 1).getNbSeeds());
-        Assertions.assertEquals(0, b.getSlot(4, 1).getNbSeeds());
-        Assertions.assertEquals(5, b.getRemainingSeeds(2));
+        Assertions.assertEquals(0, b.getSlot(5, 1).getNbSeeds());
+        Assertions.assertEquals(3, b.getRemainingSeeds(2));
         Assertions.assertEquals(0, Game.getInstance().getSeeds(1));
     }
 
     /**
      * Check if playSlot() processes a victory season
      */
-    @Disabled("getSeeds() fails only when other playSlot() tests are enabled")
     @Test
     void playSlot_victory_shouldnot_fail() {
         b.getSlot(3, 1).setNbSeeds(1);
@@ -393,5 +397,20 @@ class BoardTest {
         Assertions.assertEquals(0, b.getSlot(3, 1).getNbSeeds());
         Assertions.assertEquals(4, b.getSlot(4, 1).getNbSeeds());
         Assertions.assertEquals(25, Game.getInstance().getSeeds(1));
+    }
+
+    /**
+     * Check if resetBoard() sets the proper inial values
+     */
+    @Test
+    void resetBoard_shouldnot_fail() {
+        b.resetBoard();
+        Assertions.assertEquals(24, b.getRemainingSeeds(1));
+        Assertions.assertEquals(24, b.getRemainingSeeds(2));
+        for (int l = 0 ; l < 2 ; l++){
+            for (int c = 0 ; c < 6 ; c++){
+                Assertions.assertEquals(4, b.getSlot(c, l).getNbSeeds());
+            }
+        }
     }
 }

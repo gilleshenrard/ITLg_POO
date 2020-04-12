@@ -235,4 +235,15 @@ class GameTest {
             g.playSlot(1, 7);
         });
     }
+
+    /**
+     * Check if resetGame() sets the proper values
+     */
+    @Test
+    void resetGame_shouldnot_fail() {
+        g.setBoard(new Board());
+        g.resetGame();
+        Assertions.assertEquals(0, g.getSeeds(1));
+        Assertions.assertEquals(0, g.getSeeds(2));
+    }
 }

@@ -175,4 +175,15 @@ public class Game {
         this.m_lastSlotPlayed = slot;
         return this.m_board.playSlot(id, slot);
     }
+
+    /**
+     * Reset the Game to an inial value
+     */
+    public void resetGame(){
+        this.m_seedpl1 = 0;
+        this.m_seedpl2 = 0;
+        this.m_lastSlotPlayed = 0;
+
+        this.m_board.resetBoard();
+    }
 }

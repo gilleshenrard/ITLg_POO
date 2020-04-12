@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 public class Board {
     private Slot[][] m_slots;
-    private int remSeedsPl1;
-    private int remSeedsPl2;
+    private int m_remSeedsPl1;
+    private int m_remSeedsPl2;
 
     /**
      * Create new Board
@@ -53,9 +53,9 @@ public class Board {
         Game.validateID(ID,"Board.getRemainingSeeds()");
 
         if (ID == 1)
-            return this.remSeedsPl1;
+            return this.m_remSeedsPl1;
         else
-            return this.remSeedsPl2;
+            return this.m_remSeedsPl2;
     }
 
     /**
@@ -89,9 +89,9 @@ public class Board {
         Slot.validateNbSeeds(value, "Board.setRemainingSeeds()");
 
         if (ID == 1)
-            this.remSeedsPl1 = value;
+            this.m_remSeedsPl1 = value;
         else
-            this.remSeedsPl2 = value;
+            this.m_remSeedsPl2 = value;
     }
 
     /**
@@ -267,5 +267,19 @@ public class Board {
             total += this.getSlot(j, 1).getNbSeeds();
 
         this.setRemainingSeeds(2, total);
+    }
+
+    /**
+     * Reset the board to an inial value
+     */
+    public void resetBoard(){
+        this.setRemainingSeeds(1, 24);
+        this.setRemainingSeeds(2, 24);
+
+        for (int l = 0 ; l < 2 ; l++){
+            for (int c = 0 ; c < 6 ; c++){
+                this.getSlot(c, l).setNbSeeds(4);
+            }
+        }
     }
 }
