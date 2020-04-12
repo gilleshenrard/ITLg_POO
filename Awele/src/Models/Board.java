@@ -149,7 +149,7 @@ public class Board {
      * Harvest the seeds from a slot and, if necessary, scatter them
      * @param id ID of the player harvesting
      * @param slot Slot being harvested
-     * @return 0 if no futher action, 1 if victory, 2 if season cancelled, -1 if error
+     * @return 0 if normal season (with or without capture), 1 if victory, 2 if starvation, 3 if empty slot selected
      * @throws InvalidParameterException
      */
     public int playSlot(int id, int slot) throws InvalidParameterException{
@@ -161,7 +161,7 @@ public class Board {
         int nbseeds = s.getNbSeeds();
 
         if(nbseeds == 0)
-            return -1;
+            return 3;
 
         //backup seeds in the slot and empty it (it's been harvested)
         int backupseeds = s.getNbSeeds();

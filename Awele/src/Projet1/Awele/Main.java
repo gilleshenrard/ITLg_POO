@@ -36,6 +36,10 @@ public class Main {
                     //player starved
                     if (outcome == 2)
                         gameView.displayWarning("A player can't be starved. Its amount of seeds can't get to 0");
+
+                    //player starved
+                    if (outcome == 3)
+                        gameView.displayWarning("An empty slot can not be harvested");
                 }
                 //System error. Display error message
                 catch (NullPointerException e){
@@ -46,7 +50,7 @@ public class Main {
                     gameView.displayError(e.getMessage());
                     outcome = 2;
                 }
-            }while (outcome == 2 || outcome == -1);
+            }while (outcome == 2 || outcome == 3);
 
             gameView.displayMessage("--------------------------------------------------------------------");
 

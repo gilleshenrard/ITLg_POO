@@ -254,7 +254,7 @@ class BoardTest {
     void playSlot_0seeds_shouldnot_fail() {
         b.getSlot(0, 0).setNbSeeds(0);
         int ret = b.playSlot(1, 1);
-        Assertions.assertEquals(2, ret);
+        Assertions.assertEquals(3, ret);
     }
 
     /**
