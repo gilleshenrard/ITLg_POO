@@ -4,6 +4,7 @@ import Models.Board;
 import Models.Game;
 import Models.Player;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.security.InvalidParameterException;
@@ -17,6 +18,7 @@ class BoardViewTest {
     /**
      * Check if boardView() throws an exception when given a null instance
      */
+    @DisplayName("boardView() with a NULL Board instance - should fail")
     @Test
     void boardView_nullBoard_should_fail() {
         Assertions.assertThrows(NullPointerException.class, () -> {
@@ -27,6 +29,7 @@ class BoardViewTest {
     /**
      * Check if displayBoard() fails displaying the board
      */
+    @DisplayName("displayBoard() - should not fail")
     @Test
     void displayBoard() {
         Game g = Game.getInstance();
@@ -38,6 +41,7 @@ class BoardViewTest {
     /**
      * Check if displaySlot() fails displaying a slot
      */
+    @DisplayName("displaySlot() - should not fail")
     @Test
     void displaySlot_shouldnot_fail() {
         bv.displaySlot(2);
