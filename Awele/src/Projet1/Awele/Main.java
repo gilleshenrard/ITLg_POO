@@ -23,7 +23,7 @@ public class Main {
 
         //main game loop
         while (outcome != 1) {
-            gameView.displayMessage("This is " + game.getName(player+1) + "'s turn");
+            gameView.displayMessage("This is " + game.getName(player+1) + "'s season");
             b.displayBoard();
 
             //loop while the user selects a wrong slot or the opponent risks being starved
@@ -31,7 +31,7 @@ public class Main {
                 try {
                     choice = game.getPlayer(player + 1).selectSlot();
                     outcome = game.playSlot(player + 1, choice);
-                    gameView.displayMessage(game.getName(player+1) + " played the slot " + game.getLastSlotPlayed());
+                    gameView.displayMessage(game.getName(player+1) + " harvests the slot " + game.getLastSlotPlayed());
 
                     //player starved
                     if (outcome == 2)
