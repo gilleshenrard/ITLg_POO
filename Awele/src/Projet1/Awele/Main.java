@@ -44,7 +44,7 @@ public class Main {
                     gameView.displayError(e.getMessage());
                     outcome = 2;
                 }
-            }while (outcome == 2);
+            }while (outcome == 2 || outcome == -1);
 
             //Game is won by the current player.
             if (outcome == 1)
