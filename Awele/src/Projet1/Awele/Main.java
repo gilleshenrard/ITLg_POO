@@ -44,11 +44,12 @@ public class Main {
                 //System error. Display error message
                 catch (NullPointerException e){
                     gameView.displayError(e.getMessage());
+                    System.exit(-1);
                 }
                 //Slot out of range or other system error. Display message and get back in the loop
                 catch (InvalidParameterException e){
                     gameView.displayError(e.getMessage());
-                    outcome = 2;
+                    System.exit(-2);
                 }
             }while (outcome == 2 || outcome == 3);
 
