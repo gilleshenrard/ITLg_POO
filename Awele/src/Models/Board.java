@@ -189,10 +189,10 @@ public class Board {
 
         //get the amount of seeds in the last slot of the buffer
         nbseeds = buffer.get(buffer.size()-1).getNbSeeds();
+        this.updateRemainingSeeds();
 
         //if that amount is 2 or 3, a capture needs to be made
         if(nbseeds == 2 || nbseeds == 3){
-            this.updateRemainingSeeds();
 
             //check if this seasons risks to starve the opponent (remaining seeds = 0)
             int sumseeds = this.getSumCapturable(buffer);
@@ -202,6 +202,7 @@ public class Board {
                     tmp.decrementSeeds();
                 }
                 s.setNbSeeds(backupseeds);
+                this.updateRemainingSeeds();
 
                 //return code for starvation
                 return 2;
@@ -216,6 +217,7 @@ public class Board {
                         tmp.emptySeeds();
                     }
                 }
+                this.updateRemainingSeeds();
             }
 
             //if stored seeds > 24, the current player won the game
@@ -224,7 +226,6 @@ public class Board {
         }
 
         //return code for normal end of season
-        this.updateRemainingSeeds();
         return 0;
     }
 
@@ -252,17 +253,19 @@ public class Board {
      * Refresh the amount of remaining seeds for both players
      */
     private void updateRemainingSeeds(){
-        int totalPlayer1 = 0, totalPlayer2 = 0;
+        int total = 0;
 
-        for (int l = 0 ; l < 2 ; l++){
-            for (int c = 0 ; c < 6 ; c++){
-                if(l == 0)
-                    totalPlayer1 += getSlot(c, l).getNbSeeds();
-                else
-                    totalPlayer2 += getSlot(c, l).getNbSeeds();
-            }
-        }
-        this.setRemainingSeeds(1, totalPlayer1);
-        this.setRemainingSeeds(2, totalPlayer2);
+        //update remaining seeds for player 1
+        for (int i = 0 ; i < 6 ; i++)
+            total += this.getSlot(i, 0).getNbSeeds();
+
+        this.setRemainingSeeds(1, total);
+
+        //update remaining seeds for player 2
+        total = 0;
+        for (int j = 0 ; j < 6 ; j++)
+            total += this.getSlot(j, 1).getNbSeeds();
+
+        this.setRemainingSeeds(2, total);
     }
 }
