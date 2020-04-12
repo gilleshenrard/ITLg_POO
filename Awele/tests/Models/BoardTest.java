@@ -1,6 +1,7 @@
 package Models;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.security.InvalidParameterException;
@@ -11,6 +12,7 @@ class BoardTest {
     /**
      * Check that getSlots() returns a default Slot[2][6]
      */
+    @DisplayName("getSlots() with default values - should not fail")
     @Test
     void getSlots_shouldnot_fail() {
         Slot s[][] = b.getSlots();
@@ -27,6 +29,7 @@ class BoardTest {
     /**
      * Check if validateCoordinates() throws an exception with a negative X
      */
+    @DisplayName("validateCoordinates() with negative X - should fail")
     @Test
     void validateCoordinates_negativeX_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
@@ -37,6 +40,7 @@ class BoardTest {
     /**
      * Check if validateCoordinates() throws an exception with a negative Y
      */
+    @DisplayName("validateCoordinates() with negative Y - should fail")
     @Test
     void validateCoordinates_negativeY_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
@@ -47,6 +51,7 @@ class BoardTest {
     /**
      * Check if validateCoordinates() throws an exception with X above 5
      */
+    @DisplayName("validateCoordinates() with X above 5 - should fail")
     @Test
     void validateCoordinates_xAbove5_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
@@ -57,6 +62,7 @@ class BoardTest {
     /**
      * Check if validateCoordinates() throws an exception with Y above 1
      */
+    @DisplayName("validateCoordinates() with Y above 1 - should fail")
     @Test
     void validateCoordinates_yAbove1_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
@@ -67,6 +73,7 @@ class BoardTest {
     /**
      * Check if validateCoordinates() fails to validate maximum values
      */
+    @DisplayName("validateCoordinates() with maximum values - should not fail")
     @Test
     void validateCoordinates_maxValues_shouldnot_fail() {
             Board.validateCoordinates(5, 1, "");
@@ -75,6 +82,7 @@ class BoardTest {
     /**
      * Check if validateCoordinates() fails to validate minimum values
      */
+    @DisplayName("validateCoordinates() with minimum values - should not fail")
     @Test
     void validateCoordinates_minValues_shouldnot_fail() {
         Board.validateCoordinates(0, 0, "");
@@ -83,6 +91,7 @@ class BoardTest {
     /**
      * Check if getRemainingSeeds() throws an exception with an invalid ID
      */
+    @DisplayName("getRemainingSeeds() with invalid ID - should fail")
     @Test
     void getRemainingSeeds_invalidID_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
@@ -93,6 +102,7 @@ class BoardTest {
     /**
      * Check if getStoredSeeds() throws an exception with an invalid ID
      */
+    @DisplayName("getStoredSeeds() with invalid ID - should fail")
     @Test
     void getStoredSeeds_invalidID_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
@@ -103,6 +113,7 @@ class BoardTest {
     /**
      * Check if setRemainingSeeds() throws an exception with an invalid ID
      */
+    @DisplayName("setRemainingSeeds() with invalid ID - should fail")
     @Test
     void setRemainingSeeds_invalidID_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
@@ -113,6 +124,7 @@ class BoardTest {
     /**
      * Check if setRemainingSeeds() throws an exception with a negative value
      */
+    @DisplayName("setRemainingSeeds() with negative value - should fail")
     @Test
     void setRemainingSeeds_negativeValue_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
@@ -123,6 +135,7 @@ class BoardTest {
     /**
      * Check if setRemainingSeeds() throws an exception with a value above 48
      */
+    @DisplayName("setRemainingSeeds() with value above 48 - should fail")
     @Test
     void setRemainingSeeds_above48_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
@@ -133,6 +146,7 @@ class BoardTest {
     /**
      * Check if getRemainingSeeds() returns the proper amount
      */
+    @DisplayName("getRemainingSeeds() - should not fail")
     @Test
     void getRemainingSeeds_shouldnot_fail() {
         Assertions.assertEquals(b.getRemainingSeeds(1), 24);
@@ -141,6 +155,7 @@ class BoardTest {
     /**
      * Check if getSlot() throws an exception with an X value over 5
      */
+    @DisplayName("getSlot() with X over 5 - should fail")
     @Test
     void getSlot_Xover5_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
@@ -151,6 +166,7 @@ class BoardTest {
     /**
      * Check if getSlot() throws an exception with an invalid Y value
      */
+    @DisplayName("getSlot() with Y over 1 - should fail")
     @Test
     void getSlot_invalidY_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
@@ -161,6 +177,7 @@ class BoardTest {
     /**
      * Check if getSlot() throws an exception with an X value below 0
      */
+    @DisplayName("getSlot() with X below 0 - should fail")
     @Test
     void getSlot_Xbelow0_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
@@ -171,6 +188,7 @@ class BoardTest {
     /**
      * Check if getSlot() fails returning a slot
      */
+    @DisplayName("getSlot() with proper values - should not fail")
     @Test
     void getSlot_shouldnot_fail() {
         b.getSlot(0, 0);
@@ -179,6 +197,7 @@ class BoardTest {
     /**
      * Check if getSlotSeeds() throws an exception with an X value over 5
      */
+    @DisplayName("getSlotSeeds() with X over 5 - should fail")
     @Test
     void getSloSeeds_Xover5_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
@@ -189,6 +208,7 @@ class BoardTest {
     /**
      * Check if getSlotSeeds() throws an exception with an invalid Y value
      */
+    @DisplayName("getSlotSeeds() with Y over 1 - should fail")
     @Test
     void getSlotSeeds_invalidY_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
@@ -199,6 +219,7 @@ class BoardTest {
     /**
      * Check if getSlotSeeds() throws an exception with an X value below 0
      */
+    @DisplayName("getSlotSeeds() with X below 0 - should fail")
     @Test
     void getSlotSeeds_Xbelow0_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
@@ -209,44 +230,49 @@ class BoardTest {
     /**
      * Check if getSlotSeeds() fails returning the amount of seeds
      */
+    @DisplayName("getSlotSeeds() with proper values - should not fail")
     @Test
     void getSlotSeeds_shouldnot_fail() {
         Assertions.assertEquals(4, b.getSlot(0, 0).getNbSeeds());
     }
 
     /**
-     * Check if getRemainingSeeds() returns the proper coordinates for next slot (within a row)
+     * Check if getNext() returns the proper coordinates for next slot (within a row)
      */
+    @DisplayName("getNext() within a row - should not fail")
     @Test
     void getNext_withinARow_shouldnot_fail() {
         Slot s = b.getSlot(2, 0);
-        Assertions.assertEquals(b.getNext(s).getX(), 3);
-        Assertions.assertEquals(b.getNext(s).getY(), 0);
+        Assertions.assertEquals(3, b.getNext(s).getX());
+        Assertions.assertEquals(0, b.getNext(s).getY());
     }
 
     /**
-     * Check if getRemainingSeeds() returns the proper coordinates for next slot (end of the first row)
+     * Check if getNext() returns the proper coordinates for next slot (end of the first row)
      */
+    @DisplayName("getNext() at the end of 1st row - should not fail")
     @Test
     void getNext_endOfFirstRow_shouldnot_fail() {
         Slot s = b.getSlot(5, 0);
-        Assertions.assertEquals(b.getNext(s).getX(), 0);
-        Assertions.assertEquals(b.getNext(s).getY(), 1);
+        Assertions.assertEquals(0, b.getNext(s).getX());
+        Assertions.assertEquals(1, b.getNext(s).getY());
     }
 
     /**
-     * Check if getRemainingSeeds() returns the proper coordinates for next slot (end of the 2nd row)
+     * Check if getNext() returns the proper coordinates for next slot (end of the 2nd row)
      */
+    @DisplayName("getNext() at the end of 2nd row - should not fail")
     @Test
     void getNext_endOfSecondRow_shouldnot_fail() {
         Slot s = b.getSlot(5, 1);
-        Assertions.assertEquals(b.getNext(s).getX(), 0);
-        Assertions.assertEquals(b.getNext(s).getY(), 0);
+        Assertions.assertEquals(0, b.getNext(s).getX());
+        Assertions.assertEquals(0, b.getNext(s).getY());
     }
 
     /**
      * Check if playSlot() returns a cancellation code when selecting a slot with no seed
      */
+    @DisplayName("playSlot() with an empty slot - should not fail")
     @Test
     void playSlot_0seeds_shouldnot_fail() {
         b.getSlot(0, 0).setNbSeeds(0);
@@ -255,8 +281,9 @@ class BoardTest {
     }
 
     /**
-     * Check if getSlot() throws an exception with an invalid ID
+     * Check if playSlot() throws an exception with an invalid ID
      */
+    @DisplayName("playSlot() with an invalid ID - should fail")
     @Test
     void playSlot_invalidID_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
@@ -265,8 +292,9 @@ class BoardTest {
     }
 
     /**
-     * Check if getSlot() throws an exception with a slot below 1
+     * Check if playSlot() throws an exception with a slot below 1
      */
+    @DisplayName("playSlot() with an slot below 0 - should fail")
     @Test
     void playSlot_below1_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
@@ -275,8 +303,9 @@ class BoardTest {
     }
 
     /**
-     * Check if getSlot() throws an exception with a slot above 6
+     * Check if playSlot() throws an exception with a slot above 6
      */
+    @DisplayName("playSlot() with an slot above 6 - should fail")
     @Test
     void playSlot_above6_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
@@ -287,6 +316,7 @@ class BoardTest {
     /**
      * Check if playSlot() processes a simple scattering properly (no capture, no starvation)
      */
+    @DisplayName("playSlot() with neither capture nor starvation - should not fail")
     @Test
     void playSlot_noCaptureNoStarve_shouldnot_fail() {
         int ret = b.playSlot(1, 6);
@@ -305,6 +335,7 @@ class BoardTest {
     /**
      * Check if playSlot() properly skips the selected slot when scattering
      */
+    @DisplayName("playSlot() with a slot skipped at scattering - should not fail")
     @Test
     void playSlot_skipSelected_shouldnot_fail() {
         Game g = Game.getInstance();
@@ -335,6 +366,7 @@ class BoardTest {
     /**
      * Check if playSlot() processes a simple scattering properly (2 captures, no starvation)
      */
+    @DisplayName("playSlot() with a capture case - should not fail")
     @Test
     void playSlot_CaptureNoStarve_shouldnot_fail() {
         b.getSlot(1, 1).setNbSeeds(2);
@@ -357,6 +389,7 @@ class BoardTest {
     /**
      * Check if playSlot() processes a starvation properly
      */
+    @DisplayName("playSlot() with a starvation case - should not fail")
     @Test
     void playSlot_noCaptureStarve_shouldnot_fail() {
         b.getSlot(0, 1).setNbSeeds(1);
@@ -381,6 +414,7 @@ class BoardTest {
     /**
      * Check if playSlot() processes a victory season
      */
+    @DisplayName("playSlot() with a victory case - should not fail")
     @Test
     void playSlot_victory_shouldnot_fail() {
         b.getSlot(3, 1).setNbSeeds(1);
@@ -399,6 +433,7 @@ class BoardTest {
     /**
      * Check if resetBoard() sets the proper inial values
      */
+    @DisplayName("resetBoard() - should not fail")
     @Test
     void resetBoard_shouldnot_fail() {
         b.resetBoard();
