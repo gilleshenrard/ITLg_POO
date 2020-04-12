@@ -9,6 +9,7 @@ public class Game {
     private Player m_player1;
     private Player m_player2;
     private Board m_board;
+    private int m_lastSlotPlayed;
 
     /**
      * Create a new Game
@@ -20,6 +21,7 @@ public class Game {
         this.m_player1 = null;
         this.m_player2 = null;
         this.m_board = null;
+        this.m_lastSlotPlayed = 0;
     }
 
     /**
@@ -155,13 +157,22 @@ public class Game {
     }
 
     /**
-     * Harvest the seeds from a slot and, if necessary, scatter them
+     * Return the last slot played by a player
+     * @return Last slot played by a player
+     */
+    public int getLastSlotPlayed(){
+        return this.m_lastSlotPlayed;
+    }
+
+    /**
+     * Save the player's selection + Harvest the seeds from a slot and, if necessary, scatter them
      * @param id ID of the player harvesting
      * @param slot Slot being harvested
      * @return 0 if no further action, 1 if victory, 2 if season cancelled
      * @throws InvalidParameterException
      */
     public int playSlot(int id, int slot) throws InvalidParameterException{
+        this.m_lastSlotPlayed = slot;
         return this.m_board.playSlot(id, slot);
     }
 }

@@ -31,6 +31,7 @@ public class Main {
                 try {
                     choice = game.getPlayer(player + 1).selectSlot();
                     outcome = game.playSlot(player + 1, choice);
+                    gameView.displayMessage(game.getName(player+1) + " played the slot " + game.getLastSlotPlayed());
 
                     //player starved
                     if (outcome == 2)
