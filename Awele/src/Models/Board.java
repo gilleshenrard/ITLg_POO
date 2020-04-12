@@ -163,6 +163,10 @@ public class Board {
         if(nbseeds == 0)
             return 3;
 
+        //
+        //HARVEST PHASE
+        //
+
         //backup seeds in the slot and empty it (it's been harvested)
         int backupseeds = s.getNbSeeds();
         s.emptySeeds();
@@ -180,6 +184,10 @@ public class Board {
 
             sNext = this.getNext(sNext);
         }
+
+        //
+        //SCATTERING PHASE
+        //
 
         //get the amount of seeds in the last slot of the buffer
         nbseeds = buffer.get(buffer.size()-1).getNbSeeds();
