@@ -23,6 +23,7 @@ public class Main {
 
         //main game loop
         while (outcome != 1) {
+            gameView.displayMessage("This is " + game.getName(player+1) + "'s turn");
             b.displayBoard();
 
             //loop while the user selects a wrong slot or the opponent risks being starved
@@ -45,6 +46,8 @@ public class Main {
                     outcome = 2;
                 }
             }while (outcome == 2 || outcome == -1);
+
+            gameView.displayMessage("--------------------------------------------------------------------");
 
             //Game is won by the current player.
             if (outcome == 1)
