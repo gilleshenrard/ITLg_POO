@@ -175,14 +175,4 @@ public class Game {
 
         this.m_board.resetBoard();
     }
-
-    /**
-     * Get the X coordinate of the slots with at least 1 seed for a player
-     * @param ID ID of the player for which retrieve the playable slots
-     * @return Array of playable slots X coordinates
-     * @throws InvalidParameterException
-     */
-    public ArrayList<Integer> getNonEmptySlots(int ID) throws InvalidParameterException {
-        return this.m_board.getNonEmptySlots(ID);
-    }
 }

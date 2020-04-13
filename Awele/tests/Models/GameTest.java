@@ -270,33 +270,4 @@ class GameTest {
         Assertions.assertEquals(0, g.getSeeds(1));
         Assertions.assertEquals(0, g.getSeeds(2));
     }
-
-    /**
-     * Check if getNonEmptySlots() returns the proper playable slots
-     */
-    @DisplayName("getNonEmptySlots() - should not fail")
-    @Test
-    void getNonEmptySlots_shouldnot_fail() {
-        g.setBoard(new Board());
-        g.getBoard().getSlot(0, 1).emptySeeds();
-        g.getBoard().getSlot(2, 1).emptySeeds();
-        g.getBoard().getSlot(3, 1).emptySeeds();
-        ArrayList<Integer> array = g.getNonEmptySlots(2);
-        Assertions.assertEquals(3, array.size());
-        Assertions.assertEquals(1, array.get(0));
-        Assertions.assertEquals(4, array.get(1));
-        Assertions.assertEquals(5, array.get(2));
-    }
-
-    /**
-     * Check if getNonEmptySlots() throws an exception with an invalid ID
-     */
-    @DisplayName("getNonEmptySlots() with an invalid ID - should fail")
-    @Test
-    void getNonEmptySlots_above6_should_fail() {
-        g.setBoard(new Board());
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            g.getNonEmptySlots(3);
-        });
-    }
 }
