@@ -33,7 +33,7 @@ public class Main {
                         r.setPlayableSlots(game.getNonEmptySlots(player + 1));
                     }
                     choice = game.getPlayer(player + 1).selectSlot();
-                    gameView.displayMessage(game.getName(player+1) + " harvests the slot " + game.getLastSlotPlayed());
+                    gameView.displayMessage(game.getName(player+1) + " harvests the slot " + choice);
                     outcome = game.playSlot(player + 1, choice);
 
                     //player starved
