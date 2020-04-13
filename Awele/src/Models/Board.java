@@ -329,4 +329,23 @@ public class Board {
             }
         }
     }
+
+    /**
+     * Get a buffer with all the non-empty slots
+     * @param ID ID of the player for which getting the slots
+     * @return Buffer
+     * @throws InvalidParameterException
+     */
+    public ArrayList<Integer> getNonEmpty(int ID) throws InvalidParameterException{
+        Game.validateID(ID, "Board.getNonEmpty()");
+
+        ArrayList<Integer> array = new ArrayList<>();
+
+        for(Slot s : this.m_slots[ID-1]){
+            if (s.getNbSeeds() > 0)
+                array.add(s.getX());
+        }
+
+        return array;
+    }
 }
