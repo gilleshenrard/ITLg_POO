@@ -249,15 +249,13 @@ public class Board {
 
         //update remaining seeds for player 1
         for (int i = 0 ; i < 6 ; i++)
-            total += this.getSlot(i, 0).getNbSeeds();
-
+            total += this.getSlotSeeds(i, 0);
         this.setRemainingSeeds(1, total);
 
         //update remaining seeds for player 2
         total = 0;
         for (int j = 0 ; j < 6 ; j++)
-            total += this.getSlot(j, 1).getNbSeeds();
-
+            total += this.getSlotSeeds(j, 1);
         this.setRemainingSeeds(2, total);
     }
 
