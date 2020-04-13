@@ -383,6 +383,8 @@ class BoardTest {
         b.getSlot(4, 1).emptySeeds();
         b.getSlot(5, 1).emptySeeds();
         b.getSlot(5, 0).setNbSeeds(2);
+        b.setRemainingSeeds(2, 3);
+        b.setRemainingSeeds(1, 22);
         int ret = b.playSlot(1, 6);
         Assertions.assertEquals(2, ret);
         Assertions.assertEquals(1, b.getSlot(0, 1).getNbSeeds());
