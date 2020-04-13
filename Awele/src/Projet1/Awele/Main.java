@@ -28,10 +28,6 @@ public class Main {
             //loop while the user selects a wrong slot or the opponent risks being starved
             do {
                 try {
-                    if(game.getPlayer(player + 1).getBehaviour() instanceof RandomSelect){
-                        RandomSelect r = (RandomSelect)game.getPlayer(player + 1).getBehaviour();
-                        r.setPlayableSlots(game.getNonEmptySlots(player + 1));
-                    }
                     choice = game.getPlayer(player + 1).selectSlot();
                     gameView.displayMessage(game.getName(player+1) + " harvests the slot " + choice);
                     outcome = game.playSlot(player + 1, choice);

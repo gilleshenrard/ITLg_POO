@@ -68,14 +68,6 @@ public class Player {
     }
 
     /**
-     * Get the currently set slot selection behaviour
-     * @return Behaviour
-     */
-    public iSelectable getBehaviour(){
-        return this.m_behaviour;
-    }
-
-    /**
      * Returns the Player's name
      * @return Name
      */
