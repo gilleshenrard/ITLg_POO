@@ -188,7 +188,7 @@ public class Board {
 
             //check if this seasons risks to starve the opponent (remaining seeds = 0)
             int sumseeds = this.getSumCapturable(buffer);
-            if(sumseeds == this.getRemainingSeeds(3 - id)){
+            if(sumseeds >= this.getRemainingSeeds(3 - id)){
                 //opponent starved, cancellation
                 for (Slot tmp:buffer) {
                     tmp.decrementSeeds();
