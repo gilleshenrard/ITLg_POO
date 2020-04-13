@@ -285,7 +285,7 @@ public class Board {
         ArrayList<Integer> array = new ArrayList<>();
         for(int i=0 ; i<6 ; i++){
             if(this.getSlotSeeds(i, ID-1) > 0)
-                array.add(i+1);
+                array.add(i);
         }
 
         return array;
