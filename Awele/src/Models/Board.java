@@ -272,4 +272,22 @@ public class Board {
             }
         }
     }
+
+    /**
+     * Get the X coordinate of the slots with at least 1 seed for a player
+     * @param ID ID of the player for which retrieve the playable slots
+     * @return Array of playable slots X coordinates
+     * @throws InvalidParameterException
+     */
+    public ArrayList<Integer> getPlayableSlots(int ID) throws InvalidParameterException {
+        Game.validateID(ID, "Board.getPlayableSlots()");
+
+        ArrayList<Integer> array = new ArrayList<>();
+        for(int i=0 ; i<6 ; i++){
+            if(this.getSlotSeeds(i, ID-1) > 0)
+                array.add(i+1);
+        }
+
+        return array;
+    }
 }

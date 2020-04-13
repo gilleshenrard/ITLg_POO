@@ -1,6 +1,11 @@
 package Models;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 
 public class Game {
     private int m_seedpl1;
@@ -185,5 +190,15 @@ public class Game {
         this.m_lastSlotPlayed = 0;
 
         this.m_board.resetBoard();
+    }
+
+    /**
+     * Get the X coordinate of the slots with at least 1 seed for a player
+     * @param ID ID of the player for which retrieve the playable slots
+     * @return Array of playable slots X coordinates
+     * @throws InvalidParameterException
+     */
+    public ArrayList<Integer> getPlayableSlots(int ID) throws InvalidParameterException {
+        return this.m_board.getPlayableSlots(ID);
     }
 }

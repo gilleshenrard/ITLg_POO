@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 
 class BoardTest {
     Board b = new Board();
@@ -427,5 +428,32 @@ class BoardTest {
                 Assertions.assertEquals(4, b.getSlot(c, l).getNbSeeds());
             }
         }
+    }
+
+    /**
+     * Check if getPlayableSlots() returns the proper playable slots
+     */
+    @DisplayName("getPlayableSlots() - should not fail")
+    @Test
+    void getPlayableSlots_shouldnot_fail() {
+        b.getSlot(0, 1).emptySeeds();
+        b.getSlot(2, 1).emptySeeds();
+        b.getSlot(3, 1).emptySeeds();
+        ArrayList<Integer> array = b.getPlayableSlots(2);
+        Assertions.assertEquals(3, array.size());
+        Assertions.assertEquals(2, array.get(0));
+        Assertions.assertEquals(5, array.get(1));
+        Assertions.assertEquals(6, array.get(2));
+    }
+
+    /**
+     * Check if getPlayableSlots() throws an exception with an invalid ID
+     */
+    @DisplayName("getPlayableSlots() with an invalid ID - should fail")
+    @Test
+    void getPlayableSlots_above6_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.getPlayableSlots(3);
+        });
     }
 }
