@@ -166,7 +166,11 @@ public class Board {
         Game.validateID(id, "Board.playSlot()");
         Board.validateCoordinates(slot - 1, id - 1, "Board.playSlot()");
 
-        //get number of seeds in the slot harvested by the player
+        //
+        //SCATTERING PHASE
+        //
+
+        //get number of seeds in the slot harvested by the player + backup
         Slot s = this.getSlot(slot-1, id-1);
         int backupseeds = s.getNbSeeds();
 
@@ -174,13 +178,10 @@ public class Board {
         if(backupseeds == 0)
             return 3;
 
-        //
-        //SCATTERING PHASE
-        //
-
-        //Scatter the selected slot
+        //Scatter the selected slot + create a scattering buffer
         ArrayList<Slot> buffer = this.processScattering(s);
 
+        //if any side of the board is now empty, revert the scattering and return starvation code
         if (this.getRemainingSeeds(1) == 0 || this.getRemainingSeeds(2) == 0) {
             this.revertScattering(s, buffer, backupseeds);
             return 2;
@@ -199,10 +200,8 @@ public class Board {
             //check if this seasons risks to starve the opponent (remaining seeds = 0)
             nbseeds = this.getSumCapturable(buffer);
             if(nbseeds >= this.getRemainingSeeds(1) || nbseeds >= this.getRemainingSeeds(2)){
-                //opponent starved, cancellation
+                //opponent starved, cancellation of the season
                 this.revertScattering(s, buffer, backupseeds);
-
-                //return code for starvation
                 return 2;
             }
             else{
@@ -230,7 +229,7 @@ public class Board {
         if (s == null)
             throw new NullPointerException("Board.processScattering() : NULL instance of Slot");
 
-        //get the number of seeds in the slot to harvest and empty the slot
+        //get the number of seeds in the slot to harvest and empty it + update remaining seeds
         int nbseeds = s.getNbSeeds();
         this.removeRemainingSeeds(s.getY()+1, nbseeds);
         s.emptySeeds();
@@ -241,9 +240,10 @@ public class Board {
         while (nbseeds > 0){
             //make sure not to add the slot harvested
             if(!sNext.equals(s)) {
+                //increment the seeds in all the slot, update remaining seeds and add to the buffer
                 sNext.incrementSeeds();
                 this.addRemainingSeeds(sNext.getY()+1, 1);
-                buffer.add(sNext); //a slot can be added several times in the buffer
+                buffer.add(sNext); //a slot can be added several times in the buffer, by design
                 nbseeds--;
             }
 
@@ -265,10 +265,13 @@ public class Board {
         if (s == null)
             throw new NullPointerException("Board.revertScattering() : NULL instance of Slot");
 
+        //decrement the amount of seeds in each slot of the buffer
         for (Slot tmp:buffer) {
             tmp.decrementSeeds();
             this.removeRemainingSeeds(tmp.getY()+1, 1);
         }
+
+        //restore the original seed count in the slot selected by the player
         s.setNbSeeds(backupseeds);
         this.addRemainingSeeds(s.getY()+1, backupseeds);
     }
@@ -283,6 +286,7 @@ public class Board {
         if (buffer == null)
             throw new NullPointerException("Board.processCapture() : NULL instance of ArrayList<Slot>");
 
+        //for each slot in the buffer containing 2 or 3 seeds, store its amount, update remaining seeds and empty the slot
         for (Slot tmp:buffer) {
             if(tmp.getNbSeeds() == 2 || tmp.getNbSeeds() == 3) {
                 Game.getInstance().storeSeeds(ID, tmp.getNbSeeds());
