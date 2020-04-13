@@ -80,7 +80,7 @@ class PlayerTest {
     @DisplayName("setBehaviour() - should not fail")
     @Test
     void setBehaviour_shouldnot_fail() {
-            p.setBehaviour(new RandomSelect());
+            p.setBehaviour(new KeyboardSelect());
     }
 
     /**
