@@ -415,6 +415,30 @@ class BoardTest {
     }
 
     /**
+     * Check if playSlot() forbids a self-starvation
+     */
+    @DisplayName("playSlot() with self-starvation - should not fail")
+    @Test
+    void playSlot_selfStarvation_shouldnot_fail() {
+        b.getSlot(0, 0).emptySeeds();
+        b.getSlot(1, 0).emptySeeds();
+        b.getSlot(2, 0).emptySeeds();
+        b.getSlot(3, 0).emptySeeds();
+        b.getSlot(4, 0).emptySeeds();
+        b.getSlot(5, 0).setNbSeeds(1);
+        b.setRemainingSeeds(1, 1);
+        int ret = b.playSlot(1, 6);
+        Assertions.assertEquals(2, ret);
+        Assertions.assertEquals(0, b.getSlot(0, 0).getNbSeeds());
+        Assertions.assertEquals(0, b.getSlot(1, 0).getNbSeeds());
+        Assertions.assertEquals(0, b.getSlot(2, 0).getNbSeeds());
+        Assertions.assertEquals(0, b.getSlot(3, 0).getNbSeeds());
+        Assertions.assertEquals(0, b.getSlot(4, 0).getNbSeeds());
+        Assertions.assertEquals(1, b.getSlot(5, 0).getNbSeeds());
+        Assertions.assertEquals(1, b.getRemainingSeeds(1));
+    }
+
+    /**
      * Check if resetBoard() sets the proper inial values
      */
     @DisplayName("resetBoard() - should not fail")
