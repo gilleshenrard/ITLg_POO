@@ -13,9 +13,13 @@ public class Main {
 
     public static void main(String[] args) {
         Game game = Game.getInstance();
-        game.setPlayer(1, new Player(1, "Gilles", new RandomSelect()));
-        game.setPlayer(2, new Player(2, "AI", new RandomSelect()));
         game.setBoard(new Board());
+        game.setPlayer(1, new Player(1, "Gilles"));
+        game.setPlayer(2, new Player(2, "AI"));
+        RandomSelect r1 = new RandomSelect(game.getBoard(), 1);
+        game.getPlayer(1).setBehaviour(r1);
+        RandomSelect r2 = new RandomSelect(game.getBoard(), 2);
+        game.getPlayer(2).setBehaviour(r2);
         BoardView b = new BoardView(game.getBoard());
         GameView gameView = new GameView();
         int choice, player = 0, outcome = 0;
@@ -24,6 +28,14 @@ public class Main {
         while (outcome != 1) {
             gameView.displayMessage("This is " + game.getName(player+1) + "'s season");
             b.displayBoard();
+
+            if(r1 != null){
+                r1.reset();
+            }
+
+            if(r2 != null){
+                r2.reset();
+            }
 
             //loop while the user selects a wrong slot or the opponent risks being starved
             do {
@@ -39,6 +51,17 @@ public class Main {
                     //player starved
                     if (outcome == 3)
                         gameView.displayWarning("An empty slot can not be harvested");
+
+                    if(outcome == 2 || outcome == 3){
+                        if (r1 != null && r1.getShotsLeft() == 0){
+                            gameView.displayMessage(game.getName(1) + " can't make any move. He forfaits !");
+                            System.exit(0);
+                        }
+                        if (r2 != null && r2.getShotsLeft() == 0){
+                            gameView.displayMessage(game.getName(2) + " can't make any move. He forfaits !");
+                            System.exit(0);
+                        }
+                    }
                 }
                 //System error. Display error message
                 catch (NullPointerException e){
@@ -51,6 +74,14 @@ public class Main {
                     System.exit(-2);
                 }
             }while (outcome == 2 || outcome == 3);
+
+            if(r1 != null){
+                r1.reset();
+            }
+
+            if(r2 != null){
+                r2.reset();
+            }
 
             gameView.displayMessage("--------------------------------------------------------------------");
 
