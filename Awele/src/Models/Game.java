@@ -1,9 +1,5 @@
 package Models;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 
@@ -198,7 +194,7 @@ public class Game {
      * @return Array of playable slots X coordinates
      * @throws InvalidParameterException
      */
-    public ArrayList<Integer> getPlayableSlots(int ID) throws InvalidParameterException {
-        return this.m_board.getPlayableSlots(ID);
+    public ArrayList<Integer> getNonEmptySlots(int ID) throws InvalidParameterException {
+        return this.m_board.getNonEmptySlots(ID);
     }
 }

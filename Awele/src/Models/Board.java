@@ -336,7 +336,7 @@ public class Board {
      * @return Array of playable slots X coordinates
      * @throws InvalidParameterException
      */
-    public ArrayList<Integer> getPlayableSlots(int ID) throws InvalidParameterException {
+    public ArrayList<Integer> getNonEmptySlots(int ID) throws InvalidParameterException {
         Game.validateID(ID, "Board.getPlayableSlots()");
 
         ArrayList<Integer> array = new ArrayList<>();

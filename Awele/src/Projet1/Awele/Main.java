@@ -6,7 +6,6 @@ import Models.Game;
 import Models.Player;
 import Views.BoardView;
 import Views.GameView;
-import Views.KeyboardSelect;
 
 import java.security.InvalidParameterException;
 
@@ -31,7 +30,7 @@ public class Main {
                 try {
                     if(game.getPlayer(player + 1).getBehaviour() instanceof RandomSelect){
                         RandomSelect r = (RandomSelect)game.getPlayer(player + 1).getBehaviour();
-                        r.setPlayableSlots(game.getPlayableSlots(player + 1));
+                        r.setPlayableSlots(game.getNonEmptySlots(player + 1));
                     }
                     choice = game.getPlayer(player + 1).selectSlot();
                     gameView.displayMessage(game.getName(player+1) + " harvests the slot " + game.getLastSlotPlayed());

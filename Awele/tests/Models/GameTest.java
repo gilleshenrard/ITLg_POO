@@ -7,8 +7,6 @@ import org.junit.jupiter.api.Test;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class GameTest {
     Game g = new Game();
 
@@ -274,16 +272,16 @@ class GameTest {
     }
 
     /**
-     * Check if getPlayableSlots() returns the proper playable slots
+     * Check if getNonEmptySlots() returns the proper playable slots
      */
-    @DisplayName("getPlayableSlots() - should not fail")
+    @DisplayName("getNonEmptySlots() - should not fail")
     @Test
-    void getPlayableSlots_shouldnot_fail() {
+    void getNonEmptySlots_shouldnot_fail() {
         g.setBoard(new Board());
         g.getBoard().getSlot(0, 1).emptySeeds();
         g.getBoard().getSlot(2, 1).emptySeeds();
         g.getBoard().getSlot(3, 1).emptySeeds();
-        ArrayList<Integer> array = g.getPlayableSlots(2);
+        ArrayList<Integer> array = g.getNonEmptySlots(2);
         Assertions.assertEquals(3, array.size());
         Assertions.assertEquals(1, array.get(0));
         Assertions.assertEquals(4, array.get(1));
@@ -291,14 +289,14 @@ class GameTest {
     }
 
     /**
-     * Check if getPlayableSlots() throws an exception with an invalid ID
+     * Check if getNonEmptySlots() throws an exception with an invalid ID
      */
-    @DisplayName("getPlayableSlots() with an invalid ID - should fail")
+    @DisplayName("getNonEmptySlots() with an invalid ID - should fail")
     @Test
-    void getPlayableSlots_above6_should_fail() {
+    void getNonEmptySlots_above6_should_fail() {
         g.setBoard(new Board());
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            g.getPlayableSlots(3);
+            g.getNonEmptySlots(3);
         });
     }
 }
