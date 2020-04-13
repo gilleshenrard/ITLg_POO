@@ -68,6 +68,14 @@ public class Player {
     }
 
     /**
+     * Get the behaviour selected for the current Player
+     * @return Behaviour
+     */
+    public iSelectable getBehaviour() {
+        return this.m_behaviour;
+    }
+
+    /**
      * Returns the Player's name
      * @return Name
      */
