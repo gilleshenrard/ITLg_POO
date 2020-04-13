@@ -488,14 +488,14 @@ class BoardTest {
     void getNonEmpty_shouldnot_fail() {
         b.getSlot(0, 0).emptySeeds();
         b.getSlot(1, 0).emptySeeds();
-        b.getSlot(2, 0).setNbSeeds(3);
+        b.getSlot(2, 0).setNbSeeds(1);
         b.getSlot(3, 0).emptySeeds();
-        b.getSlot(4, 0).setNbSeeds(5);
-        b.getSlot(5, 0).setNbSeeds(6);
+        b.getSlot(4, 0).setNbSeeds(3);
+        b.getSlot(5, 0).setNbSeeds(4);
         ArrayList<Integer> array = b.getNonEmpty(1);
         Assertions.assertEquals(3, array.size());
-        Assertions.assertEquals(3, array.get(0));
-        Assertions.assertEquals(5, array.get(1));
-        Assertions.assertEquals(6, array.get(2));
+        Assertions.assertEquals(2, array.get(0));
+        Assertions.assertEquals(4, array.get(1));
+        Assertions.assertEquals(5, array.get(2));
     }
 }
