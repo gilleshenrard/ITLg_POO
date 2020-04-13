@@ -415,11 +415,11 @@ class BoardTest {
     }
 
     /**
-     * Check if playSlot() forbids a self-starvation
+     * Check if playSlot() forbids a self-starvation by scattering to another row
      */
-    @DisplayName("playSlot() with self-starvation - should not fail")
+    @DisplayName("playSlot() with self-starvation to other row - should not fail")
     @Test
-    void playSlot_selfStarvation_shouldnot_fail() {
+    void playSlot_selfStarvation_otherRow_shouldnot_fail() {
         b.getSlot(0, 0).emptySeeds();
         b.getSlot(1, 0).emptySeeds();
         b.getSlot(2, 0).emptySeeds();
@@ -436,6 +436,30 @@ class BoardTest {
         Assertions.assertEquals(0, b.getSlot(4, 0).getNbSeeds());
         Assertions.assertEquals(1, b.getSlot(5, 0).getNbSeeds());
         Assertions.assertEquals(1, b.getRemainingSeeds(1));
+    }
+
+    /**
+     * Check if playSlot() forbids a self-starvation by scattering within a row
+     */
+    @DisplayName("playSlot() with self-starvation within a row - should not fail")
+    @Test
+    void playSlot_selfStarvation_sameRow_shouldnot_fail() {
+        b.getSlot(0, 0).emptySeeds();
+        b.getSlot(1, 0).emptySeeds();
+        b.getSlot(2, 0).emptySeeds();
+        b.getSlot(3, 0).emptySeeds();
+        b.getSlot(4, 0).setNbSeeds(1);
+        b.getSlot(5, 0).setNbSeeds(1);
+        b.setRemainingSeeds(1, 2);
+        int ret = b.playSlot(1, 5);
+        Assertions.assertEquals(2, ret);
+        Assertions.assertEquals(0, b.getSlot(0, 0).getNbSeeds());
+        Assertions.assertEquals(0, b.getSlot(1, 0).getNbSeeds());
+        Assertions.assertEquals(0, b.getSlot(2, 0).getNbSeeds());
+        Assertions.assertEquals(0, b.getSlot(3, 0).getNbSeeds());
+        Assertions.assertEquals(1, b.getSlot(4, 0).getNbSeeds());
+        Assertions.assertEquals(1, b.getSlot(5, 0).getNbSeeds());
+        Assertions.assertEquals(2, b.getRemainingSeeds(1));
     }
 
     /**
@@ -465,9 +489,9 @@ class BoardTest {
         b.getSlot(3, 1).emptySeeds();
         ArrayList<Integer> array = b.getPlayableSlots(2);
         Assertions.assertEquals(3, array.size());
-        Assertions.assertEquals(2, array.get(0));
-        Assertions.assertEquals(5, array.get(1));
-        Assertions.assertEquals(6, array.get(2));
+        Assertions.assertEquals(1, array.get(0));
+        Assertions.assertEquals(4, array.get(1));
+        Assertions.assertEquals(5, array.get(2));
     }
 
     /**
