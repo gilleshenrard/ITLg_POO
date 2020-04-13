@@ -285,9 +285,9 @@ class GameTest {
         g.getBoard().getSlot(3, 1).emptySeeds();
         ArrayList<Integer> array = g.getPlayableSlots(2);
         Assertions.assertEquals(3, array.size());
-        Assertions.assertEquals(2, array.get(0));
-        Assertions.assertEquals(5, array.get(1));
-        Assertions.assertEquals(6, array.get(2));
+        Assertions.assertEquals(1, array.get(0));
+        Assertions.assertEquals(4, array.get(1));
+        Assertions.assertEquals(5, array.get(2));
     }
 
     /**
