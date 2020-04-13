@@ -14,7 +14,7 @@ public class Main {
 
     public static void main(String[] args) {
         Game game = Game.getInstance();
-        game.setPlayer(1, new Player(1, "Gilles", new KeyboardSelect()));
+        game.setPlayer(1, new Player(1, "Gilles", new RandomSelect()));
         game.setPlayer(2, new Player(2, "AI", new RandomSelect()));
         game.setBoard(new Board());
         BoardView b = new BoardView(game.getBoard());
@@ -29,6 +29,10 @@ public class Main {
             //loop while the user selects a wrong slot or the opponent risks being starved
             do {
                 try {
+                    if(game.getPlayer(player + 1).getBehaviour() instanceof RandomSelect){
+                        RandomSelect r = (RandomSelect)game.getPlayer(player + 1).getBehaviour();
+                        r.setPlayableSlots(game.getPlayableSlots(player + 1));
+                    }
                     choice = game.getPlayer(player + 1).selectSlot();
                     gameView.displayMessage(game.getName(player+1) + " harvests the slot " + game.getLastSlotPlayed());
                     outcome = game.playSlot(player + 1, choice);
