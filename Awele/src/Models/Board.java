@@ -174,7 +174,7 @@ public class Board {
         Slot s = this.getSlot(slot-1, id-1);
         int backupseeds = s.getNbSeeds();
 
-        //if the slot is empty, return starvation code
+        //if the slot is empty, return empty slot code
         if(backupseeds == 0)
             return 3;
 
@@ -197,10 +197,10 @@ public class Board {
         //if that amount is 2 or 3, a capture needs to be made
         if(nbseeds == 2 || nbseeds == 3){
 
-            //check if this seasons risks to starve the opponent (remaining seeds = 0)
+            //check if this seasons risks to starve a player (remaining seeds = 0)
             nbseeds = this.getSumCapturable(buffer);
             if(nbseeds >= this.getRemainingSeeds(1) || nbseeds >= this.getRemainingSeeds(2)){
-                //opponent starved, cancellation of the season
+                //player starved, revert the scattering and return starvation code
                 this.revertScattering(s, buffer, backupseeds);
                 return 2;
             }
