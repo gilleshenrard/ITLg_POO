@@ -25,15 +25,9 @@ public class Main {
             gameView.displayMessage("This is " + game.getName(player+1) + "'s season");
             b.displayBoard();
 
-            //refresh playable slots for player 1 if he plays randomly
-            if(game.getPlayer(1).getBehaviour() instanceof RandomSelect){
-                RandomSelect r = (RandomSelect) game.getPlayer(1).getBehaviour();
-                r.reset();
-            }
-
-            //refresh playable slots for player 2 if he plays randomly
-            if(game.getPlayer(2).getBehaviour() instanceof RandomSelect){
-                RandomSelect r = (RandomSelect) game.getPlayer(2).getBehaviour();
+            //refresh playable slots for the current player if he plays randomly
+            if(game.getPlayer(player + 1).getBehaviour() instanceof RandomSelect){
+                RandomSelect r = (RandomSelect) game.getPlayer(player + 1).getBehaviour();
                 r.reset();
             }
 
@@ -55,20 +49,11 @@ public class Main {
                         if (outcome == 3)
                             gameView.displayWarning("An empty slot can not be harvested");
 
-                        //if player 1 plays randomly and don't have any possible moves left, forfeit
-                        if (game.getPlayer(1).getBehaviour() instanceof RandomSelect) {
-                            RandomSelect r = (RandomSelect) game.getPlayer(1).getBehaviour();
+                        //if current player plays randomly and don't have any possible moves left, forfeit
+                        if (game.getPlayer(player + 1).getBehaviour() instanceof RandomSelect) {
+                            RandomSelect r = (RandomSelect) game.getPlayer(player + 1).getBehaviour();
                             if (r.getShotsLeft() == 0) {
-                                gameView.displayMessage(game.getName(1) + " can't make any move. He forfeits !");
-                                System.exit(0);
-                            }
-                        }
-
-                        //if player 2 plays randomly and don't have any possible moves left, forfeit
-                        if (game.getPlayer(2).getBehaviour() instanceof RandomSelect) {
-                            RandomSelect r = (RandomSelect) game.getPlayer(2).getBehaviour();
-                            if (r.getShotsLeft() == 0) {
-                                gameView.displayMessage(game.getName(2) + " can't make any move. He forfeits !");
+                                gameView.displayMessage(game.getName(player + 1) + " can't make any move. He forfeits !");
                                 System.exit(0);
                             }
                         }
