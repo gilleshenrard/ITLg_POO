@@ -31,9 +31,13 @@ public class RandomSelect implements iSelectable {
         if (this.m_playable == null)
             throw new NullPointerException("RandomSelect.selectSlot() : null instance of ArrayList<Integer>");
 
+        //if there are non-empty slots left
         if (this.m_playable.size() > 0) {
             Random r = new Random();
+            //randomly pick a slot
             Integer index = this.m_playable.get(r.nextInt(this.m_playable.size()));
+            //remove it from the array so it can't be played again until the array is refreshed
+            //  (avoids collisions : picking the same slots infinitely)
             this.m_playable.remove(index);
             return 1 + index.intValue();
         }

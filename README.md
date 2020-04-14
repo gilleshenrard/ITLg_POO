@@ -65,7 +65,7 @@ Views classes can be found in src/Views/. They are as following :
 - BoardView : Contains methods to display the game board (stored seeds, slots, players name)
 - iSelectable : base interface of a Strategy Pattern allowing to set the player selection behaviour on-the-fly
 - KeyboardSelect : Allows a player to be prompted to select a slot with the keyboard
-- RandomSelect : Allows a player to randomly select a slot
+- RandomSelect : Allows a player to randomly select a slot (following a collision avoidance mechanic)
 
 #### 3. Controllers
 There are no controllers built yet as the main game loop takes care of the seasons mechanics.
