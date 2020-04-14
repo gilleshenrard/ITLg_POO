@@ -55,6 +55,12 @@ public class Main {
                             RandomSelect r = (RandomSelect) game.getPlayer(player + 1).getBehaviour();
                             if (r.getShotsLeft() == 0) {
                                 gameView.displayMessage(game.getName(player + 1) + " can't make any move. He forfeits !");
+
+                                //Easter egg : when both players play randomly and one of them forfeits, he says the last quote of the W.P.O.R. in the movie Wargames
+                                if(game.getPlayer(1).getBehaviour() instanceof RandomSelect && game.getPlayer(2).getBehaviour() instanceof RandomSelect) {
+                                    gameView.displayMessage("\n" + game.getName(player + 1) + " : 'A strange game... The only winning move is not to play...'");
+                                    gameView.displayMessage(game.getName(player + 1) + " : '......................... How about a nice game of chess?'");
+                                }
                                 System.exit(0);
                             }
                         }

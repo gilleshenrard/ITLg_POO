@@ -83,4 +83,3 @@ n/a
 - Implement the harvest and capture mechanics in a separate controller class
 - Implement the AI algorithm stated in the reference book
 - Add UML diagram links to README.md
-- Add a Wargame easter egg when two AI are playing against each other
