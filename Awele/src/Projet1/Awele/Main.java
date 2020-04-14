@@ -22,7 +22,7 @@ public class Main {
         int choice, player = 0, outcome = 0;
 
         //main game loop
-        while (outcome != 1) {
+        while (outcome != 3) {
             gameView.displayMessage("This is " + game.getName(player+1) + "'s season");
             b.displayBoard();
 
@@ -41,13 +41,13 @@ public class Main {
                     outcome = game.playSlot(player + 1, choice);
 
                     //in case of starvation or empty slot played
-                    if (outcome == 2 || outcome == 3) {
+                    if (outcome == 1 || outcome == 2) {
                         //player starved
-                        if (outcome == 2)
+                        if (outcome == 1)
                             gameView.displayWarning("A player can't be starved. Its amount of seeds can't get to 0");
 
                         //empty slot played
-                        if (outcome == 3)
+                        if (outcome == 2)
                             gameView.displayWarning("An empty slot can not be harvested");
 
                         //if current player plays randomly and don't have any possible moves left, forfeit
@@ -70,14 +70,15 @@ public class Main {
                     gameView.displayError(e.getMessage());
                     System.exit(-2);
                 }
-            }while (outcome == 2 || outcome == 3);
+            }while (outcome == 1 || outcome == 2);
 
             gameView.displayMessage("--------------------------------------------------------------------");
 
             //Game is won by the current player.
-            if (outcome == 1) {
+            if (game.getSeeds(player + 1) > 24) {
                 b.displayBoard();
                 gameView.displayMessage(game.getName(player + 1) + " won the game !");
+                outcome = 3;
             }
 
             //Select next player

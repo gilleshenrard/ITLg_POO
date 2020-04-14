@@ -159,7 +159,7 @@ public class Board {
      * Harvest the seeds from a slot and, if necessary, scatter them
      * @param id ID of the player harvesting
      * @param slot Slot being harvested
-     * @return 0 if normal season (with or without capture), 1 if victory, 2 if starvation, 3 if empty slot selected
+     * @return 0 if normal season (with or without capture), 1 if starvation, 2 if empty slot selected
      * @throws InvalidParameterException
      */
     public int playSlot(int id, int slot) throws InvalidParameterException{
@@ -176,7 +176,7 @@ public class Board {
 
         //if the slot is empty, return empty slot code
         if(backupseeds == 0)
-            return 3;
+            return 2;
 
         //Scatter the selected slot + create a scattering buffer
         ArrayList<Slot> buffer = this.processScattering(s);
@@ -184,7 +184,7 @@ public class Board {
         //if any side of the board is now empty, revert the scattering and return starvation code
         if (this.getRemainingSeeds(1) == 0 || this.getRemainingSeeds(2) == 0) {
             this.revertScattering(s, buffer, backupseeds);
-            return 2;
+            return 1;
         }
 
         //
@@ -202,17 +202,13 @@ public class Board {
             if(nbseeds >= this.getRemainingSeeds(1) || nbseeds >= this.getRemainingSeeds(2)){
                 //player starved, revert the scattering and return starvation code
                 this.revertScattering(s, buffer, backupseeds);
-                return 2;
+                return 1;
             }
             else{
                 //opponent not starved, capture
                 // (collect all seeds from the slots in the buffer which contain 2 or 3 seeds)
                 this.processCapture(id, buffer);
             }
-
-            //if stored seeds > 24, the current player won the game
-            if(Game.getInstance().getSeeds(id) > 24)
-                return 1;
         }
 
         //return code for normal end of season
