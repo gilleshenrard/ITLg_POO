@@ -10,6 +10,11 @@ public class RandomSelect implements iSelectable {
     private Board m_board;
     private ArrayList<Integer> m_playable;
 
+    /**
+     * Create a new RandomSelect
+     * @param board Game board on which use this behaviour
+     * @param ID ID of the player using this behaviour
+     */
     public RandomSelect(Board board, int ID){
         this.m_id = ID;
         this.m_board = board;
