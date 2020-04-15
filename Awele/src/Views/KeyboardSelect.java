@@ -22,4 +22,10 @@ public class KeyboardSelect implements iSelectable {
 
         return this.m_scanner.nextInt();
     }
+
+    /**
+     * Do nothing
+     */
+    @Override
+    public void reset() {}
 }

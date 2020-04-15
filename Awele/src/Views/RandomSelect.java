@@ -48,6 +48,7 @@ public class RandomSelect implements iSelectable {
     /**
      * Refresh the array of non-empty slots
      */
+    @Override
     public void reset(){
         this.m_playable = this.m_board.getNonEmpty(this.m_id);
     }

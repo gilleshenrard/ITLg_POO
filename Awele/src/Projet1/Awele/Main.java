@@ -27,10 +27,7 @@ public class Main {
             b.displayBoard();
 
             //refresh playable slots for the current player if he plays randomly
-            if(game.getPlayer(player + 1).getBehaviour() instanceof RandomSelect){
-                RandomSelect r = (RandomSelect) game.getPlayer(player + 1).getBehaviour();
-                r.reset();
-            }
+            game.getPlayer(player + 1).getBehaviour().reset();
 
             //loop while the user selects a wrong slot or the opponent risks being starved
             do {
