@@ -26,7 +26,7 @@ public class Main {
             gameView.displayMessage("This is " + game.getName(player+1) + "'s season");
             b.displayBoard();
 
-            //refresh playable slots for the current player if he plays randomly
+            //refresh playable slots for the current player
             game.reset(player + 1);
 
             //loop while the user selects a wrong slot or the opponent risks being starved
