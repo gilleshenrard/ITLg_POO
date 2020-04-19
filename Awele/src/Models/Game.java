@@ -167,6 +167,18 @@ public class Game {
     }
 
     /**
+     * Select a slot to play, depending on a player's ID
+     * @param ID ID of the player for which to select the slot
+     * @return Slot selected
+     * @throws InvalidParameterException
+     */
+    public int selectSlot(int ID) throws InvalidParameterException{
+        Game.validateID(ID, "Game.selectSlot()");
+
+        return this.getPlayer(ID).selectSlot();
+    }
+
+    /**
      * Reset the Game to an inial value
      */
     public void resetGame(){

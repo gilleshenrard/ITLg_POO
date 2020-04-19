@@ -1,5 +1,6 @@
 package Models;
 
+import Views.RandomSelect;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -269,5 +270,29 @@ class GameTest {
         g.resetGame();
         Assertions.assertEquals(0, g.getSeeds(1));
         Assertions.assertEquals(0, g.getSeeds(2));
+    }
+
+    /**
+     * Check if selectSlot() throws an exception with wrong ID
+     */
+    @DisplayName("selectSlot() with a wrong ID - should fail")
+    @Test
+    void selectSlot_wrongID_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            g.selectSlot(3);
+        });
+    }
+
+    /**
+     * Check if selectSlot() returns a proper value
+     */
+    @DisplayName("selectSlot() - should not fail")
+    @Test
+    void selectSlot_shouldnot_fail() {
+        g.setBoard(new Board());
+        g.setPlayer(2, new Player(2, "", new RandomSelect(g.getBoard(), 2)));
+        g.getPlayer(2).getBehaviour().reset();
+        int ret = g.selectSlot(2);
+        Assertions.assertTrue(ret > 0 && ret <= 6);
     }
 }

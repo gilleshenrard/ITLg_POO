@@ -33,7 +33,7 @@ public class Main {
             do {
                 try {
                     //select a slot, then play it
-                    choice = game.getPlayer(player + 1).selectSlot();
+                    choice = game.selectSlot(player + 1);
                     gameView.displayMessage(game.getName(player + 1) + " harvests the slot " + choice);
                     outcome = game.playSlot(player + 1, choice);
 
