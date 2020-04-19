@@ -179,6 +179,17 @@ public class Game {
     }
 
     /**
+     * Reset the array of playable slots for the player with the id ID
+     * @param ID ID of the player for which reset the array
+     * @throws InvalidParameterException
+     */
+    public void reset(int ID) throws InvalidParameterException {
+        Game.validateID(ID, "Game.reset()");
+
+        this.getPlayer(ID).reset();
+    }
+
+    /**
      * Reset the Game to an inial value
      */
     public void resetGame(){

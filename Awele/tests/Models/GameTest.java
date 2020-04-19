@@ -295,4 +295,25 @@ class GameTest {
         int ret = g.selectSlot(2);
         Assertions.assertTrue(ret > 0 && ret <= 6);
     }
+
+    /**
+     * Check if reset() throws an exception with wrong ID
+     */
+    @DisplayName("reset() with a wrong ID - should fail")
+    @Test
+    void reset_wrongID_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            g.reset(3);
+        });
+    }
+
+    /**
+     * Check if reset() resets the array of playable slots properly
+     */
+    @DisplayName("reset() - should not fail")
+    @Test
+    void reset_shouldnot_fail() {
+        g.setPlayer(1, new Player(1, "", new RandomSelect(new Board(), 1)));
+        g.reset(1);
+    }
 }

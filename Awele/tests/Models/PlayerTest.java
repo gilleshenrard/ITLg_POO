@@ -133,4 +133,25 @@ class PlayerTest {
             p.selectSlot();
         });
     }
+
+    /**
+     * Check if reset() throws an exception when used and m_behaviour is null
+     */
+    @DisplayName("reset() with a NULL instance of m_behaviour - should fail")
+    @Test
+    void reset_null_should_fail() {
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            p.reset();
+        });
+    }
+
+    /**
+     * Check if reset() resets the array of playable slots properly
+     */
+    @DisplayName("reset() - should not fail")
+    @Test
+    void reset_shouldnot_fail() {
+        p.setBehaviour(new RandomSelect(new Board(), 1));
+        p.reset();
+    }
 }

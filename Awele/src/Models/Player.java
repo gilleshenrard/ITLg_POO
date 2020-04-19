@@ -96,6 +96,17 @@ public class Player {
     }
 
     /**
+     * Reset the array of playable slots
+     * @throws NullPointerException
+     */
+    public void reset() throws NullPointerException {
+        if (this.m_behaviour == null)
+            throw new NullPointerException("Player.reset() : NULL instance of behaviour");
+
+        this.getBehaviour().reset();
+    }
+
+    /**
      * Tells if o is equal to the current Player
      * @param o Object to test
      * @return true if equal, false otherwise
