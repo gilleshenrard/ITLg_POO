@@ -13,6 +13,38 @@ public class BoardControllerTest {
     BoardController b = new BoardController(board);
 
     /**
+     * Check if getBoard() returns the right instance of Board
+     */
+    @DisplayName("getBoard() - should not fail")
+    @Test
+    void getBoard_shouldnot_fail() {
+        Board b2 = new Board(), b3;
+        b.setBoard(b2);
+        b3 = b.getBoard();
+        Assertions.assertEquals(b2, b3);
+    }
+
+    /**
+     * Check if setBoard() throws an exception with a null instance
+     */
+    @DisplayName("setBoard() with a NULL instance - should fail")
+    @Test
+    void setBoard_nullBoard_should_fail() {
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            b.setBoard(null);
+        });
+    }
+
+    /**
+     * Check if setBoard() fails setting an instance of Board
+     */
+    @DisplayName("setBoard() - should not fail")
+    @Test
+    void setBoard_shouldnot_fail() {
+        b.setBoard(new Board());
+    }
+
+    /**
      * Check if playSlot() returns a cancellation code when selecting a slot with no seed
      */
     @DisplayName("playSlot() with an empty slot - should not fail")
