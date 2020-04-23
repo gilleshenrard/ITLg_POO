@@ -1,5 +1,6 @@
 package Projet1.Awele;
 
+import Controllers.BoardController;
 import Views.KeyboardSelect;
 import Views.RandomSelect;
 import Models.Board;
@@ -14,10 +15,11 @@ public class Main {
 
     public static void main(String[] args) {
         Game game = Game.getInstance();
-        game.setBoard(new Board());
+        Board board = new Board();
+        game.setBoardController(new BoardController(board));
         game.setPlayer(1, new Player(1, "Gilles", new KeyboardSelect()));
-        game.setPlayer(2, new Player(2, "AI", new RandomSelect(game.getBoard(), 2)));
-        BoardView b = new BoardView(game.getBoard());
+        game.setPlayer(2, new Player(2, "AI", new RandomSelect(board, 2)));
+        BoardView b = new BoardView(board);
         GameView gameView = new GameView();
         int choice, player = 0, outcome = 0;
 

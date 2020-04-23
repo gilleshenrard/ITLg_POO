@@ -1,5 +1,6 @@
 package Models;
 
+import Controllers.BoardController;
 import Views.RandomSelect;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -161,35 +162,35 @@ class GameTest {
     }
 
     /**
-     * Check if getBoard() returns the right instance of Board
+     * Check if getBoardController() returns the right instance of Board
      */
-    @DisplayName("getBoard() - should not fail")
+    @DisplayName("getBoardController() - should not fail")
     @Test
-    void getBoard_shouldnot_fail() {
-        Board b = new Board(), b2;
-        g.setBoard(b);
-        b2 = g.getBoard();
+    void getBoardController_shouldnot_fail() {
+        BoardController b = new BoardController(new Board()), b2;
+        g.setBoardController(b);
+        b2 = g.getBoardController();
         Assertions.assertEquals(b, b2);
     }
 
     /**
-     * Check if setBoard() throws an exception with a null instance
+     * Check if setBoardController() throws an exception with a null instance
      */
-    @DisplayName("setBoard() with a NULL instance - should fail")
+    @DisplayName("setBoardController() with a NULL instance - should fail")
     @Test
-    void setBoard_nullBoard_should_fail() {
+    void setBoardController_nullBoard_should_fail() {
         Assertions.assertThrows(NullPointerException.class, () -> {
-            g.setBoard(null);
+            g.setBoardController(null);
         });
     }
 
     /**
-     * Check if setBoard() fails setting an instance of Board
+     * Check if setBoardController() fails setting an instance of Board
      */
-    @DisplayName("setBoard() - should not fail")
+    @DisplayName("setBoardController() - should not fail")
     @Test
-    void setBoard_shouldnot_fail() {
-            g.setBoard(new Board());
+    void setBoardController_shouldnot_fail() {
+            g.setBoardController(new BoardController(new Board()));
     }
 
     /**
@@ -230,7 +231,7 @@ class GameTest {
     @DisplayName("getSlot() with an invalid ID - should fail")
     @Test
     void playSlot_invalidID_should_fail() {
-        g.setBoard(new Board());
+        g.setBoardController(new BoardController(new Board()));
         Assertions.assertThrows(InvalidParameterException.class, () -> {
             g.playSlot(3, 3);
         });
@@ -242,7 +243,7 @@ class GameTest {
     @DisplayName("getSlot() with a slot below 1 - should fail")
     @Test
     void playSlot_below1_should_fail() {
-        g.setBoard(new Board());
+        g.setBoardController(new BoardController(new Board()));
         Assertions.assertThrows(InvalidParameterException.class, () -> {
             g.playSlot(1, 0);
         });
@@ -254,7 +255,7 @@ class GameTest {
     @DisplayName("getSlot() with a slot above 6 - should fail")
     @Test
     void playSlot_above6_should_fail() {
-        g.setBoard(new Board());
+        g.setBoardController(new BoardController(new Board()));
         Assertions.assertThrows(InvalidParameterException.class, () -> {
             g.playSlot(1, 7);
         });
@@ -266,7 +267,7 @@ class GameTest {
     @DisplayName("resetGame() - should not fail")
     @Test
     void resetGame_shouldnot_fail() {
-        g.setBoard(new Board());
+        g.setBoardController(new BoardController(new Board()));
         g.resetGame();
         Assertions.assertEquals(0, g.getSeeds(1));
         Assertions.assertEquals(0, g.getSeeds(2));
@@ -289,8 +290,9 @@ class GameTest {
     @DisplayName("selectSlot() - should not fail")
     @Test
     void selectSlot_shouldnot_fail() {
-        g.setBoard(new Board());
-        g.setPlayer(2, new Player(2, "", new RandomSelect(g.getBoard(), 2)));
+        Board board = new Board();
+        g.setBoardController(new BoardController(board));
+        g.setPlayer(2, new Player(2, "", new RandomSelect(board, 2)));
         g.getPlayer(2).getBehaviour().reset();
         int ret = g.selectSlot(2);
         Assertions.assertTrue(ret > 0 && ret <= 6);

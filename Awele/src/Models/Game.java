@@ -1,7 +1,7 @@
 package Models;
 
+import Controllers.BoardController;
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
 
 public class Game {
     private int m_seedpl1;
@@ -9,7 +9,7 @@ public class Game {
     private static Game m_instance;
     private Player m_player1;
     private Player m_player2;
-    private Board m_board;
+    private BoardController m_board;
 
     /**
      * Create a new Game
@@ -84,7 +84,7 @@ public class Game {
      * @param board Board to set
      * @throws NullPointerException
      */
-    public void setBoard(Board board) throws NullPointerException{
+    public void setBoardController(BoardController board) throws NullPointerException{
         if(board == null)
             throw new NullPointerException("Game.setBoard() : NULL instance of Board");
         this.m_board = board;
@@ -94,7 +94,7 @@ public class Game {
      * Return the board set in the current game
      * @return Board to return
      */
-    public Board getBoard(){
+    public BoardController getBoardController(){
         return this.m_board;
     }
 
