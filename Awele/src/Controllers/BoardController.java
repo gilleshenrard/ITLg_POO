@@ -123,7 +123,7 @@ public class BoardController {
      * Harvest the seeds from a slot and, if necessary, scatter them
      * @param id ID of the player harvesting
      * @param slot Slot being harvested
-     * @return 0 if normal season (with or without capture), 1 if starvation, 2 if empty slot selected
+     * @return -1 if starvation, -2 if empty slot selected, amount of seeds captured otherwise
      * @throws InvalidParameterException
      */
     public int playSlot(int id, int slot) throws InvalidParameterException {
@@ -140,7 +140,7 @@ public class BoardController {
 
         //if the slot is empty, return empty slot code
         if(backupseeds == 0)
-            return 2;
+            return -2;
 
         //Scatter the selected slot + create a scattering buffer
         ArrayList<Slot> buffer = this.processScattering(s);
@@ -148,7 +148,7 @@ public class BoardController {
         //if any side of the board is now empty, revert the scattering and return starvation code
         if (this.m_board.getRemainingSeeds(1) == 0 || this.m_board.getRemainingSeeds(2) == 0) {
             this.revertScattering(s, buffer, backupseeds);
-            return 1;
+            return -1;
         }
 
         //
@@ -166,17 +166,19 @@ public class BoardController {
             if(nbseeds >= this.m_board.getRemainingSeeds(1) || nbseeds >= this.m_board.getRemainingSeeds(2)){
                 //player starved, revert the scattering and return starvation code
                 this.revertScattering(s, buffer, backupseeds);
-                return 1;
+                return -1;
             }
             else{
                 //opponent not starved, capture
                 // (collect all seeds from the slots in the buffer which contain 2 or 3 seeds)
-                this.processCapture(id, buffer);
+                nbseeds = this.processCapture(buffer);
             }
         }
+        else
+            nbseeds = 0;
 
         //return code for normal end of season
-        return 0;
+        return nbseeds;
     }
 
     /**
@@ -240,20 +242,25 @@ public class BoardController {
      * Capture all the slots in the array : all those containing 2 or 3 seeds are emptied and their content is stored
      * @param ID ID of the player performing the capture
      * @param buffer Array of slots in which the scattering occurred
+     * @return Amount of seeds to be captured
      * @throws NullPointerException
      */
-    private void processCapture(int ID, ArrayList<Slot> buffer) throws NullPointerException{
+    private int processCapture(ArrayList<Slot> buffer) throws NullPointerException{
         if (buffer == null)
             throw new NullPointerException("BoardController.processCapture() : NULL instance of ArrayList<Slot>");
+
+        int nb_stored = 0;
 
         //for each slot in the buffer containing 2 or 3 seeds, store its amount, update remaining seeds and empty the slot
         for (Slot tmp:buffer) {
             if(tmp.getNbSeeds() == 2 || tmp.getNbSeeds() == 3) {
-                this.m_game.storeSeeds(ID, tmp.getNbSeeds());
+                nb_stored += tmp.getNbSeeds();
                 this.removeRemainingSeeds(tmp.getY()+1, tmp.getNbSeeds());
                 tmp.emptySeeds();
             }
         }
+
+        return nb_stored;
     }
 
     /**

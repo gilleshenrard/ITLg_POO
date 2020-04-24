@@ -1,6 +1,7 @@
 package Controllers;
 
 import Models.Board;
+import Models.Game;
 import Models.Player;
 import Views.GameView;
 import Views.RandomSelect;
@@ -223,5 +224,118 @@ public class GameControllerTest {
     void reset_shouldnot_fail() {
         g.setPlayer(1, new Player(1, "", new RandomSelect(new BoardController(new Board(), new GameController(new GameView())), 1)));
         g.reset(1);
+    }
+
+    /**
+     * Check if playSlot() processes a simple scattering properly (no capture, no starvation)
+     */
+    @DisplayName("playSlot() with neither capture nor starvation - should not fail")
+    @Test
+    void playSlot_noCaptureNoStarve_shouldnot_fail() {
+        BoardController b = new BoardController(new Board(), g);
+        g.setBoardController(b);
+        int ret = g.playSlot(1, 6);
+        Assertions.assertEquals(0, ret);
+        Assertions.assertEquals(0, Game.getInstance().getSeeds(1));
+        Assertions.assertEquals(0, Game.getInstance().getSeeds(2));
+    }
+
+    /**
+     * Check if playSlot() processes a simple scattering properly (2 captures, no starvation)
+     */
+    @DisplayName("playSlot() with a capture case - should not fail")
+    @Test
+    void playSlot_CaptureNoStarve_shouldnot_fail() {
+        BoardController b = new BoardController(new Board(), g);
+        g.setBoardController(b);
+        b.getBoard().getSlot(1, 1).setNbSeeds(2);
+        b.getBoard().getSlot(3, 1).setNbSeeds(1);
+        b.getBoard().getSlot(4, 1).setNbSeeds(9);
+        int ret = g.playSlot(1, 6);
+        Assertions.assertEquals(5, ret);
+        Assertions.assertEquals(5, Game.getInstance().getSeeds(1));
+        Assertions.assertEquals(0, Game.getInstance().getSeeds(2));
+    }
+
+    /**
+     * Check if playSlot() processes a starvation properly
+     */
+    @DisplayName("playSlot() with a starvation case - should not fail")
+    @Test
+    void playSlot_noCaptureStarve_shouldnot_fail() {
+        BoardController b = new BoardController(new Board(), g);
+        g.setBoardController(b);
+        b.getBoard().getSlot(0, 1).setNbSeeds(1);
+        b.getBoard().getSlot(1, 1).setNbSeeds(2);
+        b.getBoard().getSlot(2, 1).emptySeeds();
+        b.getBoard().getSlot(3, 1).emptySeeds();
+        b.getBoard().getSlot(4, 1).emptySeeds();
+        b.getBoard().getSlot(5, 1).emptySeeds();
+        b.getBoard().getSlot(5, 0).setNbSeeds(2);
+        b.getBoard().setRemainingSeeds(2, 3);
+        b.getBoard().setRemainingSeeds(1, 22);
+        int ret = b.playSlot(1, 6);
+        Assertions.assertEquals(-1, ret);
+        Assertions.assertEquals(0, Game.getInstance().getSeeds(1));
+        Assertions.assertEquals(0, Game.getInstance().getSeeds(2));
+    }
+
+    /**
+     * Check if playSlot() processes a victory season
+     */
+    @DisplayName("playSlot() with a victory case - should not fail")
+    @Test
+    void playSlot_victory_shouldnot_fail() {
+        BoardController b = new BoardController(new Board(), g);
+        g.setBoardController(b);
+        b.getBoard().getSlot(3, 1).setNbSeeds(1);
+        b.getBoard().getSlot(1, 1).setNbSeeds(2);
+        Game.getInstance().setSeeds(1, 20);
+        int ret = g.playSlot(1, 6);
+        Assertions.assertEquals(5, ret);
+        Assertions.assertEquals(25, Game.getInstance().getSeeds(1));
+        Assertions.assertEquals(0, Game.getInstance().getSeeds(2));
+    }
+
+    /**
+     * Check if playSlot() forbids a self-starvation by scattering to another row
+     */
+    @DisplayName("playSlot() with self-starvation to other row - should not fail")
+    @Test
+    void playSlot_selfStarvation_otherRow_shouldnot_fail() {
+        BoardController b = new BoardController(new Board(), g);
+        g.setBoardController(b);
+        b.getBoard().getSlot(0, 0).emptySeeds();
+        b.getBoard().getSlot(1, 0).emptySeeds();
+        b.getBoard().getSlot(2, 0).emptySeeds();
+        b.getBoard().getSlot(3, 0).emptySeeds();
+        b.getBoard().getSlot(4, 0).emptySeeds();
+        b.getBoard().getSlot(5, 0).setNbSeeds(1);
+        b.getBoard().setRemainingSeeds(1, 1);
+        int ret = b.playSlot(1, 6);
+        Assertions.assertEquals(-1, ret);
+        Assertions.assertEquals(0, Game.getInstance().getSeeds(1));
+        Assertions.assertEquals(0, Game.getInstance().getSeeds(2));
+    }
+
+    /**
+     * Check if playSlot() forbids a self-starvation by scattering within a row
+     */
+    @DisplayName("playSlot() with self-starvation within a row - should not fail")
+    @Test
+    void playSlot_selfStarvation_sameRow_shouldnot_fail() {
+        BoardController b = new BoardController(new Board(), g);
+        g.setBoardController(b);
+        b.getBoard().getSlot(0, 0).emptySeeds();
+        b.getBoard().getSlot(1, 0).emptySeeds();
+        b.getBoard().getSlot(2, 0).emptySeeds();
+        b.getBoard().getSlot(3, 0).emptySeeds();
+        b.getBoard().getSlot(4, 0).setNbSeeds(1);
+        b.getBoard().getSlot(5, 0).setNbSeeds(1);
+        b.getBoard().setRemainingSeeds(1, 2);
+        int ret = b.playSlot(1, 5);
+        Assertions.assertEquals(-1, ret);
+        Assertions.assertEquals(0, Game.getInstance().getSeeds(1));
+        Assertions.assertEquals(0, Game.getInstance().getSeeds(2));
     }
 }

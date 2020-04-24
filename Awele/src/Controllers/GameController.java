@@ -112,7 +112,8 @@ public class GameController {
      * @throws InvalidParameterException
      */
     public void storeSeeds(int ID, int nb_seeds) throws InvalidParameterException{
-        Game.getInstance().setSeeds(ID, Game.getInstance().getSeeds(ID) + nb_seeds);
+        Game g = Game.getInstance();
+        g.setSeeds(ID, g.getSeeds(ID) + nb_seeds);
     }
 
     /**
@@ -142,11 +143,15 @@ public class GameController {
      * Save the player's selection + Harvest the seeds from a slot and, if necessary, scatter them
      * @param id ID of the player harvesting
      * @param slot Slot being harvested
-     * @return 0 if no further action, 1 if victory, 2 if season cancelled
+     * @return -1 if starvation, -2 if empty slot selected, amount of seeds captured otherwise
      * @throws InvalidParameterException
      */
     public int playSlot(int id, int slot) throws InvalidParameterException{
-        return this.m_board.playSlot(id, slot);
+        int ret = this.m_board.playSlot(id, slot);
+        if (ret > 0)
+            this.storeSeeds(id, ret);
+
+        return ret;
     }
 
     /**

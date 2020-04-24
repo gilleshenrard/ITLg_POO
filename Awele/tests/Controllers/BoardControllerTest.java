@@ -127,7 +127,7 @@ public class BoardControllerTest {
     void playSlot_0seeds_shouldnot_fail() {
         b.getBoard().getSlot(0, 0).setNbSeeds(0);
         int ret = b.playSlot(1, 1);
-        Assertions.assertEquals(2, ret);
+        Assertions.assertEquals(-2, ret);
     }
 
     /**
@@ -177,8 +177,6 @@ public class BoardControllerTest {
         Assertions.assertEquals(5, b.getBoard().getSlot(2, 1).getNbSeeds());
         Assertions.assertEquals(5, b.getBoard().getSlot(3, 1).getNbSeeds());
         Assertions.assertEquals(4, b.getBoard().getSlot(4, 1).getNbSeeds());
-        Assertions.assertEquals(0, Game.getInstance().getSeeds(1));
-        Assertions.assertEquals(0, Game.getInstance().getSeeds(2));
         Assertions.assertEquals(20, b.getBoard().getRemainingSeeds(1));
         Assertions.assertEquals(28, b.getBoard().getRemainingSeeds(2));
     }
@@ -209,8 +207,6 @@ public class BoardControllerTest {
         Assertions.assertEquals(0, b.getBoard().getSlot(3, 0).getNbSeeds());
         Assertions.assertEquals(6, b.getBoard().getSlot(4, 0).getNbSeeds());
         Assertions.assertEquals(5, b.getBoard().getSlot(5, 0).getNbSeeds());
-        Assertions.assertEquals(0, Game.getInstance().getSeeds(1));
-        Assertions.assertEquals(0, Game.getInstance().getSeeds(2));
         Assertions.assertEquals(30, b.getBoard().getRemainingSeeds(2));
         Assertions.assertEquals(18, b.getBoard().getRemainingSeeds(1));
     }
@@ -225,7 +221,7 @@ public class BoardControllerTest {
         b.getBoard().getSlot(3, 1).setNbSeeds(1);
         b.getBoard().getSlot(4, 1).setNbSeeds(9);
         int ret = b.playSlot(1, 6);
-        Assertions.assertEquals(0, ret);
+        Assertions.assertEquals(5, ret);
         Assertions.assertEquals(5, b.getBoard().getSlot(0, 1).getNbSeeds());
         Assertions.assertEquals(0, b.getBoard().getSlot(1, 1).getNbSeeds());
         Assertions.assertEquals(5, b.getBoard().getSlot(2, 1).getNbSeeds());
@@ -233,8 +229,6 @@ public class BoardControllerTest {
         Assertions.assertEquals(9, b.getBoard().getSlot(4, 1).getNbSeeds());
         Assertions.assertEquals(4, b.getBoard().getSlot(5, 1).getNbSeeds());
         Assertions.assertEquals(0, b.getBoard().getSlot(5, 0).getNbSeeds());
-        Assertions.assertEquals(5, Game.getInstance().getSeeds(1));
-        Assertions.assertEquals(0, Game.getInstance().getSeeds(2));
         Assertions.assertEquals(23, b.getBoard().getRemainingSeeds(2));
         Assertions.assertEquals(20, b.getBoard().getRemainingSeeds(1));
     }
@@ -255,7 +249,7 @@ public class BoardControllerTest {
         b.getBoard().setRemainingSeeds(2, 3);
         b.getBoard().setRemainingSeeds(1, 22);
         int ret = b.playSlot(1, 6);
-        Assertions.assertEquals(1, ret);
+        Assertions.assertEquals(-1, ret);
         Assertions.assertEquals(1, b.getBoard().getSlot(0, 1).getNbSeeds());
         Assertions.assertEquals(2, b.getBoard().getSlot(1, 1).getNbSeeds());
         Assertions.assertEquals(0, b.getBoard().getSlot(2, 1).getNbSeeds());
@@ -263,8 +257,6 @@ public class BoardControllerTest {
         Assertions.assertEquals(0, b.getBoard().getSlot(4, 1).getNbSeeds());
         Assertions.assertEquals(0, b.getBoard().getSlot(5, 1).getNbSeeds());
         Assertions.assertEquals(3, b.getBoard().getRemainingSeeds(2));
-        Assertions.assertEquals(0, Game.getInstance().getSeeds(1));
-        Assertions.assertEquals(0, Game.getInstance().getSeeds(2));
     }
 
     /**
@@ -277,14 +269,12 @@ public class BoardControllerTest {
         b.getBoard().getSlot(1, 1).setNbSeeds(2);
         Game.getInstance().setSeeds(1, 20);
         int ret = b.playSlot(1, 6);
-        Assertions.assertEquals(0, ret);
+        Assertions.assertEquals(5, ret);
         Assertions.assertEquals(5, b.getBoard().getSlot(0, 1).getNbSeeds());
         Assertions.assertEquals(0, b.getBoard().getSlot(1, 1).getNbSeeds());
         Assertions.assertEquals(5, b.getBoard().getSlot(2, 1).getNbSeeds());
         Assertions.assertEquals(0, b.getBoard().getSlot(3, 1).getNbSeeds());
         Assertions.assertEquals(4, b.getBoard().getSlot(4, 1).getNbSeeds());
-        Assertions.assertEquals(25, Game.getInstance().getSeeds(1));
-        Assertions.assertEquals(0, Game.getInstance().getSeeds(2));
     }
 
     /**
@@ -301,7 +291,7 @@ public class BoardControllerTest {
         b.getBoard().getSlot(5, 0).setNbSeeds(1);
         b.getBoard().setRemainingSeeds(1, 1);
         int ret = b.playSlot(1, 6);
-        Assertions.assertEquals(1, ret);
+        Assertions.assertEquals(-1, ret);
         Assertions.assertEquals(0, b.getBoard().getSlot(0, 0).getNbSeeds());
         Assertions.assertEquals(0, b.getBoard().getSlot(1, 0).getNbSeeds());
         Assertions.assertEquals(0, b.getBoard().getSlot(2, 0).getNbSeeds());
@@ -309,8 +299,6 @@ public class BoardControllerTest {
         Assertions.assertEquals(0, b.getBoard().getSlot(4, 0).getNbSeeds());
         Assertions.assertEquals(1, b.getBoard().getSlot(5, 0).getNbSeeds());
         Assertions.assertEquals(1, b.getBoard().getRemainingSeeds(1));
-        Assertions.assertEquals(0, Game.getInstance().getSeeds(1));
-        Assertions.assertEquals(0, Game.getInstance().getSeeds(2));
     }
 
     /**
@@ -327,7 +315,7 @@ public class BoardControllerTest {
         b.getBoard().getSlot(5, 0).setNbSeeds(1);
         b.getBoard().setRemainingSeeds(1, 2);
         int ret = b.playSlot(1, 5);
-        Assertions.assertEquals(1, ret);
+        Assertions.assertEquals(-1, ret);
         Assertions.assertEquals(0, b.getBoard().getSlot(0, 0).getNbSeeds());
         Assertions.assertEquals(0, b.getBoard().getSlot(1, 0).getNbSeeds());
         Assertions.assertEquals(0, b.getBoard().getSlot(2, 0).getNbSeeds());
@@ -335,8 +323,6 @@ public class BoardControllerTest {
         Assertions.assertEquals(1, b.getBoard().getSlot(4, 0).getNbSeeds());
         Assertions.assertEquals(1, b.getBoard().getSlot(5, 0).getNbSeeds());
         Assertions.assertEquals(2, b.getBoard().getRemainingSeeds(1));
-        Assertions.assertEquals(0, Game.getInstance().getSeeds(1));
-        Assertions.assertEquals(0, Game.getInstance().getSeeds(2));
     }
 
     /**

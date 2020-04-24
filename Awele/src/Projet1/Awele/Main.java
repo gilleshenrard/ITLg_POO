@@ -50,13 +50,13 @@ public class Main {
                     outcome = game.playSlot(player + 1, choice);
 
                     //in case of starvation or empty slot played
-                    if (outcome == 1 || outcome == 2) {
+                    if (outcome < 0) {
                         //player starved
-                        if (outcome == 1)
+                        if (outcome == -1)
                             game.displayWarning("A player can't be starved. Its amount of seeds can't get to 0");
 
                         //empty slot played
-                        if (outcome == 2)
+                        if (outcome == -2)
                             game.displayWarning("An empty slot can not be harvested");
 
                         //if current player plays randomly and don't have any possible moves left, forfeit
@@ -85,7 +85,7 @@ public class Main {
                     game.displayError(e.getMessage());
                     System.exit(-2);
                 }
-            }while (outcome == 1 || outcome == 2);
+            }while (outcome < 0);
 
             game.displayMessage("--------------------------------------------------------------------");
 
