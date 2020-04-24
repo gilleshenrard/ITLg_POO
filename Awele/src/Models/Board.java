@@ -24,6 +24,17 @@ public class Board {
     }
 
     /**
+     * Throw an exception if ID != 1 or ID != 2
+     * @param ID ID of the player
+     * @param msg Name of the method in which the validation occurs
+     * @throws InvalidParameterException
+     */
+    public static void validateID(int ID, String msg) throws InvalidParameterException{
+        if (ID != 1 && ID != 2)
+            throw new InvalidParameterException(msg + ": invalid ID provided (value : " + ID + ")");
+    }
+
+    /**
      * Throw an exception if not 0 <= x <= 5 of y != 1,2
      * @param x X coordinate to validate
      * @param y Y coordinate to validate
@@ -42,7 +53,7 @@ public class Board {
      * @throws InvalidParameterException
      */
     public int getRemainingSeeds(int ID) throws InvalidParameterException{
-        Game.validateID(ID,"Board.getRemainingSeeds()");
+        Board.validateID(ID,"Board.getRemainingSeeds()");
 
         if (ID == 1)
             return this.m_remSeedsPl1;
@@ -57,7 +68,7 @@ public class Board {
      * @throws InvalidParameterException
      */
     public void setRemainingSeeds(int ID, int value) throws InvalidParameterException{
-        Game.validateID(ID, "Board.setRemainingSeeds()");
+        Board.validateID(ID, "Board.setRemainingSeeds()");
         Slot.validateNbSeeds(value, "Board.setRemainingSeeds()");
 
         if (ID == 1)
@@ -122,7 +133,7 @@ public class Board {
      * @throws InvalidParameterException
      */
     public ArrayList<Integer> getNonEmpty(int ID) throws InvalidParameterException{
-        Game.validateID(ID, "Board.getNonEmpty()");
+        Board.validateID(ID, "Board.getNonEmpty()");
 
         ArrayList<Integer> array = new ArrayList<>();
 
