@@ -67,26 +67,6 @@ public class Board {
     }
 
     /**
-     * Add remaining seeds to a player
-     * @param ID ID of the player
-     * @param value Amount to add
-     * @throws InvalidParameterException
-     */
-    public void addRemainingSeeds(int ID, int value) throws InvalidParameterException {
-        this.setRemainingSeeds(ID, this.getRemainingSeeds(ID) + value);
-    }
-
-    /**
-     * Remove remaining seeds from a player
-     * @param ID ID of the player
-     * @param value Amount to remove
-     * @throws InvalidParameterException
-     */
-    public void removeRemainingSeeds(int ID, int value) throws InvalidParameterException {
-        this.setRemainingSeeds(ID, this.getRemainingSeeds(ID) - value);
-    }
-
-    /**
      * Get the slot located at X,Y
      * @param x X coordinate of the slot
      * @param y Y coordinate of the slot
