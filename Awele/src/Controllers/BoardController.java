@@ -3,12 +3,14 @@ package Controllers;
 import Models.Board;
 import Models.Game;
 import Models.Slot;
+import Views.BoardView;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 
 public class BoardController {
     Board m_board;
+    BoardView m_boardView;
 
     /**
      * Create a new Board controller
@@ -35,6 +37,25 @@ public class BoardController {
      */
     public Board getBoard(){
         return this.m_board;
+    }
+
+    /**
+     * Set the board view on which to play the current game
+     * @param board Board view to set
+     * @throws NullPointerException
+     */
+    public void setBoardView(BoardView board) throws NullPointerException{
+        if(board == null)
+            throw new NullPointerException("BoardController.setBoardView() : NULL instance of Board");
+        this.m_boardView = board;
+    }
+
+    /**
+     * Return the board view set in the current game
+     * @return Board view to return
+     */
+    public BoardView getBoardView(){
+        return this.m_boardView;
     }
 
     /**
@@ -66,6 +87,15 @@ public class BoardController {
      */
     public int getSlotSeeds(int x, int y) throws InvalidParameterException{
         return this.m_board.getSlotSeeds(x, y);
+    }
+
+    /**
+     * Display the whole board and score of the two players
+     * @throws InvalidParameterException
+     * @throws NullPointerException
+     */
+    public void displayBoard() throws InvalidParameterException, NullPointerException {
+        this.m_boardView.displayBoard();
     }
 
     /**

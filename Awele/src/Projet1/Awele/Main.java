@@ -14,20 +14,24 @@ import java.security.InvalidParameterException;
 public class Main {
 
     public static void main(String[] args) {
-        Game game = Game.getInstance();
+        //board setup
         Board board = new Board();
         BoardController boardController = new BoardController(board);
+        BoardView b = new BoardView(boardController);
+        boardController.setBoardView(b);
+
+        //game setup
+        Game game = Game.getInstance();
         game.setBoardController(boardController);
         game.setPlayer(1, new Player(1, "Gilles", new KeyboardSelect()));
         game.setPlayer(2, new Player(2, "AI", new RandomSelect(board, 2)));
-        BoardView b = new BoardView(boardController);
         GameView gameView = new GameView();
         int choice, player = 0, outcome = 0;
 
         //main game loop
         while (outcome != 3) {
             gameView.displayMessage("This is " + game.getName(player+1) + "'s season");
-            b.displayBoard();
+            boardController.displayBoard();
 
             //refresh playable slots for the current player
             game.reset(player + 1);
@@ -82,7 +86,7 @@ public class Main {
 
             //Game is won by the current player.
             if (game.getSeeds(player + 1) > 24) {
-                b.displayBoard();
+                boardController.displayBoard();
                 gameView.displayMessage(game.getName(player + 1) + " won the game !");
                 outcome = 3;
             }
