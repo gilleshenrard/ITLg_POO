@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class RandomSelectTest {
-    BoardController b = new BoardController(new Board(), new GameController());
+    BoardController b = new BoardController(new Board(), new GameController(new GameView()));
     RandomSelect r = new RandomSelect(b, 1);
 
     /**

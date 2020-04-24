@@ -3,19 +3,14 @@ package Views;
 import Controllers.BoardController;
 import Controllers.GameController;
 import Models.Board;
-import Models.Game;
 import Models.Player;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.security.InvalidParameterException;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class BoardViewTest {
     Board b = new Board();
-    GameController g = new GameController();
+    GameController g = new GameController(new GameView());
     BoardController bc = new BoardController(b, g);
     BoardView bv = new BoardView(bc);
 

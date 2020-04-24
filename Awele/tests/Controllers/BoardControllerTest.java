@@ -3,6 +3,7 @@ package Controllers;
 import Models.Board;
 import Models.Game;
 import Views.BoardView;
+import Views.GameView;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -11,7 +12,7 @@ import java.security.InvalidParameterException;
 
 public class BoardControllerTest {
     Board board = new Board();
-    BoardController b = new BoardController(board, new GameController());
+    BoardController b = new BoardController(board, new GameController(new GameView()));
 
     /**
      * Check if getBoard() returns the right instance of Board
@@ -188,7 +189,7 @@ public class BoardControllerTest {
     @DisplayName("playSlot() with a slot skipped at scattering - should not fail")
     @Test
     void playSlot_skipSelected_shouldnot_fail() {
-        GameController g = new GameController();
+        GameController g = new GameController(new GameView());
         g.setBoardController(b);
         g.resetGame();
         b.getBoard().getSlot(3, 0).setNbSeeds(12);

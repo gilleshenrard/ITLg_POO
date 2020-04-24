@@ -2,6 +2,7 @@ package Controllers;
 
 import Models.Game;
 import Models.Player;
+import Views.GameView;
 
 import java.security.InvalidParameterException;
 
@@ -9,11 +10,13 @@ public class GameController {
     private Player m_player1;
     private Player m_player2;
     private BoardController m_board;
+    private GameView m_gameView;
 
-    public GameController(){
+    public GameController(GameView view){
         this.m_player1 = null;
         this.m_player1 = null;
         this.m_board = null;
+        this.m_gameView = view;
     }
 
     /**
@@ -152,5 +155,28 @@ public class GameController {
     public void resetGame(){
         Game.getInstance().resetGame();
         this.m_board.resetBoard();
+    }
+    /**
+     * Display a message in the out channel
+     * @param msg Message to display
+     */
+    public void displayMessage(String msg){
+        this.m_gameView.displayMessage(msg);
+    }
+
+    /**
+     * Display a warning message in the out channel
+     * @param msg Message to display
+     */
+    public void displayWarning(String msg){
+        this.m_gameView.displayWarning(msg);
+    }
+
+    /**
+     * Display an error message in the err channel
+     * @param msg Message to display
+     */
+    public void displayError(String msg){
+        this.m_gameView.displayError(msg);
     }
 }

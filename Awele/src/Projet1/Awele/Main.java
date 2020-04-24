@@ -16,8 +16,8 @@ public class Main {
     public static void main(String[] args) {
 
         //game setup
-        GameController game = new GameController();
         GameView gameView = new GameView();
+        GameController game = new GameController(gameView);
 
         //board setup
         Board board = new Board();
@@ -35,7 +35,7 @@ public class Main {
 
         //main game loop
         while (outcome != 3) {
-            gameView.displayMessage("This is " + game.getName(player+1) + "'s season");
+            game.displayMessage("This is " + game.getName(player+1) + "'s season");
             boardController.displayBoard();
 
             //refresh playable slots for the current player
@@ -46,29 +46,29 @@ public class Main {
                 try {
                     //select a slot, then play it
                     choice = game.selectSlot(player + 1);
-                    gameView.displayMessage(game.getName(player + 1) + " harvests the slot " + choice);
+                    game.displayMessage(game.getName(player + 1) + " harvests the slot " + choice);
                     outcome = game.playSlot(player + 1, choice);
 
                     //in case of starvation or empty slot played
                     if (outcome == 1 || outcome == 2) {
                         //player starved
                         if (outcome == 1)
-                            gameView.displayWarning("A player can't be starved. Its amount of seeds can't get to 0");
+                            game.displayWarning("A player can't be starved. Its amount of seeds can't get to 0");
 
                         //empty slot played
                         if (outcome == 2)
-                            gameView.displayWarning("An empty slot can not be harvested");
+                            game.displayWarning("An empty slot can not be harvested");
 
                         //if current player plays randomly and don't have any possible moves left, forfeit
                         if (game.getPlayer(player + 1).getBehaviour() instanceof RandomSelect) {
                             RandomSelect r = (RandomSelect) game.getPlayer(player + 1).getBehaviour();
                             if (r.getShotsLeft() == 0) {
-                                gameView.displayMessage(game.getName(player + 1) + " can't make any move. He forfeits !");
+                                game.displayMessage(game.getName(player + 1) + " can't make any move. He forfeits !");
 
                                 //Easter egg : when both players play randomly and one of them forfeits, he says the last quote of the W.P.O.R. in the movie Wargames
                                 if(game.getPlayer(1).getBehaviour() instanceof RandomSelect && game.getPlayer(2).getBehaviour() instanceof RandomSelect) {
-                                    gameView.displayMessage("\n" + game.getName(player + 1) + " : 'A strange game... The only winning move is not to play...'");
-                                    gameView.displayMessage(game.getName(player + 1) + " : '......................... How about a nice game of chess?'");
+                                    game.displayMessage("\n" + game.getName(player + 1) + " : 'A strange game... The only winning move is not to play...'");
+                                    game.displayMessage(game.getName(player + 1) + " : '......................... How about a nice game of chess?'");
                                 }
                                 System.exit(0);
                             }
@@ -77,22 +77,22 @@ public class Main {
                 }
                 //System error. Display error message
                 catch (NullPointerException e){
-                    gameView.displayError(e.getMessage());
+                    game.displayError(e.getMessage());
                     System.exit(-1);
                 }
                 //Slot out of range or other system error. Display message and get back in the loop
                 catch (InvalidParameterException e){
-                    gameView.displayError(e.getMessage());
+                    game.displayError(e.getMessage());
                     System.exit(-2);
                 }
             }while (outcome == 1 || outcome == 2);
 
-            gameView.displayMessage("--------------------------------------------------------------------");
+            game.displayMessage("--------------------------------------------------------------------");
 
             //Game is won by the current player.
             if (game.getSeeds(player + 1) > 24) {
                 boardController.displayBoard();
-                gameView.displayMessage(game.getName(player + 1) + " won the game !");
+                game.displayMessage(game.getName(player + 1) + " won the game !");
                 outcome = 3;
             }
 
