@@ -1,6 +1,7 @@
 package Models;
 
 import Controllers.BoardController;
+import Controllers.GameController;
 import Views.RandomSelect;
 import Views.KeyboardSelect;
 import org.junit.jupiter.api.Assertions;
@@ -152,7 +153,7 @@ class PlayerTest {
     @DisplayName("reset() - should not fail")
     @Test
     void reset_shouldnot_fail() {
-        BoardController b = new BoardController(new Board());
+        BoardController b = new BoardController(new Board(), new GameController());
         p.setBehaviour(new RandomSelect(b, 1));
         p.reset();
     }

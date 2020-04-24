@@ -1,6 +1,7 @@
 package Projet1.Awele;
 
 import Controllers.BoardController;
+import Controllers.GameController;
 import Views.KeyboardSelect;
 import Views.RandomSelect;
 import Models.Board;
@@ -14,18 +15,23 @@ import java.security.InvalidParameterException;
 public class Main {
 
     public static void main(String[] args) {
-        //board setup
-        Board board = new Board();
-        BoardController boardController = new BoardController(board);
-        BoardView b = new BoardView(boardController);
-        boardController.setBoardView(b);
 
         //game setup
-        Game game = Game.getInstance();
+        GameController game = new GameController();
+        GameView gameView = new GameView();
+
+        //board setup
+        Board board = new Board();
+        BoardController boardController = new BoardController(board, game);
+        BoardView b = new BoardView(boardController);
+        boardController.setBoardView(b);
         game.setBoardController(boardController);
+
+        //players setup
         game.setPlayer(1, new Player(1, "Gilles", new KeyboardSelect()));
         game.setPlayer(2, new Player(2, "AI", new RandomSelect(boardController, 2)));
-        GameView gameView = new GameView();
+
+        //state variables
         int choice, player = 0, outcome = 0;
 
         //main game loop

@@ -1,7 +1,6 @@
 package Controllers;
 
 import Models.Board;
-import Models.Game;
 import Models.Slot;
 import Views.BoardView;
 
@@ -11,13 +10,15 @@ import java.util.ArrayList;
 public class BoardController {
     Board m_board;
     BoardView m_boardView;
+    GameController m_game;
 
     /**
      * Create a new Board controller
      * @param b Board to assign to the controller
      */
-    public BoardController(Board b){
+    public BoardController(Board b, GameController g){
         this.m_board = b;
+        this.m_game = g;
     }
 
     /**
@@ -65,7 +66,7 @@ public class BoardController {
      * @throws InvalidParameterException
      */
     public String getName(int ID) throws InvalidParameterException{
-        return Game.getInstance().getName(ID);
+        return this.m_game.getName(ID);
     }
 
     /**
@@ -75,7 +76,7 @@ public class BoardController {
      * @throws InvalidParameterException
      */
     public int getStoredSeeds(int ID) throws InvalidParameterException{
-        return Game.getInstance().getSeeds(ID);
+        return this.m_game.getSeeds(ID);
     }
 
     /**
@@ -126,7 +127,7 @@ public class BoardController {
      * @throws InvalidParameterException
      */
     public int playSlot(int id, int slot) throws InvalidParameterException {
-        Game.validateID(id, "BoardController.playSlot()");
+        Board.validateID(id, "BoardController.playSlot()");
         Board.validateCoordinates(slot - 1, id - 1, "Board.playSlot()");
 
         //
@@ -248,7 +249,7 @@ public class BoardController {
         //for each slot in the buffer containing 2 or 3 seeds, store its amount, update remaining seeds and empty the slot
         for (Slot tmp:buffer) {
             if(tmp.getNbSeeds() == 2 || tmp.getNbSeeds() == 3) {
-                Game.getInstance().storeSeeds(ID, tmp.getNbSeeds());
+                this.m_game.storeSeeds(ID, tmp.getNbSeeds());
                 this.removeRemainingSeeds(tmp.getY()+1, tmp.getNbSeeds());
                 tmp.emptySeeds();
             }

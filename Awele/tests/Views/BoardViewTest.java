@@ -1,6 +1,7 @@
 package Views;
 
 import Controllers.BoardController;
+import Controllers.GameController;
 import Models.Board;
 import Models.Game;
 import Models.Player;
@@ -14,7 +15,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BoardViewTest {
     Board b = new Board();
-    BoardController bc = new BoardController(b);
+    GameController g = new GameController();
+    BoardController bc = new BoardController(b, g);
     BoardView bv = new BoardView(bc);
 
     /**
@@ -34,7 +36,6 @@ class BoardViewTest {
     @DisplayName("displayBoard() - should not fail")
     @Test
     void displayBoard() {
-        Game g = Game.getInstance();
         g.setPlayer(1, new Player(1, "test"));
         g.setPlayer(2, new Player(2, "test"));
         bv.displayBoard();
