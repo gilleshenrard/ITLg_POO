@@ -27,7 +27,7 @@ public class BoardController {
      */
     public void setBoard(Board board) throws NullPointerException{
         if(board == null)
-            throw new NullPointerException("Game.setBoard() : NULL instance of Board");
+            throw new NullPointerException("BoardController.setBoard() : NULL instance of Board");
         this.m_board = board;
     }
 
@@ -126,7 +126,7 @@ public class BoardController {
      * @throws InvalidParameterException
      */
     public int playSlot(int id, int slot) throws InvalidParameterException {
-        Game.validateID(id, "Board.playSlot()");
+        Game.validateID(id, "BoardController.playSlot()");
         Board.validateCoordinates(slot - 1, id - 1, "Board.playSlot()");
 
         //
@@ -186,7 +186,7 @@ public class BoardController {
      */
     private ArrayList<Slot> processScattering(Slot s) throws NullPointerException {
         if (s == null)
-            throw new NullPointerException("Board.processScattering() : NULL instance of Slot");
+            throw new NullPointerException("BoardController.processScattering() : NULL instance of Slot");
 
         //get the number of seeds in the slot to harvest and empty it + update remaining seeds
         int nbseeds = s.getNbSeeds();
@@ -220,9 +220,9 @@ public class BoardController {
      */
     private void revertScattering(Slot s, ArrayList<Slot> buffer, int backupseeds) throws NullPointerException {
         if (buffer == null)
-            throw new NullPointerException("Board.revertScattering() : NULL instance of ArrayList<Slot>");
+            throw new NullPointerException("BoardController.revertScattering() : NULL instance of ArrayList<Slot>");
         if (s == null)
-            throw new NullPointerException("Board.revertScattering() : NULL instance of Slot");
+            throw new NullPointerException("BoardController.revertScattering() : NULL instance of Slot");
 
         //decrement the amount of seeds in each slot of the buffer
         for (Slot tmp:buffer) {
@@ -243,7 +243,7 @@ public class BoardController {
      */
     private void processCapture(int ID, ArrayList<Slot> buffer) throws NullPointerException{
         if (buffer == null)
-            throw new NullPointerException("Board.processCapture() : NULL instance of ArrayList<Slot>");
+            throw new NullPointerException("BoardController.processCapture() : NULL instance of ArrayList<Slot>");
 
         //for each slot in the buffer containing 2 or 3 seeds, store its amount, update remaining seeds and empty the slot
         for (Slot tmp:buffer) {
@@ -263,7 +263,7 @@ public class BoardController {
      */
     private int getSumCapturable(ArrayList<Slot> buffer) throws NullPointerException{
         if(buffer == null)
-            throw new NullPointerException("Board.getSumCapturable() : NULL instance of ArrayList<Slot>");
+            throw new NullPointerException("BoardController.getSumCapturable() : NULL instance of ArrayList<Slot>");
 
         //count the sum of the seeds in the capturable slots (containing 2 or 3 seeds after scattering)
         int total = 0;
