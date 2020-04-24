@@ -32,8 +32,8 @@ class BoardViewTest {
     @DisplayName("displayBoard() - should not fail")
     @Test
     void displayBoard() {
-        Game.getInstance().setPlayer(1, new Player(1, "test"));
-        Game.getInstance().setPlayer(2, new Player(2, "test"));
+        Game.getInstance().setPlayer(new Player(1, "test"));
+        Game.getInstance().setPlayer(new Player(2, "test"));
         bv.displayBoard();
     }
 
