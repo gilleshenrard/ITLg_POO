@@ -12,7 +12,7 @@ import java.security.InvalidParameterException;
 
 public class BoardControllerTest {
     Board board = new Board();
-    BoardController b = new BoardController(board, new GameController(new GameView()));
+    BoardController b = new BoardController(board, new GameController());
 
     /**
      * Check if getBoard() returns the right instance of Board
@@ -187,7 +187,7 @@ public class BoardControllerTest {
     @DisplayName("playSlot() with a slot skipped at scattering - should not fail")
     @Test
     void playSlot_skipSelected_shouldnot_fail() {
-        GameController g = new GameController(new GameView());
+        GameController g = new GameController();
         g.setBoardController(b);
         g.resetGame();
         b.getBoard().getSlot(3, 0).setNbSeeds(12);

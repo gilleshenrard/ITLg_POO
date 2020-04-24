@@ -14,6 +14,11 @@ public class GameController {
         this.m_gameView = view;
     }
 
+    public GameController(){
+        this.m_board = null;
+        this.m_gameView = null;
+    }
+
     /**
      * Set the board on which to play the current game
      * @param board Board to set

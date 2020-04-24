@@ -21,7 +21,7 @@ public class GameControllerTest {
     @DisplayName("getBoardController() - should not fail")
     @Test
     void getBoardController_shouldnot_fail() {
-        BoardController b = new BoardController(new Board(), new GameController(new GameView())), b2;
+        BoardController b = new BoardController(new Board(), new GameController()), b2;
         g.setBoardController(b);
         b2 = g.getBoardController();
         Assertions.assertEquals(b, b2);
@@ -44,7 +44,7 @@ public class GameControllerTest {
     @DisplayName("setBoardController() - should not fail")
     @Test
     void setBoardController_shouldnot_fail() {
-        g.setBoardController(new BoardController(new Board(), new GameController(new GameView())));
+        g.setBoardController(new BoardController(new Board(), new GameController()));
     }
 
     /**
@@ -86,7 +86,7 @@ public class GameControllerTest {
     @DisplayName("getSlot() with an invalid ID - should fail")
     @Test
     void playSlot_invalidID_should_fail() {
-        g.setBoardController(new BoardController(new Board(), new GameController(new GameView())));
+        g.setBoardController(new BoardController(new Board(), new GameController()));
         Assertions.assertThrows(InvalidParameterException.class, () -> {
             g.playSlot(3, 3);
         });
@@ -98,7 +98,7 @@ public class GameControllerTest {
     @DisplayName("getSlot() with a slot below 1 - should fail")
     @Test
     void playSlot_below1_should_fail() {
-        g.setBoardController(new BoardController(new Board(), new GameController(new GameView())));
+        g.setBoardController(new BoardController(new Board(), new GameController()));
         Assertions.assertThrows(InvalidParameterException.class, () -> {
             g.playSlot(1, 0);
         });
@@ -110,7 +110,7 @@ public class GameControllerTest {
     @DisplayName("getSlot() with a slot above 6 - should fail")
     @Test
     void playSlot_above6_should_fail() {
-        g.setBoardController(new BoardController(new Board(), new GameController(new GameView())));
+        g.setBoardController(new BoardController(new Board(), new GameController()));
         Assertions.assertThrows(InvalidParameterException.class, () -> {
             g.playSlot(1, 7);
         });
@@ -122,7 +122,7 @@ public class GameControllerTest {
     @DisplayName("resetGame() - should not fail")
     @Test
     void resetGame_shouldnot_fail() {
-        g.setBoardController(new BoardController(new Board(), new GameController(new GameView())));
+        g.setBoardController(new BoardController(new Board(), new GameController()));
         g.resetGame();
         Assertions.assertEquals(0, g.getSeeds(1));
         Assertions.assertEquals(0, g.getSeeds(2));
@@ -146,7 +146,7 @@ public class GameControllerTest {
     @Test
     void selectSlot_shouldnot_fail() {
         Board board = new Board();
-        g.setBoardController(new BoardController(board, new GameController(new GameView())));
+        g.setBoardController(new BoardController(board, new GameController()));
         Game.getInstance().setPlayer(new Player(2, "", new RandomSelect(g.getBoardController(), 2)));
         Game.getInstance().getPlayer(2).getBehaviour().refresh();
         int ret = g.selectSlot(2);
@@ -170,7 +170,7 @@ public class GameControllerTest {
     @DisplayName("reset() - should not fail")
     @Test
     void reset_shouldnot_fail() {
-        Game.getInstance().setPlayer(new Player(1, "", new RandomSelect(new BoardController(new Board(), new GameController(new GameView())), 1)));
+        Game.getInstance().setPlayer(new Player(1, "", new RandomSelect(new BoardController(new Board(), new GameController()), 1)));
         g.refresh(1);
     }
 
