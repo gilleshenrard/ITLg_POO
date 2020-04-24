@@ -292,7 +292,7 @@ class GameTest {
     void selectSlot_shouldnot_fail() {
         Board board = new Board();
         g.setBoardController(new BoardController(board));
-        g.setPlayer(2, new Player(2, "", new RandomSelect(board, 2)));
+        g.setPlayer(2, new Player(2, "", new RandomSelect(g.getBoardController(), 2)));
         g.getPlayer(2).getBehaviour().reset();
         int ret = g.selectSlot(2);
         Assertions.assertTrue(ret > 0 && ret <= 6);
@@ -315,7 +315,7 @@ class GameTest {
     @DisplayName("reset() - should not fail")
     @Test
     void reset_shouldnot_fail() {
-        g.setPlayer(1, new Player(1, "", new RandomSelect(new Board(), 1)));
+        g.setPlayer(1, new Player(1, "", new RandomSelect(new BoardController(new Board()), 1)));
         g.reset(1);
     }
 }

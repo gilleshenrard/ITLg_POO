@@ -288,4 +288,14 @@ public class BoardController {
             }
         }
     }
+
+    /**
+     * Get a buffer with all the non-empty slots
+     * @param ID ID of the player for which getting the slots
+     * @return Buffer
+     * @throws InvalidParameterException
+     */
+    public ArrayList<Integer> getNonEmpty(int ID) throws InvalidParameterException{
+        return this.m_board.getNonEmpty(ID);
+    }
 }

@@ -1,12 +1,13 @@
 package Views;
 
+import Controllers.BoardController;
 import Models.Board;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class RandomSelectTest {
-    Board b = new Board();
+    BoardController b = new BoardController(new Board());
     RandomSelect r = new RandomSelect(b, 1);
 
     /**

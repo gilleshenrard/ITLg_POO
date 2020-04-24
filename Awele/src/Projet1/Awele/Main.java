@@ -24,7 +24,7 @@ public class Main {
         Game game = Game.getInstance();
         game.setBoardController(boardController);
         game.setPlayer(1, new Player(1, "Gilles", new KeyboardSelect()));
-        game.setPlayer(2, new Player(2, "AI", new RandomSelect(board, 2)));
+        game.setPlayer(2, new Player(2, "AI", new RandomSelect(boardController, 2)));
         GameView gameView = new GameView();
         int choice, player = 0, outcome = 0;
 
