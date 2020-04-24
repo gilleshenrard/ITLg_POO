@@ -50,12 +50,12 @@ public class Game {
      * @throws InvalidParameterException
      * @throws NullPointerException
      */
-    public void setPlayer(int ID, Player player) throws InvalidParameterException, NullPointerException{
+    public void setPlayer(Player player) throws InvalidParameterException, NullPointerException{
         if(player == null)
             throw new NullPointerException("Game.setPlayer() : NULL instance of Player");
-        Game.validateID(ID, "Game.setPlayer()");
+        Game.validateID(player.getID(), "Game.setPlayer()");
 
-        if (ID == 1)
+        if (player.getID() == 1)
             this.m_player1 = player;
         else
             this.m_player2 = player;

@@ -28,8 +28,8 @@ public class Main {
         game.setBoardController(boardController);
 
         //players setup
-        Game.getInstance().setPlayer(1, new Player(1, "Gilles", new KeyboardSelect()));
-        Game.getInstance().setPlayer(2, new Player(2, "AI", new RandomSelect(boardController, 2)));
+        Game.getInstance().setPlayer(new Player(1, "Gilles", new KeyboardSelect()));
+        Game.getInstance().setPlayer(new Player(2, "AI", new RandomSelect(boardController, 2)));
 
         //state variables
         int choice, player = 0, outcome = 0;
