@@ -34,45 +34,45 @@ class GameTest {
     }
 
     /**
-     * Check if storeSeeds() sets the proper value to stored seeds
+     * Check if setSeeds() sets the proper value to stored seeds
      */
-    @DisplayName("storeSeeds() - should not fail")
+    @DisplayName("setSeeds() - should not fail")
     @Test
-    void storeSeeds_shouldnot_fail() {
-        g.storeSeeds(1, 15);
+    void setSeeds_shouldnot_fail() {
+        g.setSeeds(1, 15);
         Assertions.assertEquals(g.getSeeds(1), 15);
     }
 
     /**
-     * Check if storeSeeds() throws an exception with an invalid ID
+     * Check if setSeeds() throws an exception with an invalid ID
      */
-    @DisplayName("storeSeeds() with an invalid ID - should fail")
+    @DisplayName("setSeeds() with an invalid ID - should fail")
     @Test
-    void storeSeeds_invalidID_should_fail() {
+    void setSeeds_invalidID_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            g.storeSeeds(3, 15);
+            g.setSeeds(3, 15);
         });
     }
 
     /**
-     * Check if storeSeeds() throws an exception with an amount of seeds above 23
+     * Check if setSeeds() throws an exception with an amount of seeds above 23
      */
-    @DisplayName("storeSeeds() with an invalid ID - should fail")
+    @DisplayName("setSeeds() with an invalid ID - should fail")
     @Test
-    void storeSeeds_SeedsAbove23_should_fail() {
+    void setSeeds_SeedsAbove23_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            g.storeSeeds(1, 24);
+            g.setSeeds(1, 49);
         });
     }
 
     /**
-     * Check if storeSeeds() throws an exception with a negative amount of seeds
+     * Check if setSeeds() throws an exception with a negative amount of seeds
      */
-    @DisplayName("storeSeeds() with negative nb_seeds - should fail")
+    @DisplayName("setSeeds() with negative nb_seeds - should fail")
     @Test
-    void storeSeeds_negativeSeedsNb_should_fail() {
+    void setSeeds_negativeSeedsNb_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            g.storeSeeds(1, -2);
+            g.setSeeds(1, -2);
         });
     }
 
@@ -93,7 +93,7 @@ class GameTest {
     @DisplayName("getSeeds() - should not fail")
     @Test
     void getSeeds_shouldnot_fail() {
-            g.storeSeeds(1, 12);
+            g.setSeeds(1, 12);
             Assertions.assertEquals(g.getSeeds(1), 12);
     }
 

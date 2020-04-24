@@ -275,7 +275,7 @@ public class BoardControllerTest {
     void playSlot_victory_shouldnot_fail() {
         b.getBoard().getSlot(3, 1).setNbSeeds(1);
         b.getBoard().getSlot(1, 1).setNbSeeds(2);
-        Game.getInstance().storeSeeds(1, 20);
+        Game.getInstance().setSeeds(1, 20);
         int ret = b.playSlot(1, 6);
         Assertions.assertEquals(0, ret);
         Assertions.assertEquals(5, b.getBoard().getSlot(0, 1).getNbSeeds());

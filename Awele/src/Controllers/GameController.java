@@ -112,7 +112,7 @@ public class GameController {
      * @throws InvalidParameterException
      */
     public void storeSeeds(int ID, int nb_seeds) throws InvalidParameterException{
-        Game.getInstance().storeSeeds(ID, nb_seeds);
+        Game.getInstance().setSeeds(ID, Game.getInstance().getSeeds(ID) + nb_seeds);
     }
 
     /**

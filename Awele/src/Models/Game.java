@@ -45,16 +45,16 @@ public class Game {
      * @param nb_seeds  Amount of seeds to store
      * @throws InvalidParameterException
      */
-    public void storeSeeds(int ID, int nb_seeds) throws InvalidParameterException{
+    public void setSeeds(int ID, int nb_seeds) throws InvalidParameterException{
         Game.validateID(ID, "Game.storeSeeds()");
 
-        if(nb_seeds < 0 || nb_seeds > 23)
+        if(nb_seeds < 0 || nb_seeds > 48)
             throw new InvalidParameterException("Game.storeSeeds() : incorrect amount of seeds (value : " + nb_seeds + ")");
 
         if (ID == 1)
-            this.m_seedpl1 += nb_seeds;
+            this.m_seedpl1 = nb_seeds;
         else
-            this.m_seedpl2 += nb_seeds;
+            this.m_seedpl2 = nb_seeds;
     }
 
     /**
