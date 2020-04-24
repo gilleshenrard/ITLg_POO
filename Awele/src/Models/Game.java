@@ -1,7 +1,5 @@
 package Models;
 
-import Views.RandomSelect;
-
 import java.security.InvalidParameterException;
 
 public class Game {
@@ -90,7 +88,7 @@ public class Game {
         if (Game.getInstance().getPlayer(ID) == null)
             throw new NullPointerException("Game.isPlayerAI() : NULL instance of Player");
 
-        return Game.getInstance().getPlayer(ID).getBehaviour() instanceof RandomSelect;
+        return Game.getInstance().getPlayer(ID).isPlayerAI();
     }
 
     /**

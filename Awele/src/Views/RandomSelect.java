@@ -22,6 +22,15 @@ public class RandomSelect implements iSelectable {
     }
 
     /**
+     * Tell if the current behaviour is an AI one or not
+     * @return true
+     */
+    @Override
+    public boolean isAI() {
+        return true;
+    }
+
+    /**
      * Randomly select a slot (between 1 and 6)
      * @return Random slot number
      * @throws NullPointerException

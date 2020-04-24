@@ -13,6 +13,15 @@ public class KeyboardSelect implements iSelectable {
     }
 
     /**
+     * Tell if the current behaviour is an AI one or not
+     * @return false
+     */
+    @Override
+    public boolean isAI() {
+        return false;
+    }
+
+    /**
      * Prompt the user for a slot selection, and get it
      * @return Slot selected by the user
      */

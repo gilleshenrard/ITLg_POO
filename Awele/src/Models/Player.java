@@ -76,6 +76,18 @@ public class Player {
     }
 
     /**
+     * Tell if the player is an AI or not (instance of RandomSelect)
+     * @return true if RandomSelect, false otherwise
+     * @throws InvalidParameterException
+     */
+    public boolean isPlayerAI() throws NullPointerException {
+        if (this.getBehaviour() == null)
+            throw new NullPointerException("Player.isPlayerAI() : NULL instance of iSelectable");
+
+        return this.getBehaviour().isAI();
+    }
+
+    /**
      * Returns the Player's name
      * @return Name
      */
