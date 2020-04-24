@@ -166,7 +166,7 @@ public class GameController {
      * @throws InvalidParameterException
      * @throws NullPointerException
      */
-    public void displayBoard() throws InvalidParameterException, NullPointerException {
-        this.m_gameView.displayBoard();
+    public void displayGame() throws InvalidParameterException, NullPointerException {
+        this.m_gameView.displayGame();
     }
 }

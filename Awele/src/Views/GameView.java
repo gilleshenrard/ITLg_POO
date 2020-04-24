@@ -61,7 +61,7 @@ public class GameView {
      * @throws InvalidParameterException
      * @throws NullPointerException
      */
-    public void displayBoard() throws InvalidParameterException, NullPointerException {
+    public void displayGame() throws InvalidParameterException, NullPointerException {
         //display the opponent side of the board (slots are inverted)
         //OPPONENT
         //|  0 |

@@ -38,7 +38,7 @@ public class Main {
         //main game loop
         while (outcome != 3) {
             game.displayMessage("This is " + game.getName(player+1) + "'s season");
-            game.displayBoard();
+            game.displayGame();
 
             //refresh playable slots for the current player
             game.refresh(player + 1);
@@ -92,7 +92,7 @@ public class Main {
 
             //Game is won by the current player.
             if (game.getSeeds(player + 1) > 24) {
-                game.displayBoard();
+                game.displayGame();
                 game.displayMessage(game.getName(player + 1) + " won the game !");
                 outcome = 3;
             }
