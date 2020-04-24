@@ -31,17 +31,13 @@ public class BoardView {
         System.out.println(this.m_board.getName(2));
         this.displaySlot(this.m_board.getStoredSeeds(2));
         System.out.println();
-        for(int i=0 ; i<6 ; i++)
-            this.displaySlot(this.m_board.getSlotSeeds(5-i, 1));
-        System.out.println();
+        displayRow(2, true);
 
         //display the player side of the board
         //|  1 ||  2 ||  3 ||  4 ||  5 ||  6 |
         //|  0 |
         //PLAYER
-        for(int i=0 ; i<6 ; i++)
-            this.displaySlot(this.m_board.getSlotSeeds(i, 0));
-        System.out.println();
+        displayRow(1, false);
         this.displaySlot(this.m_board.getStoredSeeds(1));
         System.out.println();
         System.out.println(this.m_board.getName(1));
@@ -53,5 +49,16 @@ public class BoardView {
      */
     public void displaySlot(int amount){
         System.out.format("| %1$2d |", amount);
+    }
+
+    /**
+     * Display all the slots a player owns
+     * @param ID ID of the player
+     * @param invert Order of the slots : false = left-right, true = right-left
+     */
+    public void displayRow(int ID, boolean invert){
+        for(int i=0 ; i<6 ; i++)
+            this.displaySlot(this.m_board.getSlotSeeds((invert ? 5-i : i), ID-1));
+        System.out.println();
     }
 }
