@@ -1,5 +1,7 @@
 package Models;
 
+import Views.RandomSelect;
+
 import java.security.InvalidParameterException;
 
 public class Game {
@@ -74,6 +76,32 @@ public class Game {
             return this.m_player1;
         else
             return this.m_player2;
+    }
+
+    /**
+     * Tell if the player is an AI or not (instance of RandomSelect)
+     * @param ID ID of the player to check
+     * @return true if RandomSelect, false otherwise
+     * @throws InvalidParameterException
+     * @throws NullPointerException
+     */
+    public boolean isPlayerAI(int ID) throws InvalidParameterException, NullPointerException {
+        Game.getInstance().validateID(ID, "Game.isPlayerAI()");
+        if (Game.getInstance().getPlayer(ID) == null)
+            throw new NullPointerException("Game.isPlayerAI() : NULL instance of Player");
+
+        return Game.getInstance().getPlayer(ID).getBehaviour() instanceof RandomSelect;
+    }
+
+    /**
+     * Return the amount of playable shots left
+     * @return Number of playable shots left
+     * @throws InvalidParameterException
+     */
+    public int getShotsLeft(int ID) throws InvalidParameterException{
+        Game.validateID(ID, "Game.getShotsLeft()");
+
+        return Game.getInstance().getPlayer(ID).getShotsLeft();
     }
 
     /**

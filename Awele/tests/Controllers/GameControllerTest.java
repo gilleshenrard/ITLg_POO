@@ -16,60 +16,6 @@ public class GameControllerTest {
     GameController g = new GameController(new GameView());
 
     /**
-     * Check if setPlayer() fails setting an instance of Player
-     */
-    @DisplayName("setPlayer() - should not fail")
-    @Test
-    void setPlayer_shouldnot_fail() {
-        g.setPlayer(1, new Player(1, "test"));
-    }
-
-    /**
-     * Check if setPlayer() throws an exception with an invalid ID
-     */
-    @DisplayName("setPlayer() with an invalid ID - should fail")
-    @Test
-    void setPlayer_invalidID_should_fail() {
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            g.setPlayer(0, new Player(1, "test"));
-        });
-    }
-
-    /**
-     * Check if setPlayer() throws an exception with a null instance
-     */
-    @DisplayName("setPlayer() with a NULL instance - should fail")
-    @Test
-    void setPlayer_nullPlayer_should_fail() {
-        Assertions.assertThrows(NullPointerException.class, () -> {
-            g.setPlayer(1, null);
-        });
-    }
-
-    /**
-     * Check if getPlayer() throws an exception with an invalid ID
-     */
-    @DisplayName("getPlayer() with an invalid ID - should fail")
-    @Test
-    void getPlayer_invalidID_should_fail() {
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            g.getPlayer(3);
-        });
-    }
-
-    /**
-     * Check if getPlayer() returns the right instance of Player
-     */
-    @DisplayName("getPlayer() - should not fail")
-    @Test
-    void getPlayer_shouldnot_fail() {
-        Player p = new Player(1, "Test"), p2;
-        g.setPlayer(1, p);
-        p2 = g.getPlayer(1);
-        Assertions.assertEquals(p, p2);
-    }
-
-    /**
      * Check if getBoardController() returns the right instance of Board
      */
     @DisplayName("getBoardController() - should not fail")
@@ -107,7 +53,7 @@ public class GameControllerTest {
     @DisplayName("getName() - should not fail")
     @Test
     void getName_shouldnot_fail() {
-        g.setPlayer(1, new Player(1, "Testname"));
+        Game.getInstance().setPlayer(1, new Player(1, "Testname"));
         Assertions.assertEquals(g.getName(1), "Testname");
     }
 
@@ -201,8 +147,8 @@ public class GameControllerTest {
     void selectSlot_shouldnot_fail() {
         Board board = new Board();
         g.setBoardController(new BoardController(board, new GameController(new GameView())));
-        g.setPlayer(2, new Player(2, "", new RandomSelect(g.getBoardController(), 2)));
-        g.getPlayer(2).getBehaviour().refresh();
+        Game.getInstance().setPlayer(2, new Player(2, "", new RandomSelect(g.getBoardController(), 2)));
+        Game.getInstance().getPlayer(2).getBehaviour().refresh();
         int ret = g.selectSlot(2);
         Assertions.assertTrue(ret > 0 && ret <= 6);
     }
@@ -224,7 +170,7 @@ public class GameControllerTest {
     @DisplayName("reset() - should not fail")
     @Test
     void reset_shouldnot_fail() {
-        g.setPlayer(1, new Player(1, "", new RandomSelect(new BoardController(new Board(), new GameController(new GameView())), 1)));
+        Game.getInstance().setPlayer(1, new Player(1, "", new RandomSelect(new BoardController(new Board(), new GameController(new GameView())), 1)));
         g.refresh(1);
     }
 

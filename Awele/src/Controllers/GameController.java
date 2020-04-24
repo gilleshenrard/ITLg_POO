@@ -1,7 +1,6 @@
 package Controllers;
 
 import Models.Game;
-import Models.Player;
 import Views.GameView;
 
 import java.security.InvalidParameterException;
@@ -56,24 +55,25 @@ public class GameController {
     }
 
     /**
-     * Set the instance of the player with regards to its ID
-     * @param ID ID of the player
-     * @param player Player to set
+     * Tell if the player is an AI or not (instance of RandomSelect)
+     * @param ID ID of the player to check
+     * @return true if RandomSelect, false otherwise
      * @throws InvalidParameterException
      * @throws NullPointerException
      */
-    public void setPlayer(int ID, Player player) throws InvalidParameterException, NullPointerException{
-        Game.getInstance().setPlayer(ID, player);
+    public boolean isPlayerAI(int ID) throws InvalidParameterException, NullPointerException {
+        return Game.getInstance().isPlayerAI(ID);
     }
 
     /**
-     * Return a player according to its ID
-     * @param ID ID of the player to return
-     * @return Player to return
+     * Return the amount of playable shots left
+     * @return Number of playable shots left
      * @throws InvalidParameterException
      */
-    public Player getPlayer(int ID) throws InvalidParameterException{
-        return Game.getInstance().getPlayer(ID);
+    public int getShotsLeft(int ID) throws InvalidParameterException{
+        Game.validateID(ID, "Game.getShotsLeft()");
+
+        return Game.getInstance().getShotsLeft(ID);
     }
 
     /**

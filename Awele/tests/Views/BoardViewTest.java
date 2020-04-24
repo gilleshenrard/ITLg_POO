@@ -3,6 +3,7 @@ package Views;
 import Controllers.BoardController;
 import Controllers.GameController;
 import Models.Board;
+import Models.Game;
 import Models.Player;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -31,8 +32,8 @@ class BoardViewTest {
     @DisplayName("displayBoard() - should not fail")
     @Test
     void displayBoard() {
-        g.setPlayer(1, new Player(1, "test"));
-        g.setPlayer(2, new Player(2, "test"));
+        Game.getInstance().setPlayer(1, new Player(1, "test"));
+        Game.getInstance().setPlayer(2, new Player(2, "test"));
         bv.displayBoard();
     }
 

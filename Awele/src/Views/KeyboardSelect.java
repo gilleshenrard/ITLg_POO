@@ -28,4 +28,13 @@ public class KeyboardSelect implements iSelectable {
      */
     @Override
     public void refresh() {}
+
+    /**
+     * Always true
+     * @return 1
+     */
+    @Override
+    public int getShotsLeft() {
+        return 1;
+    }
 }

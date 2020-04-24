@@ -2,6 +2,7 @@ package Projet1.Awele;
 
 import Controllers.BoardController;
 import Controllers.GameController;
+import Models.Game;
 import Views.KeyboardSelect;
 import Views.RandomSelect;
 import Models.Board;
@@ -27,8 +28,8 @@ public class Main {
         game.setBoardController(boardController);
 
         //players setup
-        game.setPlayer(1, new Player(1, "Gilles", new KeyboardSelect()));
-        game.setPlayer(2, new Player(2, "AI", new RandomSelect(boardController, 2)));
+        Game.getInstance().setPlayer(1, new Player(1, "Gilles", new KeyboardSelect()));
+        Game.getInstance().setPlayer(2, new Player(2, "AI", new RandomSelect(boardController, 2)));
 
         //state variables
         int choice, player = 0, outcome = 0;
@@ -60,13 +61,12 @@ public class Main {
                             game.displayWarning("An empty slot can not be harvested");
 
                         //if current player plays randomly and don't have any possible moves left, forfeit
-                        if (game.getPlayer(player + 1).getBehaviour() instanceof RandomSelect) {
-                            RandomSelect r = (RandomSelect) game.getPlayer(player + 1).getBehaviour();
-                            if (r.getShotsLeft() == 0) {
+                        if (game.isPlayerAI(player + 1)) {
+                            if (game.getShotsLeft(player + 1) == 0) {
                                 game.displayMessage(game.getName(player + 1) + " can't make any move. He forfeits !");
 
                                 //Easter egg : when both players play randomly and one of them forfeits, he says the last quote of the W.P.O.R. in the movie Wargames
-                                if(game.getPlayer(1).getBehaviour() instanceof RandomSelect && game.getPlayer(2).getBehaviour() instanceof RandomSelect) {
+                                if(game.isPlayerAI(1) && game.isPlayerAI(2)) {
                                     game.displayMessage("\n" + game.getName(player + 1) + " : 'A strange game... The only winning move is not to play...'");
                                     game.displayMessage(game.getName(player + 1) + " : '......................... How about a nice game of chess?'");
                                 }

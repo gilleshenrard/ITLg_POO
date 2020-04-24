@@ -107,6 +107,14 @@ public class Player {
     }
 
     /**
+     * Return the amount of playable shots left
+     * @return Number of playable shots left
+     */
+    public int getShotsLeft() {
+        return this.m_behaviour.getShotsLeft();
+    }
+
+    /**
      * Tells if o is equal to the current Player
      * @param o Object to test
      * @return true if equal, false otherwise
