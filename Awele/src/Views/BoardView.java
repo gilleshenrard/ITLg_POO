@@ -1,17 +1,17 @@
 package Views;
-import Models.Board;
+import Controllers.BoardController;
 
 import java.security.InvalidParameterException;
 
 public class BoardView {
-    private Board m_board;
+    private BoardController m_board;
 
     /**
      * create a new Board View
      * @param board Board to view
      * @throws NullPointerException
      */
-    public BoardView(Board board) throws NullPointerException{
+    public BoardView(BoardController board) throws NullPointerException{
         if(board == null)
             throw new NullPointerException("BoardView() : NULL instance of Board");
 

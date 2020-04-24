@@ -16,10 +16,11 @@ public class Main {
     public static void main(String[] args) {
         Game game = Game.getInstance();
         Board board = new Board();
-        game.setBoardController(new BoardController(board));
+        BoardController boardController = new BoardController(board);
+        game.setBoardController(boardController);
         game.setPlayer(1, new Player(1, "Gilles", new KeyboardSelect()));
         game.setPlayer(2, new Player(2, "AI", new RandomSelect(board, 2)));
-        BoardView b = new BoardView(board);
+        BoardView b = new BoardView(boardController);
         GameView gameView = new GameView();
         int choice, player = 0, outcome = 0;
 

@@ -84,17 +84,6 @@ class BoardTest {
     }
 
     /**
-     * Check if getStoredSeeds() throws an exception with an invalid ID
-     */
-    @DisplayName("getStoredSeeds() with invalid ID - should fail")
-    @Test
-    void getStoredSeeds_invalidID_should_fail() {
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            b.getStoredSeeds(0);
-        });
-    }
-
-    /**
      * Check if setRemainingSeeds() throws an exception with an invalid ID
      */
     @DisplayName("setRemainingSeeds() with invalid ID - should fail")
@@ -217,7 +206,7 @@ class BoardTest {
     @DisplayName("getSlotSeeds() with proper values - should not fail")
     @Test
     void getSlotSeeds_shouldnot_fail() {
-        Assertions.assertEquals(4, b.getSlot(0, 0).getNbSeeds());
+        Assertions.assertEquals(4, b.getSlotSeeds(0, 0));
     }
 
     /**

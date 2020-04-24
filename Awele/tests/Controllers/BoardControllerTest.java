@@ -45,6 +45,59 @@ public class BoardControllerTest {
     }
 
     /**
+     * Check if getStoredSeeds() throws an exception with an invalid ID
+     */
+    @DisplayName("getStoredSeeds() with invalid ID - should fail")
+    @Test
+    void getStoredSeeds_invalidID_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.getStoredSeeds(0);
+        });
+    }
+
+    /**
+     * Check if getSlotSeeds() throws an exception with an X value over 5
+     */
+    @DisplayName("getSlotSeeds() with X over 5 - should fail")
+    @Test
+    void getSloSeeds_Xover5_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.getSlotSeeds(6, 0);
+        });
+    }
+
+    /**
+     * Check if getSlotSeeds() throws an exception with an invalid Y value
+     */
+    @DisplayName("getSlotSeeds() with Y over 1 - should fail")
+    @Test
+    void getSlotSeeds_invalidY_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.getSlotSeeds(0, 3);
+        });
+    }
+
+    /**
+     * Check if getSlotSeeds() throws an exception with an X value below 0
+     */
+    @DisplayName("getSlotSeeds() with X below 0 - should fail")
+    @Test
+    void getSlotSeeds_Xbelow0_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.getSlotSeeds(-1, 0);
+        });
+    }
+
+    /**
+     * Check if getSlotSeeds() fails returning the amount of seeds
+     */
+    @DisplayName("getSlotSeeds() with proper values - should not fail")
+    @Test
+    void getSlotSeeds_shouldnot_fail() {
+        Assertions.assertEquals(4, b.getSlotSeeds(0, 0));
+    }
+
+    /**
      * Check if playSlot() returns a cancellation code when selecting a slot with no seed
      */
     @DisplayName("playSlot() with an empty slot - should not fail")

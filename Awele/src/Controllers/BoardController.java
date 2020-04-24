@@ -38,6 +38,37 @@ public class BoardController {
     }
 
     /**
+     * Get the name of a player regarding its ID
+     * @param ID ID of the player of which getting the name
+     * @return Name of the player
+     * @throws InvalidParameterException
+     */
+    public String getName(int ID) throws InvalidParameterException{
+        return Game.getInstance().getName(ID);
+    }
+
+    /**
+     * Get the amount of seeds stored by a player
+     * @param ID ID of the player
+     * @return Amount of seeds
+     * @throws InvalidParameterException
+     */
+    public int getStoredSeeds(int ID) throws InvalidParameterException{
+        return Game.getInstance().getSeeds(ID);
+    }
+
+    /**
+     * Get the amount of seeds contained in the slot located at X,Y
+     * @param x X coordinate of the slot
+     * @param y Y coordinate of the slot
+     * @return Amount of seeds
+     * @throws InvalidParameterException
+     */
+    public int getSlotSeeds(int x, int y) throws InvalidParameterException{
+        return this.m_board.getSlotSeeds(x, y);
+    }
+
+    /**
      * Harvest the seeds from a slot and, if necessary, scatter them
      * @param id ID of the player harvesting
      * @param slot Slot being harvested

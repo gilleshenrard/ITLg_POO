@@ -1,5 +1,6 @@
 package Views;
 
+import Controllers.BoardController;
 import Models.Board;
 import Models.Game;
 import Models.Player;
@@ -13,7 +14,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BoardViewTest {
     Board b = new Board();
-    BoardView bv = new BoardView(b);
+    BoardController bc = new BoardController(b);
+    BoardView bv = new BoardView(bc);
 
     /**
      * Check if boardView() throws an exception when given a null instance
