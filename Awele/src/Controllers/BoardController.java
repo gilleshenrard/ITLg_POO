@@ -19,6 +19,8 @@ public class BoardController {
     public BoardController(Board b, GameController g){
         this.m_board = b;
         this.m_game = g;
+
+        this.m_game.setBoardController(this);
     }
 
     /**
