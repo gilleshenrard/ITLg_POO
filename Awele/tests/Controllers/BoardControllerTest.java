@@ -3,7 +3,6 @@ package Controllers;
 import Models.Board;
 import Models.Game;
 import Views.BoardView;
-import Views.GameView;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -64,17 +63,6 @@ public class BoardControllerTest {
     @Test
     void setBoardView_shouldnot_fail() {
         b.setBoardView(new BoardView(b));
-    }
-
-    /**
-     * Check if getStoredSeeds() throws an exception with an invalid ID
-     */
-    @DisplayName("getStoredSeeds() with invalid ID - should fail")
-    @Test
-    void getStoredSeeds_invalidID_should_fail() {
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            b.getStoredSeeds(0);
-        });
     }
 
     /**

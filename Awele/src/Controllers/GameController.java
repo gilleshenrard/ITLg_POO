@@ -160,4 +160,13 @@ public class GameController {
     public void displayError(String msg){
         this.m_gameView.displayError(msg);
     }
+
+    /**
+     * Display the whole board and score of the two players
+     * @throws InvalidParameterException
+     * @throws NullPointerException
+     */
+    public void displayBoard() throws InvalidParameterException, NullPointerException {
+        this.m_gameView.displayBoard();
+    }
 }

@@ -19,11 +19,13 @@ public class Main {
         //game setup
         GameView gameView = new GameView();
         GameController game = new GameController(gameView);
+        gameView.setController(game);
 
         //board setup
         Board board = new Board();
         BoardController boardController = new BoardController(board, game);
         BoardView b = new BoardView(boardController);
+        gameView.setBoardView(b);
         boardController.setBoardView(b);
 
         //players setup
@@ -36,7 +38,7 @@ public class Main {
         //main game loop
         while (outcome != 3) {
             game.displayMessage("This is " + game.getName(player+1) + "'s season");
-            boardController.displayBoard();
+            game.displayBoard();
 
             //refresh playable slots for the current player
             game.refresh(player + 1);
@@ -90,7 +92,7 @@ public class Main {
 
             //Game is won by the current player.
             if (game.getSeeds(player + 1) > 24) {
-                boardController.displayBoard();
+                game.displayBoard();
                 game.displayMessage(game.getName(player + 1) + " won the game !");
                 outcome = 3;
             }

@@ -54,34 +54,6 @@ public class BoardController {
     }
 
     /**
-     * Return the board view set in the current game
-     * @return Board view to return
-     */
-    public BoardView getBoardView(){
-        return this.m_boardView;
-    }
-
-    /**
-     * Get the name of a player regarding its ID
-     * @param ID ID of the player of which getting the name
-     * @return Name of the player
-     * @throws InvalidParameterException
-     */
-    public String getName(int ID) throws InvalidParameterException{
-        return this.m_game.getName(ID);
-    }
-
-    /**
-     * Get the amount of seeds stored by a player
-     * @param ID ID of the player
-     * @return Amount of seeds
-     * @throws InvalidParameterException
-     */
-    public int getStoredSeeds(int ID) throws InvalidParameterException{
-        return this.m_game.getSeeds(ID);
-    }
-
-    /**
      * Get the amount of seeds contained in the slot located at X,Y
      * @param x X coordinate of the slot
      * @param y Y coordinate of the slot
@@ -110,15 +82,6 @@ public class BoardController {
      */
     public void removeRemainingSeeds(int ID, int value) throws InvalidParameterException {
         this.m_board.setRemainingSeeds(ID, this.m_board.getRemainingSeeds(ID) - value);
-    }
-
-    /**
-     * Display the whole board and score of the two players
-     * @throws InvalidParameterException
-     * @throws NullPointerException
-     */
-    public void displayBoard() throws InvalidParameterException, NullPointerException {
-        this.m_boardView.displayBoard();
     }
 
     /**
