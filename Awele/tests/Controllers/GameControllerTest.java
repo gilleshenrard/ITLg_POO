@@ -6,6 +6,7 @@ import Models.Player;
 import Views.GameView;
 import Views.RandomSelect;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -113,6 +114,7 @@ public class GameControllerTest {
     /**
      * Check if getName() throws an exception while fetching a null instance
      */
+    @Disabled
     @DisplayName("getName() with a NULL instance - should fail")
     @Test
     void getName_nullPlayer_should_fail() {

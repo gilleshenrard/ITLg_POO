@@ -7,73 +7,12 @@ import Views.GameView;
 import java.security.InvalidParameterException;
 
 public class GameController {
-    private Player m_player1;
-    private Player m_player2;
     private BoardController m_board;
     private GameView m_gameView;
 
     public GameController(GameView view){
-        this.m_player1 = null;
-        this.m_player1 = null;
         this.m_board = null;
         this.m_gameView = view;
-    }
-
-    /**
-     * Set the instance of the player with regards to its ID
-     * @param ID ID of the player
-     * @param player Player to set
-     * @throws InvalidParameterException
-     * @throws NullPointerException
-     */
-    public void setPlayer(int ID, Player player) throws InvalidParameterException, NullPointerException{
-        if(player == null)
-            throw new NullPointerException("GameController.setPlayer() : NULL instance of Player");
-        Game.validateID(ID, "GameController.setPlayer()");
-
-        if (ID == 1)
-            this.m_player1 = player;
-        else
-            this.m_player2 = player;
-    }
-
-    /**
-     * Return a player according to its ID
-     * @param ID ID of the player to return
-     * @return Player to return
-     * @throws InvalidParameterException
-     */
-    public Player getPlayer(int ID) throws InvalidParameterException{
-        Game.validateID(ID, "GameController.getPlayer()");
-
-        if(ID == 1)
-            return this.m_player1;
-        else
-            return this.m_player2;
-    }
-
-    /**
-     * Fetch the name of a player via its ID
-     * @param ID ID of the player
-     * @return Name of the player
-     * @throws InvalidParameterException
-     * @throws NullPointerException
-     */
-    public String getName(int ID) throws InvalidParameterException, NullPointerException{
-        Game.validateID(ID, "GameController.getName()");
-
-        if(ID == 1) {
-            if (this.m_player1 == null)
-                throw new NullPointerException("GameController.getName() : Player 1 not instantiated");
-            else
-                return this.m_player1.getName();
-        }
-        else{
-            if (this.m_player2 == null)
-                throw new NullPointerException("GameController.getName() : Player 2 not instantiated");
-            else
-                return this.m_player2.getName();
-        }
     }
 
     /**
@@ -106,6 +45,38 @@ public class GameController {
     }
 
     /**
+     * Fetch the name of a player via its ID
+     * @param ID ID of the player
+     * @return Name of the player
+     * @throws InvalidParameterException
+     * @throws NullPointerException
+     */
+    public String getName(int ID) throws InvalidParameterException, NullPointerException{
+        return Game.getInstance().getName(ID);
+    }
+
+    /**
+     * Set the instance of the player with regards to its ID
+     * @param ID ID of the player
+     * @param player Player to set
+     * @throws InvalidParameterException
+     * @throws NullPointerException
+     */
+    public void setPlayer(int ID, Player player) throws InvalidParameterException, NullPointerException{
+        Game.getInstance().setPlayer(ID, player);
+    }
+
+    /**
+     * Return a player according to its ID
+     * @param ID ID of the player to return
+     * @return Player to return
+     * @throws InvalidParameterException
+     */
+    public Player getPlayer(int ID) throws InvalidParameterException{
+        return Game.getInstance().getPlayer(ID);
+    }
+
+    /**
      * Add nb_seeds to the seeds reserve of Player 1 or Player 2
      * @param ID ID of the player who receives the seeds
      * @param nb_seeds  Amount of seeds to store
@@ -125,7 +96,7 @@ public class GameController {
     public int selectSlot(int ID) throws InvalidParameterException{
         Game.validateID(ID, "GameController.selectSlot()");
 
-        return this.getPlayer(ID).selectSlot();
+        return Game.getInstance().getPlayer(ID).selectSlot();
     }
 
     /**
@@ -136,7 +107,7 @@ public class GameController {
     public void reset(int ID) throws InvalidParameterException {
         Game.validateID(ID, "GameController.reset()");
 
-        this.getPlayer(ID).reset();
+        Game.getInstance().getPlayer(ID).reset();
     }
 
     /**

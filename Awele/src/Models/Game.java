@@ -3,6 +3,8 @@ package Models;
 import java.security.InvalidParameterException;
 
 public class Game {
+    private Player m_player1;
+    private Player m_player2;
     private int m_seedpl1;
     private int m_seedpl2;
     private static Game m_instance;
@@ -13,6 +15,8 @@ public class Game {
     public Game() {
         this.m_seedpl1 = 0;
         this.m_seedpl2 = 0;
+        this.m_player1 = null;
+        this.m_player2 = null;
         this.m_instance = null;
     }
 
@@ -37,6 +41,63 @@ public class Game {
             Game.m_instance = new Game();
 
         return Game.m_instance;
+    }
+
+    /**
+     * Set the instance of the player with regards to its ID
+     * @param ID ID of the player
+     * @param player Player to set
+     * @throws InvalidParameterException
+     * @throws NullPointerException
+     */
+    public void setPlayer(int ID, Player player) throws InvalidParameterException, NullPointerException{
+        if(player == null)
+            throw new NullPointerException("Game.setPlayer() : NULL instance of Player");
+        Game.validateID(ID, "Game.setPlayer()");
+
+        if (ID == 1)
+            this.m_player1 = player;
+        else
+            this.m_player2 = player;
+    }
+
+    /**
+     * Return a player according to its ID
+     * @param ID ID of the player to return
+     * @return Player to return
+     * @throws InvalidParameterException
+     */
+    public Player getPlayer(int ID) throws InvalidParameterException{
+        Game.validateID(ID, "Game.getPlayer()");
+
+        if(ID == 1)
+            return this.m_player1;
+        else
+            return this.m_player2;
+    }
+
+    /**
+     * Fetch the name of a player via its ID
+     * @param ID ID of the player
+     * @return Name of the player
+     * @throws InvalidParameterException
+     * @throws NullPointerException
+     */
+    public String getName(int ID) throws InvalidParameterException, NullPointerException{
+        Game.validateID(ID, "Game.getName()");
+
+        if(ID == 1) {
+            if (this.m_player1 == null)
+                throw new NullPointerException("Game.getName() : Player 1 not instantiated");
+            else
+                return this.m_player1.getName();
+        }
+        else{
+            if (this.m_player2 == null)
+                throw new NullPointerException("Game.getName() : Player 2 not instantiated");
+            else
+                return this.m_player2.getName();
+        }
     }
 
     /**
