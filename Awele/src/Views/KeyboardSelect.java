@@ -27,5 +27,5 @@ public class KeyboardSelect implements iSelectable {
      * Do nothing
      */
     @Override
-    public void reset() {}
+    public void refresh() {}
 }

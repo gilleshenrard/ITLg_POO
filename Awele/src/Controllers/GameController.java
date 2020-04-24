@@ -104,10 +104,10 @@ public class GameController {
      * @param ID ID of the player for which reset the array
      * @throws InvalidParameterException
      */
-    public void reset(int ID) throws InvalidParameterException {
+    public void refresh(int ID) throws InvalidParameterException {
         Game.validateID(ID, "GameController.reset()");
 
-        Game.getInstance().getPlayer(ID).reset();
+        Game.getInstance().getPlayer(ID).refresh();
     }
 
     /**

@@ -202,7 +202,7 @@ public class GameControllerTest {
         Board board = new Board();
         g.setBoardController(new BoardController(board, new GameController(new GameView())));
         g.setPlayer(2, new Player(2, "", new RandomSelect(g.getBoardController(), 2)));
-        g.getPlayer(2).getBehaviour().reset();
+        g.getPlayer(2).getBehaviour().refresh();
         int ret = g.selectSlot(2);
         Assertions.assertTrue(ret > 0 && ret <= 6);
     }
@@ -214,7 +214,7 @@ public class GameControllerTest {
     @Test
     void reset_wrongID_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            g.reset(3);
+            g.refresh(3);
         });
     }
 
@@ -225,7 +225,7 @@ public class GameControllerTest {
     @Test
     void reset_shouldnot_fail() {
         g.setPlayer(1, new Player(1, "", new RandomSelect(new BoardController(new Board(), new GameController(new GameView())), 1)));
-        g.reset(1);
+        g.refresh(1);
     }
 
     /**

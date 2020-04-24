@@ -17,7 +17,7 @@ class RandomSelectTest {
     @DisplayName("selectSlot() - should not fail")
     @Test
     void selectSlot_shouldnot_fail() {
-        r.reset();
+        r.refresh();
         int buffer = r.selectSlot();
         Assertions.assertTrue(buffer >0 && buffer <=6);
     }
@@ -34,12 +34,12 @@ class RandomSelectTest {
     }
 
     /**
-     * Verify that reset() generates 0 <= value <= 5
+     * Verify that refresh() generates 0 <= value <= 5
      */
-    @DisplayName("reset() - should not fail")
+    @DisplayName("refresh() - should not fail")
     @Test
-    void reset_shouldnot_fail() {
-        r.reset();
+    void refresh_shouldnot_fail() {
+        r.refresh();
     }
 
     /**
@@ -48,7 +48,7 @@ class RandomSelectTest {
     @DisplayName("getShotsLeft() - should not fail")
     @Test
     void getShotsLeft_shouldnot_fail() {
-        r.reset();
+        r.refresh();
         Assertions.assertEquals(6, r.getShotsLeft());
     }
 

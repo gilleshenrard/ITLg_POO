@@ -99,11 +99,11 @@ public class Player {
      * Reset the array of playable slots
      * @throws NullPointerException
      */
-    public void reset() throws NullPointerException {
+    public void refresh() throws NullPointerException {
         if (this.m_behaviour == null)
             throw new NullPointerException("Player.reset() : NULL instance of behaviour");
 
-        this.getBehaviour().reset();
+        this.getBehaviour().refresh();
     }
 
     /**

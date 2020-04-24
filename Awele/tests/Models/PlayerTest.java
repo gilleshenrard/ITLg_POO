@@ -138,24 +138,24 @@ class PlayerTest {
     }
 
     /**
-     * Check if reset() throws an exception when used and m_behaviour is null
+     * Check if refresh() throws an exception when used and m_behaviour is null
      */
-    @DisplayName("reset() with a NULL instance of m_behaviour - should fail")
+    @DisplayName("refresh() with a NULL instance of m_behaviour - should fail")
     @Test
-    void reset_null_should_fail() {
+    void refresh_null_should_fail() {
         Assertions.assertThrows(NullPointerException.class, () -> {
-            p.reset();
+            p.refresh();
         });
     }
 
     /**
-     * Check if reset() resets the array of playable slots properly
+     * Check if refresh() resets the array of playable slots properly
      */
-    @DisplayName("reset() - should not fail")
+    @DisplayName("refresh() - should not fail")
     @Test
-    void reset_shouldnot_fail() {
+    void refresh_shouldnot_fail() {
         BoardController b = new BoardController(new Board(), new GameController(new GameView()));
         p.setBehaviour(new RandomSelect(b, 1));
-        p.reset();
+        p.refresh();
     }
 }

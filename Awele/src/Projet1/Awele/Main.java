@@ -39,7 +39,7 @@ public class Main {
             boardController.displayBoard();
 
             //refresh playable slots for the current player
-            game.reset(player + 1);
+            game.refresh(player + 1);
 
             //loop while the user selects a wrong slot or the opponent risks being starved
             do {
