@@ -1,9 +1,5 @@
 package Models;
 
-import Controllers.BoardController;
-import Controllers.GameController;
-import Views.KeyboardSelect;
-import Views.RandomSelect;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import java.security.InvalidParameterException;
 
 class GameTest {
-    Game g = new Game();
+    Game g = Game.getInstance();
 
     /**
      * Check if validateID() throws an exception with an ID different than 1 or 2
@@ -182,7 +178,7 @@ class GameTest {
     @DisplayName("getInstance() - should not fail")
     @Test
     void getInstance_shouldnot_fail() {
-        Game g2 = new Game();
+        Game g2 = Game.getInstance();
         Assertions.assertEquals(g.getInstance(), g2.getInstance());
     }
 }
