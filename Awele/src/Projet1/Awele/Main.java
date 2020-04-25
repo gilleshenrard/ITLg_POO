@@ -24,6 +24,7 @@ public class Main {
         //board setup
         Board board = new Board();
         BoardController boardController = new BoardController(board, game);
+        game.setBoardController(boardController);
         BoardView b = new BoardView(boardController);
         gameView.setBoardView(b);
         boardController.setBoardView(b);

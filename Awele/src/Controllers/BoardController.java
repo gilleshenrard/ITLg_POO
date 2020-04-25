@@ -15,12 +15,17 @@ public class BoardController {
     /**
      * Create a new Board controller
      * @param b Board to assign to the controller
+     * @throws NullPointerException
      */
-    public BoardController(Board b, GameController g){
+    public BoardController(Board b, GameController g) throws NullPointerException{
+        if(b == null)
+            throw new NullPointerException("NULL instance of Board");
+
+        if(b == null)
+            throw new NullPointerException("NULL instance of GameController");
+
         this.m_board = b;
         this.m_game = g;
-
-        this.m_game.setBoardController(this);
     }
 
     /**
