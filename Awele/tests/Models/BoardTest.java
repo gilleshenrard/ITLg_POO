@@ -117,6 +117,86 @@ class BoardTest {
     }
 
     /**
+     * Check if setRemainingSeeds() sets the proper value
+     */
+    @DisplayName("setRemainingSeeds() - should not fail")
+    @Test
+    void setRemainingSeeds_shouldnot_fail() {
+        b.setRemainingSeeds(1, 6);
+        Assertions.assertEquals(6, b.getRemainingSeeds(1));
+    }
+
+    /**
+     * Check if addRemainingSeeds() throws an exception while adding above 48
+     */
+    @DisplayName("addRemainingSeeds() adding above 48 - should fail")
+    @Test
+    void addRemainingSeeds_above48_should_fail() {
+        b.setRemainingSeeds(1, 40);
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.addRemainingSeeds(1, 10);
+        });
+    }
+
+    /**
+     * Check if addRemainingSeeds() while substracting below 0
+     */
+    @DisplayName("addRemainingSeeds() adding below 0 - should fail")
+    @Test
+    void addRemainingSeeds_below0_should_fail() {
+        b.setRemainingSeeds(1, 5);
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.addRemainingSeeds(1, -7);
+        });
+    }
+
+    /**
+     * Check if addRemainingSeeds() sets the proper value
+     */
+    @DisplayName("addRemainingSeeds() - should not fail")
+    @Test
+    void addRemainingSeeds_shouldnot_fail() {
+        b.setRemainingSeeds(1, 5);
+        b.addRemainingSeeds(1, 6);
+        Assertions.assertEquals(11, b.getRemainingSeeds(1));
+    }
+
+    /**
+     * Check if removeRemainingSeeds() throws an exception while adding above 48
+     */
+    @DisplayName("removeRemainingSeeds() adding above 48 - should fail")
+    @Test
+    void removeRemainingSeeds_above48_should_fail() {
+        b.setRemainingSeeds(1, 40);
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.removeRemainingSeeds(1, -10);
+        });
+    }
+
+    /**
+     * Check if removeRemainingSeeds() while substracting below 0
+     */
+    @DisplayName("removeRemainingSeeds() adding below 0 - should fail")
+    @Test
+    void removeRemainingSeeds_below0_should_fail() {
+        b.setRemainingSeeds(1, 5);
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.removeRemainingSeeds(1, 7);
+        });
+    }
+
+    /**
+     * Check if removeRemainingSeeds() sets the proper value
+     */
+    @DisplayName("removeRemainingSeeds() - should not fail")
+    @Test
+    void removeRemainingSeeds_shouldnot_fail() {
+        b.setRemainingSeeds(1, 6);
+        b.removeRemainingSeeds(1, 5);
+        Assertions.assertEquals(1, b.getRemainingSeeds(1));
+    }
+
+    /**
      * Check if getRemainingSeeds() returns the proper amount
      */
     @DisplayName("getRemainingSeeds() - should not fail")

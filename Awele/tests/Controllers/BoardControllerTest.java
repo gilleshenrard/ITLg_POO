@@ -71,7 +71,7 @@ public class BoardControllerTest {
      */
     @DisplayName("getSlotSeeds() with X over 5 - should fail")
     @Test
-    void getSloSeeds_Xover5_should_fail() {
+    void getSlotSeeds_Xover5_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
             b.getSlotSeeds(new Point(6, 0));
         });

@@ -69,26 +69,6 @@ public class BoardController {
     }
 
     /**
-     * Add remaining seeds to a player
-     * @param ID ID of the player
-     * @param value Amount to add
-     * @throws InvalidParameterException
-     */
-    public void addRemainingSeeds(int ID, int value) throws InvalidParameterException {
-        this.m_board.setRemainingSeeds(ID, this.m_board.getRemainingSeeds(ID) + value);
-    }
-
-    /**
-     * Remove remaining seeds from a player
-     * @param ID ID of the player
-     * @param value Amount to remove
-     * @throws InvalidParameterException
-     */
-    public void removeRemainingSeeds(int ID, int value) throws InvalidParameterException {
-        this.m_board.setRemainingSeeds(ID, this.m_board.getRemainingSeeds(ID) - value);
-    }
-
-    /**
      * Harvest the seeds from a slot and, if necessary, scatter them
      * @param id ID of the player harvesting
      * @param slot Slot being harvested
@@ -162,7 +142,7 @@ public class BoardController {
 
         //get the number of seeds in the slot to harvest and empty it + update remaining seeds
         int nbseeds = this.m_board.getSlotSeeds(point);
-        this.removeRemainingSeeds(point.getY()+1, nbseeds);
+        this.m_board.removeRemainingSeeds(point.getY()+1, nbseeds);
         this.m_board.emptySlotSeeds(point);
 
         //save all the slots after the slot harvested in a buffer until there are no seeds left to scatter
@@ -173,7 +153,7 @@ public class BoardController {
             if(!pNext.equals(point)) {
                 //increment the seeds in all the slot, update remaining seeds and add to the buffer
                 this.m_board.incrementSlotSeeds(pNext);
-                this.addRemainingSeeds(pNext.getY()+1, 1);
+                this.m_board.addRemainingSeeds(pNext.getY()+1, 1);
                 buffer.add(pNext); //a slot can be added several times in the buffer, by design
                 nbseeds--;
             }
@@ -199,12 +179,12 @@ public class BoardController {
         //decrement the amount of seeds in each slot of the buffer
         for (Point tmp:buffer) {
             this.m_board.decrementSlotSeeds(tmp);
-            this.removeRemainingSeeds(tmp.getY()+1, 1);
+            this.m_board.removeRemainingSeeds(tmp.getY()+1, 1);
         }
 
         //restore the original seed count in the slot selected by the player
         this.m_board.setSlotSeeds(point, backupseeds);
-        this.addRemainingSeeds(point.getY()+1, backupseeds);
+        this.m_board.addRemainingSeeds(point.getY()+1, backupseeds);
     }
 
     /**
@@ -224,7 +204,7 @@ public class BoardController {
         for (Point tmp:buffer) {
             if(this.m_board.getSlotSeeds(tmp) == 2 || this.m_board.getSlotSeeds(tmp) == 3) {
                 nb_stored += this.m_board.getSlotSeeds(tmp);
-                this.removeRemainingSeeds(tmp.getY()+1, this.m_board.getSlotSeeds(tmp));
+                this.m_board.removeRemainingSeeds(tmp.getY()+1, this.m_board.getSlotSeeds(tmp));
                 this.m_board.emptySlotSeeds(tmp);
             }
         }
