@@ -88,7 +88,7 @@ The unit tests for each class can be found in the mirrored directory tests/ (tes
 
 - Creation of Controller classes + migration of the game mechanics methods.
 - Improve MVC model use
-- Improve classes decoupling (playSlot(), Player/GameController, RandomSelect)
+- Improve classes decoupling (playSlot(), Player/GameController, RandomSelect, BoardController/Slot)
 - Ease up constructors use
 - Move displayBoard in Game view and rename it to displayGame
 - Make the game loop use solely GameController
