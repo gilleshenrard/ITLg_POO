@@ -1,6 +1,7 @@
 package Controllers;
 
 import Models.Board;
+import Models.Point;
 import Models.Slot;
 import Views.BoardView;
 
@@ -93,14 +94,14 @@ public class BoardController {
      */
     public int playSlot(int id, int slot) throws InvalidParameterException {
         Board.validateID(id, "BoardController.playSlot()");
-        Board.validateCoordinates(slot - 1, id - 1, "Board.playSlot()");
+        Board.validateCoordinates(new Point(slot - 1, id - 1), "Board.playSlot()");
 
         //
         //SCATTERING PHASE
         //
 
         //get number of seeds in the slot harvested by the player + backup
-        Slot s = this.m_board.getSlot(slot-1, id-1);
+        Slot s = this.m_board.getSlot(new Point(slot-1, id-1));
         int backupseeds = s.getNbSeeds();
 
         //if the slot is empty, return empty slot code
@@ -257,7 +258,7 @@ public class BoardController {
 
         for (int l = 0 ; l < 2 ; l++){
             for (int c = 0 ; c < 6 ; c++){
-                this.m_board.getSlot(c, l).setNbSeeds(4);
+                this.m_board.getSlot(new Point(c, l)).setNbSeeds(4);
             }
         }
     }

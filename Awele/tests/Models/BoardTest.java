@@ -17,7 +17,7 @@ class BoardTest {
     @Test
     void validateCoordinates_negativeX_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            Board.validateCoordinates(-1, 0, "");
+            Board.validateCoordinates(new Point(-1, 0), "");
         });
     }
 
@@ -28,7 +28,7 @@ class BoardTest {
     @Test
     void validateCoordinates_negativeY_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            Board.validateCoordinates(0, -1, "");
+            Board.validateCoordinates(new Point(0, -1), "");
         });
     }
 
@@ -39,7 +39,7 @@ class BoardTest {
     @Test
     void validateCoordinates_xAbove5_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            Board.validateCoordinates(6, 0, "");
+            Board.validateCoordinates(new Point(6, 0), "");
         });
     }
 
@@ -50,7 +50,7 @@ class BoardTest {
     @Test
     void validateCoordinates_yAbove1_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            Board.validateCoordinates(0, 2, "");
+            Board.validateCoordinates(new Point(0, 2), "");
         });
     }
 
@@ -60,7 +60,7 @@ class BoardTest {
     @DisplayName("validateCoordinates() with maximum values - should not fail")
     @Test
     void validateCoordinates_maxValues_shouldnot_fail() {
-            Board.validateCoordinates(5, 1, "");
+            Board.validateCoordinates(new Point(5, 1), "");
     }
 
     /**
@@ -69,7 +69,7 @@ class BoardTest {
     @DisplayName("validateCoordinates() with minimum values - should not fail")
     @Test
     void validateCoordinates_minValues_shouldnot_fail() {
-        Board.validateCoordinates(0, 0, "");
+        Board.validateCoordinates(new Point(0, 0), "");
     }
 
     /**
@@ -132,7 +132,7 @@ class BoardTest {
     @Test
     void getSlot_Xover5_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            b.getSlot(6, 0);
+            b.getSlot(new Point(6, 0));
         });
     }
 
@@ -143,7 +143,7 @@ class BoardTest {
     @Test
     void getSlot_invalidY_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            b.getSlot(0, 3);
+            b.getSlot(new Point(0, 3));
         });
     }
 
@@ -154,7 +154,7 @@ class BoardTest {
     @Test
     void getSlot_Xbelow0_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            b.getSlot(-1, 0);
+            b.getSlot(new Point(-1, 0));
         });
     }
 
@@ -164,7 +164,7 @@ class BoardTest {
     @DisplayName("getSlot() with proper values - should not fail")
     @Test
     void getSlot_shouldnot_fail() {
-        b.getSlot(0, 0);
+        b.getSlot(new Point(0, 0));
     }
 
     /**
@@ -215,7 +215,7 @@ class BoardTest {
     @DisplayName("getNext() within a row - should not fail")
     @Test
     void getNext_withinARow_shouldnot_fail() {
-        Slot s = b.getSlot(2, 0);
+        Slot s = b.getSlot(new Point(2, 0));
         Assertions.assertEquals(3, b.getNext(s).getX());
         Assertions.assertEquals(0, b.getNext(s).getY());
     }
@@ -226,7 +226,7 @@ class BoardTest {
     @DisplayName("getNext() at the end of 1st row - should not fail")
     @Test
     void getNext_endOfFirstRow_shouldnot_fail() {
-        Slot s = b.getSlot(5, 0);
+        Slot s = b.getSlot(new Point(5, 0));
         Assertions.assertEquals(0, b.getNext(s).getX());
         Assertions.assertEquals(1, b.getNext(s).getY());
     }
@@ -237,7 +237,7 @@ class BoardTest {
     @DisplayName("getNext() at the end of 2nd row - should not fail")
     @Test
     void getNext_endOfSecondRow_shouldnot_fail() {
-        Slot s = b.getSlot(5, 1);
+        Slot s = b.getSlot(new Point(5, 1));
         Assertions.assertEquals(0, b.getNext(s).getX());
         Assertions.assertEquals(0, b.getNext(s).getY());
     }
@@ -248,12 +248,12 @@ class BoardTest {
     @DisplayName("getNonEmpty() - should not fail")
     @Test
     void getNonEmpty_shouldnot_fail() {
-        b.getSlot(0, 0).emptySeeds();
-        b.getSlot(1, 0).emptySeeds();
-        b.getSlot(2, 0).setNbSeeds(1);
-        b.getSlot(3, 0).emptySeeds();
-        b.getSlot(4, 0).setNbSeeds(3);
-        b.getSlot(5, 0).setNbSeeds(4);
+        b.getSlot(new Point(0, 0)).emptySeeds();
+        b.getSlot(new Point(1, 0)).emptySeeds();
+        b.getSlot(new Point(2, 0)).setNbSeeds(1);
+        b.getSlot(new Point(3, 0)).emptySeeds();
+        b.getSlot(new Point(4, 0)).setNbSeeds(3);
+        b.getSlot(new Point(5, 0)).setNbSeeds(4);
         ArrayList<Integer> array = b.getNonEmpty(1);
         Assertions.assertEquals(3, array.size());
         Assertions.assertEquals(2, array.get(0));

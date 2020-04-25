@@ -36,14 +36,13 @@ public class Board {
 
     /**
      * Throw an exception if not 0 <= x <= 5 of y != 1,2
-     * @param x X coordinate to validate
-     * @param y Y coordinate to validate
+     * @param point Coordinates to validate
      * @param msg Name of the method in which the validation occurs
      * @throws InvalidParameterException
      */
-    public static void validateCoordinates(int x, int y, String msg) throws InvalidParameterException{
-        if(x < 0 || x > 5 || (y != 0 && y != 1))
-            throw new InvalidParameterException(msg + " : incorrect coordinates (values : " + x + "," + y + ")");
+    public static void validateCoordinates(Point point, String msg) throws InvalidParameterException{
+        if(point.getX() < 0 || point.getX() > 5 || (point.getY() != 0 && point.getY() != 1))
+            throw new InvalidParameterException(msg + " : incorrect coordinates (values : " + point.getX() + "," + point.getY() + ")");
     }
 
     /**
@@ -78,15 +77,14 @@ public class Board {
     }
 
     /**
-     * Get the slot located at X,Y
-     * @param x X coordinate of the slot
-     * @param y Y coordinate of the slot
+     * Get the slot located at point coordinates
+     * @param point Coordinates of the slot
      * @return Slot requested
      * @throws InvalidParameterException
      */
-    public Slot getSlot(int x, int y) throws InvalidParameterException{
-        Board.validateCoordinates(x, y, "Board.getSlot()");
-        return this.m_slots[y][x];
+    public Slot getSlot(Point point) throws InvalidParameterException{
+        Board.validateCoordinates(point, "Board.getSlot()");
+        return this.m_slots[point.getY()][point.getX()];
     }
 
     /**
@@ -97,7 +95,7 @@ public class Board {
      * @throws InvalidParameterException
      */
     public int getSlotSeeds(int x, int y) throws InvalidParameterException{
-        return this.getSlot(x, y).getNbSeeds();
+        return this.getSlot(new Point(x, y)).getNbSeeds();
     }
 
     /**
@@ -123,7 +121,7 @@ public class Board {
             y %= 2;
         }
 
-        return this.getSlot(x, y);
+        return this.getSlot(new Point(x, y));
     }
 
     /**
