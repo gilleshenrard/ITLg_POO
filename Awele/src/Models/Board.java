@@ -135,38 +135,13 @@ public class Board {
     }
 
     /**
-     * Get the next slot (increment x, and roll y when reached the end)
-     * @param s Slot of which to find the next
-     * @return Next slot to s
-     * @throws NullPointerException
-     */
-/*    public Slot getNext(Slot s) throws NullPointerException{
-        if (s == null)
-            throw new NullPointerException("Board.getNext() : NULL instance of Slot");
-
-        //retrieve current coordinates
-        int x = s.getX();
-        int y = s.getY();
-
-        //increment X
-        //if end of row (X rolled back to 0), increment Y
-        // if end of column, roll Y back to 0
-        x++;
-        if((x %= 6) == 0){
-            y++;
-            y %= 2;
-        }
-
-        return this.getSlot(new Point(x, y));
-    }
-*/
-    /**
      * Get the next slot coordinates (increment x, and roll y when reached the end)
      * @param point Point of which find the next
      * @return Next slot to point
      * @throws NullPointerException
      */
     public Point getNext(Point point) throws NullPointerException{
+        validateCoordinates(point, "Board.getNext()");
         if (point == null)
             throw new NullPointerException("Board.getNext() : NULL instance of Point");
 
@@ -199,7 +174,7 @@ public class Board {
 
         for(Slot s : this.m_slots[ID-1]){
             if (s.getNbSeeds() > 0)
-                array.add(s.getX());
+                array.add(s.getCoordinates().getX());
         }
 
         return array;
