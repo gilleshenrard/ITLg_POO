@@ -32,4 +32,13 @@ class BoardViewTest {
     void displaySlot_shouldnot_fail() {
         bv.displaySlot(2);
     }
+
+    /**
+     * Check if displayRow() fails displaying a row of slots
+     */
+    @DisplayName("displayRow() - should not fail")
+    @Test
+    void displayRow_shouldnot_fail() {
+        bv.displayRow(1, false);
+    }
 }
