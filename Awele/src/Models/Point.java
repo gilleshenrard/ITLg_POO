@@ -1,5 +1,7 @@
 package Models;
 
+import java.util.Objects;
+
 public class Point {
     private int m_x;
     private int m_y;
@@ -80,8 +82,7 @@ public class Point {
      */
     @Override
     public int hashCode() {
-        int hash = 7;
-        return hash;
+        return Objects.hash(this.getX(), this.getY());
     }
 
     /**
