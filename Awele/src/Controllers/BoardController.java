@@ -99,7 +99,7 @@ public class BoardController {
         //
 
         //get number of seeds in the slot harvested by the player + backup
-        Point p = this.m_board.getSlot(new Point(slot-1, id-1)).getCoordinates();
+        Point p = new Point(slot - 1, id -1);
         int backupseeds = this.m_board.getSlotSeeds(p);
 
         //if the slot is empty, return empty slot code
@@ -156,7 +156,7 @@ public class BoardController {
             throw new NullPointerException("BoardController.processScattering() : NULL instance of Point");
 
         //get the number of seeds in the slot to harvest and empty it + update remaining seeds
-        int nbseeds = this.getSlotSeeds(point);
+        int nbseeds = this.m_board.getSlotSeeds(point);
         this.removeRemainingSeeds(point.getY()+1, nbseeds);
         this.m_board.emptySlotSeeds(point);
 
