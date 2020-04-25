@@ -88,6 +88,16 @@ public class Board {
     }
 
     /**
+     * Set the amount of seeds contained in the slot located at X,Y
+     * @param point Coordinates of the slot
+     * @param nbSeeds Amount of seeds to set to the slot
+     * @throws InvalidParameterException
+     */
+    public void setSlotSeeds(Point point, int nbSeeds) throws InvalidParameterException{
+        this.getSlot(point).setNbSeeds(nbSeeds);
+    }
+
+    /**
      * Get the amount of seeds contained in the slot located at X,Y
      * @param point Coordinates of the slot
      * @return Amount of seeds
@@ -98,12 +108,39 @@ public class Board {
     }
 
     /**
+     * Empty a slot located at point
+     * @param point Coordinates of the slot to empty
+     * @throws InvalidParameterException
+     */
+    public void emptySlotSeeds(Point point) throws InvalidParameterException{
+        this.getSlot(point).emptySeeds();
+    }
+
+    /**
+     * Increment the amount of seeds in a Slot located at point
+     * @param point Coordinates of the Slot of which increment the seeds
+     * @throws InvalidParameterException
+     */
+    public void incrementSlotSeeds(Point point) throws InvalidParameterException{
+        this.getSlot(point).incrementSeeds();
+    }
+
+    /**
+     * Decrement the amount of seeds in a Slot located at point
+     * @param point Coordinates of the Slot of which decrement the seeds
+     * @throws InvalidParameterException
+     */
+    public void decrementSlotSeeds(Point point) throws InvalidParameterException{
+        this.getSlot(point).decrementSeeds();
+    }
+
+    /**
      * Get the next slot (increment x, and roll y when reached the end)
      * @param s Slot of which to find the next
      * @return Next slot to s
      * @throws NullPointerException
      */
-    public Slot getNext(Slot s) throws NullPointerException{
+/*    public Slot getNext(Slot s) throws NullPointerException{
         if (s == null)
             throw new NullPointerException("Board.getNext() : NULL instance of Slot");
 
@@ -121,6 +158,32 @@ public class Board {
         }
 
         return this.getSlot(new Point(x, y));
+    }
+*/
+    /**
+     * Get the next slot coordinates (increment x, and roll y when reached the end)
+     * @param point Point of which find the next
+     * @return Next slot to point
+     * @throws NullPointerException
+     */
+    public Point getNext(Point point) throws NullPointerException{
+        if (point == null)
+            throw new NullPointerException("Board.getNext() : NULL instance of Point");
+
+        //retrieve current coordinates
+        int x = point.getX();
+        int y = point.getY();
+
+        //increment X
+        //if end of row (X rolled back to 0), increment Y
+        // if end of column, roll Y back to 0
+        x++;
+        if((x %= 6) == 0){
+            y++;
+            y %= 2;
+        }
+
+        return new Point(x, y);
     }
 
     /**

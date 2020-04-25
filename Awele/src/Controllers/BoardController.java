@@ -2,7 +2,6 @@ package Controllers;
 
 import Models.Board;
 import Models.Point;
-import Models.Slot;
 import Views.BoardView;
 
 import java.security.InvalidParameterException;
@@ -100,19 +99,19 @@ public class BoardController {
         //
 
         //get number of seeds in the slot harvested by the player + backup
-        Slot s = this.m_board.getSlot(new Point(slot-1, id-1));
-        int backupseeds = s.getNbSeeds();
+        Point p = this.m_board.getSlot(new Point(slot-1, id-1)).getCoordinates();
+        int backupseeds = this.m_board.getSlotSeeds(p);
 
         //if the slot is empty, return empty slot code
         if(backupseeds == 0)
             return -2;
 
         //Scatter the selected slot + create a scattering buffer
-        ArrayList<Slot> buffer = this.processScattering(s);
+        ArrayList<Point> buffer = this.processScattering(p);
 
         //if any side of the board is now empty, revert the scattering and return starvation code
         if (this.m_board.getRemainingSeeds(1) == 0 || this.m_board.getRemainingSeeds(2) == 0) {
-            this.revertScattering(s, buffer, backupseeds);
+            this.revertScattering(p, buffer, backupseeds);
             return -1;
         }
 
@@ -121,7 +120,7 @@ public class BoardController {
         //
 
         //get the amount of seeds in the last slot of the buffer
-        int nbseeds = buffer.get(buffer.size()-1).getNbSeeds();
+        int nbseeds = this.m_board.getSlotSeeds(buffer.get(buffer.size()-1));
 
         //if that amount is 2 or 3, a capture needs to be made
         if(nbseeds == 2 || nbseeds == 3){
@@ -130,7 +129,7 @@ public class BoardController {
             nbseeds = this.getSumCapturable(buffer);
             if(nbseeds >= this.m_board.getRemainingSeeds(1) || nbseeds >= this.m_board.getRemainingSeeds(2)){
                 //player starved, revert the scattering and return starvation code
-                this.revertScattering(s, buffer, backupseeds);
+                this.revertScattering(p, buffer, backupseeds);
                 return -1;
             }
             else{
@@ -148,33 +147,33 @@ public class BoardController {
 
     /**
      * Process the scattering of a slot : empty it and scatter it one seed at a time in the next slots
-     * @param s Slot to harvest and scatter
-     * @return Array of slots in which the scattering occurred
+     * @param point Coordinates of the slot to harvest and scatter
+     * @return Array of slots coordinates in which the scattering occurred
      * @throws NullPointerException
      */
-    private ArrayList<Slot> processScattering(Slot s) throws NullPointerException {
-        if (s == null)
-            throw new NullPointerException("BoardController.processScattering() : NULL instance of Slot");
+    private ArrayList<Point> processScattering(Point point) throws NullPointerException {
+        if (point == null)
+            throw new NullPointerException("BoardController.processScattering() : NULL instance of Point");
 
         //get the number of seeds in the slot to harvest and empty it + update remaining seeds
-        int nbseeds = s.getNbSeeds();
-        this.removeRemainingSeeds(s.getY()+1, nbseeds);
-        s.emptySeeds();
+        int nbseeds = this.getSlotSeeds(point);
+        this.removeRemainingSeeds(point.getY()+1, nbseeds);
+        this.m_board.emptySlotSeeds(point);
 
         //save all the slots after the slot harvested in a buffer until there are no seeds left to scatter
-        Slot sNext = this.m_board.getNext(s);
-        ArrayList<Slot> buffer = new ArrayList<Slot>();
+        Point pNext = this.m_board.getNext(point);
+        ArrayList<Point> buffer = new ArrayList<>();
         while (nbseeds > 0){
             //make sure not to add the slot harvested
-            if(!sNext.equals(s)) {
+            if(!pNext.equals(point)) {
                 //increment the seeds in all the slot, update remaining seeds and add to the buffer
-                sNext.incrementSeeds();
-                this.addRemainingSeeds(sNext.getY()+1, 1);
-                buffer.add(sNext); //a slot can be added several times in the buffer, by design
+                this.m_board.incrementSlotSeeds(pNext);
+                this.addRemainingSeeds(pNext.getY()+1, 1);
+                buffer.add(pNext); //a slot can be added several times in the buffer, by design
                 nbseeds--;
             }
 
-            sNext = this.m_board.getNext(sNext);
+            pNext = this.m_board.getNext(pNext);
         }
 
         return buffer;
@@ -186,21 +185,21 @@ public class BoardController {
      * @param backupseeds Amount of seeds to recover in the original node
      * @throws NullPointerException
      */
-    private void revertScattering(Slot s, ArrayList<Slot> buffer, int backupseeds) throws NullPointerException {
+    private void revertScattering(Point point, ArrayList<Point> buffer, int backupseeds) throws NullPointerException {
         if (buffer == null)
-            throw new NullPointerException("BoardController.revertScattering() : NULL instance of ArrayList<Slot>");
-        if (s == null)
-            throw new NullPointerException("BoardController.revertScattering() : NULL instance of Slot");
+            throw new NullPointerException("BoardController.revertScattering() : NULL instance of ArrayList<Point>");
+        if (point == null)
+            throw new NullPointerException("BoardController.revertScattering() : NULL instance of Point");
 
         //decrement the amount of seeds in each slot of the buffer
-        for (Slot tmp:buffer) {
-            tmp.decrementSeeds();
+        for (Point tmp:buffer) {
+            this.m_board.decrementSlotSeeds(tmp);
             this.removeRemainingSeeds(tmp.getY()+1, 1);
         }
 
         //restore the original seed count in the slot selected by the player
-        s.setNbSeeds(backupseeds);
-        this.addRemainingSeeds(s.getY()+1, backupseeds);
+        this.m_board.setSlotSeeds(point, backupseeds);
+        this.addRemainingSeeds(point.getY()+1, backupseeds);
     }
 
     /**
@@ -210,18 +209,18 @@ public class BoardController {
      * @return Amount of seeds to be captured
      * @throws NullPointerException
      */
-    private int processCapture(ArrayList<Slot> buffer) throws NullPointerException{
+    private int processCapture(ArrayList<Point> buffer) throws NullPointerException{
         if (buffer == null)
-            throw new NullPointerException("BoardController.processCapture() : NULL instance of ArrayList<Slot>");
+            throw new NullPointerException("BoardController.processCapture() : NULL instance of ArrayList<Point>");
 
         int nb_stored = 0;
 
         //for each slot in the buffer containing 2 or 3 seeds, store its amount, update remaining seeds and empty the slot
-        for (Slot tmp:buffer) {
-            if(tmp.getNbSeeds() == 2 || tmp.getNbSeeds() == 3) {
-                nb_stored += tmp.getNbSeeds();
-                this.removeRemainingSeeds(tmp.getY()+1, tmp.getNbSeeds());
-                tmp.emptySeeds();
+        for (Point tmp:buffer) {
+            if(this.m_board.getSlotSeeds(tmp) == 2 || this.m_board.getSlotSeeds(tmp) == 3) {
+                nb_stored += this.m_board.getSlotSeeds(tmp);
+                this.removeRemainingSeeds(tmp.getY()+1, this.m_board.getSlotSeeds(tmp));
+                this.m_board.emptySlotSeeds(tmp);
             }
         }
 
@@ -234,15 +233,15 @@ public class BoardController {
      * @return Sum of the seeds which can be captured
      * @throws NullPointerException
      */
-    private int getSumCapturable(ArrayList<Slot> buffer) throws NullPointerException{
+    private int getSumCapturable(ArrayList<Point> buffer) throws NullPointerException{
         if(buffer == null)
-            throw new NullPointerException("BoardController.getSumCapturable() : NULL instance of ArrayList<Slot>");
+            throw new NullPointerException("BoardController.getSumCapturable() : NULL instance of ArrayList<Point>");
 
         //count the sum of the seeds in the capturable slots (containing 2 or 3 seeds after scattering)
         int total = 0;
-        for (Slot s: buffer) {
-            if(s.getNbSeeds() == 2 || s.getNbSeeds()==3)
-                total += s.getNbSeeds();
+        for (Point p: buffer) {
+            if(this.m_board.getSlotSeeds(p) == 2 || this.m_board.getSlotSeeds(p) == 3)
+                total += this.m_board.getSlotSeeds(p);
         }
 
         return total;
@@ -255,9 +254,11 @@ public class BoardController {
         this.m_board.setRemainingSeeds(1, 24);
         this.m_board.setRemainingSeeds(2, 24);
 
+        Point p = new Point(0, 0);
         for (int l = 0 ; l < 2 ; l++){
             for (int c = 0 ; c < 6 ; c++){
-                this.m_board.getSlot(new Point(c, l)).setNbSeeds(4);
+                p.setCoordinates(c, l);
+                this.m_board.setSlotSeeds(p, 4);
             }
         }
     }

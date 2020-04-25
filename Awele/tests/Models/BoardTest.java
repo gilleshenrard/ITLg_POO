@@ -215,9 +215,9 @@ class BoardTest {
     @DisplayName("getNext() within a row - should not fail")
     @Test
     void getNext_withinARow_shouldnot_fail() {
-        Slot s = b.getSlot(new Point(2, 0));
-        Assertions.assertEquals(3, b.getNext(s).getX());
-        Assertions.assertEquals(0, b.getNext(s).getY());
+        Point p = new Point(2, 0);
+        Assertions.assertEquals(3, b.getNext(p).getX());
+        Assertions.assertEquals(0, b.getNext(p).getY());
     }
 
     /**
@@ -226,9 +226,9 @@ class BoardTest {
     @DisplayName("getNext() at the end of 1st row - should not fail")
     @Test
     void getNext_endOfFirstRow_shouldnot_fail() {
-        Slot s = b.getSlot(new Point(5, 0));
-        Assertions.assertEquals(0, b.getNext(s).getX());
-        Assertions.assertEquals(1, b.getNext(s).getY());
+        Point p = new Point(5, 0);
+        Assertions.assertEquals(0, b.getNext(p).getX());
+        Assertions.assertEquals(1, b.getNext(p).getY());
     }
 
     /**
@@ -237,9 +237,9 @@ class BoardTest {
     @DisplayName("getNext() at the end of 2nd row - should not fail")
     @Test
     void getNext_endOfSecondRow_shouldnot_fail() {
-        Slot s = b.getSlot(new Point(5, 1));
-        Assertions.assertEquals(0, b.getNext(s).getX());
-        Assertions.assertEquals(0, b.getNext(s).getY());
+        Point p = new Point(5, 1);
+        Assertions.assertEquals(0, b.getNext(p).getX());
+        Assertions.assertEquals(0, b.getNext(p).getY());
     }
 
     /**
