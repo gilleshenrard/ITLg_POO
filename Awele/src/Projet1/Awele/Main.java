@@ -3,7 +3,6 @@ package Projet1.Awele;
 import Controllers.BoardController;
 import Controllers.GameController;
 import Models.Game;
-import Models.Point;
 import Views.KeyboardSelect;
 import Views.RandomSelect;
 import Models.Board;
@@ -51,7 +50,7 @@ public class Main {
                     //select a slot, then play it
                     choice = game.selectSlot(player + 1);
                     game.displayMessage(game.getName(player + 1) + " harvests the slot " + choice);
-                    outcome = game.playSlot(new Point(choice - 1, player));
+                    outcome = game.playSlot(player + 1, choice);
 
                     //in case of starvation or empty slot played
                     if (outcome < 0) {

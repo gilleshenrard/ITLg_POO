@@ -1,7 +1,6 @@
 package Controllers;
 
 import Models.Game;
-import Models.Point;
 import Views.GameView;
 
 import java.security.InvalidParameterException;
@@ -133,10 +132,10 @@ public class GameController {
      * @return -1 if starvation, -2 if empty slot selected, amount of seeds captured otherwise
      * @throws InvalidParameterException
      */
-    public int playSlot(Point p) throws InvalidParameterException{
-        int ret = this.m_board.playSlot(p);
+    public int playSlot(int id, int slot) throws InvalidParameterException{
+        int ret = this.m_board.playSlot(id, slot);
         if (ret > 0)
-            this.storeSeeds(p.getY() + 1, ret);
+            this.storeSeeds(id, ret);
 
         return ret;
     }

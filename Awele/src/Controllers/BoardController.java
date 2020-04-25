@@ -75,15 +75,16 @@ public class BoardController {
      * @return -1 if starvation, -2 if empty slot selected, amount of seeds captured otherwise
      * @throws InvalidParameterException
      */
-    public int playSlot(Point p) throws InvalidParameterException {
-        Board.validateID(p.getY() + 1, "BoardController.playSlot()");
-        Board.validateCoordinates(new Point(p.getX(), p.getY()), "Board.playSlot()");
+    public int playSlot(int id, int slot) throws InvalidParameterException {
+        Board.validateID(id, "BoardController.playSlot()");
+        Board.validateCoordinates(new Point(slot - 1, id - 1), "Board.playSlot()");
 
         //
         //SCATTERING PHASE
         //
 
         //get number of seeds in the slot harvested by the player + backup
+        Point p = new Point(slot - 1, id -1);
         int backupseeds = this.m_board.getSlotSeeds(p);
 
         //if the slot is empty, return empty slot code

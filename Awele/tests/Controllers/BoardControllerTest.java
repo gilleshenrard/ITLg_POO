@@ -115,7 +115,7 @@ public class BoardControllerTest {
     @Test
     void playSlot_0seeds_shouldnot_fail() {
         b.getBoard().setSlotSeeds(new Point(0, 0), 0);
-        int ret = b.playSlot(new Point(0, 0));
+        int ret = b.playSlot(1, 1);
         Assertions.assertEquals(-2, ret);
     }
 
@@ -126,29 +126,29 @@ public class BoardControllerTest {
     @Test
     void playSlot_invalidID_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            b.playSlot(new Point(3, 3));
+            b.playSlot(3, 3);
         });
     }
 
     /**
-     * Check if playSlot() throws an exception with a slot below 0
+     * Check if playSlot() throws an exception with a slot below 1
      */
     @DisplayName("playSlot() with an slot below 0 - should fail")
     @Test
-    void playSlot_below0_should_fail() {
+    void playSlot_below1_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            b.playSlot(new Point(-1, 0));
+            b.playSlot(1, 0);
         });
     }
 
     /**
-     * Check if playSlot() throws an exception with a slot above 5
+     * Check if playSlot() throws an exception with a slot above 6
      */
-    @DisplayName("playSlot() with an slot above 5 - should fail")
+    @DisplayName("playSlot() with an slot above 6 - should fail")
     @Test
-    void playSlot_above5_should_fail() {
+    void playSlot_above6_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            b.playSlot(new Point(1, 6));
+            b.playSlot(1, 7);
         });
     }
 
@@ -158,7 +158,7 @@ public class BoardControllerTest {
     @DisplayName("playSlot() with neither capture nor starvation - should not fail")
     @Test
     void playSlot_noCaptureNoStarve_shouldnot_fail() {
-        int ret = b.playSlot(new Point(5, 0));
+        int ret = b.playSlot(1, 6);
         Assertions.assertEquals(0, ret);
 
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(5, 0)));
@@ -180,7 +180,7 @@ public class BoardControllerTest {
         b.getBoard().setSlotSeeds(new Point(3, 0), 12);
         b.getBoard().emptySlotSeeds(new Point(1, 0));
         b.getBoard().emptySlotSeeds(new Point(2, 0));
-        int ret = b.playSlot(new Point(3, 0));
+        int ret = b.playSlot(1, 4);
         Assertions.assertEquals(0, ret);
         Assertions.assertEquals(5, b.getSlotSeeds(new Point(0, 1)));
         Assertions.assertEquals(5, b.getSlotSeeds(new Point(1, 1)));
@@ -207,7 +207,7 @@ public class BoardControllerTest {
         b.getBoard().setSlotSeeds(new Point(1, 1), 2);
         b.getBoard().setSlotSeeds(new Point(3, 1), 1);
         b.getBoard().setSlotSeeds(new Point(4, 1), 9);
-        int ret = b.playSlot(new Point(5, 0));
+        int ret = b.playSlot(1, 6);
         Assertions.assertEquals(5, ret);
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(5, 0)));
         Assertions.assertEquals(5, b.getSlotSeeds(new Point(0, 1)));
@@ -235,7 +235,7 @@ public class BoardControllerTest {
         b.getBoard().setSlotSeeds(new Point(5, 0), 2);
         b.getBoard().setRemainingSeeds(2, 3);
         b.getBoard().setRemainingSeeds(1, 22);
-        int ret = b.playSlot(new Point(5, 0));
+        int ret = b.playSlot(1, 6);
         Assertions.assertEquals(-1, ret);
         Assertions.assertEquals(1, b.getSlotSeeds(new Point(0, 1)));
         Assertions.assertEquals(2, b.getSlotSeeds(new Point(1, 1)));
@@ -256,7 +256,7 @@ public class BoardControllerTest {
         b.getBoard().setSlotSeeds(new Point(3, 1), 1);
         b.getBoard().setSlotSeeds(new Point(1, 1), 2);
         Game.getInstance().setSeeds(1, 20);
-        int ret = b.playSlot(new Point(5, 0));
+        int ret = b.playSlot(1, 6);
         Assertions.assertEquals(5, ret);
         Assertions.assertEquals(5, b.getSlotSeeds(new Point(0, 1)));
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(1, 1)));
@@ -278,7 +278,7 @@ public class BoardControllerTest {
         b.getBoard().emptySlotSeeds(new Point(4, 0));
         b.getBoard().setSlotSeeds(new Point(5, 0), 1);
         b.getBoard().setRemainingSeeds(1, 1);
-        int ret = b.playSlot(new Point(5, 0));
+        int ret = b.playSlot(1, 6);
         Assertions.assertEquals(-1, ret);
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(0, 0)));
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(1, 0)));
@@ -302,7 +302,7 @@ public class BoardControllerTest {
         b.getBoard().setSlotSeeds(new Point(4, 0), 1);
         b.getBoard().setSlotSeeds(new Point(5, 0), 1);
         b.getBoard().setRemainingSeeds(1, 2);
-        int ret = b.playSlot(new Point(4, 0));
+        int ret = b.playSlot(1, 5);
         Assertions.assertEquals(-1, ret);
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(0, 0)));
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(1, 0)));
