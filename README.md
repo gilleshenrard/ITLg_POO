@@ -92,6 +92,9 @@ The unit tests for each class can be found in the mirrored directory tests/ (tes
 - Ease up constructors use
 - Move displayBoard in Game view and rename it to displayGame
 - Make the game loop use solely GameController
+- Make playSlot() use actual coordinates
+- Make Game constructor private (Singleton pattern)
+- Move all members in arrays when possible (Game.m_player, Game.m_seedsPlayer, Board.m_remainingSeeds)
 
 ---
 ### 5. Known issues
