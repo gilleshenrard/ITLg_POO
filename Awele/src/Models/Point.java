@@ -15,6 +15,16 @@ public class Point {
     }
 
     /**
+     * Assign both coordinates at once
+     * @param x X coordinate of the Point
+     * @param y Y coordinate of the Point
+     */
+    public void setCoordinates(int x, int y){
+        this.setX(x);
+        this.setY(y);
+    }
+
+    /**
      * Returns the X value of the current point
      * @return X
      */

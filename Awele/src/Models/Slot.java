@@ -61,8 +61,7 @@ public class Slot {
      * @param y Y coordinate of the slot
      */
     public void setCoordinates(int x, int y){
-        this.m_coordinates.setX(x);
-        this.m_coordinates.setY(y);
+        this.m_coordinates.setCoordinates(x, y);
     }
 
     /**
@@ -70,7 +69,7 @@ public class Slot {
      * @param point Point containing the coordinates of the slot
      */
     public void setCoordinates(Point point){
-        this.m_coordinates = point;
+        this.m_coordinates.setCoordinates(point.getX(), point.getY());
     }
 
     /**
