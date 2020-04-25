@@ -5,13 +5,13 @@ import java.util.ArrayList;
 
 public class Board {
     private Slot[][] m_slots;
-    private int m_remSeedsPl1;
-    private int m_remSeedsPl2;
+    private int[] m_remSeedsPlayer;
 
     /**
      * Create new Board
      */
     public Board(){
+        this.m_remSeedsPlayer = new int[2];
         this.setRemainingSeeds(1, 24);
         this.setRemainingSeeds(2, 24);
         
@@ -54,10 +54,7 @@ public class Board {
     public int getRemainingSeeds(int ID) throws InvalidParameterException{
         Board.validateID(ID,"Board.getRemainingSeeds()");
 
-        if (ID == 1)
-            return this.m_remSeedsPl1;
-        else
-            return this.m_remSeedsPl2;
+        return this.m_remSeedsPlayer[ID - 1];
     }
 
     /**
@@ -70,10 +67,7 @@ public class Board {
         Board.validateID(ID, "Board.setRemainingSeeds()");
         Slot.validateNbSeeds(value, "Board.setRemainingSeeds()");
 
-        if (ID == 1)
-            this.m_remSeedsPl1 = value;
-        else
-            this.m_remSeedsPl2 = value;
+        this.m_remSeedsPlayer[ID - 1] = value;
     }
 
     /**
