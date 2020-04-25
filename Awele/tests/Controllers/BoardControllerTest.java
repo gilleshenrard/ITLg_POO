@@ -73,7 +73,7 @@ public class BoardControllerTest {
     @Test
     void getSloSeeds_Xover5_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            b.getSlotSeeds(6, 0);
+            b.getSlotSeeds(new Point(6, 0));
         });
     }
 
@@ -84,7 +84,7 @@ public class BoardControllerTest {
     @Test
     void getSlotSeeds_invalidY_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            b.getSlotSeeds(0, 3);
+            b.getSlotSeeds(new Point(0, 3));
         });
     }
 
@@ -95,7 +95,7 @@ public class BoardControllerTest {
     @Test
     void getSlotSeeds_Xbelow0_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            b.getSlotSeeds(-1, 0);
+            b.getSlotSeeds(new Point(-1, 0));
         });
     }
 
@@ -105,7 +105,7 @@ public class BoardControllerTest {
     @DisplayName("getSlotSeeds() with proper values - should not fail")
     @Test
     void getSlotSeeds_shouldnot_fail() {
-        Assertions.assertEquals(4, b.getSlotSeeds(0, 0));
+        Assertions.assertEquals(4, b.getSlotSeeds(new Point(0, 0)));
     }
 
     /**

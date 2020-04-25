@@ -56,13 +56,12 @@ public class BoardController {
 
     /**
      * Get the amount of seeds contained in the slot located at X,Y
-     * @param x X coordinate of the slot
-     * @param y Y coordinate of the slot
+     * @param point Coordinates of the slot
      * @return Amount of seeds
      * @throws InvalidParameterException
      */
-    public int getSlotSeeds(int x, int y) throws InvalidParameterException{
-        return this.m_board.getSlotSeeds(x, y);
+    public int getSlotSeeds(Point point) throws InvalidParameterException{
+        return this.m_board.getSlotSeeds(point);
     }
 
     /**

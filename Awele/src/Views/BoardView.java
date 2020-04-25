@@ -1,5 +1,6 @@
 package Views;
 import Controllers.BoardController;
+import Models.Point;
 
 public class BoardView {
     private BoardController m_board;
@@ -30,8 +31,10 @@ public class BoardView {
      * @param invert Order of the slots : false = left-right, true = right-left
      */
     public void displayRow(int ID, boolean invert){
+        Point p = new Point(0, 0);
         for(int i=0 ; i<6 ; i++)
-            this.displaySlot(this.m_board.getSlotSeeds((invert ? 5-i : i), ID-1));
+            p.setCoordinates((invert ? 5-i : i), ID-1);
+            this.displaySlot(this.m_board.getSlotSeeds(p));
         System.out.println();
     }
 }
