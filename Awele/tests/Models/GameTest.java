@@ -1,9 +1,11 @@
 package Models;
 
 import Controllers.BoardController;
+import Controllers.GameController;
 import Views.KeyboardSelect;
 import Views.RandomSelect;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -41,6 +43,18 @@ class GameTest {
     void getName_invalidID_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
             g.getName(3);
+        });
+    }
+
+    /**
+     * Check if getName() throws an exception while fetching a null instance
+     */
+    @Disabled
+    @DisplayName("getName() with a NULL instance - should fail")
+    @Test
+    void getName_nullPlayer_should_fail() {
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            g.getName(1);
         });
     }
 
@@ -116,6 +130,50 @@ class GameTest {
     void getSeeds_shouldnot_fail() {
             g.setSeeds(1, 12);
             Assertions.assertEquals(g.getSeeds(1), 12);
+    }
+
+    /**
+     * Check if selectSlot() throws an exception with an invalid ID
+     */
+    @DisplayName("selectSlot() with an invalid ID - should fail")
+    @Test
+    void selectSlot_invalidID_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            g.selectSlot(3);
+        });
+    }
+
+    /**
+     * Check if selectSlot() throws an exception with a NULL instance of Player
+     */
+    @DisplayName("selectSlot() with a NULL Player - should fail")
+    @Test
+    void selectSlot_NULLinstance_should_fail() {
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            g.selectSlot(1);
+        });
+    }
+
+    /**
+     * Check if refresh() throws an exception with an invalid ID
+     */
+    @DisplayName("refresh() with an invalid ID - should fail")
+    @Test
+    void refresh_invalidID_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            g.refresh(3);
+        });
+    }
+
+    /**
+     * Check if refresh() throws an exception with a NULL instance of Player
+     */
+    @DisplayName("refresh() with a NULL Player - should fail")
+    @Test
+    void refresh_NULLinstance_should_fail() {
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            g.refresh(1);
+        });
     }
 
     /**

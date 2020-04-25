@@ -9,11 +9,18 @@ public class GameController {
     private BoardController m_board;
     private GameView m_gameView;
 
+    /**
+     * Create a new Game controller
+     * @param view Game view to assign to the controller
+     */
     public GameController(GameView view){
         this.m_board = null;
         this.m_gameView = view;
     }
 
+    /**
+     * Create a new Game Controller
+     */
     public GameController(){
         this.m_board = null;
         this.m_gameView = null;
@@ -88,6 +95,9 @@ public class GameController {
      * @throws InvalidParameterException
      */
     public void storeSeeds(int ID, int nb_seeds) throws InvalidParameterException{
+        if (nb_seeds < 0)
+            throw new InvalidParameterException("Game.storeSeeds() : negative amount of seeds");
+
         Game g = Game.getInstance();
         g.setSeeds(ID, g.getSeeds(ID) + nb_seeds);
     }
@@ -101,7 +111,7 @@ public class GameController {
     public int selectSlot(int ID) throws InvalidParameterException{
         Game.validateID(ID, "GameController.selectSlot()");
 
-        return Game.getInstance().getPlayer(ID).selectSlot();
+        return Game.getInstance().selectSlot(ID);
     }
 
     /**
@@ -110,9 +120,9 @@ public class GameController {
      * @throws InvalidParameterException
      */
     public void refresh(int ID) throws InvalidParameterException {
-        Game.validateID(ID, "GameController.reset()");
+        Game.validateID(ID, "GameController.refresh()");
 
-        Game.getInstance().getPlayer(ID).refresh();
+        Game.getInstance().refresh(ID);
     }
 
     /**

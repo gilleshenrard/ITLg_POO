@@ -160,6 +160,36 @@ public class Game {
     }
 
     /**
+     * Make a player select a slot
+     * @param ID ID of the player to play the slot
+     * @return Slot selected
+     * @throws InvalidParameterException
+     * @throws NullPointerException
+     */
+    public int selectSlot(int ID) throws InvalidParameterException, NullPointerException{
+        Game.validateID(ID, "Game.selectSlot()");
+        if (Game.getInstance().getPlayer(ID) == null)
+            throw new NullPointerException("Game.selectSlot() : NULL instance of Player");
+
+        return Game.getInstance().getPlayer(ID).selectSlot();
+    }
+
+    /**
+     * Make a player select a slot
+     * @param ID ID of the player to play the slot
+     * @return Slot selected
+     * @throws InvalidParameterException
+     * @throws NullPointerException
+     */
+    public void refresh(int ID) throws InvalidParameterException, NullPointerException{
+        Game.validateID(ID, "Game.refresh()");
+        if (Game.getInstance().getPlayer(ID) == null)
+            throw new NullPointerException("Game.refresh() : NULL instance of Player");
+
+        Game.getInstance().getPlayer(ID).refresh();
+    }
+
+    /**
      * Reset the Game to an inial value
      */
     public void resetGame(){
