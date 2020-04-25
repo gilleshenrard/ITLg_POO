@@ -177,12 +177,9 @@ public class BoardControllerTest {
     @DisplayName("playSlot() with a slot skipped at scattering - should not fail")
     @Test
     void playSlot_skipSelected_shouldnot_fail() {
-        GameController g = new GameController();
-        g.setBoardController(b);
-        g.resetGame();
         b.getBoard().setSlotSeeds(new Point(3, 0), 12);
-        b.getBoard().emptySlotSeeds(new Point(2, 0));
         b.getBoard().emptySlotSeeds(new Point(1, 0));
+        b.getBoard().emptySlotSeeds(new Point(2, 0));
         int ret = b.playSlot(1, 4);
         Assertions.assertEquals(0, ret);
         Assertions.assertEquals(5, b.getSlotSeeds(new Point(0, 1)));
@@ -246,6 +243,7 @@ public class BoardControllerTest {
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(3, 1)));
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(4, 1)));
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(5, 1)));
+        Assertions.assertEquals(22, b.getBoard().getRemainingSeeds(1));
         Assertions.assertEquals(3, b.getBoard().getRemainingSeeds(2));
     }
 
@@ -316,7 +314,7 @@ public class BoardControllerTest {
     }
 
     /**
-     * Check if resetBoard() sets the proper inial values
+     * Check if resetBoard() sets the proper initial values
      */
     @DisplayName("resetBoard() - should not fail")
     @Test
