@@ -32,9 +32,10 @@ public class BoardView {
      */
     public void displayRow(int ID, boolean invert){
         Point p = new Point(0, 0);
-        for(int i=0 ; i<6 ; i++)
-            p.setCoordinates((invert ? 5-i : i), ID-1);
+        for(int i=0 ; i<6 ; i++) {
+            p.setCoordinates((invert ? 5 - i : i), ID - 1);
             this.displaySlot(this.m_board.getSlotSeeds(p));
+        }
         System.out.println();
     }
 }
