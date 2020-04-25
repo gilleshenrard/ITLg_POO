@@ -23,11 +23,27 @@ public class Point {
     }
 
     /**
+     * Set the X value of the current point
+     * @param x Value to set
+     */
+    public void setX(int x){
+        this.m_x = x;
+    }
+
+    /**
      * Returns the Y value of the current point
      * @return Y
      */
     public int getY() {
         return this.m_y;
+    }
+
+    /**
+     * Set the Y value of the current point
+     * @param y Value to set
+     */
+    public void setY(int y){
+        this.m_y = y;
     }
 
     /**

@@ -4,9 +4,8 @@ import java.security.InvalidParameterException;
 import java.util.Objects;
 
 public class Slot {
-    private int m_x;
-    private int m_y;
-    int nb_seeds;
+    private Point m_coordinates;
+    private int nb_seeds;
 
     /**
      * Create a new Slot
@@ -16,6 +15,15 @@ public class Slot {
     public Slot(int x, int y){
         this.setNbSeeds(4);
         this.setCoordinates(x, y);
+    }
+
+    /**
+     * Create a new Slot
+     * @param point Coordinates of the Slot
+     */
+    public Slot(Point point){
+        this.setNbSeeds(4);
+        this.setCoordinates(point);
     }
 
     /**
@@ -53,8 +61,16 @@ public class Slot {
      * @param y Y coordinate of the slot
      */
     public void setCoordinates(int x, int y){
-        this.m_x = x;
-        this.m_y = y;
+        this.m_coordinates.setX(x);
+        this.m_coordinates.setY(y);
+    }
+
+    /**
+     * Set the X and Y coordinates of the Slot
+     * @param point Point containing the coordinates of the slot
+     */
+    public void setCoordinates(Point point){
+        this.m_coordinates = point;
     }
 
     /**
@@ -62,7 +78,7 @@ public class Slot {
      * @return X coordinate
      */
     public int getX(){
-        return this.m_x;
+        return this.m_coordinates.getX();
     }
 
     /**
@@ -70,7 +86,7 @@ public class Slot {
      * @return Y coordinate
      */
     public int getY(){
-        return this.m_y;
+        return this.m_coordinates.getY();
     }
 
     /**
@@ -108,9 +124,9 @@ public class Slot {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Slot slot = (Slot) o;
-        return m_x == slot.m_x &&
-                m_y == slot.m_y &&
-                nb_seeds == slot.nb_seeds;
+        return this.m_coordinates.getX() == slot.getX() &&
+                this.m_coordinates.getY() == slot.getY() &&
+                this.nb_seeds == slot.getNbSeeds();
     }
 
     /**
@@ -119,6 +135,6 @@ public class Slot {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(m_x, m_y, nb_seeds);
+        return Objects.hash(this.m_coordinates.getX(), this.m_coordinates.getY(), this.getNbSeeds());
     }
 }
