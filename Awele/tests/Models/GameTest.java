@@ -1,5 +1,8 @@
 package Models;
 
+import Controllers.BoardController;
+import Views.KeyboardSelect;
+import Views.RandomSelect;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,6 +31,27 @@ class GameTest {
     void validateID_shouldnot_fail() {
         Game.validateID(1, "");
         Game.validateID(2, "");
+    }
+
+    /**
+     * Check if getName() throws an exception with an invalid ID
+     */
+    @DisplayName("getName() with an invalid ID - should fail")
+    @Test
+    void getName_invalidID_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            g.getName(3);
+        });
+    }
+
+    /**
+     * Check if getName() returns the right player name
+     */
+    @DisplayName("getName() - should not fail")
+    @Test
+    void getName_shouldnot_fail() {
+        g.setPlayer(new Player(1, "Test"));
+        Assertions.assertEquals("Test", g.getName(1));
     }
 
     /**
