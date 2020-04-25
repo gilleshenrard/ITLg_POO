@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import java.security.InvalidParameterException;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class SlotTest {
     Slot s = new Slot(0, 0);
 
@@ -54,14 +52,14 @@ class SlotTest {
     }
 
     /**
-     * Check if getX() and getY() return the right values
+     * Check if getCoordinates() return the right values
      */
-    @DisplayName("getX() and getY() - should not fail")
+    @DisplayName("getCoordinates() - should not fail")
     @Test
-    void get_coordinates_shouldnot_fail() {
+    void getCoordinates_shouldnot_fail() {
         s.setCoordinates(3, 1);
-        Assertions.assertEquals(3, s.getX());
-        Assertions.assertEquals(1, s.getY());
+        Point p = new Point(3, 1);
+        Assertions.assertEquals(p, s.getCoordinates());
     }
 
     /**
@@ -131,8 +129,7 @@ class SlotTest {
     @DisplayName("incrementSeeds() when incrementing above 48 - should fail")
     @Test
     void incrementSeeds_above48_should_fail() {
-        for(int i=0 ; i<44 ; i++)
-            s.incrementSeeds();
+        s.setNbSeeds(48);
 
         Assertions.assertThrows(InvalidParameterException.class, () -> {
             s.incrementSeeds();

@@ -18,15 +18,6 @@ public class Slot {
     }
 
     /**
-     * Create a new Slot
-     * @param point Coordinates of the Slot
-     */
-    public Slot(Point point){
-        this.setNbSeeds(4);
-        this.m_coordinates = new Point(point);
-    }
-
-    /**
      * Throw an exception if not 0 <= seeds <= 48
      * @param seeds Amount of seeds to validate
      * @param msg Name of the method in which the validation occurs
@@ -73,22 +64,6 @@ public class Slot {
     }
 
     /**
-     * Return the X coordinate of the current Slot
-     * @return X coordinate
-     */
-    public int getX(){
-        return this.m_coordinates.getX();
-    }
-
-    /**
-     * Return the Y coordinate of the current Slot
-     * @return Y coordinate
-     */
-    public int getY(){
-        return this.m_coordinates.getY();
-    }
-
-    /**
      * Set the amount of seeds to 0
      */
     public void emptySeeds(){
@@ -99,7 +74,7 @@ public class Slot {
      * Add one seed in the slot
      * @throws InvalidParameterException
      */
-    public void incrementSeeds() throws InvalidParameterException{;
+    public void incrementSeeds() throws InvalidParameterException{
         Slot.validateNbSeeds(this.nb_seeds + 1, "Slot.incrementSeeds()");
         this.nb_seeds += 1;
     }
@@ -123,8 +98,8 @@ public class Slot {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Slot slot = (Slot) o;
-        return this.m_coordinates.getX() == slot.getX() &&
-                this.m_coordinates.getY() == slot.getY() &&
+        return this.m_coordinates.getX() == slot.getCoordinates().getX() &&
+                this.m_coordinates.getY() == slot.getCoordinates().getY() &&
                 this.nb_seeds == slot.getNbSeeds();
     }
 
@@ -134,6 +109,6 @@ public class Slot {
      */
     @Override
     public int hashCode() {
-        return Objects.hash(this.m_coordinates.getX(), this.m_coordinates.getY(), this.getNbSeeds());
+        return Objects.hash(Objects.hash(this.getCoordinates()), this.getNbSeeds());
     }
 }
