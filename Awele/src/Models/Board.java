@@ -82,7 +82,7 @@ public class Board {
      * @return Slot requested
      * @throws InvalidParameterException
      */
-    public Slot getSlot(Point point) throws InvalidParameterException{
+    private Slot getSlot(Point point) throws InvalidParameterException{
         Board.validateCoordinates(point, "Board.getSlot()");
         return this.m_slots[point.getY()][point.getX()];
     }

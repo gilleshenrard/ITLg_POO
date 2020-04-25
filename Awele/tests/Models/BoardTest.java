@@ -126,45 +126,68 @@ class BoardTest {
     }
 
     /**
-     * Check if getSlot() throws an exception with an X value over 5
+     * Check if setSlotSeeds() throws an exception with an X value over 5
      */
-    @DisplayName("getSlot() with X over 5 - should fail")
+    @DisplayName("setSlotSeeds() with X over 5 - should fail")
     @Test
-    void getSlot_Xover5_should_fail() {
+    void setSlotSeeds_Xover5_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            b.getSlot(new Point(6, 0));
+            b.setSlotSeeds(new Point(6, 0), 0);
         });
     }
 
     /**
-     * Check if getSlot() throws an exception with an invalid Y value
+     * Check if setSlotSeeds() throws an exception with an invalid Y value
      */
-    @DisplayName("getSlot() with Y over 1 - should fail")
+    @DisplayName("setSlotSeeds() with Y over 1 - should fail")
     @Test
-    void getSlot_invalidY_should_fail() {
+    void setSlotSeeds_invalidY_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            b.getSlot(new Point(0, 3));
+            b.setSlotSeeds(new Point(0, 3), 0);
         });
     }
 
     /**
-     * Check if getSlot() throws an exception with an X value below 0
+     * Check if setSlotSeeds() throws an exception with an X value below 0
      */
-    @DisplayName("getSlot() with X below 0 - should fail")
+    @DisplayName("setSlotSeeds() with X below 0 - should fail")
     @Test
-    void getSlot_Xbelow0_should_fail() {
+    void setSlotSeeds_Xbelow0_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
-            b.getSlot(new Point(-1, 0));
+            b.setSlotSeeds(new Point(-1, 0), 0);
         });
     }
 
     /**
-     * Check if getSlot() fails returning a slot
+     * Check if setSlotSeeds() sets the proper value
      */
-    @DisplayName("getSlot() with proper values - should not fail")
+    @DisplayName("setSlotSeeds() with proper values - should not fail")
     @Test
-    void getSlot_shouldnot_fail() {
-        b.getSlot(new Point(0, 0));
+    void setSlotSeeds_shouldnot_fail() {
+        b.setSlotSeeds(new Point(0, 0), 3);
+        Assertions.assertEquals(3, b.getSlotSeeds(new Point(0, 0)));
+    }
+
+    /**
+     * Check if setSlotSeeds() throws an exception when giving a negative amount of seeds
+     */
+    @DisplayName("setSlotSeeds() with negative seeds - should fail")
+    @Test
+    void setSlotSeeds_negative_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.setSlotSeeds(new Point(0, 0), -1);
+        });
+    }
+
+    /**
+     * Check if setSlotSeeds() throws an exception when giving an amount of seeds above 48
+     */
+    @DisplayName("setSlotSeeds() with seeds above 48 - should fail")
+    @Test
+    void setSlotSeeds_above48_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.setSlotSeeds(new Point(0, 0), 49);
+        });
     }
 
     /**
@@ -172,7 +195,7 @@ class BoardTest {
      */
     @DisplayName("getSlotSeeds() with X over 5 - should fail")
     @Test
-    void getSloSeeds_Xover5_should_fail() {
+    void getSlotSeeds_Xover5_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
             b.getSlotSeeds(new Point(6, 0));
         });
@@ -207,6 +230,61 @@ class BoardTest {
     @Test
     void getSlotSeeds_shouldnot_fail() {
         Assertions.assertEquals(4, b.getSlotSeeds(new Point(0, 0)));
+    }
+
+    /**
+     * Check if emptySlotSeeds() properly sets slots seeds to 0
+     */
+    @DisplayName("emptySlotSeeds() - should not fail")
+    @Test
+    void emptySlotSeeds_shouldnot_fail() {
+        b.emptySlotSeeds(new Point(0, 0));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(0, 0)));
+    }
+
+    /**
+     * Check if incrementSlotSeeds() properly increments m_nbseeds
+     */
+    @DisplayName("incrementSlotSeeds() - should not fail")
+    @Test
+    void incrementSlotSeeds_shouldnot_fail() {
+        b.incrementSlotSeeds(new Point(0, 0));
+        Assertions.assertEquals(5, b.getSlotSeeds(new Point(0, 0)));
+    }
+
+    /**
+     * Check if incrementSlotSeeds() throws an exception when rising m_nbseeds above 48 (max seeds on the board)
+     */
+    @DisplayName("incrementSlotSeeds() when incrementing above 48 - should fail")
+    @Test
+    void incrementSlotSeeds_above48_should_fail() {
+        b.setSlotSeeds(new Point(0, 0), 48);
+
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.incrementSlotSeeds(new Point(0, 0));
+        });
+    }
+
+    /**
+     * Check if decrementSlotSeeds() properly decrements m_nbseeds
+     */
+    @DisplayName("decrementSlotSeeds() - should not fail")
+    @Test
+    void decrementSlotSeeds_shouldnot_fail() {
+        b.decrementSlotSeeds(new Point(0, 0));
+        Assertions.assertEquals(3, b.getSlotSeeds(new Point(0, 0)));
+    }
+
+    /**
+     * Check if decrementSlotSeeds() throws an exception when lowering m_nbseeds below 0
+     */
+    @DisplayName("decrementSlotSeeds() when decrementing below 0 - should fail")
+    @Test
+    void decrementSlotSeeds_negativeamount_should_fail() {
+        b.emptySlotSeeds(new Point(0, 0));
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.decrementSlotSeeds(new Point(0, 0));
+        });
     }
 
     /**
@@ -248,12 +326,12 @@ class BoardTest {
     @DisplayName("getNonEmpty() - should not fail")
     @Test
     void getNonEmpty_shouldnot_fail() {
-        b.getSlot(new Point(0, 0)).emptySeeds();
-        b.getSlot(new Point(1, 0)).emptySeeds();
-        b.getSlot(new Point(2, 0)).setNbSeeds(1);
-        b.getSlot(new Point(3, 0)).emptySeeds();
-        b.getSlot(new Point(4, 0)).setNbSeeds(3);
-        b.getSlot(new Point(5, 0)).setNbSeeds(4);
+        b.emptySlotSeeds(new Point(0, 0));
+        b.emptySlotSeeds(new Point(1, 0));
+        b.setSlotSeeds(new Point(2, 0), 1);
+        b.emptySlotSeeds(new Point(3, 0));
+        b.setSlotSeeds(new Point(4, 0), 3);
+        b.setSlotSeeds(new Point(5, 0), 4);
         ArrayList<Integer> array = b.getNonEmpty(1);
         Assertions.assertEquals(3, array.size());
         Assertions.assertEquals(2, array.get(0));
