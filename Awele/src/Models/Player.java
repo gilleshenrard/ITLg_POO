@@ -104,7 +104,7 @@ public class Player {
         if (this.m_behaviour == null)
             throw new NullPointerException("Player.selectSlot() : NULL instance of behaviour");
 
-        return this.m_behaviour.selectSlot();
+        return this.getBehaviour().selectSlot();
     }
 
     /**
