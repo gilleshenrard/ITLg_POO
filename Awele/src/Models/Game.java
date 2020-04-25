@@ -3,20 +3,20 @@ package Models;
 import java.security.InvalidParameterException;
 
 public class Game {
-    private Player m_player1;
-    private Player m_player2;
-    private int m_seedpl1;
-    private int m_seedpl2;
+    private Player[] m_player;
+    private int[] m_seedPlayer;
     private static Game m_instance;
 
     /**
      * Create a new Game
      */
-    public Game() {
-        this.m_seedpl1 = 0;
-        this.m_seedpl2 = 0;
-        this.m_player1 = null;
-        this.m_player2 = null;
+    private Game() {
+        this.m_seedPlayer = new int[2];
+        this.m_seedPlayer[0] = 0;
+        this.m_seedPlayer[1] = 0;
+        this.m_player = new Player[2];
+        this.m_player[0] = null;
+        this.m_player[1] = null;
         this.m_instance = null;
     }
 
@@ -55,10 +55,7 @@ public class Game {
             throw new NullPointerException("Game.setPlayer() : NULL instance of Player");
         Game.validateID(player.getID(), "Game.setPlayer()");
 
-        if (player.getID() == 1)
-            this.m_player1 = player;
-        else
-            this.m_player2 = player;
+        this.m_player[player.getID() - 1] = player;
     }
 
     /**
@@ -70,10 +67,7 @@ public class Game {
     public Player getPlayer(int ID) throws InvalidParameterException{
         Game.validateID(ID, "Game.getPlayer()");
 
-        if(ID == 1)
-            return this.m_player1;
-        else
-            return this.m_player2;
+        return this.m_player[ID - 1];
     }
 
     /**
@@ -112,18 +106,10 @@ public class Game {
     public String getName(int ID) throws InvalidParameterException, NullPointerException{
         Game.validateID(ID, "Game.getName()");
 
-        if(ID == 1) {
-            if (this.m_player1 == null)
-                throw new NullPointerException("Game.getName() : Player 1 not instantiated");
-            else
-                return this.m_player1.getName();
-        }
-        else{
-            if (this.m_player2 == null)
-                throw new NullPointerException("Game.getName() : Player 2 not instantiated");
-            else
-                return this.m_player2.getName();
-        }
+        if(this.m_player[ID - 1] == null)
+            throw new NullPointerException("Game.getName() : Player" + (ID) + "not instantiated");
+        else
+            return this.m_player[ID - 1].getName();
     }
 
     /**
@@ -138,10 +124,7 @@ public class Game {
         if(nb_seeds < 0 || nb_seeds > 48)
             throw new InvalidParameterException("Game.storeSeeds() : incorrect amount of seeds (value : " + nb_seeds + ")");
 
-        if (ID == 1)
-            this.m_seedpl1 = nb_seeds;
-        else
-            this.m_seedpl2 = nb_seeds;
+        this.m_seedPlayer[ID - 1] = nb_seeds;
     }
 
     /**
@@ -153,10 +136,7 @@ public class Game {
     public int getSeeds(int ID) throws InvalidParameterException {
         Game.validateID(ID, "Game.getSeeds()");
 
-        if(ID == 1)
-            return m_seedpl1;
-        else
-            return m_seedpl2;
+        return this.m_seedPlayer[ID - 1];
     }
 
     /**
@@ -193,7 +173,7 @@ public class Game {
      * Reset the Game to an inial value
      */
     public void resetGame(){
-        this.m_seedpl1 = 0;
-        this.m_seedpl2 = 0;
+        this.m_seedPlayer[0] = 0;
+        this.m_seedPlayer[1] = 0;
     }
 }
