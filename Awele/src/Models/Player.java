@@ -113,7 +113,7 @@ public class Player {
      */
     public void refresh() throws NullPointerException {
         if (this.m_behaviour == null)
-            throw new NullPointerException("Player.reset() : NULL instance of behaviour");
+            throw new NullPointerException("Player.refresh() : NULL instance of behaviour");
 
         this.getBehaviour().refresh();
     }
