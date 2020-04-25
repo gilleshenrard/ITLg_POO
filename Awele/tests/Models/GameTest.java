@@ -1,13 +1,10 @@
 package Models;
 
-import Controllers.BoardController;
-import Views.RandomSelect;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
 
 class GameTest {
     Game g = new Game();
