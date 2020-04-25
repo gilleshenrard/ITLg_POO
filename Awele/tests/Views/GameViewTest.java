@@ -1,7 +1,16 @@
 package Views;
 
+import Controllers.BoardController;
+import Controllers.GameController;
+import Models.Board;
+import Models.Game;
+import Models.Player;
+import Models.Point;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.security.InvalidParameterException;
 
 class GameViewTest {
     GameView g = new GameView();
@@ -58,5 +67,42 @@ class GameViewTest {
     @Test
     void displayError_nullmsg_shouldnot_fail() {
         g.displayError(null);
+    }
+
+    /**
+     * Check if displayGame() throws an exception with a NULL controller
+     */
+    @DisplayName("displayGame() with a NULL controller - should fail")
+    @Test
+    void displayGame_nullController_should_fail() {
+        g.setBoardView(new BoardView(new BoardController(new Board(), new GameController())));
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            g.displayGame();
+        });
+    }
+
+    /**
+     * Check if displayGame() throws an exception with a NULL board view
+     */
+    @DisplayName("displayGame() with a NULL board view - should fail")
+    @Test
+    void displayGame_nullBoardView_should_fail() {
+        g.setController(new GameController());
+        Assertions.assertThrows(NullPointerException.class, () -> {
+            g.displayGame();
+        });
+    }
+
+    /**
+     * Check if displayGame() fails displaying the game board
+     */
+    @DisplayName("displayGame() - should not fail")
+    @Test
+    void displayGame_shouldnot_fail() {
+        g.setBoardView(new BoardView(new BoardController(new Board(), new GameController())));
+        g.setController(new GameController());
+        Game.getInstance().setPlayer(new Player(1, "Test1"));
+        Game.getInstance().setPlayer(new Player(2, "Test2"));
+        g.displayGame();
     }
 }

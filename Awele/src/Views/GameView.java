@@ -62,6 +62,11 @@ public class GameView {
      * @throws NullPointerException
      */
     public void displayGame() throws InvalidParameterException, NullPointerException {
+        if (this.m_controller == null)
+            throw new NullPointerException("GameView.displayGame() : NULL instance of GameController");
+        if (this.m_board == null)
+            throw new NullPointerException("GameView.displayGame() : NULL instance of BoardView");
+
         //display the opponent side of the board (slots are inverted)
         //OPPONENT
         //|  0 |
