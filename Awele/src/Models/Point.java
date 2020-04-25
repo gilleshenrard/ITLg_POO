@@ -15,6 +15,15 @@ public class Point {
     }
 
     /**
+     * Creates a point by copying another one
+     * @param point Point to copy
+     */
+    public Point(Point point) {
+        this.m_x = point.getX();
+        this.m_y = point.getY();
+    }
+
+    /**
      * Assign both coordinates at once
      * @param x X coordinate of the Point
      * @param y Y coordinate of the Point

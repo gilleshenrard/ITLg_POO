@@ -14,7 +14,7 @@ public class Slot {
      */
     public Slot(int x, int y){
         this.setNbSeeds(4);
-        this.setCoordinates(x, y);
+        this.m_coordinates = new Point(x, y);
     }
 
     /**
@@ -23,7 +23,7 @@ public class Slot {
      */
     public Slot(Point point){
         this.setNbSeeds(4);
-        this.setCoordinates(point);
+        this.m_coordinates = new Point(point);
     }
 
     /**
