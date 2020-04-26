@@ -22,6 +22,6 @@ public class SwitchingPlayerStateTest {
         g.setNextState(GameController.m_switching);
         g.handleState(0);
         Assertions.assertEquals(2, g.getCurrentPlayer());
-        Assertions.assertTrue(g.getNextState() instanceof PromptedState);
+        Assertions.assertTrue(g.getNextState() instanceof PromptingState);
     }
 }

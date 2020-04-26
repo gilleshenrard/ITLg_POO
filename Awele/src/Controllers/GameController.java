@@ -12,7 +12,7 @@ public class GameController {
     private GameState m_currentState;
     private int m_currentPlayer;
     public static SwitchingPlayerState m_switching = new SwitchingPlayerState();
-    public static PromptedState m_prompting = new PromptedState();
+    public static PromptingState m_prompting = new PromptingState();
     public static PlayingState m_playing = new PlayingState();
     public static StoringState m_storing = new StoringState();
 

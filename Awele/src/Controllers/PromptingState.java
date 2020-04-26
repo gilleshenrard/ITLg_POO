@@ -1,6 +1,6 @@
 package Controllers;
 
-public class PromptedState extends GameState {
+public class PromptingState extends GameState {
 
     /**
      * Make the player select its entry and display it on the screen
