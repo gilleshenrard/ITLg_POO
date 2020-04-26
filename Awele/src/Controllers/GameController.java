@@ -46,6 +46,14 @@ public class GameController {
     }
 
     /**
+     * Get the next game state
+     * @return Next game state to reach
+     */
+    public GameState getNextState(){
+        return this.m_currentState;
+    }
+
+    /**
      * Set the ID of the current player
      * @param ID Next state to join
      * @throws InvalidParameterException

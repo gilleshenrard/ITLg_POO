@@ -162,64 +162,6 @@ public class GameControllerTest {
     }
 
     /**
-     * Check if resetGame() sets the proper values
-     */
-    @DisplayName("resetGame() - should not fail")
-    @Test
-    void resetGame_shouldnot_fail() {
-        g.setBoardController(new BoardController(new Board(), new GameController()));
-        g.resetGame();
-        Assertions.assertEquals(0, g.getSeeds(1));
-        Assertions.assertEquals(0, g.getSeeds(2));
-    }
-
-    /**
-     * Check if selectSlot() throws an exception with wrong ID
-     */
-    @DisplayName("selectSlot() with a wrong ID - should fail")
-    @Test
-    void selectSlot_wrongID_should_fail() {
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            g.selectSlot(3);
-        });
-    }
-
-    /**
-     * Check if selectSlot() returns a proper value
-     */
-    @DisplayName("selectSlot() - should not fail")
-    @Test
-    void selectSlot_shouldnot_fail() {
-        Board board = new Board();
-        g.setBoardController(new BoardController(board, new GameController()));
-        Game.getInstance().setPlayer(new Player(2, "", new RandomSelect(g.getBoardController(), 2)));
-        Game.getInstance().getPlayer(2).getBehaviour().refresh();
-        int ret = g.selectSlot(2);
-        Assertions.assertTrue(ret > 0 && ret <= 6);
-    }
-
-    /**
-     * Check if refresh() throws an exception with wrong ID
-     */
-    @DisplayName("refresh() with a wrong ID - should fail")
-    @Test
-    void refresh_wrongID_should_fail() {
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            g.refresh(3);
-        });
-    }
-
-    /**
-     * Check if refresh() resets the array of playable slots properly
-     */
-    @DisplayName("refresh() - should not fail")
-    @Test
-    void refresh_shouldnot_fail() {
-        Game.getInstance().setPlayer(new Player(1, "", new RandomSelect(new BoardController(new Board(), new GameController()), 1)));
-        g.refresh(1);
-    }
-
-    /**
      * Check if playSlot() processes a simple scattering properly (no capture, no starvation)
      */
     @DisplayName("playSlot() with neither capture nor starvation - should not fail")
@@ -341,5 +283,63 @@ public class GameControllerTest {
         Assertions.assertEquals(-1, ret);
         Assertions.assertEquals(0, Game.getInstance().getSeeds(1));
         Assertions.assertEquals(0, Game.getInstance().getSeeds(2));
+    }
+
+    /**
+     * Check if resetGame() sets the proper values
+     */
+    @DisplayName("resetGame() - should not fail")
+    @Test
+    void resetGame_shouldnot_fail() {
+        g.setBoardController(new BoardController(new Board(), new GameController()));
+        g.resetGame();
+        Assertions.assertEquals(0, g.getSeeds(1));
+        Assertions.assertEquals(0, g.getSeeds(2));
+    }
+
+    /**
+     * Check if selectSlot() throws an exception with wrong ID
+     */
+    @DisplayName("selectSlot() with a wrong ID - should fail")
+    @Test
+    void selectSlot_wrongID_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            g.selectSlot(3);
+        });
+    }
+
+    /**
+     * Check if selectSlot() returns a proper value
+     */
+    @DisplayName("selectSlot() - should not fail")
+    @Test
+    void selectSlot_shouldnot_fail() {
+        Board board = new Board();
+        g.setBoardController(new BoardController(board, new GameController()));
+        Game.getInstance().setPlayer(new Player(2, "", new RandomSelect(g.getBoardController(), 2)));
+        Game.getInstance().getPlayer(2).getBehaviour().refresh();
+        int ret = g.selectSlot(2);
+        Assertions.assertTrue(ret > 0 && ret <= 6);
+    }
+
+    /**
+     * Check if refresh() throws an exception with wrong ID
+     */
+    @DisplayName("refresh() with a wrong ID - should fail")
+    @Test
+    void refresh_wrongID_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            g.refresh(3);
+        });
+    }
+
+    /**
+     * Check if refresh() resets the array of playable slots properly
+     */
+    @DisplayName("refresh() - should not fail")
+    @Test
+    void refresh_shouldnot_fail() {
+        Game.getInstance().setPlayer(new Player(1, "", new RandomSelect(new BoardController(new Board(), new GameController()), 1)));
+        g.refresh(1);
     }
 }
