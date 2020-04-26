@@ -3,7 +3,8 @@ package Models;
 import java.security.InvalidParameterException;
 import java.util.Objects;
 
-public class Slot {
+//Slot is private-package : only accessible by classes in the Models package
+class Slot {
     private Point m_coordinates;
     private int nb_seeds;
 
