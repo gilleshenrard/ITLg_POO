@@ -9,6 +9,12 @@ import java.security.InvalidParameterException;
 public class GameController {
     private BoardController m_board;
     private GameView m_gameView;
+    private GameState m_currentState;
+    private int m_currentPlayer;
+    public static SwitchingPlayerState m_switching = new SwitchingPlayerState();
+    public static PromptedState m_prompting = new PromptedState();
+    public static PlayingState m_playing = new PlayingState();
+    public static StoringState m_storing = new StoringState();
 
     /**
      * Create a new Game controller
@@ -17,6 +23,8 @@ public class GameController {
     public GameController(GameView view){
         this.m_board = null;
         this.m_gameView = view;
+        this.m_currentPlayer = 2;
+        this.m_currentState = GameController.m_switching;
     }
 
     /**
@@ -25,6 +33,40 @@ public class GameController {
     public GameController(){
         this.m_board = null;
         this.m_gameView = null;
+    }
+
+    /**
+     * Set which will be the next state to join
+     * @param nextState Next state to join
+     */
+    public void setNextState(GameState nextState){
+        this.m_currentState = nextState;
+    }
+
+    /**
+     * Get the current game state
+     * @return Current game state
+     */
+    public GameState getState(){
+        return this.m_currentState;
+    }
+
+    /**
+     * Set the ID of the current player
+     * @param ID Next state to join
+     * @throws InvalidParameterException
+     */
+    public void setCurrentPlayer(int ID) throws InvalidParameterException{
+        Game.validateID(ID, "GameController.setCurrentPlayer()");
+        this.m_currentPlayer = ID;
+    }
+
+    /**
+     * Get the ID of the current player
+     * @return ID of the current player
+     */
+    public int getCurrentPlayer(){
+        return this.m_currentPlayer;
     }
 
     /**
@@ -134,11 +176,12 @@ public class GameController {
      * @throws InvalidParameterException
      */
     public int playSlot(Point p) throws InvalidParameterException{
-        int ret = this.m_board.playSlot(p);
+/*        int ret = this.m_board.playSlot(p);
         if (ret > 0)
             this.storeSeeds(p.getY() + 1, ret);
 
         return ret;
+*/      return this.m_board.playSlot(p);
     }
 
     /**
