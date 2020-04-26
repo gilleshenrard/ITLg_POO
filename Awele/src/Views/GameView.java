@@ -5,7 +5,6 @@ import Controllers.GameController;
 import java.security.InvalidParameterException;
 
 public class GameView {
-    private BoardView m_board;
     private GameController m_controller;
 
     /**
@@ -13,15 +12,6 @@ public class GameView {
      */
     public GameView(){
         this.m_controller = null;
-        this.m_board = null;
-    }
-
-    /**
-     * Set the BoardView used by the game view
-     * @param board Board view to use
-     */
-    public void setBoardView(BoardView board){
-        this.m_board = board;
     }
 
     /**
@@ -64,24 +54,22 @@ public class GameView {
     public void displayGame() throws InvalidParameterException, NullPointerException {
         if (this.m_controller == null)
             throw new NullPointerException("GameView.displayGame() : NULL instance of GameController");
-        if (this.m_board == null)
-            throw new NullPointerException("GameView.displayGame() : NULL instance of BoardView");
 
         //display the opponent side of the board (slots are inverted)
         //OPPONENT
         //|  0 |
         //|  6 ||  5 ||  4 ||  3 ||  2 ||  1 |
         System.out.println(this.m_controller.getName(2));
-        this.m_board.displaySlot(this.m_controller.getSeeds(2));
+        this.m_controller.displaySlot(this.m_controller.getSeeds(2));
         System.out.println();
-        this.m_board.displayRow(2, true);
+        this.m_controller.displayRow(2, true);
 
         //display the player side of the board
         //|  1 ||  2 ||  3 ||  4 ||  5 ||  6 |
         //|  0 |
         //PLAYER
-        this.m_board.displayRow(1, false);
-        this.m_board.displaySlot(this.m_controller.getSeeds(1));
+        this.m_controller.displayRow(1, false);
+        this.m_controller.displaySlot(this.m_controller.getSeeds(1));
         System.out.println();
         System.out.println(this.m_controller.getName(1));
     }

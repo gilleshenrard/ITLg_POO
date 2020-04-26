@@ -75,7 +75,6 @@ class GameViewTest {
     @DisplayName("displayGame() with a NULL controller - should fail")
     @Test
     void displayGame_nullController_should_fail() {
-        g.setBoardView(new BoardView(new BoardController(new Board(), new GameController())));
         Assertions.assertThrows(NullPointerException.class, () -> {
             g.displayGame();
         });
@@ -99,8 +98,12 @@ class GameViewTest {
     @DisplayName("displayGame() - should not fail")
     @Test
     void displayGame_shouldnot_fail() {
-        g.setBoardView(new BoardView(new BoardController(new Board(), new GameController())));
-        g.setController(new GameController());
+        GameController gc = new GameController();
+        g.setController(gc);
+        BoardController bc = new BoardController(new Board(), gc);
+        gc.setBoardController(bc);
+        BoardView bv = new BoardView(bc);
+        bc.setBoardView(bv);
         Game.getInstance().setPlayer(new Player(1, "Test1"));
         Game.getInstance().setPlayer(new Player(2, "Test2"));
         g.displayGame();

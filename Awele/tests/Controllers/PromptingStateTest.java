@@ -22,8 +22,9 @@ public class PromptingStateTest {
         GameController g = new GameController(gv);
         BoardController bc = new BoardController(new Board(), g);
         BoardView bv = new BoardView(bc);
+        bc.setBoardView(bv);
+        g.setBoardController(bc);
         gv.setController(g);
-        gv.setBoardView(bv);
         Game.getInstance().setPlayer(new Player(1, "Test", new RandomSelect(bc, 1)));
         Game.getInstance().setPlayer(new Player(2, "Test", new RandomSelect(bc, 2)));
         g.setNextState(GameController.m_prompting);

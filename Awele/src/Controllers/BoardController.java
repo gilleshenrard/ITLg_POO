@@ -256,4 +256,27 @@ public class BoardController {
     public ArrayList<Integer> getNonEmpty(int ID) throws InvalidParameterException{
         return this.m_board.getNonEmpty(ID);
     }
+
+    /**
+     * Display a board row depending on the ID of a player
+     * @param ID ID of the player for which display the row
+     * @param invert Direction in which display the row (right-left or left-right)
+     */
+    public void displayRow(int ID, boolean invert){
+        if (this.m_boardView == null)
+            throw new NullPointerException("BoardController.displayRow() : NULL instance of BoardView");
+
+        this.m_boardView.displayRow(ID, invert);
+    }
+
+    /**
+     * Display a fixed size slot
+     * @param amount Amount to display in the slot
+     */
+    public void displaySlot(int amount){
+        if (this.m_boardView == null)
+            throw new NullPointerException("BoardController.displaySlot() : NULL instance of BoardView");
+
+        this.m_boardView.displaySlot(amount);
+    }
 }

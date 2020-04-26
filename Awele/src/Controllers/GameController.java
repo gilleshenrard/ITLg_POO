@@ -234,4 +234,27 @@ public class GameController {
     public void displayGame() throws InvalidParameterException, NullPointerException {
         this.m_gameView.displayGame();
     }
+
+    /**
+     * Display a board row depending on the ID of a player
+     * @param ID ID of the player for which display the row
+     * @param invert Direction in which display the row (right-left or left-right)
+     */
+    public void displayRow(int ID, boolean invert){
+        if (this.m_board == null)
+            throw new NullPointerException("GameController.displayRow() : NULL instance of BoardController");
+
+        this.m_board.displayRow(ID, invert);
+    }
+
+    /**
+     * Display a fixed size slot
+     * @param amount Amount to display in the slot
+     */
+    public void displaySlot(int amount){
+        if (this.m_board == null)
+            throw new NullPointerException("GameController.displaySlot() : NULL instance of BoardController");
+
+        this.m_board.displaySlot(amount);
+    }
 }

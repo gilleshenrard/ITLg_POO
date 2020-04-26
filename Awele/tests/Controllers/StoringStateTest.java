@@ -36,9 +36,9 @@ public class StoringStateTest {
     void handleState_shouldnot_fail() {
         Board b = new Board();
         BoardController bc = new BoardController(b, g);
+        bc.setBoardView(new BoardView(bc));
         g.setBoardController(bc);
         gv.setController(g);
-        gv.setBoardView(new BoardView(bc));
         g.setNextState(GameController.m_storing);
         g.setCurrentPlayer(1);
         Game.getInstance().setSeeds(1, 23);
