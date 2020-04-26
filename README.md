@@ -78,13 +78,26 @@ and link the views and the models together.
 They are as following :
 
 - GameController : Encapsulates all the game entry point methods. The main game loop should always call GameControllers methods
-- BoardController : Contains the harvest and capture mechanics (extensively unit tested)
+- BoardController : Contains the harvest and capture mechanics (extensively unit tested) and contains the current state
+of the state machine pattern.
 
-#### 4. Unit tests
+#### 4. Machine State Pattern based main loop
+To implement and manage the main loop, a State Machine pattern has been implemented.
+
+It consists of four classes (plus the base class) :
+
+- SwitchingPlayerState : Sets the ID of the player which will play the current season
+- PromptingState : Deals with prompting the user for a slot selection
+- PlayingState : Performs the scattering (+capture) and eventual error management, plus determines if a player forfeits
+- StoringState : Performs the eventual storage of captured seeds and determines if a player wins
+
+As per the pattern rules, a state is always active and present as a member of the game controller.
+
+#### 5. Unit tests
 The unit tests for each class can be found in the mirrored directory tests/ (tests/Models, tests/Views).
 
 ---
-### 4. Change list
+### 4. Change list (since v1.0)
 
 - Creation of Controller classes + migration of the game mechanics methods.
 - Improve MVC model use
@@ -95,6 +108,7 @@ The unit tests for each class can be found in the mirrored directory tests/ (tes
 - Make playSlot() use actual coordinates
 - Make Game constructor private (Singleton pattern)
 - Move all members in arrays when possible (Game.m_player, Game.m_seedsPlayer, Board.m_remainingSeeds)
+- Implement a machine state pattern for the main loop logic
 
 ---
 ### 5. Known issues
@@ -104,5 +118,5 @@ n/a
 ### 6. To do
 
 - Implement the Minimax AI algorithm stated in the reference book
-- Improve the unit tests
+- Optimise the unit tests
 - Add UML diagram links to README.md
