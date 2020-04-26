@@ -7,13 +7,14 @@ import java.security.InvalidParameterException;
 public class PlayingState extends GameState {
 
     /**
-     * Make the user play a slot
+     * Make the player play a slot
      * @param controller Game controller to use
      * @param input Slot selected by the user
-     * @return -1 if error, 0 if ok, 1 if forfeit
+     * @return -2 if forfeit, -1 if error, 0 if ok
      */
     @Override
-    public int handleInput(GameController controller, int input){
+    public int handleState(GameController controller, int input){
+        //play the slot selected
         int outcome = 0;
         try {
             outcome = controller.playSlot(new Point(input - 1, controller.getCurrentPlayer() - 1));
@@ -48,14 +49,16 @@ public class PlayingState extends GameState {
                         controller.displayMessage("\n" + controller.getName(controller.getCurrentPlayer()) + " : 'A strange game... The only winning move is not to play...'");
                         controller.displayMessage(controller.getName(controller.getCurrentPlayer()) + " : '......................... How about a nice game of chess?'");
                     }
-                    return 1;
+                    return -2;
                 }
             }
+            //get back to the Prompting state
             controller.setNextState(controller.m_prompting);
         }
         else
+            //Go to the Storing state
             controller.setNextState(controller.m_storing);
 
-        return 0;
+        return outcome;
     }
 }

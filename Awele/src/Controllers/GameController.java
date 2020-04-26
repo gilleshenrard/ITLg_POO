@@ -23,8 +23,8 @@ public class GameController {
     public GameController(GameView view){
         this.m_board = null;
         this.m_gameView = view;
-        this.m_currentPlayer = 2;
-        this.m_currentState = GameController.m_switching;
+        this.m_currentPlayer = 1;
+        this.m_currentState = GameController.m_prompting;
     }
 
     /**
@@ -33,6 +33,8 @@ public class GameController {
     public GameController(){
         this.m_board = null;
         this.m_gameView = null;
+        this.m_currentPlayer = 1;
+        this.m_currentState = GameController.m_prompting;
     }
 
     /**
@@ -41,14 +43,6 @@ public class GameController {
      */
     public void setNextState(GameState nextState){
         this.m_currentState = nextState;
-    }
-
-    /**
-     * Get the current game state
-     * @return Current game state
-     */
-    public GameState getState(){
-        return this.m_currentState;
     }
 
     /**
@@ -68,6 +62,15 @@ public class GameController {
     public int getCurrentPlayer(){
         return this.m_currentPlayer;
     }
+
+    /**
+     * Handle the current game state
+     * @param input Input for the current state
+     * @return Output of the current state
+     */
+    public int handleState(int input){
+        return this.m_currentState.handleState(this, input);
+    };
 
     /**
      * Set the board on which to play the current game

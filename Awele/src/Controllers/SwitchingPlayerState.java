@@ -8,14 +8,17 @@ public class SwitchingPlayerState extends GameState {
      * @return /
      */
     @Override
-    public int handleInput(GameController controller, int input){
+    public int handleState(GameController controller, int input){
+        //switch user
         if(controller.getCurrentPlayer() == 1)
             controller.setCurrentPlayer(2);
         else
             controller.setCurrentPlayer(1);
 
+        //display the current player's name
         controller.displayMessage("This is " + controller.getName(controller.getCurrentPlayer()) + "'s season");
 
+        //plug in the Prompting state
         controller.setNextState(controller.m_prompting);
 
         return 0;

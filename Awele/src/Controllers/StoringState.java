@@ -5,11 +5,12 @@ public class StoringState extends GameState {
     /**
      * Store the seeds captured by the player
      * @param controller Game controller to use
-     * @param input Slot selected by the user
-     * @return 0 if ok, 1 if victory
+     * @param input Amount of seeds captured by the player
+     * @return 0 if ok, -2 if victory
      */
     @Override
-    public int handleInput(GameController controller, int input){
+    public int handleState(GameController controller, int input){
+        //store the seeds
         if(input > 0)
             controller.storeSeeds(controller.getCurrentPlayer(), input);
 
@@ -18,9 +19,10 @@ public class StoringState extends GameState {
             controller.displayGame();
             controller.displayMessage(controller.getName(controller.getCurrentPlayer()) + " won the game !");
 
-            return 1;
+            return -2;
         }
         else
+            //Go to the player switching state
             controller.setNextState(controller.m_switching);
 
         return 0;
