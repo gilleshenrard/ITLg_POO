@@ -52,6 +52,8 @@ public class Main {
                     choice = game.selectSlot(player + 1);
                     game.displayMessage(game.getName(player + 1) + " harvests the slot " + choice);
                     outcome = game.playSlot(new Point(choice - 1, player));
+                    if (outcome > 0)
+                        game.storeSeeds(player + 1, outcome);
 
                     //in case of starvation or empty slot played
                     if (outcome < 0) {

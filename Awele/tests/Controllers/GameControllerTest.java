@@ -250,7 +250,7 @@ public class GameControllerTest {
         b.getBoard().setSlotSeeds(new Point(4, 1), 9);
         int ret = g.playSlot(new Point(5, 0));
         Assertions.assertEquals(5, ret);
-        Assertions.assertEquals(5, Game.getInstance().getSeeds(1));
+        Assertions.assertEquals(0, Game.getInstance().getSeeds(1));
         Assertions.assertEquals(0, Game.getInstance().getSeeds(2));
     }
 
@@ -293,7 +293,7 @@ public class GameControllerTest {
         Game.getInstance().setSeeds(1, 20);
         int ret = g.playSlot(new Point(5, 0));
         Assertions.assertEquals(5, ret);
-        Assertions.assertEquals(25, Game.getInstance().getSeeds(1));
+        Assertions.assertEquals(20, Game.getInstance().getSeeds(1));
         Assertions.assertEquals(0, Game.getInstance().getSeeds(2));
     }
 
