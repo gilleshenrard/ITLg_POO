@@ -34,17 +34,13 @@ public class Main {
         //state variables
         int outcome = 0;
 
-        //main game loop
-        while (true){
+        //main game loop, while no victory
+        while (outcome != -2){
             outcome = game.handleState(outcome);
 
             //system error, exit with an error
             if (outcome == -1)
                 System.exit(-1);
-
-            //game won by a player, exit with 0
-            if (outcome == -2)
-                System.exit(0);
         }
     }
 }
