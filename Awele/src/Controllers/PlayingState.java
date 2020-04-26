@@ -10,7 +10,7 @@ public class PlayingState extends GameState {
      * Make the player play a slot
      * @param controller Game controller to use
      * @param input Slot selected by the user
-     * @return -2 if forfeit, -1 if error, 0 if ok
+     * @return -2 if forfeit, -1 if error, 0 if ok (or cancelled)
      */
     @Override
     public int handleState(GameController controller, int input){
@@ -54,6 +54,8 @@ public class PlayingState extends GameState {
             }
             //get back to the Prompting state
             controller.setNextState(controller.m_prompting);
+
+            return 0;
         }
         else
             //Go to the Storing state
