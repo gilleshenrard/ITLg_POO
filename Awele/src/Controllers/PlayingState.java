@@ -19,23 +19,25 @@ public class PlayingState implements iGameState {
         try {
             outcome = controller.playSlot(new Point(input - 1, controller.getCurrentPlayer() - 1));
         }
-        //System error. Display error message
+        //System error. Display error message and quit
         catch (NullPointerException e){
             controller.displayError(e.getMessage());
             return -1;
         }
-        //Slot out of range or other system error. Display message and get back in the loop
+        //Slot out of range or other system error. Display error message and quit
         catch (InvalidParameterException e){
             controller.displayError(e.getMessage());
             return -1;
         }
 
-        if (outcome < 0)
-            return handleOutcome(controller, outcome);  //player starved or empty slot
-        else
-            controller.setNextState(controller.m_storing);  //Go to the Storing state
-
-        return outcome;
+        if (outcome < 0) {  //player starved or empty slot, get back to prompting state and display forfeit
+            controller.setNextState(controller.m_prompting);
+            return handleOutcome(controller, outcome);
+        }
+        else {  //Go to the Storing state
+            controller.setNextState(controller.m_storing);
+            return outcome;
+        }
     }
 
     /**
@@ -64,8 +66,6 @@ public class PlayingState implements iGameState {
             }
             return -2;
         }
-        //get back to the Prompting state
-        controller.setNextState(controller.m_prompting);
 
         return 0;
     }
