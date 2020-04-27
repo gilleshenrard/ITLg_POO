@@ -15,6 +15,7 @@ public class BoardView {
             throw new NullPointerException("BoardView() : NULL instance of Board");
 
         this.m_board = board;
+        this.m_board.setBoardView(this);
     }
 
     /**

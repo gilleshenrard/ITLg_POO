@@ -21,10 +21,9 @@ public class Main {
 
         //board setup
         Board board = new Board();
-        BoardController boardController = new BoardController(board, game);
+        BoardController boardController = new BoardController(board);
         game.setBoardController(boardController);
         BoardView b = new BoardView(boardController);
-        boardController.setBoardView(b);
 
         //players setup
         Game.getInstance().setPlayer(new Player(1, "Gilles", new KeyboardSelect()));
