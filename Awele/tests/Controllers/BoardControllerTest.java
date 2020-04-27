@@ -1,7 +1,6 @@
 package Controllers;
 
 import Models.Board;
-import Models.Game;
 import Models.Point;
 import Views.BoardView;
 import org.junit.jupiter.api.Assertions;
@@ -11,8 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.security.InvalidParameterException;
 
 public class BoardControllerTest {
-    Board board = new Board();
-    BoardController b = new BoardController(board, new GameController());
+    BoardController b = new BoardController(new Board());
 
     /**
      * Check if getBoard() returns the right instance of Board
@@ -255,7 +253,6 @@ public class BoardControllerTest {
     void playSlot_victory_shouldnot_fail() {
         b.getBoard().setSlotSeeds(new Point(3, 1), 1);
         b.getBoard().setSlotSeeds(new Point(1, 1), 2);
-        Game.getInstance().setSeeds(1, 20);
         int ret = b.playSlot(new Point(5, 0));
         Assertions.assertEquals(5, ret);
         Assertions.assertEquals(5, b.getSlotSeeds(new Point(0, 1)));

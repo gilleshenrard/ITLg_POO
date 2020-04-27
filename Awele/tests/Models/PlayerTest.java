@@ -1,8 +1,6 @@
 package Models;
 
 import Controllers.BoardController;
-import Controllers.GameController;
-import Views.GameView;
 import Views.RandomSelect;
 import Views.KeyboardSelect;
 import org.junit.jupiter.api.Assertions;
@@ -154,7 +152,7 @@ class PlayerTest {
     @DisplayName("refresh() - should not fail")
     @Test
     void refresh_shouldnot_fail() {
-        BoardController b = new BoardController(new Board(), new GameController(new GameView()));
+        BoardController b = new BoardController(new Board());
         p.setBehaviour(new RandomSelect(b, 1));
         p.refresh();
     }

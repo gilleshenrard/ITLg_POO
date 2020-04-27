@@ -10,22 +10,17 @@ import java.util.ArrayList;
 public class BoardController {
     Board m_board;
     BoardView m_boardView;
-    GameController m_game;
 
     /**
      * Create a new Board controller
      * @param b Board to assign to the controller
      * @throws NullPointerException
      */
-    public BoardController(Board b, GameController g) throws NullPointerException{
+    public BoardController(Board b) throws NullPointerException{
         if(b == null)
             throw new NullPointerException("NULL instance of Board");
 
-        if(b == null)
-            throw new NullPointerException("NULL instance of GameController");
-
         this.m_board = b;
-        this.m_game = g;
     }
 
     /**

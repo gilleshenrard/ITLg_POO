@@ -5,12 +5,9 @@ import Controllers.GameController;
 import Models.Board;
 import Models.Game;
 import Models.Player;
-import Models.Point;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.security.InvalidParameterException;
 
 class GameViewTest {
     GameView g = new GameView();
@@ -100,10 +97,9 @@ class GameViewTest {
     void displayGame_shouldnot_fail() {
         GameController gc = new GameController();
         g.setController(gc);
-        BoardController bc = new BoardController(new Board(), gc);
+        BoardController bc = new BoardController(new Board());
         gc.setBoardController(bc);
         BoardView bv = new BoardView(bc);
-        bc.setBoardView(bv);
         Game.getInstance().setPlayer(new Player(1, "Test1"));
         Game.getInstance().setPlayer(new Player(2, "Test2"));
         g.displayGame();

@@ -1,17 +1,13 @@
 package Views;
 
 import Controllers.BoardController;
-import Controllers.GameController;
 import Models.Board;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class BoardViewTest {
-    Board b = new Board();
-    GameController g = new GameController(new GameView());
-    BoardController bc = new BoardController(b, g);
-    BoardView bv = new BoardView(bc);
+    BoardView bv = new BoardView(new BoardController(new Board()));
 
     /**
      * Check if boardView() throws an exception when given a null instance

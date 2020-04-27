@@ -22,7 +22,7 @@ public class GameControllerTest {
     @DisplayName("getBoardController() - should not fail")
     @Test
     void getBoardController_shouldnot_fail() {
-        BoardController b = new BoardController(new Board(), new GameController()), b2;
+        BoardController b = new BoardController(new Board()), b2;
         g.setBoardController(b);
         b2 = g.getBoardController();
         Assertions.assertEquals(b, b2);
@@ -45,7 +45,7 @@ public class GameControllerTest {
     @DisplayName("setBoardController() - should not fail")
     @Test
     void setBoardController_shouldnot_fail() {
-        g.setBoardController(new BoardController(new Board(), new GameController()));
+        g.setBoardController(new BoardController(new Board()));
     }
 
     /**
@@ -131,7 +131,7 @@ public class GameControllerTest {
     @DisplayName("getSlot() with an invalid ID - should fail")
     @Test
     void playSlot_invalidID_should_fail() {
-        g.setBoardController(new BoardController(new Board(), new GameController()));
+        g.setBoardController(new BoardController(new Board()));
         Assertions.assertThrows(InvalidParameterException.class, () -> {
             g.playSlot(new Point(3, 3));
         });
@@ -143,7 +143,7 @@ public class GameControllerTest {
     @DisplayName("getSlot() with a slot below 0 - should fail")
     @Test
     void playSlot_below0_should_fail() {
-        g.setBoardController(new BoardController(new Board(), new GameController()));
+        g.setBoardController(new BoardController(new Board()));
         Assertions.assertThrows(InvalidParameterException.class, () -> {
             g.playSlot(new Point(-1, 0));
         });
@@ -155,7 +155,7 @@ public class GameControllerTest {
     @DisplayName("getSlot() with a slot above 5 - should fail")
     @Test
     void playSlot_above5_should_fail() {
-        g.setBoardController(new BoardController(new Board(), new GameController()));
+        g.setBoardController(new BoardController(new Board()));
         Assertions.assertThrows(InvalidParameterException.class, () -> {
             g.playSlot(new Point(1, 6));
         });
@@ -169,7 +169,7 @@ public class GameControllerTest {
     void playSlot_noCaptureNoStarve_shouldnot_fail() {
         Game.getInstance().setSeeds(1, 0);
         Game.getInstance().setSeeds(2, 0);
-        BoardController b = new BoardController(new Board(), g);
+        BoardController b = new BoardController(new Board());
         g.setBoardController(b);
         int ret = g.playSlot(new Point(5, 0));
         Assertions.assertEquals(0, ret);
@@ -185,7 +185,7 @@ public class GameControllerTest {
     void playSlot_CaptureNoStarve_shouldnot_fail() {
         Game.getInstance().setSeeds(1, 0);
         Game.getInstance().setSeeds(2, 0);
-        BoardController b = new BoardController(new Board(), g);
+        BoardController b = new BoardController(new Board());
         g.setBoardController(b);
         b.getBoard().setSlotSeeds(new Point(1, 1), 2);
         b.getBoard().setSlotSeeds(new Point(3, 1), 1);
@@ -204,7 +204,7 @@ public class GameControllerTest {
     void playSlot_noCaptureStarve_shouldnot_fail() {
         Game.getInstance().setSeeds(1, 0);
         Game.getInstance().setSeeds(2, 0);
-        BoardController b = new BoardController(new Board(), g);
+        BoardController b = new BoardController(new Board());
         g.setBoardController(b);
         b.getBoard().setSlotSeeds(new Point(0, 1), 1);
         b.getBoard().setSlotSeeds(new Point(1, 1), 2);
@@ -227,7 +227,7 @@ public class GameControllerTest {
     @DisplayName("playSlot() with a victory case - should not fail")
     @Test
     void playSlot_victory_shouldnot_fail() {
-        BoardController b = new BoardController(new Board(), g);
+        BoardController b = new BoardController(new Board());
         g.setBoardController(b);
         b.getBoard().setSlotSeeds(new Point(3, 1), 1);
         b.getBoard().setSlotSeeds(new Point(1, 1), 2);
@@ -247,7 +247,7 @@ public class GameControllerTest {
     void playSlot_selfStarvation_otherRow_shouldnot_fail() {
         Game.getInstance().setSeeds(1, 0);
         Game.getInstance().setSeeds(2, 0);
-        BoardController b = new BoardController(new Board(), g);
+        BoardController b = new BoardController(new Board());
         g.setBoardController(b);
         b.getBoard().emptySlotSeeds(new Point(0, 0));
         b.getBoard().emptySlotSeeds(new Point(1, 0));
@@ -270,7 +270,7 @@ public class GameControllerTest {
     void playSlot_selfStarvation_sameRow_shouldnot_fail() {
         Game.getInstance().setSeeds(1, 0);
         Game.getInstance().setSeeds(2, 0);
-        BoardController b = new BoardController(new Board(), g);
+        BoardController b = new BoardController(new Board());
         g.setBoardController(b);
         b.getBoard().emptySlotSeeds(new Point(0, 0));
         b.getBoard().emptySlotSeeds(new Point(1, 0));
@@ -291,7 +291,7 @@ public class GameControllerTest {
     @DisplayName("resetGame() - should not fail")
     @Test
     void resetGame_shouldnot_fail() {
-        g.setBoardController(new BoardController(new Board(), new GameController()));
+        g.setBoardController(new BoardController(new Board()));
         g.resetGame();
         Assertions.assertEquals(0, g.getSeeds(1));
         Assertions.assertEquals(0, g.getSeeds(2));
@@ -315,7 +315,7 @@ public class GameControllerTest {
     @Test
     void selectSlot_shouldnot_fail() {
         Board board = new Board();
-        g.setBoardController(new BoardController(board, new GameController()));
+        g.setBoardController(new BoardController(board));
         Game.getInstance().setPlayer(new Player(2, "", new RandomSelect(g.getBoardController(), 2)));
         Game.getInstance().getPlayer(2).getBehaviour().refresh();
         int ret = g.selectSlot(2);
@@ -339,7 +339,7 @@ public class GameControllerTest {
     @DisplayName("refresh() - should not fail")
     @Test
     void refresh_shouldnot_fail() {
-        Game.getInstance().setPlayer(new Player(1, "", new RandomSelect(new BoardController(new Board(), new GameController()), 1)));
+        Game.getInstance().setPlayer(new Player(1, "", new RandomSelect(new BoardController(new Board()), 1)));
         g.refresh(1);
     }
 }

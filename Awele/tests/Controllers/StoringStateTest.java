@@ -34,9 +34,8 @@ public class StoringStateTest {
     @DisplayName("handleState() - should not fail")
     @Test
     void handleState_shouldnot_fail() {
-        Board b = new Board();
-        BoardController bc = new BoardController(b, g);
-        bc.setBoardView(new BoardView(bc));
+        BoardController bc = new BoardController(new Board());
+        BoardView bv = new BoardView(bc);
         g.setBoardController(bc);
         gv.setController(g);
         g.setNextState(GameController.m_storing);

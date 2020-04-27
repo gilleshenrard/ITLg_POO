@@ -20,7 +20,7 @@ public class PromptingStateTest {
     void handleState_shouldnot_fail() {
         GameView gv = new GameView();
         GameController g = new GameController(gv);
-        BoardController bc = new BoardController(new Board(), g);
+        BoardController bc = new BoardController(new Board());
         BoardView bv = new BoardView(bc);
         bc.setBoardView(bv);
         g.setBoardController(bc);

@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 public class PlayingStateTest {
     GameController g = new GameController(new GameView());
+    BoardController b = new BoardController(new Board());
 
     /**
      * Check if handleState() processes a simple scattering properly (no capture, no starvation)
@@ -21,7 +22,6 @@ public class PlayingStateTest {
     void handleState_noCaptureNoStarve_shouldnot_fail() {
         Game.getInstance().setSeeds(1, 0);
         Game.getInstance().setSeeds(2, 0);
-        BoardController b = new BoardController(new Board(), g);
         g.setBoardController(b);
         g.setNextState(GameController.m_playing);
         g.setCurrentPlayer(1);
@@ -38,7 +38,6 @@ public class PlayingStateTest {
     void handleState_CaptureNoStarve_shouldnot_fail() {
         Game.getInstance().setSeeds(1, 0);
         Game.getInstance().setSeeds(2, 0);
-        BoardController b = new BoardController(new Board(), g);
         g.setBoardController(b);
         b.getBoard().setSlotSeeds(new Point(1, 1), 2);
         b.getBoard().setSlotSeeds(new Point(3, 1), 1);
@@ -58,7 +57,6 @@ public class PlayingStateTest {
     void handleState_noCaptureStarve_shouldnot_fail() {
         Game.getInstance().setSeeds(1, 0);
         Game.getInstance().setSeeds(2, 0);
-        BoardController b = new BoardController(new Board(), g);
         g.setBoardController(b);
         b.getBoard().setSlotSeeds(new Point(0, 1), 1);
         b.getBoard().setSlotSeeds(new Point(1, 1), 2);
@@ -83,7 +81,6 @@ public class PlayingStateTest {
     @DisplayName("handleState() with a victory case - should not fail")
     @Test
     void handleState_victory_shouldnot_fail() {
-        BoardController b = new BoardController(new Board(), g);
         g.setBoardController(b);
         b.getBoard().setSlotSeeds(new Point(3, 1), 1);
         b.getBoard().setSlotSeeds(new Point(1, 1), 2);
@@ -104,17 +101,16 @@ public class PlayingStateTest {
     void handleState_selfStarvation_otherRow_shouldnot_fail() {
         Game.getInstance().setSeeds(1, 0);
         Game.getInstance().setSeeds(2, 0);
-        BoardController bc = new BoardController(new Board(), g);
-        Game.getInstance().setPlayer(new Player(1, "Test", new RandomSelect(bc, 1)));
-        Game.getInstance().setPlayer(new Player(2, "Test", new RandomSelect(bc, 2)));
-        g.setBoardController(bc);
-        bc.getBoard().emptySlotSeeds(new Point(0, 0));
-        bc.getBoard().emptySlotSeeds(new Point(1, 0));
-        bc.getBoard().emptySlotSeeds(new Point(2, 0));
-        bc.getBoard().emptySlotSeeds(new Point(3, 0));
-        bc.getBoard().emptySlotSeeds(new Point(4, 0));
-        bc.getBoard().setSlotSeeds(new Point(5, 0), 1);
-        bc.getBoard().setRemainingSeeds(1, 1);
+        Game.getInstance().setPlayer(new Player(1, "Test", new RandomSelect(b, 1)));
+        Game.getInstance().setPlayer(new Player(2, "Test", new RandomSelect(b, 2)));
+        g.setBoardController(b);
+        b.getBoard().emptySlotSeeds(new Point(0, 0));
+        b.getBoard().emptySlotSeeds(new Point(1, 0));
+        b.getBoard().emptySlotSeeds(new Point(2, 0));
+        b.getBoard().emptySlotSeeds(new Point(3, 0));
+        b.getBoard().emptySlotSeeds(new Point(4, 0));
+        b.getBoard().setSlotSeeds(new Point(5, 0), 1);
+        b.getBoard().setRemainingSeeds(1, 1);
         g.setNextState(GameController.m_playing);
         g.setCurrentPlayer(1);
         g.refresh(1);
@@ -131,7 +127,6 @@ public class PlayingStateTest {
     void handleState_selfStarvation_sameRow_shouldnot_fail() {
         Game.getInstance().setSeeds(1, 0);
         Game.getInstance().setSeeds(2, 0);
-        BoardController b = new BoardController(new Board(), g);
         g.setBoardController(b);
         b.getBoard().emptySlotSeeds(new Point(0, 0));
         b.getBoard().emptySlotSeeds(new Point(1, 0));
