@@ -10,7 +10,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class GameViewTest {
-    GameView g = new GameView();
+    BoardController bc = new BoardController(new Board());
+    GameController gc = new GameController(bc);
+    GameView g = new GameView(gc);
 
     /**
      * Check if displayMessage() fails displaying the winning message
@@ -83,7 +85,6 @@ class GameViewTest {
     @DisplayName("displayGame() with a NULL board view - should fail")
     @Test
     void displayGame_nullBoardView_should_fail() {
-        g.setController(new GameController());
         Assertions.assertThrows(NullPointerException.class, () -> {
             g.displayGame();
         });
@@ -95,9 +96,7 @@ class GameViewTest {
     @DisplayName("displayGame() - should not fail")
     @Test
     void displayGame_shouldnot_fail() {
-        GameController gc = new GameController();
-        g.setController(gc);
-        BoardController bc = new BoardController(new Board());
+
         gc.setBoardController(bc);
         BoardView bv = new BoardView(bc);
         Game.getInstance().setPlayer(new Player(1, "Test1"));

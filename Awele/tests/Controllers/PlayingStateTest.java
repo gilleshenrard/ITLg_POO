@@ -11,8 +11,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class PlayingStateTest {
-    GameController g = new GameController(new GameView());
     BoardController b = new BoardController(new Board());
+    GameController g = new GameController(b);
+    GameView gv = new GameView(g);
 
     /**
      * Check if handleState() processes a simple scattering properly (no capture, no starvation)

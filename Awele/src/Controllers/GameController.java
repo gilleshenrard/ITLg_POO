@@ -18,11 +18,15 @@ public class GameController {
 
     /**
      * Create a new Game controller
-     * @param view Game view to assign to the controller
+     * @param view Board controller to use
+     * @throws NullPointerException
      */
-    public GameController(GameView view){
-        this.m_board = null;
-        this.m_gameView = view;
+    public GameController(BoardController boardController) throws NullPointerException {
+        if(boardController == null)
+            throw new NullPointerException("GameController() : NULL instance of BoardController");
+
+        this.m_board = boardController;
+        this.m_gameView = null;
         this.m_currentPlayer = 1;
         this.m_currentState = GameController.m_prompting;
     }
@@ -97,6 +101,17 @@ public class GameController {
      */
     public BoardController getBoardController(){
         return this.m_board;
+    }
+
+    /**
+     * Set the Game View used
+     * @param gameView Game view to use
+     * @throws NullPointerException
+     */
+    public void setView(GameView gameView) throws NullPointerException{
+        if(gameView == null)
+            throw new NullPointerException("GameController.setView() : NULL instance of GameView");
+        this.m_gameView = gameView;
     }
 
     /**

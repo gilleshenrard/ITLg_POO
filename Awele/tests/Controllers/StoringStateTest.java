@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import java.security.InvalidParameterException;
 
 public class StoringStateTest {
-    GameView gv = new GameView();
-    GameController g = new GameController(gv);
+    GameController g = new GameController(new BoardController(new Board()));
+    GameView gv = new GameView(g);
 
     /**
      * Check if handleState() throws an exception when storing above 48
@@ -34,10 +34,7 @@ public class StoringStateTest {
     @DisplayName("handleState() - should not fail")
     @Test
     void handleState_shouldnot_fail() {
-        BoardController bc = new BoardController(new Board());
-        BoardView bv = new BoardView(bc);
-        g.setBoardController(bc);
-        gv.setController(g);
+        BoardView bv = new BoardView(g.getBoardController());
         g.setNextState(GameController.m_storing);
         g.setCurrentPlayer(1);
         Game.getInstance().setSeeds(1, 23);

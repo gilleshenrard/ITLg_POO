@@ -9,9 +9,15 @@ public class GameView {
 
     /**
      * Create a new GameView
+     * @param controller Game controller to use
+     * @throws NullPointerException
      */
-    public GameView(){
-        this.m_controller = null;
+    public GameView(GameController controller) throws NullPointerException{
+        if (controller == null)
+            throw new NullPointerException("GameView() : NULL instance of GameController");
+
+        this.m_controller = controller;
+        this.m_controller.setView(this);
     }
 
     /**

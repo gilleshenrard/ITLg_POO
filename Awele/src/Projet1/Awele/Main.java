@@ -14,16 +14,14 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //game setup
-        GameView gameView = new GameView();
-        GameController game = new GameController(gameView);
-        gameView.setController(game);
-
         //board setup
         Board board = new Board();
         BoardController boardController = new BoardController(board);
-        game.setBoardController(boardController);
         BoardView b = new BoardView(boardController);
+
+        //game setup
+        GameController game = new GameController(boardController);
+        GameView gameView = new GameView(game);
 
         //players setup
         Game.getInstance().setPlayer(new Player(1, "Gilles", new KeyboardSelect()));

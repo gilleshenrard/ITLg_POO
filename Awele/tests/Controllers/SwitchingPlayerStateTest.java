@@ -15,7 +15,8 @@ public class SwitchingPlayerStateTest {
     @DisplayName("handleState() - should not fail")
     @Test
     void handleState_shouldnot_fail() {
-        GameController g = new GameController(new GameView());
+        GameController g = new GameController();
+        GameView gv = new GameView(g);
         Game.getInstance().setPlayer(new Player(1, "Test"));
         Game.getInstance().setPlayer(new Player(2, "Test"));
         Assertions.assertEquals(1, g.getCurrentPlayer());

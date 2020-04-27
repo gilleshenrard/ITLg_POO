@@ -18,13 +18,10 @@ public class PromptingStateTest {
     @DisplayName("handleState() - should not fail")
     @Test
     void handleState_shouldnot_fail() {
-        GameView gv = new GameView();
-        GameController g = new GameController(gv);
         BoardController bc = new BoardController(new Board());
         BoardView bv = new BoardView(bc);
-        bc.setBoardView(bv);
-        g.setBoardController(bc);
-        gv.setController(g);
+        GameController g = new GameController(bc);
+        GameView gv = new GameView(g);
         Game.getInstance().setPlayer(new Player(1, "Test", new RandomSelect(bc, 1)));
         Game.getInstance().setPlayer(new Player(2, "Test", new RandomSelect(bc, 2)));
         g.setNextState(GameController.m_prompting);

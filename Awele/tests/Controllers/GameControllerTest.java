@@ -4,7 +4,6 @@ import Models.Board;
 import Models.Game;
 import Models.Player;
 import Models.Point;
-import Views.GameView;
 import Views.RandomSelect;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
@@ -14,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import java.security.InvalidParameterException;
 
 public class GameControllerTest {
-    GameController g = new GameController(new GameView());
+    GameController g = new GameController();
 
     /**
      * Check if getBoardController() returns the right instance of Board
