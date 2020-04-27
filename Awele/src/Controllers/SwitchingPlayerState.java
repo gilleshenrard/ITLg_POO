@@ -1,6 +1,6 @@
 package Controllers;
 
-public class SwitchingPlayerState extends GameState {
+public class SwitchingPlayerState implements iGameState {
     /**
      * Switch players (1 becomes 2, 2 becomes 1)
      * @param controller Game controller to use

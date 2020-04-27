@@ -1,6 +1,6 @@
 package Controllers;
 
-public class StoringState extends GameState {
+public class StoringState implements iGameState {
 
     /**
      * Store the seeds captured by the player

@@ -4,7 +4,7 @@ import Models.Point;
 
 import java.security.InvalidParameterException;
 
-public class PlayingState extends GameState {
+public class PlayingState implements iGameState {
 
     /**
      * Make the player play a slot

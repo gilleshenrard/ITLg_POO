@@ -9,7 +9,7 @@ import java.security.InvalidParameterException;
 public class GameController {
     private BoardController m_board;
     private GameView m_gameView;
-    private GameState m_currentState;
+    private iGameState m_currentState;
     private int m_currentPlayer;
     public static SwitchingPlayerState m_switching = new SwitchingPlayerState();
     public static PromptingState m_prompting = new PromptingState();
@@ -41,7 +41,7 @@ public class GameController {
      * Set which will be the next state to join
      * @param nextState Next state to join
      */
-    public void setNextState(GameState nextState){
+    public void setNextState(iGameState nextState){
         this.m_currentState = nextState;
     }
 
@@ -49,7 +49,7 @@ public class GameController {
      * Get the next game state
      * @return Next game state to reach
      */
-    public GameState getNextState(){
+    public iGameState getNextState(){
         return this.m_currentState;
     }
 
