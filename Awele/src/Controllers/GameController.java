@@ -187,12 +187,7 @@ public class GameController {
      * @throws InvalidParameterException
      */
     public int playSlot(Point p) throws InvalidParameterException{
-/*        int ret = this.m_board.playSlot(p);
-        if (ret > 0)
-            this.storeSeeds(p.getY() + 1, ret);
-
-        return ret;
-*/      return this.m_board.playSlot(p);
+      return this.m_board.playSlot(p);
     }
 
     /**
@@ -239,8 +234,9 @@ public class GameController {
      * Display a board row depending on the ID of a player
      * @param ID ID of the player for which display the row
      * @param invert Direction in which display the row (right-left or left-right)
+     * @throws NullPointerException
      */
-    public void displayRow(int ID, boolean invert){
+    public void displayRow(int ID, boolean invert) throws NullPointerException{
         if (this.m_board == null)
             throw new NullPointerException("GameController.displayRow() : NULL instance of BoardController");
 
@@ -250,8 +246,9 @@ public class GameController {
     /**
      * Display a fixed size slot
      * @param amount Amount to display in the slot
+     * @throws NullPointerException
      */
-    public void displaySlot(int amount){
+    public void displaySlot(int amount) throws NullPointerException{
         if (this.m_board == null)
             throw new NullPointerException("GameController.displaySlot() : NULL instance of BoardController");
 
