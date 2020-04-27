@@ -53,18 +53,16 @@ public class PlayingState implements iGameState {
         if (outcome == -2)
             controller.displayWarning("An empty slot can not be harvested");
 
-        //if current player plays randomly and don't have any possible moves left, forfeit
-        if (controller.isPlayerAI(controller.getCurrentPlayer())) {
-            if (controller.getShotsLeft(controller.getCurrentPlayer()) == 0) {
-                controller.displayMessage(controller.getName(controller.getCurrentPlayer()) + " can't make any move. He forfeits !");
+        //if current player doesn't have any possible moves left, forfeit
+        if (controller.getShotsLeft(controller.getCurrentPlayer()) <= 0) {
+            controller.displayMessage(controller.getName(controller.getCurrentPlayer()) + " can't make any move. He forfeits !");
 
-                //Easter egg : when both players play randomly and one of them forfeits, he says the last quote of the W.P.O.R. in the movie Wargames
-                if(controller.isPlayerAI(1) && controller.isPlayerAI(2)) {
-                    controller.displayMessage("\n" + controller.getName(controller.getCurrentPlayer()) + " : 'A strange game... The only winning move is not to play...'");
-                    controller.displayMessage(controller.getName(controller.getCurrentPlayer()) + " : '......................... How about a nice game of chess?'");
-                }
-                return -2;
+            //Easter egg : when both players play randomly and one of them forfeits, he says the last quote of the W.P.O.R. in the movie Wargames
+            if(controller.isPlayerAI(1) && controller.isPlayerAI(2)) {
+                controller.displayMessage("\n" + controller.getName(controller.getCurrentPlayer()) + " : 'A strange game... The only winning move is not to play...'");
+                controller.displayMessage(controller.getName(controller.getCurrentPlayer()) + " : '......................... How about a nice game of chess?'");
             }
+            return -2;
         }
         //get back to the Prompting state
         controller.setNextState(controller.m_prompting);
