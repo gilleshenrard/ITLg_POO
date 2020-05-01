@@ -69,10 +69,13 @@ public class BoardController {
      * @param slot Slot being harvested
      * @return -1 if starvation, -2 if empty slot selected, amount of seeds captured otherwise
      * @throws InvalidParameterException
+     * @throws NullPointerException
      */
-    public int playSlot(Point p) throws InvalidParameterException {
+    public int playSlot(Point p) throws InvalidParameterException, NullPointerException {
+        if (p == null)
+            throw new NullPointerException("BoardController.playSlot() : NULL instance of Point");
         Board.validateID(p.getY() + 1, "BoardController.playSlot()");
-        Board.validateCoordinates(new Point(p.getX(), p.getY()), "Board.playSlot()");
+        Board.validateCoordinates(p, "Board.playSlot()");
 
         //
         //SCATTERING PHASE
