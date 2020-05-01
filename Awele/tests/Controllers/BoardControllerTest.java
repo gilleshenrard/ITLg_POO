@@ -107,6 +107,138 @@ public class BoardControllerTest {
     }
 
     /**
+     * Check if isLegal() returns a cancellation code when selecting a slot with no seed
+     */
+    @DisplayName("isLegal() with an empty slot - should not fail")
+    @Test
+    void isLegal_0seeds_shouldnot_fail() {
+        b.getBoard().setSlotSeeds(new Point(0, 0), 0);
+        int ret = b.isLegal(new Point(0, 0));
+        Assertions.assertEquals(-2, ret);
+    }
+
+    /**
+     * Check if isLegal() throws an exception with an invalid ID
+     */
+    @DisplayName("isLegal() with an invalid ID - should fail")
+    @Test
+    void isLegal_invalidID_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.isLegal(new Point(3, 3));
+        });
+    }
+
+    /**
+     * Check if isLegal() throws an exception with a slot below 0
+     */
+    @DisplayName("isLegal() with an slot below 0 - should fail")
+    @Test
+    void isLegal_below0_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.isLegal(new Point(-1, 0));
+        });
+    }
+
+    /**
+     * Check if isLegal() throws an exception with a slot above 5
+     */
+    @DisplayName("isLegal() with an slot above 5 - should fail")
+    @Test
+    void isLegal_above5_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.isLegal(new Point(1, 6));
+        });
+    }
+
+    /**
+     * Check if isLegal() processes a simple scattering properly (no capture, no starvation)
+     */
+    @DisplayName("isLegal() with neither capture nor starvation - should not fail")
+    @Test
+    void isLegal_noCaptureNoStarve_shouldnot_fail() {
+        int ret = b.isLegal(new Point(5, 0));
+        Assertions.assertEquals(1, ret);
+    }
+
+    /**
+     * Check if isLegal() processes a simple scattering properly (2 captures, no starvation)
+     */
+    @DisplayName("isLegal() with a capture case - should not fail")
+    @Test
+    void isLegal_CaptureNoStarve_shouldnot_fail() {
+        b.getBoard().setSlotSeeds(new Point(1, 1), 2);
+        b.getBoard().setSlotSeeds(new Point(3, 1), 1);
+        b.getBoard().setSlotSeeds(new Point(4, 1), 9);
+        int ret = b.isLegal(new Point(5, 0));
+        Assertions.assertEquals(1, ret);
+    }
+
+    /**
+     * Check if isLegal() processes a starvation properly
+     */
+    @DisplayName("isLegal() with a starvation case - should not fail")
+    @Test
+    void isLegal_noCaptureStarve_shouldnot_fail() {
+        b.getBoard().setSlotSeeds(new Point(0, 1), 1);
+        b.getBoard().setSlotSeeds(new Point(1, 1), 2);
+        b.getBoard().emptySlotSeeds(new Point(2, 1));
+        b.getBoard().emptySlotSeeds(new Point(3, 1));
+        b.getBoard().emptySlotSeeds(new Point(4, 1));
+        b.getBoard().emptySlotSeeds(new Point(5, 1));
+        b.getBoard().setSlotSeeds(new Point(5, 0), 2);
+        b.getBoard().setRemainingSeeds(2, 3);
+        b.getBoard().setRemainingSeeds(1, 22);
+        int ret = b.isLegal(new Point(5, 0));
+        Assertions.assertEquals(-1, ret);
+    }
+
+    /**
+     * Check if isLegal() processes a victory season
+     */
+    @DisplayName("isLegal() with a victory case - should not fail")
+    @Test
+    void isLegal_victory_shouldnot_fail() {
+        b.getBoard().setSlotSeeds(new Point(3, 1), 1);
+        b.getBoard().setSlotSeeds(new Point(1, 1), 2);
+        int ret = b.isLegal(new Point(5, 0));
+        Assertions.assertEquals(1, ret);
+    }
+
+    /**
+     * Check if isLegal() forbids a self-starvation by scattering to another row
+     */
+    @DisplayName("isLegal() with self-starvation to other row - should not fail")
+    @Test
+    void isLegal_selfStarvation_otherRow_shouldnot_fail() {
+        b.getBoard().emptySlotSeeds(new Point(0, 0));
+        b.getBoard().emptySlotSeeds(new Point(1, 0));
+        b.getBoard().emptySlotSeeds(new Point(2, 0));
+        b.getBoard().emptySlotSeeds(new Point(3, 0));
+        b.getBoard().emptySlotSeeds(new Point(4, 0));
+        b.getBoard().setSlotSeeds(new Point(5, 0), 1);
+        b.getBoard().setRemainingSeeds(1, 1);
+        int ret = b.isLegal(new Point(5, 0));
+        Assertions.assertEquals(-1, ret);
+    }
+
+    /**
+     * Check if isLegal() forbids a self-starvation by scattering within a row
+     */
+    @DisplayName("isLegal() with self-starvation within a row - should not fail")
+    @Test
+    void isLegal_selfStarvation_sameRow_shouldnot_fail() {
+        b.getBoard().emptySlotSeeds(new Point(0, 0));
+        b.getBoard().emptySlotSeeds(new Point(1, 0));
+        b.getBoard().emptySlotSeeds(new Point(2, 0));
+        b.getBoard().emptySlotSeeds(new Point(3, 0));
+        b.getBoard().setSlotSeeds(new Point(4, 0), 1);
+        b.getBoard().setSlotSeeds(new Point(5, 0), 1);
+        b.getBoard().setRemainingSeeds(1, 2);
+        int ret = b.playSlot(new Point(4, 0));
+        Assertions.assertEquals(-1, ret);
+    }
+
+    /**
      * Check if playSlot() returns a cancellation code when selecting a slot with no seed
      */
     @DisplayName("playSlot() with an empty slot - should not fail")

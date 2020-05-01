@@ -195,6 +195,17 @@ public class GameController {
     }
 
     /**
+     * Check if playing p is legal
+     * @param p The slot to test
+     * @return -1 if starvation, -2 if empty, positive if the play is legal
+     * @throws InvalidParameterException
+     * @throws NullPointerException
+     */
+    public int isLegal(Point p) throws InvalidParameterException, NullPointerException{
+        return this.m_board.isLegal(p);
+    }
+
+    /**
      * Save the player's selection + Harvest the seeds from a slot and, if necessary, scatter them
      * @param id ID of the player harvesting
      * @param slot Slot being harvested

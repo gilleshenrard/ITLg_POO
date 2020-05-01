@@ -64,6 +64,48 @@ public class BoardController {
     }
 
     /**
+     * Check if playing p is legal
+     * @param p The slot to test
+     * @return -1 if starvation, -2 if empty, positive if the play is legal
+     * @throws InvalidParameterException
+     * @throws NullPointerException
+     */
+    public int isLegal(Point p) throws InvalidParameterException, NullPointerException{
+        if (p == null)
+            throw new NullPointerException("BoardController.isLegal() : NULL instance of Point");
+        Board.validateID(p.getY() + 1, "BoardController.isLegal()");
+        Board.validateCoordinates(p, "Board.isLegal()");
+
+        //recover the amount of seeds it the slot tested
+        int nbseeds = getSlotSeeds(p);
+
+        //if slot empty, return the proper code
+        if (nbseeds == 0)
+            return -2;
+
+        //compute the amount of seeds which would be captured in each player row
+        //  (1 or 2 in each slot in which the tested slot would be scattered)
+        Point tmp = new Point(p);
+        int[] capturable = new int[2];
+        capturable[0] = 0;
+        capturable[1] = 0;
+        do {
+            tmp = this.m_board.getNext(tmp);
+            if (getSlotSeeds(tmp) == 1 || getSlotSeeds(tmp) == 2)
+                capturable[tmp.getY()] += getSlotSeeds(p);
+            nbseeds--;
+        }while (nbseeds > 0);
+
+        //in case of starvation, return the proper code
+        if ((getSlotSeeds(tmp) == 1 || getSlotSeeds(tmp) == 2)
+             && (capturable[0] == this.m_board.getRemainingSeeds(1)
+                 || capturable[1] == this.m_board.getRemainingSeeds(2)))
+            return -1;
+
+        return 1;
+    }
+
+    /**
      * Harvest the seeds from a slot and, if necessary, scatter them
      * @param id ID of the player harvesting
      * @param slot Slot being harvested
