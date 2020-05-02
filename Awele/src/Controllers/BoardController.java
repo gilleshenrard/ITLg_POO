@@ -77,7 +77,7 @@ public class BoardController {
         Board.validateCoordinates(p, "Board.isLegal()");
 
         //recover the amount of seeds it the slot tested
-        int nbseeds = getSlotSeeds(p);
+        int nbseeds = this.getSlotSeeds(p);
 
         //if slot empty, return the proper code
         if (nbseeds == 0)
@@ -95,17 +95,17 @@ public class BoardController {
         java.util.Arrays.fill(capturable, 0);
         do {
             tmp = this.m_board.getNext(tmp);
-            if (getSlotSeeds(tmp) == 1 || getSlotSeeds(tmp) == 2)
+            if (this.getSlotSeeds(tmp) == 1 || this.getSlotSeeds(tmp) == 2)
                 capturable[tmp.getY()] += getSlotSeeds(tmp);
             nbseeds--;
         }while (nbseeds > 0);
 
         //starvation case for the player 1
-        if(backup[0] + (getSlotSeeds(tmp) == 1 || getSlotSeeds(tmp) == 2 ? capturable[0] : 0) == this.m_board.getRemainingSeeds(1))
+        if(backup[0] + (this.getSlotSeeds(tmp) == 1 || this.getSlotSeeds(tmp) == 2 ? capturable[0] : 0) == this.m_board.getRemainingSeeds(1))
             return -1;
 
         //starvation case for the player 2
-        if(backup[1] + (getSlotSeeds(tmp) == 1 || getSlotSeeds(tmp) == 2 ? capturable[1] : 0) == this.m_board.getRemainingSeeds(2))
+        if(backup[1] + (this.getSlotSeeds(tmp) == 1 || this.getSlotSeeds(tmp) == 2 ? capturable[1] : 0) == this.m_board.getRemainingSeeds(2))
             return -1;
 
         return 1;
@@ -134,15 +134,15 @@ public class BoardController {
         ArrayList<Point> buffer = this.processScattering(p);
 
         //get the amount of seeds in the last slot of the buffer
-        int nbseeds = this.m_board.getSlotSeeds(buffer.get(buffer.size()-1));
+        ret = this.m_board.getSlotSeeds(buffer.get(buffer.size()-1));
 
         //if that amount is 2 or 3, a capture needs to be made
-        if(nbseeds == 2 || nbseeds == 3)
-            nbseeds = this.processCapture(buffer);
+        if(ret == 2 || ret == 3)
+            ret = this.processCapture(buffer);
         else
-            nbseeds = 0;
+            ret = 0;
 
-        return nbseeds;
+        return ret;
     }
 
     /**
