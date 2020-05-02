@@ -72,7 +72,7 @@ public class PlayingStateTest {
         g.setCurrentPlayer(1);
         g.refresh(1);
         int ret = g.handleState(6);
-        Assertions.assertEquals(0, ret);
+        Assertions.assertEquals(-1, ret);
         Assertions.assertTrue(g.getNextState() instanceof PromptingState);
     }
 
@@ -116,7 +116,7 @@ public class PlayingStateTest {
         g.setCurrentPlayer(1);
         g.refresh(1);
         int ret = g.handleState(6);
-        Assertions.assertEquals(0, ret);
+        Assertions.assertEquals(-2, ret);
         Assertions.assertTrue(g.getNextState() instanceof PromptingState);
     }
 
@@ -140,7 +140,7 @@ public class PlayingStateTest {
         g.setNextState(GameController.m_playing);
         g.refresh(1);
         int ret = g.handleState(5);
-        Assertions.assertEquals(0, ret);
+        Assertions.assertEquals(-2, ret);
         Assertions.assertTrue(g.getNextState() instanceof PromptingState);
     }
 }

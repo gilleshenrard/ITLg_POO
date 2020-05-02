@@ -1,6 +1,7 @@
 package Views;
 
 import Controllers.BoardController;
+import Models.Point;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -8,7 +9,7 @@ import java.util.Random;
 public class RandomSelect implements iSelectable {
     private int m_id;
     private BoardController m_board;
-    private ArrayList<Integer> m_playable;
+    private ArrayList<Integer> m_legal;
 
     /**
      * Create a new RandomSelect
@@ -18,7 +19,7 @@ public class RandomSelect implements iSelectable {
     public RandomSelect(BoardController board, int ID){
         this.m_id = ID;
         this.m_board = board;
-        this.m_playable = null;
+        this.m_legal = new ArrayList<>();
     }
 
     /**
@@ -33,21 +34,14 @@ public class RandomSelect implements iSelectable {
     /**
      * Randomly select a slot (between 1 and 6)
      * @return Random slot number
-     * @throws NullPointerException
      */
     @Override
-    public int selectSlot() throws NullPointerException{
-        if (this.m_playable == null)
-            throw new NullPointerException("RandomSelect.selectSlot() : null instance of ArrayList<Integer>");
-
+    public int selectSlot(){
         //if there are non-empty slots left
-        if (this.m_playable.size() > 0) {
+        if (this.m_legal.size() > 0) {
             Random r = new Random();
             //randomly pick a slot
-            Integer index = this.m_playable.get(r.nextInt(this.m_playable.size()));
-            //remove it from the array so it can't be played again until the array is refreshed
-            //  (avoids collisions : picking the same slots infinitely)
-            this.m_playable.remove(index);
+            Integer index = this.m_legal.get(r.nextInt(this.m_legal.size()));
             return 1 + index.intValue();
         }
         else
@@ -55,22 +49,25 @@ public class RandomSelect implements iSelectable {
     }
 
     /**
-     * Refresh the array of non-empty slots
+     * Refresh the array of legal slots
      */
     @Override
     public void refresh(){
-        this.m_playable = this.m_board.getNonEmpty(this.m_id);
+        this.m_legal.clear();
+
+        Point tmp = new Point(0, 0);
+        for(int i = 0 ; i<6 ; i++){
+            tmp.setCoordinates(i, this.m_id - 1);
+            if (this.m_board.isLegal(tmp) > 0)
+                this.m_legal.add(i);
+        }
     }
 
     /**
      * Return the amount of slots not tried yet
      * @return Amount of slots left
-     * @throws NullPointerException
      */
-    public int getShotsLeft() throws NullPointerException{
-        if (this.m_playable == null)
-            throw new NullPointerException("RandomSelect.selectSlot() : null instance of ArrayList<Integer>");
-
-        return this.m_playable.size();
+    public int getShotsLeft(){
+        return this.m_legal.size();
     }
 }

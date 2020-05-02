@@ -22,17 +22,6 @@ class RandomSelectTest {
     }
 
     /**
-     * Verify that selectSlot() throws an exception with a NULL instance
-     */
-    @DisplayName("selectSlot() with m_playable NULL - should fail")
-    @Test
-    void selectSlot_NULL_should_fail() {
-        Assertions.assertThrows(NullPointerException.class, () -> {
-            int buffer = r.selectSlot();
-        });
-    }
-
-    /**
      * Verify that refresh() generates 0 <= value <= 5
      */
     @DisplayName("refresh() - should not fail")
@@ -49,16 +38,5 @@ class RandomSelectTest {
     void getShotsLeft_shouldnot_fail() {
         r.refresh();
         Assertions.assertEquals(6, r.getShotsLeft());
-    }
-
-    /**
-     * Verify that getShotsLeft() throws an exception with a NULL instance
-     */
-    @DisplayName("getShotsLeft() with m_playable NULL - should fail")
-    @Test
-    void getShotsLeft_NULL_should_fail() {
-        Assertions.assertThrows(NullPointerException.class, () -> {
-            r.getShotsLeft();
-        });
     }
 }
