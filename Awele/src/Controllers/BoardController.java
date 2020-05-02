@@ -125,53 +125,23 @@ public class BoardController {
         Board.validateID(p.getY() + 1, "BoardController.playSlot()");
         Board.validateCoordinates(p, "Board.playSlot()");
 
-        //
-        //SCATTERING PHASE
-        //
-
-        //get number of seeds in the slot harvested by the player + backup
-        int backupseeds = this.m_board.getSlotSeeds(p);
-
-        //if the slot is empty, return empty slot code
-        if(backupseeds == 0)
-            return -2;
+        //Check if the play is legal, and return ad hoc code if not
+        int ret = this.isLegal(p);
+        if (ret <= 0)
+            return ret;
 
         //Scatter the selected slot + create a scattering buffer
         ArrayList<Point> buffer = this.processScattering(p);
-
-        //if any side of the board is now empty, revert the scattering and return starvation code
-        if (this.m_board.getRemainingSeeds(1) == 0 || this.m_board.getRemainingSeeds(2) == 0) {
-            this.revertScattering(p, buffer, backupseeds);
-            return -1;
-        }
-
-        //
-        //CAPTURE PHASE
-        //
 
         //get the amount of seeds in the last slot of the buffer
         int nbseeds = this.m_board.getSlotSeeds(buffer.get(buffer.size()-1));
 
         //if that amount is 2 or 3, a capture needs to be made
-        if(nbseeds == 2 || nbseeds == 3){
-
-            //check if this seasons risks to starve a player (remaining seeds = 0)
-            nbseeds = this.getSumCapturable(buffer);
-            if(nbseeds >= this.m_board.getRemainingSeeds(1) || nbseeds >= this.m_board.getRemainingSeeds(2)){
-                //player starved, revert the scattering and return starvation code
-                this.revertScattering(p, buffer, backupseeds);
-                return -1;
-            }
-            else{
-                //opponent not starved, capture
-                // (collect all seeds from the slots in the buffer which contain 2 or 3 seeds)
-                nbseeds = this.processCapture(buffer);
-            }
-        }
+        if(nbseeds == 2 || nbseeds == 3)
+            nbseeds = this.processCapture(buffer);
         else
             nbseeds = 0;
 
-        //return code for normal end of season
         return nbseeds;
     }
 
@@ -210,29 +180,6 @@ public class BoardController {
     }
 
     /**
-     * Revert a scattering previously made
-     * @param buffer Buffer containing the slots involved in the scattering
-     * @param backupseeds Amount of seeds to recover in the original node
-     * @throws NullPointerException
-     */
-    private void revertScattering(Point point, ArrayList<Point> buffer, int backupseeds) throws NullPointerException {
-        if (buffer == null)
-            throw new NullPointerException("BoardController.revertScattering() : NULL instance of ArrayList<Point>");
-        if (point == null)
-            throw new NullPointerException("BoardController.revertScattering() : NULL instance of Point");
-
-        //decrement the amount of seeds in each slot of the buffer
-        for (Point tmp:buffer) {
-            this.m_board.decrementSlotSeeds(tmp);
-            this.m_board.removeRemainingSeeds(tmp.getY()+1, 1);
-        }
-
-        //restore the original seed count in the slot selected by the player
-        this.m_board.setSlotSeeds(point, backupseeds);
-        this.m_board.addRemainingSeeds(point.getY()+1, backupseeds);
-    }
-
-    /**
      * Capture all the slots in the array : all those containing 2 or 3 seeds are emptied and their content is stored
      * @param ID ID of the player performing the capture
      * @param buffer Array of slots in which the scattering occurred
@@ -255,26 +202,6 @@ public class BoardController {
         }
 
         return nb_stored;
-    }
-
-    /**
-     * Get the sum of seeds which can be captured in the buffer
-     * @param buffer Buffer from which get the sum
-     * @return Sum of the seeds which can be captured
-     * @throws NullPointerException
-     */
-    private int getSumCapturable(ArrayList<Point> buffer) throws NullPointerException{
-        if(buffer == null)
-            throw new NullPointerException("BoardController.getSumCapturable() : NULL instance of ArrayList<Point>");
-
-        //count the sum of the seeds in the capturable slots (containing 2 or 3 seeds after scattering)
-        int total = 0;
-        for (Point p: buffer) {
-            if(this.m_board.getSlotSeeds(p) == 2 || this.m_board.getSlotSeeds(p) == 3)
-                total += this.m_board.getSlotSeeds(p);
-        }
-
-        return total;
     }
 
     /**
