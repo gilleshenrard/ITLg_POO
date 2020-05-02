@@ -176,6 +176,22 @@ public class Board {
     }
 
     /**
+     * Reset the board to an inial value
+     */
+    public void reset(){
+        this.setRemainingSeeds(1, 24);
+        this.setRemainingSeeds(2, 24);
+
+        Point p = new Point(0, 0);
+        for (int l = 0 ; l < 2 ; l++){
+            for (int c = 0 ; c < 6 ; c++){
+                p.setCoordinates(c, l);
+                this.setSlotSeeds(p, 4);
+            }
+        }
+    }
+
+    /**
      * Get a buffer with all the non-empty slots
      * @param ID ID of the player for which getting the slots
      * @return Buffer

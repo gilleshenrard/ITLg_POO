@@ -208,16 +208,7 @@ public class BoardController {
      * Reset the board to an inial value
      */
     public void resetBoard(){
-        this.m_board.setRemainingSeeds(1, 24);
-        this.m_board.setRemainingSeeds(2, 24);
-
-        Point p = new Point(0, 0);
-        for (int l = 0 ; l < 2 ; l++){
-            for (int c = 0 ; c < 6 ; c++){
-                p.setCoordinates(c, l);
-                this.m_board.setSlotSeeds(p, 4);
-            }
-        }
+        this.m_board.reset();
     }
 
     /**
