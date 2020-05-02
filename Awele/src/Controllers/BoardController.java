@@ -83,23 +83,29 @@ public class BoardController {
         if (nbseeds == 0)
             return -2;
 
+        //backup the amount of seeds in the slot harvested by the player
+        int[] backup = new int[2];
+        backup[0] = (p.getY() == 0 ? nbseeds : 0);
+        backup[1] = (p.getY() == 1 ? nbseeds : 0);
+
         //compute the amount of seeds which would be captured in each player row
         //  (1 or 2 in each slot in which the tested slot would be scattered)
         Point tmp = new Point(p);
         int[] capturable = new int[2];
-        capturable[0] = 0;
-        capturable[1] = 0;
+        java.util.Arrays.fill(capturable, 0);
         do {
             tmp = this.m_board.getNext(tmp);
             if (getSlotSeeds(tmp) == 1 || getSlotSeeds(tmp) == 2)
-                capturable[tmp.getY()] += getSlotSeeds(p);
+                capturable[tmp.getY()] += getSlotSeeds(tmp);
             nbseeds--;
         }while (nbseeds > 0);
 
-        //in case of starvation, return the proper code
-        if ((getSlotSeeds(tmp) == 1 || getSlotSeeds(tmp) == 2)
-             && (capturable[0] == this.m_board.getRemainingSeeds(1)
-                 || capturable[1] == this.m_board.getRemainingSeeds(2)))
+        //starvation case for the player 1
+        if(backup[0] + (getSlotSeeds(tmp) == 1 || getSlotSeeds(tmp) == 2 ? capturable[0] : 0) == this.m_board.getRemainingSeeds(1))
+            return -1;
+
+        //starvation case for the player 2
+        if(backup[1] + (getSlotSeeds(tmp) == 1 || getSlotSeeds(tmp) == 2 ? capturable[1] : 0) == this.m_board.getRemainingSeeds(2))
             return -1;
 
         return 1;
