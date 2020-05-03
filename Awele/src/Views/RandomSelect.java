@@ -37,6 +37,7 @@ public class RandomSelect implements iSelectable {
     public int selectSlot(){
         ArrayList<Integer> legalShots = new ArrayList<>();
 
+        //create an array with all the legal shots the player can take
         Point tmp = new Point(0, 0);
         for(int i = 0 ; i<6 ; i++){
             tmp.setCoordinates(i, this.m_id - 1);
@@ -44,7 +45,7 @@ public class RandomSelect implements iSelectable {
                 legalShots.add(i);
         }
 
-        //if there are non-empty slots left
+        //if there are any legal shots
         if (legalShots.size() > 0) {
             Random r = new Random();
             //randomly pick a slot
