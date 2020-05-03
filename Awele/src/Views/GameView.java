@@ -23,14 +23,6 @@ public class GameView {
     }
 
     /**
-     * Set the game controller used by the game view
-     * @param controller Controller to use
-     */
-    public void setController(GameController controller){
-        this.m_controller = controller;
-    }
-
-    /**
      * Display a message in the out channel
      * @param msg Message to display
      */
