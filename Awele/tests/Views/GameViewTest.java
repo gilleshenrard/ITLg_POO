@@ -70,6 +70,7 @@ class GameViewTest {
     @DisplayName("displayGame() - should not fail")
     @Test
     void displayGame_shouldnot_fail() {
+        BoardView bv = new BoardView(gc.getBoardController());
         Game.getInstance().setPlayer(new Player(1, "Test1"));
         Game.getInstance().setPlayer(new Player(2, "Test2"));
         g.displayGame();
