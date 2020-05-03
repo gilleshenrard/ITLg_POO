@@ -30,11 +30,11 @@ class BoardViewTest {
     }
 
     /**
-     * Check if displayRow() fails displaying a row of slots
+     * Check if displayBoard() fails displaying a row of slots
      */
-    @DisplayName("displayRow() - should not fail")
+    @DisplayName("displayBoard() - should not fail")
     @Test
-    void displayRow_shouldnot_fail() {
-        bv.displayRow(1, false);
+    void displayBoard_shouldnot_fail() {
+        bv.displayBoard(1);
     }
 }

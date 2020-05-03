@@ -212,15 +212,15 @@ public class BoardController {
     }
 
     /**
-     * Display a board row depending on the ID of a player
-     * @param ID ID of the player for which display the row
-     * @param invert Direction in which display the row (right-left or left-right)
+     * Display all the slots of the board
+     * @param ID ID of the current player
+     * @throws NullPointerException
      */
-    public void displayRow(int ID, boolean invert){
+    public void displayBoard(int ID) throws NullPointerException{
         if (this.m_boardView == null)
             throw new NullPointerException("BoardController.displayRow() : NULL instance of BoardView");
 
-        this.m_boardView.displayRow(ID, invert);
+        this.m_boardView.displayBoard(ID);
     }
 
     /**

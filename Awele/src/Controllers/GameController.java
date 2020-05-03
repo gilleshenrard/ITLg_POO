@@ -246,16 +246,11 @@ public class GameController {
     }
 
     /**
-     * Display a board row depending on the ID of a player
-     * @param ID ID of the player for which display the row
-     * @param invert Direction in which display the row (right-left or left-right)
-     * @throws InvalidParameterException
+     * Display all the slots of the board
      * @throws NullPointerException
      */
-    public void displayRow(int ID, boolean invert) throws InvalidParameterException, NullPointerException{
-        Game.validateID(ID, "GameController.displayRow()");
-
-        this.m_board.displayRow(ID, invert);
+    public void displayBoard() throws NullPointerException{
+        this.getBoardController().displayBoard(this.m_currentPlayer);
     }
 
     /**

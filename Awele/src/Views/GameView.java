@@ -53,20 +53,18 @@ public class GameView {
         if (this.m_controller == null)
             throw new NullPointerException("GameView.displayGame() : NULL instance of GameController");
 
-        //display the opponent side of the board (slots are inverted)
+        //display the board
         //OPPONENT
         //|  0 |
         //|  6 ||  5 ||  4 ||  3 ||  2 ||  1 |
-        System.out.println(this.m_controller.getName(2));
-        this.m_controller.displaySlot(this.m_controller.getSeeds(2), false);
-        System.out.println();
-        this.m_controller.displayRow(2, true);
-
-        //display the player side of the board
         //|  1 ||  2 ||  3 ||  4 ||  5 ||  6 |
         //|  0 |
         //PLAYER
-        this.m_controller.displayRow(1, false);
+
+        System.out.println(this.m_controller.getName(2));
+        this.m_controller.displaySlot(this.m_controller.getSeeds(2), false);
+        System.out.println();
+        this.m_controller.displayBoard();
         this.m_controller.displaySlot(this.m_controller.getSeeds(1), false);
         System.out.println();
         System.out.println(this.m_controller.getName(1));

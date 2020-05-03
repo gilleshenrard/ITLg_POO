@@ -28,16 +28,18 @@ public class BoardView {
     }
 
     /**
-     * Display all the slots a player owns
-     * @param ID ID of the player
-     * @param invert Order of the slots : false = left-right, true = right-left
+     * Display all the slots of the board
+     * @param ID ID of the current player
      */
-    public void displayRow(int ID, boolean invert){
+    public void displayBoard(int ID){
         Point p = new Point(0, 0);
-        for(int i=0 ; i<6 ; i++) {
-            p.setCoordinates((invert ? 5 - i : i), ID - 1);
-            this.displaySlot(this.m_board.getSlotSeeds(p), this.m_board.isLegal(p) > 0);
+        for(int l=1 ; l>=0 ; l--) {
+            for (int c = 0; c < 6; c++) {
+                p.setCoordinates((l > 0 ? 5 - c : c), l);
+                this.displaySlot(this.m_board.getSlotSeeds(p),  l == ID-1 && this.m_board.isLegal(p) > 0);
+            }
+            System.out.println();
         }
-        System.out.println();
+
     }
 }
