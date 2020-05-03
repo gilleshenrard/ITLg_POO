@@ -9,6 +9,7 @@ import java.util.Random;
 public class RandomSelect implements iSelectable {
     private int m_id;
     private BoardController m_board;
+    private ArrayList<Integer> m_legal;
 
     /**
      * Create a new RandomSelect
@@ -18,6 +19,7 @@ public class RandomSelect implements iSelectable {
     public RandomSelect(BoardController board, int ID){
         this.m_id = ID;
         this.m_board = board;
+        this.m_legal = new ArrayList<>();
     }
 
     /**
