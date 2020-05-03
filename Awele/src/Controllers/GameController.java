@@ -121,16 +121,6 @@ public class GameController {
     }
 
     /**
-     * Return the amount of playable shots left
-     * @return Number of playable shots left
-     * @throws InvalidParameterException
-     * @throws NullPointerException
-     */
-    public int getShotsLeft(int ID) throws InvalidParameterException, NullPointerException{
-        return Game.getInstance().getShotsLeft(ID);
-    }
-
-    /**
      * Add nb_seeds to the seeds reserve of Player 1 or Player 2
      * @param ID ID of the player who receives the seeds
      * @param nb_seeds  Amount of seeds to store
@@ -154,18 +144,6 @@ public class GameController {
         Game.validateID(ID, "GameController.selectSlot()");
 
         return Game.getInstance().selectSlot(ID);
-    }
-
-    /**
-     * Reset the array of playable slots for the player with the id ID
-     * @param ID ID of the player for which reset the array
-     * @throws InvalidParameterException
-     * @throws NullPointerException
-     */
-    public void refresh(int ID) throws InvalidParameterException, NullPointerException {
-        Game.validateID(ID, "GameController.refresh()");
-
-        Game.getInstance().refresh(ID);
     }
 
     /**

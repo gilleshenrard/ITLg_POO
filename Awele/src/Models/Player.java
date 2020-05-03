@@ -108,25 +108,6 @@ public class Player {
     }
 
     /**
-     * Reset the array of playable slots
-     * @throws NullPointerException
-     */
-    public void refresh() throws NullPointerException {
-        if (this.m_behaviour == null)
-            throw new NullPointerException("Player.refresh() : NULL instance of behaviour");
-
-        this.getBehaviour().refresh();
-    }
-
-    /**
-     * Return the amount of playable shots left
-     * @return Number of playable shots left
-     */
-    public int getShotsLeft() {
-        return this.m_behaviour.getShotsLeft();
-    }
-
-    /**
      * Tells if o is equal to the current Player
      * @param o Object to test
      * @return true if equal, false otherwise

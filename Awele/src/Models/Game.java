@@ -96,20 +96,6 @@ public class Game {
     }
 
     /**
-     * Return the amount of playable shots left
-     * @return Number of playable shots left
-     * @throws InvalidParameterException
-     * @throws NullPointerException
-     */
-    public int getShotsLeft(int ID) throws InvalidParameterException, NullPointerException{
-        Game.validateID(ID, "Game.getShotsLeft()");
-        if (Game.getInstance().getPlayer(ID) == null)
-            throw new NullPointerException("Game.getShotsLeft() : Player " + ID + " not instantiated");
-
-        return Game.getInstance().getPlayer(ID).getShotsLeft();
-    }
-
-    /**
      * Fetch the name of a player via its ID
      * @param ID ID of the player
      * @return Name of the player
@@ -164,21 +150,6 @@ public class Game {
             throw new NullPointerException("Game.selectSlot() : Player " + ID + " not instantiated");
 
         return Game.getInstance().getPlayer(ID).selectSlot();
-    }
-
-    /**
-     * Make a player select a slot
-     * @param ID ID of the player to play the slot
-     * @return Slot selected
-     * @throws InvalidParameterException
-     * @throws NullPointerException
-     */
-    public void refresh(int ID) throws InvalidParameterException, NullPointerException{
-        Game.validateID(ID, "Game.refresh()");
-        if (Game.getInstance().getPlayer(ID) == null)
-            throw new NullPointerException("Game.refresh() : Player " + ID + " not instantiated");
-
-        Game.getInstance().getPlayer(ID).refresh();
     }
 
     /**

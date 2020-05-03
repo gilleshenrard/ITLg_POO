@@ -151,28 +151,6 @@ class GameTest {
     }
 
     /**
-     * Check if refresh() throws an exception with an invalid ID
-     */
-    @DisplayName("refresh() with an invalid ID - should fail")
-    @Test
-    void refresh_invalidID_should_fail() {
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            g.refresh(3);
-        });
-    }
-
-    /**
-     * Check if refresh() throws an exception with a NULL instance of Player
-     */
-    @DisplayName("refresh() with a NULL Player - should fail")
-    @Test
-    void refresh_NULLinstance_should_fail() {
-        Assertions.assertThrows(NullPointerException.class, () -> {
-            g.refresh(1);
-        });
-    }
-
-    /**
      * Check if getInstance() returns the right instance of Game
      */
     @DisplayName("getInstance() - should not fail")

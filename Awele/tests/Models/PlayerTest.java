@@ -134,26 +134,4 @@ class PlayerTest {
             p.selectSlot();
         });
     }
-
-    /**
-     * Check if refresh() throws an exception when used and m_behaviour is null
-     */
-    @DisplayName("refresh() with a NULL instance of m_behaviour - should fail")
-    @Test
-    void refresh_null_should_fail() {
-        Assertions.assertThrows(NullPointerException.class, () -> {
-            p.refresh();
-        });
-    }
-
-    /**
-     * Check if refresh() resets the array of playable slots properly
-     */
-    @DisplayName("refresh() - should not fail")
-    @Test
-    void refresh_shouldnot_fail() {
-        BoardController b = new BoardController(new Board());
-        p.setBehaviour(new RandomSelect(b, 1));
-        p.refresh();
-    }
 }

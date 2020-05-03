@@ -31,19 +31,4 @@ public class KeyboardSelect implements iSelectable {
 
         return this.m_scanner.nextInt();
     }
-
-    /**
-     * Do nothing
-     */
-    @Override
-    public void refresh() {}
-
-    /**
-     * Always true
-     * @return 1
-     */
-    @Override
-    public int getShotsLeft() {
-        return 1;
-    }
 }

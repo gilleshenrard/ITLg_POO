@@ -268,29 +268,7 @@ public class GameControllerTest {
     @Test
     void selectSlot_shouldnot_fail() {
         Game.getInstance().setPlayer(new Player(2, "", new RandomSelect(g.getBoardController(), 2)));
-        Game.getInstance().getPlayer(2).getBehaviour().refresh();
         int ret = g.selectSlot(2);
         Assertions.assertTrue(ret > 0 && ret <= 6);
-    }
-
-    /**
-     * Check if refresh() throws an exception with wrong ID
-     */
-    @DisplayName("refresh() with a wrong ID - should fail")
-    @Test
-    void refresh_wrongID_should_fail() {
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            g.refresh(3);
-        });
-    }
-
-    /**
-     * Check if refresh() resets the array of playable slots properly
-     */
-    @DisplayName("refresh() - should not fail")
-    @Test
-    void refresh_shouldnot_fail() {
-        Game.getInstance().setPlayer(new Player(1, "", new RandomSelect(g.getBoardController(), 1)));
-        g.refresh(1);
     }
 }
