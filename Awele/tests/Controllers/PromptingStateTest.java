@@ -1,6 +1,5 @@
 package Controllers;
 
-import Models.Board;
 import Models.Game;
 import Models.Player;
 import Views.BoardView;
@@ -18,12 +17,11 @@ public class PromptingStateTest {
     @DisplayName("handleState() - should not fail")
     @Test
     void handleState_shouldnot_fail() {
-        BoardController bc = new BoardController(new Board());
-        BoardView bv = new BoardView(bc);
-        GameController g = new GameController(bc);
+        GameController g = new GameController();
+        BoardView bv = new BoardView(g.getBoardController());
         GameView gv = new GameView(g);
-        Game.getInstance().setPlayer(new Player(1, "Test", new RandomSelect(bc, 1)));
-        Game.getInstance().setPlayer(new Player(2, "Test", new RandomSelect(bc, 2)));
+        Game.getInstance().setPlayer(new Player(1, "Test", new RandomSelect(g.getBoardController(), 1)));
+        Game.getInstance().setPlayer(new Player(2, "Test", new RandomSelect(g.getBoardController(), 2)));
         g.setNextState(GameController.m_prompting);
         int output = g.handleState(0);
         Assertions.assertTrue(output > 0 && output < 7);

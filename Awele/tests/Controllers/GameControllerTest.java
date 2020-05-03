@@ -16,38 +16,6 @@ public class GameControllerTest {
     GameController g = new GameController();
 
     /**
-     * Check if getBoardController() returns the right instance of Board
-     */
-    @DisplayName("getBoardController() - should not fail")
-    @Test
-    void getBoardController_shouldnot_fail() {
-        BoardController b = new BoardController(new Board()), b2;
-        g.setBoardController(b);
-        b2 = g.getBoardController();
-        Assertions.assertEquals(b, b2);
-    }
-
-    /**
-     * Check if setBoardController() throws an exception with a null instance
-     */
-    @DisplayName("setBoardController() with a NULL instance - should fail")
-    @Test
-    void setBoardController_nullBoard_should_fail() {
-        Assertions.assertThrows(NullPointerException.class, () -> {
-            g.setBoardController(null);
-        });
-    }
-
-    /**
-     * Check if setBoardController() fails setting an instance of Board
-     */
-    @DisplayName("setBoardController() - should not fail")
-    @Test
-    void setBoardController_shouldnot_fail() {
-        g.setBoardController(new BoardController(new Board()));
-    }
-
-    /**
      * Check if getName() returns the right player name
      */
     @DisplayName("getName() - should not fail")
@@ -130,7 +98,6 @@ public class GameControllerTest {
     @DisplayName("getSlot() with an invalid ID - should fail")
     @Test
     void playSlot_invalidID_should_fail() {
-        g.setBoardController(new BoardController(new Board()));
         Assertions.assertThrows(InvalidParameterException.class, () -> {
             g.playSlot(new Point(3, 3));
         });
@@ -142,7 +109,6 @@ public class GameControllerTest {
     @DisplayName("getSlot() with a slot below 0 - should fail")
     @Test
     void playSlot_below0_should_fail() {
-        g.setBoardController(new BoardController(new Board()));
         Assertions.assertThrows(InvalidParameterException.class, () -> {
             g.playSlot(new Point(-1, 0));
         });
@@ -154,7 +120,6 @@ public class GameControllerTest {
     @DisplayName("getSlot() with a slot above 5 - should fail")
     @Test
     void playSlot_above5_should_fail() {
-        g.setBoardController(new BoardController(new Board()));
         Assertions.assertThrows(InvalidParameterException.class, () -> {
             g.playSlot(new Point(1, 6));
         });
@@ -168,8 +133,7 @@ public class GameControllerTest {
     void playSlot_noCaptureNoStarve_shouldnot_fail() {
         Game.getInstance().setSeeds(1, 0);
         Game.getInstance().setSeeds(2, 0);
-        BoardController b = new BoardController(new Board());
-        g.setBoardController(b);
+        g.resetGame();
         int ret = g.playSlot(new Point(5, 0));
         Assertions.assertEquals(0, ret);
         Assertions.assertEquals(0, Game.getInstance().getSeeds(1));
@@ -184,11 +148,10 @@ public class GameControllerTest {
     void playSlot_CaptureNoStarve_shouldnot_fail() {
         Game.getInstance().setSeeds(1, 0);
         Game.getInstance().setSeeds(2, 0);
-        BoardController b = new BoardController(new Board());
-        g.setBoardController(b);
-        b.getBoard().setSlotSeeds(new Point(1, 1), 2);
-        b.getBoard().setSlotSeeds(new Point(3, 1), 1);
-        b.getBoard().setSlotSeeds(new Point(4, 1), 9);
+        g.resetGame();
+        g.getBoardController().getBoard().setSlotSeeds(new Point(1, 1), 2);
+        g.getBoardController().getBoard().setSlotSeeds(new Point(3, 1), 1);
+        g.getBoardController().getBoard().setSlotSeeds(new Point(4, 1), 9);
         int ret = g.playSlot(new Point(5, 0));
         Assertions.assertEquals(5, ret);
         Assertions.assertEquals(0, Game.getInstance().getSeeds(1));
@@ -203,18 +166,16 @@ public class GameControllerTest {
     void playSlot_noCaptureStarve_shouldnot_fail() {
         Game.getInstance().setSeeds(1, 0);
         Game.getInstance().setSeeds(2, 0);
-        BoardController b = new BoardController(new Board());
-        g.setBoardController(b);
-        b.getBoard().setSlotSeeds(new Point(0, 1), 1);
-        b.getBoard().setSlotSeeds(new Point(1, 1), 2);
-        b.getBoard().emptySlotSeeds(new Point(2, 1));
-        b.getBoard().emptySlotSeeds(new Point(3, 1));
-        b.getBoard().emptySlotSeeds(new Point(4, 1));
-        b.getBoard().emptySlotSeeds(new Point(5, 1));
-        b.getBoard().setSlotSeeds(new Point(5, 0), 2);
-        b.getBoard().setRemainingSeeds(2, 3);
-        b.getBoard().setRemainingSeeds(1, 22);
-        int ret = b.playSlot(new Point(5, 0));
+        g.getBoardController().getBoard().setSlotSeeds(new Point(0, 1), 1);
+        g.getBoardController().getBoard().setSlotSeeds(new Point(1, 1), 2);
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(2, 1));
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(3, 1));
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(4, 1));
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(5, 1));
+        g.getBoardController().getBoard().setSlotSeeds(new Point(5, 0), 2);
+        g.getBoardController().getBoard().setRemainingSeeds(2, 3);
+        g.getBoardController().getBoard().setRemainingSeeds(1, 22);
+        int ret = g.playSlot(new Point(5, 0));
         Assertions.assertEquals(-1, ret);
         Assertions.assertEquals(0, Game.getInstance().getSeeds(1));
         Assertions.assertEquals(0, Game.getInstance().getSeeds(2));
@@ -226,10 +187,9 @@ public class GameControllerTest {
     @DisplayName("playSlot() with a victory case - should not fail")
     @Test
     void playSlot_victory_shouldnot_fail() {
-        BoardController b = new BoardController(new Board());
-        g.setBoardController(b);
-        b.getBoard().setSlotSeeds(new Point(3, 1), 1);
-        b.getBoard().setSlotSeeds(new Point(1, 1), 2);
+        g.resetGame();
+        g.getBoardController().getBoard().setSlotSeeds(new Point(3, 1), 1);
+        g.getBoardController().getBoard().setSlotSeeds(new Point(1, 1), 2);
         Game.getInstance().setSeeds(2, 0);
         Game.getInstance().setSeeds(1, 20);
         int ret = g.playSlot(new Point(5, 0));
@@ -246,16 +206,14 @@ public class GameControllerTest {
     void playSlot_selfStarvation_otherRow_shouldnot_fail() {
         Game.getInstance().setSeeds(1, 0);
         Game.getInstance().setSeeds(2, 0);
-        BoardController b = new BoardController(new Board());
-        g.setBoardController(b);
-        b.getBoard().emptySlotSeeds(new Point(0, 0));
-        b.getBoard().emptySlotSeeds(new Point(1, 0));
-        b.getBoard().emptySlotSeeds(new Point(2, 0));
-        b.getBoard().emptySlotSeeds(new Point(3, 0));
-        b.getBoard().emptySlotSeeds(new Point(4, 0));
-        b.getBoard().setSlotSeeds(new Point(5, 0), 1);
-        b.getBoard().setRemainingSeeds(1, 1);
-        int ret = b.playSlot(new Point(5, 0));
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(0, 0));
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(1, 0));
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(2, 0));
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(3, 0));
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(4, 0));
+        g.getBoardController().getBoard().setSlotSeeds(new Point(5, 0), 1);
+        g.getBoardController().getBoard().setRemainingSeeds(1, 1);
+        int ret = g.playSlot(new Point(5, 0));
         Assertions.assertEquals(-1, ret);
         Assertions.assertEquals(0, Game.getInstance().getSeeds(1));
         Assertions.assertEquals(0, Game.getInstance().getSeeds(2));
@@ -269,16 +227,14 @@ public class GameControllerTest {
     void playSlot_selfStarvation_sameRow_shouldnot_fail() {
         Game.getInstance().setSeeds(1, 0);
         Game.getInstance().setSeeds(2, 0);
-        BoardController b = new BoardController(new Board());
-        g.setBoardController(b);
-        b.getBoard().emptySlotSeeds(new Point(0, 0));
-        b.getBoard().emptySlotSeeds(new Point(1, 0));
-        b.getBoard().emptySlotSeeds(new Point(2, 0));
-        b.getBoard().emptySlotSeeds(new Point(3, 0));
-        b.getBoard().setSlotSeeds(new Point(4, 0), 1);
-        b.getBoard().setSlotSeeds(new Point(5, 0), 1);
-        b.getBoard().setRemainingSeeds(1, 2);
-        int ret = b.playSlot(new Point(4, 0));
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(0, 0));
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(1, 0));
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(2, 0));
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(3, 0));
+        g.getBoardController().getBoard().setSlotSeeds(new Point(4, 0), 1);
+        g.getBoardController().getBoard().setSlotSeeds(new Point(5, 0), 1);
+        g.getBoardController().getBoard().setRemainingSeeds(1, 2);
+        int ret = g.playSlot(new Point(4, 0));
         Assertions.assertEquals(-1, ret);
         Assertions.assertEquals(0, Game.getInstance().getSeeds(1));
         Assertions.assertEquals(0, Game.getInstance().getSeeds(2));
@@ -290,7 +246,6 @@ public class GameControllerTest {
     @DisplayName("resetGame() - should not fail")
     @Test
     void resetGame_shouldnot_fail() {
-        g.setBoardController(new BoardController(new Board()));
         g.resetGame();
         Assertions.assertEquals(0, g.getSeeds(1));
         Assertions.assertEquals(0, g.getSeeds(2));
@@ -313,8 +268,6 @@ public class GameControllerTest {
     @DisplayName("selectSlot() - should not fail")
     @Test
     void selectSlot_shouldnot_fail() {
-        Board board = new Board();
-        g.setBoardController(new BoardController(board));
         Game.getInstance().setPlayer(new Player(2, "", new RandomSelect(g.getBoardController(), 2)));
         Game.getInstance().getPlayer(2).getBehaviour().refresh();
         int ret = g.selectSlot(2);

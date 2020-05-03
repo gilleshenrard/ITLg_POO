@@ -1,6 +1,5 @@
 package Controllers;
 
-import Models.Board;
 import Models.Game;
 import Views.BoardView;
 import Views.GameView;
@@ -11,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import java.security.InvalidParameterException;
 
 public class StoringStateTest {
-    GameController g = new GameController(new BoardController(new Board()));
+    GameController g = new GameController();
     GameView gv = new GameView(g);
 
     /**

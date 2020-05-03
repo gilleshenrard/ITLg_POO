@@ -1,17 +1,13 @@
 package Views;
 
-import Controllers.BoardController;
 import Controllers.GameController;
-import Models.Board;
 import Models.Game;
 import Models.Player;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class GameViewTest {
-    BoardController bc = new BoardController(new Board());
-    GameController gc = new GameController(bc);
+    GameController gc = new GameController();
     GameView g = new GameView(gc);
 
     /**
@@ -69,36 +65,12 @@ class GameViewTest {
     }
 
     /**
-     * Check if displayGame() throws an exception with a NULL controller
-     */
-    @DisplayName("displayGame() with a NULL controller - should fail")
-    @Test
-    void displayGame_nullController_should_fail() {
-        Assertions.assertThrows(NullPointerException.class, () -> {
-            g.displayGame();
-        });
-    }
-
-    /**
-     * Check if displayGame() throws an exception with a NULL board view
-     */
-    @DisplayName("displayGame() with a NULL board view - should fail")
-    @Test
-    void displayGame_nullBoardView_should_fail() {
-        Assertions.assertThrows(NullPointerException.class, () -> {
-            g.displayGame();
-        });
-    }
-
-    /**
      * Check if displayGame() fails displaying the game board
      */
     @DisplayName("displayGame() - should not fail")
     @Test
     void displayGame_shouldnot_fail() {
-
-        gc.setBoardController(bc);
-        BoardView bv = new BoardView(bc);
+        BoardView bv = new BoardView(gc.getBoardController());
         Game.getInstance().setPlayer(new Player(1, "Test1"));
         Game.getInstance().setPlayer(new Player(2, "Test2"));
         g.displayGame();

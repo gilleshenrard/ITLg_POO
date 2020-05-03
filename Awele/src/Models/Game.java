@@ -3,6 +3,7 @@ package Models;
 import java.security.InvalidParameterException;
 
 public class Game {
+    private Board m_board;
     private Player[] m_player;
     private int[] m_seedPlayer;
     private static Game m_instance;
@@ -11,6 +12,7 @@ public class Game {
      * Create a new Game
      */
     private Game() {
+        this.m_board = new Board();
         this.m_seedPlayer = new int[2];
         this.m_seedPlayer[0] = 0;
         this.m_seedPlayer[1] = 0;
@@ -41,6 +43,14 @@ public class Game {
             Game.m_instance = new Game();
 
         return Game.m_instance;
+    }
+
+    /**
+     * Get the board attached to the current game
+     * @return Current board
+     */
+    public Board getBoard(){
+        return this.m_board;
     }
 
     /**
@@ -175,5 +185,6 @@ public class Game {
     public void resetGame(){
         this.m_seedPlayer[0] = 0;
         this.m_seedPlayer[1] = 0;
+        this.m_board.reset();
     }
 }

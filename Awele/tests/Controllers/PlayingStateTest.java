@@ -1,6 +1,5 @@
 package Controllers;
 
-import Models.Board;
 import Models.Game;
 import Models.Player;
 import Models.Point;
@@ -11,8 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class PlayingStateTest {
-    BoardController b = new BoardController(new Board());
-    GameController g = new GameController(b);
+    GameController g = new GameController();
     GameView gv = new GameView(g);
 
     /**
@@ -23,7 +21,6 @@ public class PlayingStateTest {
     void handleState_noCaptureNoStarve_shouldnot_fail() {
         Game.getInstance().setSeeds(1, 0);
         Game.getInstance().setSeeds(2, 0);
-        g.setBoardController(b);
         g.setNextState(GameController.m_playing);
         g.setCurrentPlayer(1);
         int ret = g.handleState(6);
@@ -39,10 +36,10 @@ public class PlayingStateTest {
     void handleState_CaptureNoStarve_shouldnot_fail() {
         Game.getInstance().setSeeds(1, 0);
         Game.getInstance().setSeeds(2, 0);
-        g.setBoardController(b);
-        b.getBoard().setSlotSeeds(new Point(1, 1), 2);
-        b.getBoard().setSlotSeeds(new Point(3, 1), 1);
-        b.getBoard().setSlotSeeds(new Point(4, 1), 9);
+        g.resetGame();
+        g.getBoardController().getBoard().setSlotSeeds(new Point(1, 1), 2);
+        g.getBoardController().getBoard().setSlotSeeds(new Point(3, 1), 1);
+        g.getBoardController().getBoard().setSlotSeeds(new Point(4, 1), 9);
         g.setNextState(GameController.m_playing);
         g.setCurrentPlayer(1);
         int ret = g.handleState(6);
@@ -58,17 +55,17 @@ public class PlayingStateTest {
     void handleState_noCaptureStarveNoForfeit_shouldnot_fail() {
         Game.getInstance().setSeeds(1, 0);
         Game.getInstance().setSeeds(2, 0);
-        Game.getInstance().setPlayer(new Player(1, "Test", new RandomSelect(b, 1)));
-        b.resetBoard();
-        b.getBoard().setSlotSeeds(new Point(0, 1), 1);
-        b.getBoard().setSlotSeeds(new Point(1, 1), 2);
-        b.getBoard().emptySlotSeeds(new Point(2, 1));
-        b.getBoard().emptySlotSeeds(new Point(3, 1));
-        b.getBoard().emptySlotSeeds(new Point(4, 1));
-        b.getBoard().emptySlotSeeds(new Point(5, 1));
-        b.getBoard().setSlotSeeds(new Point(5, 0), 2);
-        b.getBoard().setRemainingSeeds(2, 3);
-        b.getBoard().setRemainingSeeds(1, 22);
+        Game.getInstance().setPlayer(new Player(1, "Test", new RandomSelect(g.getBoardController(), 1)));
+        g.getBoardController().resetBoard();
+        g.getBoardController().getBoard().setSlotSeeds(new Point(0, 1), 1);
+        g.getBoardController().getBoard().setSlotSeeds(new Point(1, 1), 2);
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(2, 1));
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(3, 1));
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(4, 1));
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(5, 1));
+        g.getBoardController().getBoard().setSlotSeeds(new Point(5, 0), 2);
+        g.getBoardController().getBoard().setRemainingSeeds(2, 3);
+        g.getBoardController().getBoard().setRemainingSeeds(1, 22);
         g.setNextState(GameController.m_playing);
         g.setCurrentPlayer(1);
         g.refresh(1);
@@ -85,16 +82,15 @@ public class PlayingStateTest {
     void handleState_selfStarvationForfeit_otherRow_shouldnot_fail() {
         Game.getInstance().setSeeds(1, 0);
         Game.getInstance().setSeeds(2, 0);
-        Game.getInstance().setPlayer(new Player(1, "Test", new RandomSelect(b, 1)));
-        Game.getInstance().setPlayer(new Player(2, "Test", new RandomSelect(b, 2)));
-        g.setBoardController(b);
-        b.getBoard().emptySlotSeeds(new Point(0, 0));
-        b.getBoard().emptySlotSeeds(new Point(1, 0));
-        b.getBoard().emptySlotSeeds(new Point(2, 0));
-        b.getBoard().emptySlotSeeds(new Point(3, 0));
-        b.getBoard().emptySlotSeeds(new Point(4, 0));
-        b.getBoard().setSlotSeeds(new Point(5, 0), 1);
-        b.getBoard().setRemainingSeeds(1, 1);
+        Game.getInstance().setPlayer(new Player(1, "Test", new RandomSelect(g.getBoardController(), 1)));
+        Game.getInstance().setPlayer(new Player(2, "Test", new RandomSelect(g.getBoardController(), 2)));
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(0, 0));
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(1, 0));
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(2, 0));
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(3, 0));
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(4, 0));
+        g.getBoardController().getBoard().setSlotSeeds(new Point(5, 0), 1);
+        g.getBoardController().getBoard().setRemainingSeeds(1, 1);
         g.setNextState(GameController.m_playing);
         g.setCurrentPlayer(1);
         g.refresh(1);
@@ -111,17 +107,16 @@ public class PlayingStateTest {
     void handleState_selfStarvationNoForfeit_sameRow_shouldnot_fail() {
         Game.getInstance().setSeeds(1, 0);
         Game.getInstance().setSeeds(2, 0);
-        Game.getInstance().setPlayer(new Player(1, "Test", new RandomSelect(b, 1)));
-        Game.getInstance().setPlayer(new Player(2, "Test", new RandomSelect(b, 2)));
-        g.setBoardController(b);
-        b.resetBoard();
-        b.getBoard().emptySlotSeeds(new Point(0, 0));
-        b.getBoard().emptySlotSeeds(new Point(1, 0));
-        b.getBoard().emptySlotSeeds(new Point(2, 0));
-        b.getBoard().emptySlotSeeds(new Point(3, 0));
-        b.getBoard().setSlotSeeds(new Point(4, 0), 1);
-        b.getBoard().setSlotSeeds(new Point(5, 0), 1);
-        b.getBoard().setRemainingSeeds(1, 2);
+        Game.getInstance().setPlayer(new Player(1, "Test", new RandomSelect(g.getBoardController(), 1)));
+        Game.getInstance().setPlayer(new Player(2, "Test", new RandomSelect(g.getBoardController(), 2)));
+        g.getBoardController().resetBoard();
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(0, 0));
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(1, 0));
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(2, 0));
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(3, 0));
+        g.getBoardController().getBoard().setSlotSeeds(new Point(4, 0), 1);
+        g.getBoardController().getBoard().setSlotSeeds(new Point(5, 0), 1);
+        g.getBoardController().getBoard().setRemainingSeeds(1, 2);
         g.setCurrentPlayer(1);
         g.setNextState(GameController.m_playing);
         g.refresh(1);

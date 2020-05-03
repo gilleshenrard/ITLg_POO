@@ -17,25 +17,10 @@ public class GameController {
     public static StoringState m_storing = new StoringState();
 
     /**
-     * Create a new Game controller
-     * @param view Board controller to use
-     * @throws NullPointerException
-     */
-    public GameController(BoardController boardController) throws NullPointerException {
-        if(boardController == null)
-            throw new NullPointerException("GameController() : NULL instance of BoardController");
-
-        this.m_board = boardController;
-        this.m_gameView = null;
-        this.m_currentPlayer = 1;
-        this.m_currentState = GameController.m_prompting;
-    }
-
-    /**
      * Create a new Game Controller
      */
     public GameController(){
-        this.m_board = null;
+        this.m_board = new BoardController(Game.getInstance().getBoard());
         this.m_gameView = null;
         this.m_currentPlayer = 1;
         this.m_currentState = GameController.m_prompting;
@@ -83,17 +68,6 @@ public class GameController {
     public int handleState(int input){
         return this.m_currentState.handleState(this, input);
     };
-
-    /**
-     * Set the board on which to play the current game
-     * @param board Board to set
-     * @throws NullPointerException
-     */
-    public void setBoardController(BoardController board) throws NullPointerException{
-        if(board == null)
-            throw new NullPointerException("GameController.setBoard() : NULL instance of Board");
-        this.m_board = board;
-    }
 
     /**
      * Return the board set in the current game
