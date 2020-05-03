@@ -157,7 +157,7 @@ public class BoardControllerTest {
     @Test
     void checkOutcome_noCaptureNoStarve_shouldnot_fail() {
         int ret = b.checkOutcome(new Point(5, 0));
-        Assertions.assertEquals(1, ret);
+        Assertions.assertEquals(0, ret);
     }
 
     /**
@@ -170,7 +170,7 @@ public class BoardControllerTest {
         b.getBoard().setSlotSeeds(new Point(3, 1), 1);
         b.getBoard().setSlotSeeds(new Point(4, 1), 9);
         int ret = b.checkOutcome(new Point(5, 0));
-        Assertions.assertEquals(0, ret);
+        Assertions.assertEquals(1, ret);
     }
 
     /**
@@ -201,7 +201,7 @@ public class BoardControllerTest {
         b.getBoard().setSlotSeeds(new Point(3, 1), 1);
         b.getBoard().setSlotSeeds(new Point(1, 1), 2);
         int ret = b.checkOutcome(new Point(5, 0));
-        Assertions.assertEquals(0, ret);
+        Assertions.assertEquals(1, ret);
     }
 
     /**
@@ -252,7 +252,7 @@ public class BoardControllerTest {
         b.getBoard().emptySlotSeeds(new Point(5, 0));
         b.getBoard().setRemainingSeeds(1, 1);
         int ret = b.checkOutcome(new Point(0, 0));
-        Assertions.assertEquals(1, ret);
+        Assertions.assertEquals(0, ret);
     }
 
     /**
