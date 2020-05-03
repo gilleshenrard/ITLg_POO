@@ -43,6 +43,17 @@ public class BoardController {
     }
 
     /**
+     * Set the board view on which to play the current game
+     * @param board Board view to set
+     * @throws NullPointerException
+     */
+    public void setBoardView(BoardView board) throws NullPointerException{
+        if(board == null)
+            throw new NullPointerException("BoardController.setBoardView() : NULL instance of Board");
+        this.m_boardView = board;
+    }
+
+    /**
      * Get the amount of seeds contained in the slot located at X,Y
      * @param point Coordinates of the slot
      * @return Amount of seeds
