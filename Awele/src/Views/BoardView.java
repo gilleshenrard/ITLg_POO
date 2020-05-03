@@ -21,6 +21,7 @@ public class BoardView {
     /**
      * Display a fixed size slot
      * @param amount Amount to display in the slot
+     * @param highlight Flag to indicate whether the slot should be highlighted
      */
     public void displaySlot(int amount, boolean highlight){
             System.out.format((highlight ? "\033[47;30m| %1$2d |\033[0m" : "| %1$2d |"), amount);

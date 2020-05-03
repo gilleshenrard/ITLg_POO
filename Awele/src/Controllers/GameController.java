@@ -261,6 +261,7 @@ public class GameController {
     /**
      * Display a fixed size slot
      * @param amount Amount to display in the slot
+     * @param highlight Flag to indicate whether the slot should be highlighted
      * @throws NullPointerException
      */
     public void displaySlot(int amount, boolean highlight) throws NullPointerException{
