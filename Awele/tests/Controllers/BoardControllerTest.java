@@ -234,8 +234,25 @@ public class BoardControllerTest {
         b.getBoard().setSlotSeeds(new Point(4, 0), 1);
         b.getBoard().setSlotSeeds(new Point(5, 0), 1);
         b.getBoard().setRemainingSeeds(1, 2);
-        int ret = b.playSlot(new Point(4, 0));
+        int ret = b.isLegal(new Point(4, 0));
         Assertions.assertEquals(-1, ret);
+    }
+
+    /**
+     * Check if isLegal()  without capture in the same row
+     */
+    @DisplayName("isLegal() w/o capture within a row - should not fail")
+    @Test
+    void isLegal_noCaptureNoStarveSameRow_shouldnot_fail() {
+        b.getBoard().setSlotSeeds(new Point(0, 0), 1);
+        b.getBoard().emptySlotSeeds(new Point(1, 0));
+        b.getBoard().emptySlotSeeds(new Point(2, 0));
+        b.getBoard().emptySlotSeeds(new Point(3, 0));
+        b.getBoard().emptySlotSeeds(new Point(4, 0));
+        b.getBoard().emptySlotSeeds(new Point(5, 0));
+        b.getBoard().setRemainingSeeds(1, 1);
+        int ret = b.isLegal(new Point(0, 0));
+        Assertions.assertEquals(1, ret);
     }
 
     /**
@@ -440,6 +457,30 @@ public class BoardControllerTest {
         Assertions.assertEquals(1, b.getSlotSeeds(new Point(4, 0)));
         Assertions.assertEquals(1, b.getSlotSeeds(new Point(5, 0)));
         Assertions.assertEquals(2, b.getBoard().getRemainingSeeds(1));
+    }
+
+    /**
+     * Check if playSlot() processes a shot without capture in the same row
+     */
+    @DisplayName("playSlot() w/o capture within a row - should not fail")
+    @Test
+    void playSlot_noCaptureNoStarveSameRow_shouldnot_fail() {
+        b.getBoard().setSlotSeeds(new Point(0, 0), 1);
+        b.getBoard().emptySlotSeeds(new Point(1, 0));
+        b.getBoard().emptySlotSeeds(new Point(2, 0));
+        b.getBoard().emptySlotSeeds(new Point(3, 0));
+        b.getBoard().emptySlotSeeds(new Point(4, 0));
+        b.getBoard().emptySlotSeeds(new Point(5, 0));
+        b.getBoard().setRemainingSeeds(1, 1);
+        int ret = b.playSlot(new Point(0, 0));
+        Assertions.assertEquals(0, ret);
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(0, 0)));
+        Assertions.assertEquals(1, b.getSlotSeeds(new Point(1, 0)));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(2, 0)));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(3, 0)));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(4, 0)));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(5, 0)));
+        Assertions.assertEquals(1, b.getBoard().getRemainingSeeds(1));
     }
 
     /**
