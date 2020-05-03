@@ -2,12 +2,14 @@ package Controllers;
 
 import Models.Board;
 import Models.Point;
+import Views.BoardView;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 
 public class BoardController {
     Board m_board;
+    BoardView m_boardView;
 
     /**
      * Create a new Board controller
