@@ -1,6 +1,5 @@
 package Controllers;
 
-import Models.Board;
 import Models.Game;
 import Models.Player;
 import Models.Point;
@@ -291,7 +290,7 @@ public class GameControllerTest {
     @DisplayName("refresh() - should not fail")
     @Test
     void refresh_shouldnot_fail() {
-        Game.getInstance().setPlayer(new Player(1, "", new RandomSelect(new BoardController(new Board()), 1)));
+        Game.getInstance().setPlayer(new Player(1, "", new RandomSelect(g.getBoardController(), 1)));
         g.refresh(1);
     }
 }
