@@ -3,9 +3,7 @@ package Controllers;
 import Models.Board;
 import Models.Point;
 import Views.BoardView;
-
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
 
 public class BoardController {
     Board m_board;
@@ -130,7 +128,7 @@ public class BoardController {
                || capturable[1] + backup[1] == this.m_board.getRemainingSeeds(2))
                 return -1;
             else
-                return 0;
+                return 1;
         }
         //starvation occurring during a scattering
         else {
@@ -138,7 +136,7 @@ public class BoardController {
                || scattered[1] + backup[1] == this.m_board.getRemainingSeeds(2))
                 return -1;
             else
-                return 1;
+                return 0;
         }
     }
 
@@ -161,78 +159,37 @@ public class BoardController {
         if (ret < 0)
             return ret;
 
-        //Scatter the selected slot + create a scattering buffer
-        ArrayList<Point> buffer = this.processScattering(p);
-
-        //get the amount of seeds in the last slot of the buffer
-        ret = this.m_board.getSlotSeeds(buffer.get(buffer.size()-1));
-
-        //if that amount is 2 or 3, a capture needs to be made
-        if(ret == 2 || ret == 3)
-            ret = this.processCapture(buffer);
-        else
-            ret = 0;
-
-        return ret;
-    }
-
-    /**
-     * Process the scattering of a slot : empty it and scatter it one seed at a time in the next slots
-     * @param point Coordinates of the slot to harvest and scatter
-     * @return Array of slots coordinates in which the scattering occurred
-     * @throws NullPointerException
-     */
-    private ArrayList<Point> processScattering(Point point) throws NullPointerException {
-        if (point == null)
-            throw new NullPointerException("BoardController.processScattering() : NULL instance of Point");
-
         //get the number of seeds in the slot to harvest and empty it + update remaining seeds
-        int nbseeds = this.m_board.getSlotSeeds(point);
-        this.m_board.removeRemainingSeeds(point.getY()+1, nbseeds);
-        this.m_board.emptySlotSeeds(point);
+        int nbseeds = this.getSlotSeeds(p);
+        this.m_board.removeRemainingSeeds(p.getY()+1, nbseeds);
+        this.m_board.emptySlotSeeds(p);
 
-        //save all the slots after the slot harvested in a buffer until there are no seeds left to scatter
-        Point pNext = new Point(point);
-        ArrayList<Point> buffer = new ArrayList<>();
-        do{
+        //until all the seeds have been scattered
+        int total = 0;
+        Point pNext = new Point(p);
+        do {
+            //get the next slot to treat, except for the one played by the player
             pNext = this.m_board.getNext(pNext);
+            if (!pNext.equals(p)){
+                int tmp = this.getSlotSeeds(pNext);
 
-            //make sure not to add the slot harvested
-            if(!pNext.equals(point)) {
-                //increment the seeds in all the slot, update remaining seeds and add to the buffer
-                this.m_board.incrementSlotSeeds(pNext);
-                this.m_board.addRemainingSeeds(pNext.getY()+1, 1);
-                buffer.add(pNext); //a slot can be added several times in the buffer, by design
+                //if capture case, store the seeds, empty the slot and update remaining
+                if (ret == 1 && (tmp == 1 || tmp == 2)) {
+                    total += tmp + 1;
+                    this.m_board.emptySlotSeeds(pNext);
+                    this.m_board.removeRemainingSeeds(pNext.getY()+1, tmp);
+                }
+                //otherwise just increment the amount of seeds in each slot
+                else {
+                    this.m_board.incrementSlotSeeds(pNext);
+                    this.m_board.addRemainingSeeds(pNext.getY()+1, 1);
+                }
                 nbseeds--;
             }
         }while (nbseeds > 0);
 
-        return buffer;
-    }
-
-    /**
-     * Capture all the slots in the array : all those containing 2 or 3 seeds are emptied and their content is stored
-     * @param ID ID of the player performing the capture
-     * @param buffer Array of slots in which the scattering occurred
-     * @return Amount of seeds to be captured
-     * @throws NullPointerException
-     */
-    private int processCapture(ArrayList<Point> buffer) throws NullPointerException{
-        if (buffer == null)
-            throw new NullPointerException("BoardController.processCapture() : NULL instance of ArrayList<Point>");
-
-        int nb_stored = 0;
-
-        //for each slot in the buffer containing 2 or 3 seeds, store its amount, update remaining seeds and empty the slot
-        for (Point tmp:buffer) {
-            if(this.m_board.getSlotSeeds(tmp) == 2 || this.m_board.getSlotSeeds(tmp) == 3) {
-                nb_stored += this.m_board.getSlotSeeds(tmp);
-                this.m_board.removeRemainingSeeds(tmp.getY()+1, this.m_board.getSlotSeeds(tmp));
-                this.m_board.emptySlotSeeds(tmp);
-            }
-        }
-
-        return nb_stored;
+        //return the total captured (0 if no capture occurrence)
+        return total;
     }
 
     /**
