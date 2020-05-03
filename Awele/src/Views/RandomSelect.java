@@ -42,7 +42,7 @@ public class RandomSelect implements iSelectable {
         Point tmp = new Point(0, 0);
         for(int i = 0 ; i<6 ; i++){
             tmp.setCoordinates(i, this.m_id - 1);
-            if (this.m_board.isLegal(tmp) > 0)
+            if (this.m_board.isLegal(tmp))
                 this.m_legal.add(i);
         }
 

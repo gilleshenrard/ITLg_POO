@@ -66,15 +66,31 @@ public class BoardController {
     /**
      * Check if playing p is legal
      * @param p The slot to test
+     * @return true = legal, false otherwise
+     * @throws InvalidParameterException
+     * @throws NullPointerException
+     */
+    public boolean isLegal(Point p) throws InvalidParameterException, NullPointerException{
+        if (p == null)
+            throw new NullPointerException("BoardController.checkOutcome() : NULL instance of Point");
+        Board.validateID(p.getY() + 1, "BoardController.checkOutcome()");
+        Board.validateCoordinates(p, "Board.checkOutcome()");
+
+        return this.checkOutcome(p) >= 0;
+    }
+
+    /**
+     * Test a slot for an outcome code
+     * @param p The slot to test
      * @return -2 if empty, -1 if starvation, 0 if simple scattering, 1 if capture
      * @throws InvalidParameterException
      * @throws NullPointerException
      */
-    public int isLegal(Point p) throws InvalidParameterException, NullPointerException{
+    public int checkOutcome(Point p) throws InvalidParameterException, NullPointerException{
         if (p == null)
-            throw new NullPointerException("BoardController.isLegal() : NULL instance of Point");
-        Board.validateID(p.getY() + 1, "BoardController.isLegal()");
-        Board.validateCoordinates(p, "Board.isLegal()");
+            throw new NullPointerException("BoardController.checkOutcome() : NULL instance of Point");
+        Board.validateID(p.getY() + 1, "BoardController.checkOutcome()");
+        Board.validateCoordinates(p, "Board.checkOutcome()");
 
         //recover the amount of seeds it the slot tested
         int nbseeds = this.getSlotSeeds(p);
@@ -141,7 +157,7 @@ public class BoardController {
         Board.validateCoordinates(p, "Board.playSlot()");
 
         //Check if the play is legal, and return ad hoc code if not
-        int ret = this.isLegal(p);
+        int ret = this.checkOutcome(p);
         if (ret < 0)
             return ret;
 

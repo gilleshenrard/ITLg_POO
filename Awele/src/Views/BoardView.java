@@ -36,7 +36,7 @@ public class BoardView {
         for(int l=1 ; l>=0 ; l--) {
             for (int c = 0; c < 6; c++) {
                 p.setCoordinates((l > 0 ? 5 - c : c), l);
-                this.displaySlot(this.m_board.getSlotSeeds(p),  l == ID-1 && this.m_board.isLegal(p) > 0);
+                this.displaySlot(this.m_board.getSlotSeeds(p),  l == ID-1 && this.m_board.isLegal(p));
             }
             System.out.println();
         }
