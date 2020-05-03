@@ -124,10 +124,9 @@ public class GameController {
      * Return the amount of playable shots left
      * @return Number of playable shots left
      * @throws InvalidParameterException
+     * @throws NullPointerException
      */
-    public int getShotsLeft(int ID) throws InvalidParameterException{
-        Game.validateID(ID, "Game.getShotsLeft()");
-
+    public int getShotsLeft(int ID) throws InvalidParameterException, NullPointerException{
         return Game.getInstance().getShotsLeft(ID);
     }
 
@@ -161,8 +160,9 @@ public class GameController {
      * Reset the array of playable slots for the player with the id ID
      * @param ID ID of the player for which reset the array
      * @throws InvalidParameterException
+     * @throws NullPointerException
      */
-    public void refresh(int ID) throws InvalidParameterException {
+    public void refresh(int ID) throws InvalidParameterException, NullPointerException {
         Game.validateID(ID, "GameController.refresh()");
 
         Game.getInstance().refresh(ID);
@@ -200,24 +200,36 @@ public class GameController {
     /**
      * Display a message in the out channel
      * @param msg Message to display
+     * @throws NullPointerException
      */
-    public void displayMessage(String msg){
+    public void displayMessage(String msg) throws NullPointerException{
+        if (this.m_gameView == null)
+            throw new NullPointerException("GameController.displayMessage() : GameView not instantiated");
+
         this.m_gameView.displayMessage(msg);
     }
 
     /**
      * Display a warning message in the out channel
      * @param msg Message to display
+     * @throws NullPointerException
      */
-    public void displayWarning(String msg){
+    public void displayWarning(String msg) throws NullPointerException{
+        if (this.m_gameView == null)
+            throw new NullPointerException("GameController.displayWarning() : GameView not instantiated");
+
         this.m_gameView.displayWarning(msg);
     }
 
     /**
      * Display an error message in the err channel
      * @param msg Message to display
+     * @throws NullPointerException
      */
-    public void displayError(String msg){
+    public void displayError(String msg) throws NullPointerException{
+        if (this.m_gameView == null)
+            throw new NullPointerException("GameController.displayError() : GameView not instantiated");
+
         this.m_gameView.displayError(msg);
     }
 
@@ -227,6 +239,9 @@ public class GameController {
      * @throws NullPointerException
      */
     public void displayGame() throws InvalidParameterException, NullPointerException {
+        if (this.m_gameView == null)
+            throw new NullPointerException("GameController.displayGame() : GameView not instantiated");
+
         this.m_gameView.displayGame();
     }
 
@@ -234,11 +249,11 @@ public class GameController {
      * Display a board row depending on the ID of a player
      * @param ID ID of the player for which display the row
      * @param invert Direction in which display the row (right-left or left-right)
+     * @throws InvalidParameterException
      * @throws NullPointerException
      */
-    public void displayRow(int ID, boolean invert) throws NullPointerException{
-        if (this.m_board == null)
-            throw new NullPointerException("GameController.displayRow() : NULL instance of BoardController");
+    public void displayRow(int ID, boolean invert) throws InvalidParameterException, NullPointerException{
+        Game.validateID(ID, "GameController.displayRow()");
 
         this.m_board.displayRow(ID, invert);
     }
@@ -249,9 +264,6 @@ public class GameController {
      * @throws NullPointerException
      */
     public void displaySlot(int amount) throws NullPointerException{
-        if (this.m_board == null)
-            throw new NullPointerException("GameController.displaySlot() : NULL instance of BoardController");
-
         this.m_board.displaySlot(amount);
     }
 }
