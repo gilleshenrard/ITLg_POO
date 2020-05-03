@@ -227,10 +227,10 @@ public class BoardController {
      * Display a fixed size slot
      * @param amount Amount to display in the slot
      */
-    public void displaySlot(int amount){
+    public void displaySlot(int amount, boolean highlight){
         if (this.m_boardView == null)
             throw new NullPointerException("BoardController.displaySlot() : NULL instance of BoardView");
 
-        this.m_boardView.displaySlot(amount);
+        this.m_boardView.displaySlot(amount, highlight);
     }
 }

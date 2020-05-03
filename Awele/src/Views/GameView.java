@@ -58,7 +58,7 @@ public class GameView {
         //|  0 |
         //|  6 ||  5 ||  4 ||  3 ||  2 ||  1 |
         System.out.println(this.m_controller.getName(2));
-        this.m_controller.displaySlot(this.m_controller.getSeeds(2));
+        this.m_controller.displaySlot(this.m_controller.getSeeds(2), false);
         System.out.println();
         this.m_controller.displayRow(2, true);
 
@@ -67,7 +67,7 @@ public class GameView {
         //|  0 |
         //PLAYER
         this.m_controller.displayRow(1, false);
-        this.m_controller.displaySlot(this.m_controller.getSeeds(1));
+        this.m_controller.displaySlot(this.m_controller.getSeeds(1), false);
         System.out.println();
         System.out.println(this.m_controller.getName(1));
     }

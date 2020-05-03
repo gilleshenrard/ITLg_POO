@@ -263,7 +263,7 @@ public class GameController {
      * @param amount Amount to display in the slot
      * @throws NullPointerException
      */
-    public void displaySlot(int amount) throws NullPointerException{
-        this.m_board.displaySlot(amount);
+    public void displaySlot(int amount, boolean highlight) throws NullPointerException{
+        this.m_board.displaySlot(amount, highlight);
     }
 }

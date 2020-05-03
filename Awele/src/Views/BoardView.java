@@ -22,8 +22,8 @@ public class BoardView {
      * Display a fixed size slot
      * @param amount Amount to display in the slot
      */
-    public void displaySlot(int amount){
-        System.out.format("| %1$2d |", amount);
+    public void displaySlot(int amount, boolean highlight){
+            System.out.format((highlight ? "\033[47;30m| %1$2d |\033[0m" : "| %1$2d |"), amount);
     }
 
     /**
@@ -35,7 +35,7 @@ public class BoardView {
         Point p = new Point(0, 0);
         for(int i=0 ; i<6 ; i++) {
             p.setCoordinates((invert ? 5 - i : i), ID - 1);
-            this.displaySlot(this.m_board.getSlotSeeds(p));
+            this.displaySlot(this.m_board.getSlotSeeds(p), this.m_board.isLegal(p) > 0);
         }
         System.out.println();
     }

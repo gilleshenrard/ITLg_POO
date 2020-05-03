@@ -26,7 +26,7 @@ class BoardViewTest {
     @DisplayName("displaySlot() - should not fail")
     @Test
     void displaySlot_shouldnot_fail() {
-        bv.displaySlot(2);
+        bv.displaySlot(2, true);
     }
 
     /**
