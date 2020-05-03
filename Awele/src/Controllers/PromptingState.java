@@ -16,7 +16,8 @@ public class PromptingState implements iGameState {
         //get the choice from the user
         int choice = controller.selectSlot(controller.getCurrentPlayer());
         if(choice > 0) {
-            controller.displayMessage(controller.getName(controller.getCurrentPlayer()) + " harvests the slot " + choice);
+            if (controller.isPlayerAI(controller.getCurrentPlayer()))
+                controller.displayMessage(controller.getName(controller.getCurrentPlayer()) + " harvests the slot " + choice);
 
             //plug in the Playing state
             controller.setNextState(controller.m_playing);
