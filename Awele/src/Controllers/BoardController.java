@@ -99,11 +99,13 @@ public class BoardController {
         java.util.Arrays.fill(capturable, 0);
         do {
             tmp = this.m_board.getNext(tmp);
-            if (this.getSlotSeeds(tmp) == 1 || this.getSlotSeeds(tmp) == 2)
-                capturable[tmp.getY()] += getSlotSeeds(tmp);
-            else
-                scattered[tmp.getY()]++;
-            nbseeds--;
+            if (!tmp.equals(p)) {
+                if (this.getSlotSeeds(tmp) == 1 || this.getSlotSeeds(tmp) == 2)
+                    capturable[tmp.getY()] += getSlotSeeds(tmp);
+                else
+                    scattered[tmp.getY()]++;
+                nbseeds--;
+            }
         }while (nbseeds > 0);
 
         //starvation occurring during a capture
