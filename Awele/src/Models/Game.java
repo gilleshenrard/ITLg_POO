@@ -90,7 +90,7 @@ public class Game {
     public boolean isPlayerAI(int ID) throws InvalidParameterException, NullPointerException {
         Game.getInstance().validateID(ID, "Game.isPlayerAI()");
         if (Game.getInstance().getPlayer(ID) == null)
-            throw new NullPointerException("Game.isPlayerAI() : NULL instance of Player");
+            throw new NullPointerException("Game.isPlayerAI() : Player " + ID + " not instantiated");
 
         return Game.getInstance().getPlayer(ID).isPlayerAI();
     }
@@ -99,9 +99,12 @@ public class Game {
      * Return the amount of playable shots left
      * @return Number of playable shots left
      * @throws InvalidParameterException
+     * @throws NullPointerException
      */
-    public int getShotsLeft(int ID) throws InvalidParameterException{
+    public int getShotsLeft(int ID) throws InvalidParameterException, NullPointerException{
         Game.validateID(ID, "Game.getShotsLeft()");
+        if (Game.getInstance().getPlayer(ID) == null)
+            throw new NullPointerException("Game.getShotsLeft() : Player " + ID + " not instantiated");
 
         return Game.getInstance().getPlayer(ID).getShotsLeft();
     }
@@ -115,11 +118,10 @@ public class Game {
      */
     public String getName(int ID) throws InvalidParameterException, NullPointerException{
         Game.validateID(ID, "Game.getName()");
+        if(Game.getInstance().getPlayer(ID) == null)
+            throw new NullPointerException("Game.getName() : Player " + ID + " not instantiated");
 
-        if(this.m_player[ID - 1] == null)
-            throw new NullPointerException("Game.getName() : Player" + (ID) + "not instantiated");
-        else
-            return this.m_player[ID - 1].getName();
+            return Game.getInstance().getPlayer(ID).getName();
     }
 
     /**
@@ -159,7 +161,7 @@ public class Game {
     public int selectSlot(int ID) throws InvalidParameterException, NullPointerException{
         Game.validateID(ID, "Game.selectSlot()");
         if (Game.getInstance().getPlayer(ID) == null)
-            throw new NullPointerException("Game.selectSlot() : NULL instance of Player");
+            throw new NullPointerException("Game.selectSlot() : Player " + ID + " not instantiated");
 
         return Game.getInstance().getPlayer(ID).selectSlot();
     }
@@ -174,7 +176,7 @@ public class Game {
     public void refresh(int ID) throws InvalidParameterException, NullPointerException{
         Game.validateID(ID, "Game.refresh()");
         if (Game.getInstance().getPlayer(ID) == null)
-            throw new NullPointerException("Game.refresh() : NULL instance of Player");
+            throw new NullPointerException("Game.refresh() : Player " + ID + " not instantiated");
 
         Game.getInstance().getPlayer(ID).refresh();
     }
@@ -183,8 +185,7 @@ public class Game {
      * Reset the Game to an inial value
      */
     public void resetGame(){
-        this.m_seedPlayer[0] = 0;
-        this.m_seedPlayer[1] = 0;
+        java.util.Arrays.fill(this.m_seedPlayer, 0);
         this.m_board.reset();
     }
 }
