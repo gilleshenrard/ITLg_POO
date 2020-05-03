@@ -2,6 +2,7 @@ package Projet1.Awele;
 
 import Controllers.GameController;
 import Models.Game;
+import Views.BoardView;
 import Views.KeyboardSelect;
 import Views.RandomSelect;
 import Models.Player;
@@ -13,6 +14,7 @@ public class Main {
         //game setup
         GameController game = new GameController();
         GameView gameView = new GameView(game);
+        BoardView boardView = new BoardView(game.getBoardController());
 
         //players setup
         Game.getInstance().setPlayer(new Player(1, "Gilles", new KeyboardSelect()));

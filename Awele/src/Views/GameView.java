@@ -6,7 +6,6 @@ import java.security.InvalidParameterException;
 
 public class GameView {
     private GameController m_controller;
-    private BoardView m_boardView;
 
     /**
      * Create a new GameView
@@ -19,15 +18,6 @@ public class GameView {
 
         this.m_controller = controller;
         this.m_controller.setView(this);
-        this.m_boardView = new BoardView(this.m_controller.getBoardController());
-    }
-
-    /**
-     * Set the game controller used by the game view
-     * @param controller Controller to use
-     */
-    public void setController(GameController controller){
-        this.m_controller = controller;
     }
 
     /**
