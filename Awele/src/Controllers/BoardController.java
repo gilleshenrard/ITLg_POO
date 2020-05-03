@@ -66,7 +66,7 @@ public class BoardController {
     /**
      * Check if playing p is legal
      * @param p The slot to test
-     * @return -1 if starvation, -2 if empty, positive if the play is legal
+     * @return -2 if empty, -1 if starvation, 0 if simple scattering, 1 if capture
      * @throws InvalidParameterException
      * @throws NullPointerException
      */
@@ -113,15 +113,17 @@ public class BoardController {
             if(capturable[0] + backup[0] == this.m_board.getRemainingSeeds(1)
                || capturable[1] + backup[1] == this.m_board.getRemainingSeeds(2))
                 return -1;
+            else
+                return 0;
         }
         //starvation occurring during a scattering
         else {
             if(scattered[0] + backup[0] == this.m_board.getRemainingSeeds(1)
                || scattered[1] + backup[1] == this.m_board.getRemainingSeeds(2))
                 return -1;
+            else
+                return 1;
         }
-
-        return 1;
     }
 
     /**
@@ -140,7 +142,7 @@ public class BoardController {
 
         //Check if the play is legal, and return ad hoc code if not
         int ret = this.isLegal(p);
-        if (ret <= 0)
+        if (ret < 0)
             return ret;
 
         //Scatter the selected slot + create a scattering buffer
@@ -174,9 +176,11 @@ public class BoardController {
         this.m_board.emptySlotSeeds(point);
 
         //save all the slots after the slot harvested in a buffer until there are no seeds left to scatter
-        Point pNext = this.m_board.getNext(point);
+        Point pNext = new Point(point);
         ArrayList<Point> buffer = new ArrayList<>();
-        while (nbseeds > 0){
+        do{
+            pNext = this.m_board.getNext(pNext);
+
             //make sure not to add the slot harvested
             if(!pNext.equals(point)) {
                 //increment the seeds in all the slot, update remaining seeds and add to the buffer
@@ -185,9 +189,7 @@ public class BoardController {
                 buffer.add(pNext); //a slot can be added several times in the buffer, by design
                 nbseeds--;
             }
-
-            pNext = this.m_board.getNext(pNext);
-        }
+        }while (nbseeds > 0);
 
         return buffer;
     }

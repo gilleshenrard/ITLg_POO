@@ -170,7 +170,7 @@ public class BoardControllerTest {
         b.getBoard().setSlotSeeds(new Point(3, 1), 1);
         b.getBoard().setSlotSeeds(new Point(4, 1), 9);
         int ret = b.isLegal(new Point(5, 0));
-        Assertions.assertEquals(1, ret);
+        Assertions.assertEquals(0, ret);
     }
 
     /**
@@ -201,7 +201,7 @@ public class BoardControllerTest {
         b.getBoard().setSlotSeeds(new Point(3, 1), 1);
         b.getBoard().setSlotSeeds(new Point(1, 1), 2);
         int ret = b.isLegal(new Point(5, 0));
-        Assertions.assertEquals(1, ret);
+        Assertions.assertEquals(0, ret);
     }
 
     /**
