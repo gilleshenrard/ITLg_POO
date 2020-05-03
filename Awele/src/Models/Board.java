@@ -24,6 +24,26 @@ public class Board {
     }
 
     /**
+     * Copy a Board from another Board
+     * @param board Board to copy
+     */
+    public Board(Board board){
+        this.m_remSeedsPlayer = new int[2];
+        this.setRemainingSeeds(1, board.getRemainingSeeds(1));
+        this.setRemainingSeeds(2, board.getRemainingSeeds(2));
+
+        Point p = new Point(0, 0);
+        this.m_slots = new Slot[2][6];
+        for (int l = 0 ; l < 2 ; l++){
+            for (int c = 0 ; c < 6 ; c++){
+                this.m_slots[l][c] = new Slot(c, l);
+                p.setCoordinates(c, l);
+                this.m_slots[l][c].setNbSeeds(board.getSlot(p).getNbSeeds());
+            }
+        }
+    }
+
+    /**
      * Throw an exception if ID != 1 or ID != 2
      * @param ID ID of the player
      * @param msg Name of the method in which the validation occurs
