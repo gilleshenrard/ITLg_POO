@@ -37,21 +37,20 @@ public class RandomSelect implements iSelectable {
      */
     @Override
     public int selectSlot(){
-        ArrayList<Integer> legalShots = new ArrayList<>();
-
         //create an array with all the legal shots the player can take
+        this.m_legal.clear();
         Point tmp = new Point(0, 0);
         for(int i = 0 ; i<6 ; i++){
             tmp.setCoordinates(i, this.m_id - 1);
             if (this.m_board.isLegal(tmp) > 0)
-                legalShots.add(i);
+                this.m_legal.add(i);
         }
 
         //if there are any legal shots
-        if (legalShots.size() > 0) {
+        if (this.m_legal.size() > 0) {
             Random r = new Random();
             //randomly pick a slot
-            Integer index = legalShots.get(r.nextInt(legalShots.size()));
+            Integer index = this.m_legal.get(r.nextInt(this.m_legal.size()));
             return 1 + index.intValue();
         }
         else
