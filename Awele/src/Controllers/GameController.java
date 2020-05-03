@@ -227,6 +227,16 @@ public class GameController {
      * @throws NullPointerException
      */
     public void displaySlot(int amount, boolean highlight) throws NullPointerException{
-        this.m_board.displaySlot(amount, highlight);
+        this.getBoardController().displaySlot(amount, highlight);
+    }
+
+    /**
+     * Display a separator in the console
+     */
+    public void displaySeparator(){
+        if (this.m_gameView == null)
+            throw new NullPointerException("GameController.displayGame() : GameView not instantiated");
+
+        this.m_gameView.displaySeparator();
     }
 }

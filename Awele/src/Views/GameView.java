@@ -69,4 +69,11 @@ public class GameView {
         System.out.println();
         System.out.println(this.m_controller.getName(1));
     }
+
+    /**
+     * Display a separator in the console
+     */
+    public void displaySeparator(){
+        System.out.println("=====================================================");
+    }
 }
