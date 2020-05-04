@@ -92,7 +92,7 @@ public class GameControllerTest {
         int ret = g.playSlot(new Point(5, 0));
         Assertions.assertEquals(0, ret);
         Assertions.assertEquals(0, g.getStoredSeeds(1));
-        Assertions.assertEquals(0, g.getStoredSeeds(1));
+        Assertions.assertEquals(0, g.getStoredSeeds(2));
     }
 
     /**
@@ -110,7 +110,7 @@ public class GameControllerTest {
         int ret = g.playSlot(new Point(5, 0));
         Assertions.assertEquals(5, ret);
         Assertions.assertEquals(0, g.getStoredSeeds(1));
-        Assertions.assertEquals(0, g.getStoredSeeds(1));
+        Assertions.assertEquals(0, g.getStoredSeeds(2));
     }
 
     /**
@@ -133,7 +133,7 @@ public class GameControllerTest {
         int ret = g.playSlot(new Point(5, 0));
         Assertions.assertEquals(-1, ret);
         Assertions.assertEquals(0, g.getStoredSeeds(1));
-        Assertions.assertEquals(0, g.getStoredSeeds(1));
+        Assertions.assertEquals(0, g.getStoredSeeds(2));
     }
 
     /**
@@ -150,7 +150,7 @@ public class GameControllerTest {
         int ret = g.playSlot(new Point(5, 0));
         Assertions.assertEquals(5, ret);
         Assertions.assertEquals(20, g.getStoredSeeds(1));
-        Assertions.assertEquals(0, g.getStoredSeeds(1));
+        Assertions.assertEquals(0, g.getStoredSeeds(2));
     }
 
     /**
@@ -171,7 +171,7 @@ public class GameControllerTest {
         int ret = g.playSlot(new Point(5, 0));
         Assertions.assertEquals(-1, ret);
         Assertions.assertEquals(0, g.getStoredSeeds(1));
-        Assertions.assertEquals(0, g.getStoredSeeds(1));
+        Assertions.assertEquals(0, g.getStoredSeeds(2));
     }
 
     /**
@@ -192,7 +192,7 @@ public class GameControllerTest {
         int ret = g.playSlot(new Point(4, 0));
         Assertions.assertEquals(-1, ret);
         Assertions.assertEquals(0, g.getStoredSeeds(1));
-        Assertions.assertEquals(0, g.getStoredSeeds(1));
+        Assertions.assertEquals(0, g.getStoredSeeds(2));
     }
 
     /**
@@ -203,7 +203,7 @@ public class GameControllerTest {
     void resetGame_shouldnot_fail() {
         g.resetGame();
         Assertions.assertEquals(0, g.getStoredSeeds(1));
-        Assertions.assertEquals(0, g.getStoredSeeds(1));
+        Assertions.assertEquals(0, g.getStoredSeeds(2));
     }
 
     /**
