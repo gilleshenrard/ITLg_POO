@@ -133,6 +133,6 @@ public class MinimaxSelect implements iSelectable{
         }
 
         //return the delta between both evaluations, the order depending on which player is evaluated
-        return eval[this.m_id] - eval[3 - this.m_id];
+        return eval[this.m_id - 1] - eval[2 - this.m_id];
     }
 }
