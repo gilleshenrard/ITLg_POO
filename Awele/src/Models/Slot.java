@@ -19,6 +19,15 @@ class Slot {
     }
 
     /**
+     * Create a new Slot
+     * @param p Point containing the coordinates to assign
+     */
+    public Slot(Point p){
+        this.setNbSeeds(4);
+        this.m_coordinates = new Point(p);
+    }
+
+    /**
      * Throw an exception if not 0 <= seeds <= 48
      * @param seeds Amount of seeds to validate
      * @param msg Name of the method in which the validation occurs
@@ -54,6 +63,14 @@ class Slot {
      */
     public void setCoordinates(int x, int y){
         this.m_coordinates.setCoordinates(x, y);
+    }
+
+    /**
+     * Set the X and Y coordinates of the Slot
+     * @param p Point of which copy the coordinates
+     */
+    public void setCoordinates(Point p){
+        this.m_coordinates.setCoordinates(p);
     }
 
     /**

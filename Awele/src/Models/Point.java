@@ -36,6 +36,15 @@ public class Point {
     }
 
     /**
+     * Assign both coordinates at once
+     * @param p Point of which copy the coordinates
+     */
+    public void setCoordinates(Point p){
+        this.setX(p.getX());
+        this.setY(p.getY());
+    }
+
+    /**
      * Returns the X value of the current point
      * @return X
      */
