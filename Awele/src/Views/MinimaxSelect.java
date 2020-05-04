@@ -147,11 +147,11 @@ public class MinimaxSelect implements iSelectable{
         Point p = new Point(0, 0);
 
         //if minimiser won the game
-        if (bc.getStoredSeeds(2 - this.m_id) > 24)
+        if (bc.getStoredSeeds(3 - this.m_id) > 24)
             return NEGINFINITE;
 
         //if maximiser won the game
-        if (bc.getStoredSeeds(this.m_id - 1) > 24)
+        if (bc.getStoredSeeds(this.m_id) > 24)
             return POSINFINITE;
 
         //process the evaluation for both players
