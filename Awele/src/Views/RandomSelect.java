@@ -33,7 +33,7 @@ public class RandomSelect implements iSelectable {
 
     /**
      * Randomly select a slot (between 1 and 6)
-     * @return Random slot number
+     * @return Random slot number, or -2 if error
      */
     @Override
     public int selectSlot(){
