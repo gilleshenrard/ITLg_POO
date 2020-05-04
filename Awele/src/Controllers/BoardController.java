@@ -213,8 +213,7 @@ public class BoardController {
         int ret = this.checkOutcome(p);
         if (ret < 0)
             return ret;
-        else if(ret > 0)
-            this.storeSeeds(p.getY() + 1, ret);
+
 
         //get the number of seeds in the slot to harvest and empty it + update remaining seeds
         int nbseeds = this.getSlotSeeds(p);
@@ -233,6 +232,7 @@ public class BoardController {
                 //if capture case, store the seeds, empty the slot and update remaining
                 if (ret > 0 && (tmp == 1 || tmp == 2)) {
                     total += tmp + 1;
+                    this.storeSeeds(p.getY() + 1, tmp + 1);
                     this.m_board.emptySlotSeeds(pNext);
                     this.m_board.removeRemainingSeeds(pNext.getY()+1, tmp);
                 }
