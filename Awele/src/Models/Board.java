@@ -34,6 +34,10 @@ public class Board {
         this.setRemainingSeeds(1, board.getRemainingSeeds(1));
         this.setRemainingSeeds(2, board.getRemainingSeeds(2));
 
+        this.m_storedSeeds = new int[2];
+        this.setStoredSeeds(1, board.getStoredSeeds(1));
+        this.setStoredSeeds(2, board.getStoredSeeds(2));
+
         Point p = new Point(0, 0);
         this.m_slots = new Slot[2][6];
         for (int l = 0 ; l < 2 ; l++){
