@@ -9,7 +9,8 @@ public class MinimaxSelect implements iSelectable{
     private BoardController m_controller;
     private int m_id;
     private int m_maxDepth;
-    private static int ERROR = -100000;
+    private final static int POSINFINITE = 200000;
+    private final static int NEGINFINITE = -POSINFINITE;
 
     /**
      * Create a new Minimax selection behaviour
@@ -50,17 +51,17 @@ public class MinimaxSelect implements iSelectable{
      */
     private int findBest(){
         ArrayList<Point> legalShots = new ArrayList<>();
-        Point p = new Point(0, 0);
+
         for(int i=0 ; i<6 ; i++){
-            p.setCoordinates(i, this.m_id - 1);
+            Point p = new Point(i, this.m_id - 1);
             if (this.m_controller.isLegal(p))
                 legalShots.add(p);
         }
 
         if (legalShots.size() > 0){
-            int bestVal = (this.m_id == 1 ? Integer.MAX_VALUE : Integer.MIN_VALUE);
+            int bestVal = (this.m_id == 1 ? POSINFINITE : NEGINFINITE);
             for (Point tmp : legalShots){
-                int val = miniMax(this.m_controller, tmp, this.m_maxDepth, Integer.MIN_VALUE, Integer.MAX_VALUE, (this.m_id == 1 ? false : true));
+                int val = miniMax(this.m_controller, tmp, this.m_maxDepth, NEGINFINITE, POSINFINITE, (this.m_id == 1 ? false : true));
                 if(this.m_id == 1 && val > bestVal)
                     bestVal = val;
 
@@ -87,17 +88,17 @@ public class MinimaxSelect implements iSelectable{
         parent.pushStack();
         if (parent.playSlot(p) < 0 ) {
             parent.popStack();
-            return ERROR;
+            return (maximiser ? Integer.MIN_VALUE : Integer.MAX_VALUE);
         }
 
         int outcome = evaluateState(parent);
-        if (depth == 0 || outcome == Integer.MAX_VALUE || outcome == Integer.MIN_VALUE ) {
+        if (depth == 0 || outcome == POSINFINITE || outcome == NEGINFINITE ) {
             return outcome;
         }
 
         Point tmp = new Point(0, 0);
         if (maximiser){
-            int maxEval = Integer.MIN_VALUE;
+            int maxEval = NEGINFINITE;
             for(int i=0 ; i<6 ; i++){
                 tmp.setCoordinates(i, 1);
                 int eval = miniMax(parent, tmp, depth - 1, alpha, beta, false);
@@ -110,7 +111,7 @@ public class MinimaxSelect implements iSelectable{
             return maxEval;
         }
         else {
-            int minEval = Integer.MAX_VALUE;
+            int minEval = POSINFINITE;
             for(int i=0 ; i<6 ; i++){
                 p.setCoordinates(i, 0);
                 int eval = miniMax(parent, tmp, depth - 1, alpha, beta, true);
@@ -134,11 +135,11 @@ public class MinimaxSelect implements iSelectable{
 
         //if minimiser (player 1) won the game
         if (this.m_id == 1 && bc.getStoredSeeds(1) > 24)
-            return Integer.MIN_VALUE;
+            return NEGINFINITE;
 
         //if maximiser (player 2) won the game
         if (this.m_id == 2 && bc.getStoredSeeds(2) > 24)
-            return Integer.MAX_VALUE;
+            return POSINFINITE;
 
         //process the evaluation for both players
         for (int player=0 ; player < 2 ; player++){
