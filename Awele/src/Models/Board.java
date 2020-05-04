@@ -13,7 +13,7 @@ public class Board {
      */
     public Board(){
         this.m_remSeedsPlayer = new int[2];
-        java.util.Arrays.fill(m_storedSeeds, 24);
+        java.util.Arrays.fill(m_remSeedsPlayer, 24);
         this.m_storedSeeds = new int[2];
         java.util.Arrays.fill(m_storedSeeds, 0);
         
