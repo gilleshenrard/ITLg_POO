@@ -41,14 +41,15 @@ public class MinimaxSelect implements iSelectable{
      */
     @Override
     public int selectSlot() {
-        return bestMove();
+//        return bestMove();
+        return 0;
     }
 
     /**
      * Get the best possible move starting from the current state as a tree root
      * @return X coordinate of the best move found
      */
-    private int bestMove(){
+/*    private int bestMove(){
         int best_eval = ERROR;
         int best = ERROR;
         Point p = new Point(0, 0);
@@ -71,7 +72,7 @@ public class MinimaxSelect implements iSelectable{
         }
         return best + 1;
     }
-
+*/
     /**
      * Evaluate each possible states (tree nodes) recursively, and return the best move
      * @param depth Depth of the current tree evaluated
@@ -80,7 +81,7 @@ public class MinimaxSelect implements iSelectable{
      * @param alpha Alpha value (Alpha-Beta Pruning)
      * @return Best move evaluated in the current tree
      */
-    private int evaluate(BoardController parent, int depth, int ID, Point move, int alpha){
+/*    private int evaluate(BoardController parent, int depth, int ID, Point move, int alpha){
         //return error if move is not possible
         if (parent.playSlot(move) < 0)
             return ERROR;
@@ -116,12 +117,12 @@ public class MinimaxSelect implements iSelectable{
         }
         return best;
     }
-
+*/
     /**
      * Generate an evaluation value for the current state of the game
      * @return Evaluation value
      */
-    private int evaluateState(){
+/*    private int evaluateState(){
         int[] eval = new int[2];
         Point p = new Point(0, 0);
 
@@ -140,4 +141,5 @@ public class MinimaxSelect implements iSelectable{
         //return the delta between both evaluations, the order depending on which player is evaluated
         return eval[this.m_id - 1] - eval[2 - this.m_id];
     }
+*/
 }

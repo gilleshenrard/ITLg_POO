@@ -21,7 +21,7 @@ public class StoringStateTest {
     void handleState_above48_should_fail() {
         g.setNextState(GameController.m_storing);
         g.setCurrentPlayer(1);
-        Game.getInstance().setSeeds(1, 23);
+        g.getBoardController().getBoard().setStoredSeeds(1, 23);
         Assertions.assertThrows(InvalidParameterException.class, () -> {
             g.handleState(49);
         });
@@ -36,7 +36,7 @@ public class StoringStateTest {
         BoardView bv = new BoardView(g.getBoardController());
         g.setNextState(GameController.m_storing);
         g.setCurrentPlayer(1);
-        Game.getInstance().setSeeds(1, 23);
+        g.getBoardController().getBoard().setStoredSeeds(1, 23);
         g.handleState(25);
     }
 }

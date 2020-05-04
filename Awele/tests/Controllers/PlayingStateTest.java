@@ -19,8 +19,8 @@ public class PlayingStateTest {
     @DisplayName("handleState() with neither capture nor starvation - should not fail")
     @Test
     void handleState_noCaptureNoStarve_shouldnot_fail() {
-        Game.getInstance().setSeeds(1, 0);
-        Game.getInstance().setSeeds(2, 0);
+        g.getBoardController().getBoard().setStoredSeeds(1, 0);
+        g.getBoardController().getBoard().setStoredSeeds(2, 0);
         g.setNextState(GameController.m_playing);
         g.setCurrentPlayer(1);
         int ret = g.handleState(6);
@@ -34,8 +34,8 @@ public class PlayingStateTest {
     @DisplayName("handleState() with a capture case - should not fail")
     @Test
     void handleState_CaptureNoStarve_shouldnot_fail() {
-        Game.getInstance().setSeeds(1, 0);
-        Game.getInstance().setSeeds(2, 0);
+        g.getBoardController().getBoard().setStoredSeeds(1, 0);
+        g.getBoardController().getBoard().setStoredSeeds(2, 0);
         g.resetGame();
         g.getBoardController().getBoard().setSlotSeeds(new Point(1, 1), 2);
         g.getBoardController().getBoard().setSlotSeeds(new Point(3, 1), 1);
@@ -53,8 +53,8 @@ public class PlayingStateTest {
     @DisplayName("handleState() with a starvation case, no forfeit - should not fail")
     @Test
     void handleState_noCaptureStarveNoForfeit_shouldnot_fail() {
-        Game.getInstance().setSeeds(1, 0);
-        Game.getInstance().setSeeds(2, 0);
+        g.getBoardController().getBoard().setStoredSeeds(1, 0);
+        g.getBoardController().getBoard().setStoredSeeds(2, 0);
         Game.getInstance().setPlayer(new Player(1, "Test", new RandomSelect(g.getBoardController(), 1)));
         g.getBoardController().resetBoard();
         g.getBoardController().getBoard().setSlotSeeds(new Point(0, 1), 1);
@@ -79,8 +79,8 @@ public class PlayingStateTest {
     @DisplayName("handleState() with self-starvation to other row, forfeit - should not fail")
     @Test
     void handleState_selfStarvationForfeit_otherRow_shouldnot_fail() {
-        Game.getInstance().setSeeds(1, 0);
-        Game.getInstance().setSeeds(2, 0);
+        g.getBoardController().getBoard().setStoredSeeds(1, 0);
+        g.getBoardController().getBoard().setStoredSeeds(2, 0);
         Game.getInstance().setPlayer(new Player(1, "Test", new RandomSelect(g.getBoardController(), 1)));
         Game.getInstance().setPlayer(new Player(2, "Test", new RandomSelect(g.getBoardController(), 2)));
         g.getBoardController().getBoard().emptySlotSeeds(new Point(0, 0));
@@ -103,8 +103,8 @@ public class PlayingStateTest {
     @DisplayName("handleState() with self-starvation within a row, no forfeit - should not fail")
     @Test
     void handleState_selfStarvationNoForfeit_sameRow_shouldnot_fail() {
-        Game.getInstance().setSeeds(1, 0);
-        Game.getInstance().setSeeds(2, 0);
+        g.getBoardController().getBoard().setStoredSeeds(1, 0);
+        g.getBoardController().getBoard().setStoredSeeds(2, 0);
         Game.getInstance().setPlayer(new Player(1, "Test", new RandomSelect(g.getBoardController(), 1)));
         Game.getInstance().setPlayer(new Player(2, "Test", new RandomSelect(g.getBoardController(), 2)));
         g.getBoardController().resetBoard();

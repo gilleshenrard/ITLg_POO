@@ -1,6 +1,7 @@
 package Controllers;
 
 import Models.Board;
+import Models.Game;
 import Models.Point;
 import Views.BoardView;
 import java.security.InvalidParameterException;
@@ -27,6 +28,35 @@ public class BoardController {
             throw new NullPointerException("NULL instance of Board");
 
         this.m_board = b;
+    }
+
+    /**
+     * Return the amount of stored seeds for a Player
+     * @param ID ID of the player
+     * @return Amount of seeds stored
+     * @throws InvalidParameterException
+     * @throws NullPointerException
+     */
+    public int getStoredSeeds(int ID) throws InvalidParameterException, NullPointerException {
+        if(this.m_board == null)
+            throw new NullPointerException("BoardController.setBoard() : Board not instantiated");
+
+        return this.m_board.getStoredSeeds(ID);
+    }
+
+    /**
+     * Add nb_seeds to the seeds reserve of Player 1 or Player 2
+     * @param ID ID of the player who receives the seeds
+     * @param nb_seeds  Amount of seeds to store
+     * @throws InvalidParameterException
+     */
+    public void storeSeeds(int ID, int nb_seeds) throws InvalidParameterException{
+        Board.validateID(ID, "BoardController.storeSeeds()");
+        if (nb_seeds < 0)
+            throw new InvalidParameterException("BoardController.storeSeeds() : negative amount of seeds");
+
+        Board b = this.getBoard();
+        b.setStoredSeeds(ID, b.getStoredSeeds(ID) + nb_seeds);
     }
 
     /**

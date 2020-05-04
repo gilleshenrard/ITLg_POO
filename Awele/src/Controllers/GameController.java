@@ -1,5 +1,6 @@
 package Controllers;
 
+import Models.Board;
 import Models.Game;
 import Models.Point;
 import Views.GameView;
@@ -78,6 +79,33 @@ public class GameController {
     }
 
     /**
+     * Return the amount of stored seeds for a Player
+     * @param ID ID of the player
+     * @return Amount of seeds stored
+     * @throws InvalidParameterException
+     * @throws NullPointerException
+     */
+    public int getStoredSeeds(int ID) throws InvalidParameterException, NullPointerException {
+        if(this.m_board == null)
+            throw new NullPointerException("GameController.setBoard() : BoardController not instantiated");
+
+        return this.m_board.getStoredSeeds(ID);
+    }
+
+    /**
+     * Add nb_seeds to the seeds reserve of Player 1 or Player 2
+     * @param ID ID of the player who receives the seeds
+     * @param nb_seeds  Amount of seeds to store
+     * @throws InvalidParameterException
+     */
+    public void storeSeeds(int ID, int nb_seeds) throws InvalidParameterException, NullPointerException{
+        if(this.m_board == null)
+            throw new NullPointerException("GameController.setBoard() : BoardController not instantiated");
+
+        this.m_board.storeSeeds(ID, nb_seeds);
+    }
+
+    /**
      * Set the Game View used
      * @param gameView Game view to use
      * @throws NullPointerException
@@ -86,16 +114,6 @@ public class GameController {
         if(gameView == null)
             throw new NullPointerException("GameController.setView() : NULL instance of GameView");
         this.m_gameView = gameView;
-    }
-
-    /**
-     * Return the amount of stored seeds for a Player
-     * @param ID ID of the player
-     * @return Amount of seeds stored
-     * @throws InvalidParameterException
-     */
-    public int getSeeds(int ID) throws InvalidParameterException {
-        return Game.getInstance().getSeeds(ID);
     }
 
     /**
@@ -118,20 +136,6 @@ public class GameController {
      */
     public boolean isPlayerAI(int ID) throws InvalidParameterException, NullPointerException {
         return Game.getInstance().isPlayerAI(ID);
-    }
-
-    /**
-     * Add nb_seeds to the seeds reserve of Player 1 or Player 2
-     * @param ID ID of the player who receives the seeds
-     * @param nb_seeds  Amount of seeds to store
-     * @throws InvalidParameterException
-     */
-    public void storeSeeds(int ID, int nb_seeds) throws InvalidParameterException{
-        if (nb_seeds < 0)
-            throw new InvalidParameterException("Game.storeSeeds() : negative amount of seeds");
-
-        Game g = Game.getInstance();
-        g.setSeeds(ID, g.getSeeds(ID) + nb_seeds);
     }
 
     /**
@@ -161,7 +165,7 @@ public class GameController {
      * Reset the Game to an inial value
      */
     public void resetGame(){
-        Game.getInstance().resetGame();
+        Game.getInstance().reset();
         this.m_board.resetBoard();
     }
     /**

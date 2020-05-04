@@ -1,6 +1,7 @@
 package Controllers;
 
 import Models.Board;
+import Models.Game;
 import Models.Point;
 import Views.BoardView;
 import org.junit.jupiter.api.Assertions;
@@ -104,6 +105,50 @@ public class BoardControllerTest {
     @Test
     void getSlotSeeds_shouldnot_fail() {
         Assertions.assertEquals(4, b.getSlotSeeds(new Point(0, 0)));
+    }
+
+    /**
+     * Check if storeSeeds() throws an exception with an invalid ID
+     */
+    @DisplayName("storeSeeds() with an invalid ID - should fail")
+    @Test
+    void storeSeeds_invalidID_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.storeSeeds(3, 3);
+        });
+    }
+
+    /**
+     * Check if storeSeeds() throws an exception when storing above 48
+     */
+    @DisplayName("storeSeeds() above 48 - should fail")
+    @Test
+    void storeSeeds_above48_should_fail() {
+        b.getBoard().setStoredSeeds(1, 23);
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.storeSeeds(1, 26);
+        });
+    }
+
+    /**
+     * Check if storeSeeds() throws an exception when storing below 0
+     */
+    @DisplayName("storeSeeds() negative amount - should fail")
+    @Test
+    void storeSeeds_below_0_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.storeSeeds(1, -2);
+        });
+    }
+
+    /**
+     * Check if storeSeeds() fails storing seeds
+     */
+    @DisplayName("storeSeeds() - should not fail")
+    @Test
+    void storeSeeds_shouldnot_fail() {
+        b.getBoard().setStoredSeeds(1, 23);
+        b.storeSeeds(1, 25);
     }
 
     /**

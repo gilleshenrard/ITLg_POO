@@ -62,10 +62,10 @@ public class GameView {
         //PLAYER
 
         System.out.println(this.m_controller.getName(2));
-        this.m_controller.displaySlot(this.m_controller.getSeeds(2), false);
+        this.m_controller.displaySlot(this.m_controller.getStoredSeeds(2), false);
         System.out.println();
         this.m_controller.displayBoard();
-        this.m_controller.displaySlot(this.m_controller.getSeeds(1), false);
+        this.m_controller.displaySlot(this.m_controller.getStoredSeeds(1), false);
         System.out.println();
         System.out.println(this.m_controller.getName(1));
     }

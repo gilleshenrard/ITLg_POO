@@ -5,7 +5,6 @@ import java.security.InvalidParameterException;
 public class Game {
     private Board m_board;
     private Player[] m_player;
-    private int[] m_seedPlayer;
     private static Game m_instance;
 
     /**
@@ -13,9 +12,6 @@ public class Game {
      */
     private Game() {
         this.m_board = new Board();
-        this.m_seedPlayer = new int[2];
-        this.m_seedPlayer[0] = 0;
-        this.m_seedPlayer[1] = 0;
         this.m_player = new Player[2];
         this.m_player[0] = null;
         this.m_player[1] = null;
@@ -111,33 +107,6 @@ public class Game {
     }
 
     /**
-     * Add nb_seeds to the seeds reserve of Player 1 or Player 2
-     * @param ID ID of the player who receives the seeds
-     * @param nb_seeds  Amount of seeds to store
-     * @throws InvalidParameterException
-     */
-    public void setSeeds(int ID, int nb_seeds) throws InvalidParameterException{
-        Game.validateID(ID, "Game.storeSeeds()");
-
-        if(nb_seeds < 0 || nb_seeds > 48)
-            throw new InvalidParameterException("Game.storeSeeds() : incorrect amount of seeds (value : " + nb_seeds + ")");
-
-        this.m_seedPlayer[ID - 1] = nb_seeds;
-    }
-
-    /**
-     * Return the amount of stored seeds for a Player
-     * @param ID ID of the player
-     * @return Amount of seeds stored
-     * @throws InvalidParameterException
-     */
-    public int getSeeds(int ID) throws InvalidParameterException {
-        Game.validateID(ID, "Game.getSeeds()");
-
-        return this.m_seedPlayer[ID - 1];
-    }
-
-    /**
      * Make a player select a slot
      * @param ID ID of the player to play the slot
      * @return Slot selected
@@ -155,8 +124,7 @@ public class Game {
     /**
      * Reset the Game to an inial value
      */
-    public void resetGame(){
-        java.util.Arrays.fill(this.m_seedPlayer, 0);
+    public void reset(){
         this.m_board.reset();
     }
 }

@@ -367,6 +367,71 @@ class BoardTest {
         });
     }
 
+
+    /**
+     * Check if setStoredSeeds() sets the proper value to stored seeds
+     */
+    @DisplayName("setStoredSeeds() - should not fail")
+    @Test
+    void setStoredSeeds_shouldnot_fail() {
+        b.setStoredSeeds(1, 15);
+        Assertions.assertEquals(b.getStoredSeeds(1), 15);
+    }
+
+    /**
+     * Check if setStoredSeeds() throws an exception with an invalid ID
+     */
+    @DisplayName("setStoredSeeds() with an invalid ID - should fail")
+    @Test
+    void setStoredSeeds_invalidID_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.setStoredSeeds(3, 15);
+        });
+    }
+
+    /**
+     * Check if setStoredSeeds() throws an exception with an amount of seeds above 23
+     */
+    @DisplayName("setStoredSeeds() with an invalid ID - should fail")
+    @Test
+    void setStoredSeeds_SeedsAbove23_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.setStoredSeeds(1, 49);
+        });
+    }
+
+    /**
+     * Check if setStoredSeeds() throws an exception with a negative amount of seeds
+     */
+    @DisplayName("setStoredSeeds() with negative nb_seeds - should fail")
+    @Test
+    void setStoredSeeds_negativeSeedsNb_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.setStoredSeeds(1, -2);
+        });
+    }
+
+    /**
+     * Check if getStoredSeeds() throws an exception with an invalid ID
+     */
+    @DisplayName("getStoredSeeds() with an invalid ID - should fail")
+    @Test
+    void getStoredSeeds_invalidID_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.getStoredSeeds(3);
+        });
+    }
+
+    /**
+     * Check if getStoredSeeds() returns the right amount of seeds
+     */
+    @DisplayName("getStoredSeeds() - should not fail")
+    @Test
+    void getStoredSeeds_shouldnot_fail() {
+        b.setStoredSeeds(1, 12);
+        Assertions.assertEquals(b.getStoredSeeds(1), 12);
+    }
+
     /**
      * Check if getNext() returns the proper coordinates for next slot (within a row)
      */

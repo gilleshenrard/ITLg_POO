@@ -48,50 +48,6 @@ public class GameControllerTest {
     }
 
     /**
-     * Check if storeSeeds() throws an exception with an invalid ID
-     */
-    @DisplayName("storeSeeds() with an invalid ID - should fail")
-    @Test
-    void storeSeeds_invalidID_should_fail() {
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            g.storeSeeds(3, 3);
-        });
-    }
-
-    /**
-     * Check if storeSeeds() throws an exception when storing above 48
-     */
-    @DisplayName("storeSeeds() above 48 - should fail")
-    @Test
-    void storeSeeds_above48_should_fail() {
-        Game.getInstance().setSeeds(1, 23);
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            g.storeSeeds(1, 26);
-        });
-    }
-
-    /**
-     * Check if storeSeeds() throws an exception when storing below 0
-     */
-    @DisplayName("storeSeeds() negative amount - should fail")
-    @Test
-    void storeSeeds_below_0_should_fail() {
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            g.storeSeeds(1, -2);
-        });
-    }
-
-    /**
-     * Check if storeSeeds() fails storing seeds
-     */
-    @DisplayName("storeSeeds() - should not fail")
-    @Test
-    void storeSeeds_shouldnot_fail() {
-        Game.getInstance().setSeeds(1, 23);
-        g.storeSeeds(1, 25);
-    }
-
-    /**
      * Check if getSlot() throws an exception with an invalid ID
      */
     @DisplayName("getSlot() with an invalid ID - should fail")
@@ -130,13 +86,13 @@ public class GameControllerTest {
     @DisplayName("playSlot() with neither capture nor starvation - should not fail")
     @Test
     void playSlot_noCaptureNoStarve_shouldnot_fail() {
-        Game.getInstance().setSeeds(1, 0);
-        Game.getInstance().setSeeds(2, 0);
+        g.getBoardController().getBoard().setStoredSeeds(1, 0);
+        g.getBoardController().getBoard().setStoredSeeds(2, 0);
         g.resetGame();
         int ret = g.playSlot(new Point(5, 0));
         Assertions.assertEquals(0, ret);
-        Assertions.assertEquals(0, Game.getInstance().getSeeds(1));
-        Assertions.assertEquals(0, Game.getInstance().getSeeds(2));
+        Assertions.assertEquals(0, g.getStoredSeeds(1));
+        Assertions.assertEquals(0, g.getStoredSeeds(1));
     }
 
     /**
@@ -145,16 +101,16 @@ public class GameControllerTest {
     @DisplayName("playSlot() with a capture case - should not fail")
     @Test
     void playSlot_CaptureNoStarve_shouldnot_fail() {
-        Game.getInstance().setSeeds(1, 0);
-        Game.getInstance().setSeeds(2, 0);
+        g.getBoardController().getBoard().setStoredSeeds(1, 0);
+        g.getBoardController().getBoard().setStoredSeeds(2, 0);
         g.resetGame();
         g.getBoardController().getBoard().setSlotSeeds(new Point(1, 1), 2);
         g.getBoardController().getBoard().setSlotSeeds(new Point(3, 1), 1);
         g.getBoardController().getBoard().setSlotSeeds(new Point(4, 1), 9);
         int ret = g.playSlot(new Point(5, 0));
         Assertions.assertEquals(5, ret);
-        Assertions.assertEquals(0, Game.getInstance().getSeeds(1));
-        Assertions.assertEquals(0, Game.getInstance().getSeeds(2));
+        Assertions.assertEquals(0, g.getStoredSeeds(1));
+        Assertions.assertEquals(0, g.getStoredSeeds(1));
     }
 
     /**
@@ -163,8 +119,8 @@ public class GameControllerTest {
     @DisplayName("playSlot() with a starvation case - should not fail")
     @Test
     void playSlot_noCaptureStarve_shouldnot_fail() {
-        Game.getInstance().setSeeds(1, 0);
-        Game.getInstance().setSeeds(2, 0);
+        g.getBoardController().getBoard().setStoredSeeds(1, 0);
+        g.getBoardController().getBoard().setStoredSeeds(2, 0);
         g.getBoardController().getBoard().setSlotSeeds(new Point(0, 1), 1);
         g.getBoardController().getBoard().setSlotSeeds(new Point(1, 1), 2);
         g.getBoardController().getBoard().emptySlotSeeds(new Point(2, 1));
@@ -176,8 +132,8 @@ public class GameControllerTest {
         g.getBoardController().getBoard().setRemainingSeeds(1, 22);
         int ret = g.playSlot(new Point(5, 0));
         Assertions.assertEquals(-1, ret);
-        Assertions.assertEquals(0, Game.getInstance().getSeeds(1));
-        Assertions.assertEquals(0, Game.getInstance().getSeeds(2));
+        Assertions.assertEquals(0, g.getStoredSeeds(1));
+        Assertions.assertEquals(0, g.getStoredSeeds(1));
     }
 
     /**
@@ -189,12 +145,12 @@ public class GameControllerTest {
         g.resetGame();
         g.getBoardController().getBoard().setSlotSeeds(new Point(3, 1), 1);
         g.getBoardController().getBoard().setSlotSeeds(new Point(1, 1), 2);
-        Game.getInstance().setSeeds(2, 0);
-        Game.getInstance().setSeeds(1, 20);
+        g.getBoardController().getBoard().setStoredSeeds(2, 0);
+        g.getBoardController().getBoard().setStoredSeeds(1, 20);
         int ret = g.playSlot(new Point(5, 0));
         Assertions.assertEquals(5, ret);
-        Assertions.assertEquals(20, Game.getInstance().getSeeds(1));
-        Assertions.assertEquals(0, Game.getInstance().getSeeds(2));
+        Assertions.assertEquals(20, g.getStoredSeeds(1));
+        Assertions.assertEquals(0, g.getStoredSeeds(1));
     }
 
     /**
@@ -203,8 +159,8 @@ public class GameControllerTest {
     @DisplayName("playSlot() with self-starvation to other row - should not fail")
     @Test
     void playSlot_selfStarvation_otherRow_shouldnot_fail() {
-        Game.getInstance().setSeeds(1, 0);
-        Game.getInstance().setSeeds(2, 0);
+        g.getBoardController().getBoard().setStoredSeeds(1, 0);
+        g.getBoardController().getBoard().setStoredSeeds(2, 0);
         g.getBoardController().getBoard().emptySlotSeeds(new Point(0, 0));
         g.getBoardController().getBoard().emptySlotSeeds(new Point(1, 0));
         g.getBoardController().getBoard().emptySlotSeeds(new Point(2, 0));
@@ -214,8 +170,8 @@ public class GameControllerTest {
         g.getBoardController().getBoard().setRemainingSeeds(1, 1);
         int ret = g.playSlot(new Point(5, 0));
         Assertions.assertEquals(-1, ret);
-        Assertions.assertEquals(0, Game.getInstance().getSeeds(1));
-        Assertions.assertEquals(0, Game.getInstance().getSeeds(2));
+        Assertions.assertEquals(0, g.getStoredSeeds(1));
+        Assertions.assertEquals(0, g.getStoredSeeds(1));
     }
 
     /**
@@ -224,8 +180,8 @@ public class GameControllerTest {
     @DisplayName("playSlot() with self-starvation within a row - should not fail")
     @Test
     void playSlot_selfStarvation_sameRow_shouldnot_fail() {
-        Game.getInstance().setSeeds(1, 0);
-        Game.getInstance().setSeeds(2, 0);
+        g.getBoardController().getBoard().setStoredSeeds(1, 0);
+        g.getBoardController().getBoard().setStoredSeeds(2, 0);
         g.getBoardController().getBoard().emptySlotSeeds(new Point(0, 0));
         g.getBoardController().getBoard().emptySlotSeeds(new Point(1, 0));
         g.getBoardController().getBoard().emptySlotSeeds(new Point(2, 0));
@@ -235,8 +191,8 @@ public class GameControllerTest {
         g.getBoardController().getBoard().setRemainingSeeds(1, 2);
         int ret = g.playSlot(new Point(4, 0));
         Assertions.assertEquals(-1, ret);
-        Assertions.assertEquals(0, Game.getInstance().getSeeds(1));
-        Assertions.assertEquals(0, Game.getInstance().getSeeds(2));
+        Assertions.assertEquals(0, g.getStoredSeeds(1));
+        Assertions.assertEquals(0, g.getStoredSeeds(1));
     }
 
     /**
@@ -246,8 +202,8 @@ public class GameControllerTest {
     @Test
     void resetGame_shouldnot_fail() {
         g.resetGame();
-        Assertions.assertEquals(0, g.getSeeds(1));
-        Assertions.assertEquals(0, g.getSeeds(2));
+        Assertions.assertEquals(0, g.getStoredSeeds(1));
+        Assertions.assertEquals(0, g.getStoredSeeds(1));
     }
 
     /**

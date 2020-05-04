@@ -6,14 +6,16 @@ import java.util.ArrayList;
 public class Board {
     private Slot[][] m_slots;
     private int[] m_remSeedsPlayer;
+    private int[] m_storedSeeds;
 
     /**
      * Create new Board
      */
     public Board(){
         this.m_remSeedsPlayer = new int[2];
-        this.setRemainingSeeds(1, 24);
-        this.setRemainingSeeds(2, 24);
+        java.util.Arrays.fill(m_storedSeeds, 24);
+        this.m_storedSeeds = new int[2];
+        java.util.Arrays.fill(m_storedSeeds, 0);
         
         this.m_slots = new Slot[2][6];
         for (int l = 0 ; l < 2 ; l++){
@@ -108,6 +110,33 @@ public class Board {
      */
     public void removeRemainingSeeds(int ID, int value) throws InvalidParameterException {
         this.setRemainingSeeds(ID, this.getRemainingSeeds(ID) - value);
+    }
+
+    /**
+     * Add nb_seeds to the seeds reserve of Player 1 or Player 2
+     * @param ID ID of the player who receives the seeds
+     * @param nb_seeds  Amount of seeds to store
+     * @throws InvalidParameterException
+     */
+    public void setStoredSeeds(int ID, int nb_seeds) throws InvalidParameterException{
+        Board.validateID(ID, "Board.storeSeeds()");
+
+        if(nb_seeds < 0 || nb_seeds > 48)
+            throw new InvalidParameterException("Board.storeSeeds() : incorrect amount of seeds (value : " + nb_seeds + ")");
+
+        this.m_storedSeeds[ID - 1] = nb_seeds;
+    }
+
+    /**
+     * Return the amount of stored seeds for a Player
+     * @param ID ID of the player
+     * @return Amount of seeds stored
+     * @throws InvalidParameterException
+     */
+    public int getStoredSeeds(int ID) throws InvalidParameterException {
+        Board.validateID(ID, "Board.getSeeds()");
+
+        return this.m_storedSeeds[ID - 1];
     }
 
     /**

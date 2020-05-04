@@ -35,8 +35,8 @@ public class PromptingStateTest {
     @DisplayName("handleState() with self-starvation to other row, forfeit - should not fail")
     @Test
     void handleState_selfStarvationForfeit_otherRow_shouldnot_fail() {
-        Game.getInstance().setSeeds(1, 0);
-        Game.getInstance().setSeeds(2, 0);
+        g.getBoardController().getBoard().setStoredSeeds(1, 0);
+        g.getBoardController().getBoard().setStoredSeeds(2, 0);
         Game.getInstance().setPlayer(new Player(1, "Test", new RandomSelect(g.getBoardController(), 1)));
         Game.getInstance().setPlayer(new Player(2, "Test", new RandomSelect(g.getBoardController(), 2)));
         g.getBoardController().getBoard().emptySlotSeeds(new Point(0, 0));
