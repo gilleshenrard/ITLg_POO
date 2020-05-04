@@ -23,7 +23,7 @@ public class MinimaxSelect implements iSelectable{
 
         this.m_controller = controller;
         this.m_id = ID;
-        this.m_maxDepth = 2;
+        this.m_maxDepth = 6;
     }
 
     /**
