@@ -92,19 +92,6 @@ public class GameController {
     }
 
     /**
-     * Add nb_seeds to the seeds reserve of Player 1 or Player 2
-     * @param ID ID of the player who receives the seeds
-     * @param nb_seeds  Amount of seeds to store
-     * @throws InvalidParameterException
-     */
-    public void storeSeeds(int ID, int nb_seeds) throws InvalidParameterException, NullPointerException{
-        if(this.m_board == null)
-            throw new NullPointerException("GameController.setBoard() : BoardController not instantiated");
-
-        this.m_board.storeSeeds(ID, nb_seeds);
-    }
-
-    /**
      * Set the Game View used
      * @param gameView Game view to use
      * @throws NullPointerException
