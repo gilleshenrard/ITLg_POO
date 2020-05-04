@@ -23,7 +23,7 @@ public class MinimaxSelect implements iSelectable{
 
         this.m_controller = controller;
         this.m_id = ID;
-        this.m_maxDepth = 3;
+        this.m_maxDepth = 2;
     }
 
     /**
@@ -57,7 +57,6 @@ public class MinimaxSelect implements iSelectable{
         for(int i=0 ; i<6 ; i++){
             p.setCoordinates(i, this.m_id - 1);
             if (this.m_controller.isLegal(p)) {
-
                 int val = miniMax(this.m_controller, p, this.m_maxDepth, NEGINFINITE, POSINFINITE, true);
                 if (val == ERROR)
                     continue;
@@ -91,15 +90,17 @@ public class MinimaxSelect implements iSelectable{
 
         int outcome = evaluateState(parent);
         if (depth == 0 || outcome == POSINFINITE || outcome == NEGINFINITE ) {
+            parent.popStack();
             return outcome;
         }
 
-        Point tmp = new Point(0, 0);
         if (maximiser){
             int maxEval = NEGINFINITE;
             for(int i=0 ; i<6 ; i++){
-                tmp.setCoordinates(i, 1);
+                Point tmp = new Point(i, this.m_id - 1);
                 int eval = miniMax(parent, tmp, depth - 1, alpha, beta, false);
+                if (eval == ERROR)
+                    continue;
                 maxEval = Math.max(maxEval, eval);
                 alpha = Math.max(alpha, eval);
                 if (beta <= alpha)
@@ -111,8 +112,10 @@ public class MinimaxSelect implements iSelectable{
         else {
             int minEval = POSINFINITE;
             for(int i=0 ; i<6 ; i++){
-                p.setCoordinates(i, 0);
+                Point tmp = new Point(i, 2 - this.m_id);
                 int eval = miniMax(parent, tmp, depth - 1, alpha, beta, true);
+                if (eval == ERROR)
+                    continue;
                 minEval = Math.min(minEval, eval);
                 beta = Math.min(beta, eval);
                 if (beta <= alpha)
@@ -131,11 +134,11 @@ public class MinimaxSelect implements iSelectable{
         int[] eval = new int[2];
         Point p = new Point(0, 0);
 
-        //if minimiser (player 1) won the game
+        //if minimiser won the game
         if (this.m_id == 1 && bc.getStoredSeeds(1) > 24)
             return NEGINFINITE;
 
-        //if maximiser (player 2) won the game
+        //if maximiser won the game
         if (this.m_id == 2 && bc.getStoredSeeds(2) > 24)
             return POSINFINITE;
 
@@ -151,9 +154,6 @@ public class MinimaxSelect implements iSelectable{
             }
         }
 
-        if(this.m_id == 1)
-            return eval[0] - eval[1];
-        else
-            return eval[1] - eval[0];
+        return eval[this.m_id - 1] - eval[2 - this.m_id];
     }
 }
