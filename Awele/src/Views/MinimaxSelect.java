@@ -1,12 +1,9 @@
 package Views;
 
 import Controllers.BoardController;
-import Controllers.GameController;
-import Models.Board;
-import Models.Point;
 
 public class MinimaxSelect implements iSelectable{
-    private GameController m_game;
+    private BoardController m_board;
     private int m_id;
     private int m_maxDepth;
     private static int ERROR = -100000;
@@ -17,11 +14,11 @@ public class MinimaxSelect implements iSelectable{
      * @param ID The ID of the player to which set the behaviour
      * @throws NullPointerException
      */
-    public MinimaxSelect(GameController game, int ID) throws NullPointerException{
-        if(game == null)
-            throw new NullPointerException("MinimaxSelect() : NULL instance of GameController");
+    public MinimaxSelect(BoardController board, int ID) throws NullPointerException{
+        if(board == null)
+            throw new NullPointerException("MinimaxSelect() : NULL instance of BoardController");
 
-        this.m_game = game;
+        this.m_board = board;
         this.m_id = ID;
         this.m_maxDepth = 6;
     }

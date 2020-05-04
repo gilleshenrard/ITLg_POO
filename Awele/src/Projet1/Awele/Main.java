@@ -18,7 +18,7 @@ public class Main {
 
         //players setup
         Game.getInstance().setPlayer(new Player(1, "Gilles", new KeyboardSelect()));
-        Game.getInstance().setPlayer(new Player(2, "AI", new MinimaxSelect(game, 2)));
+        Game.getInstance().setPlayer(new Player(2, "AI", new MinimaxSelect(game.getBoardController(), 2)));
 
         //state variables
         int outcome = 0;
