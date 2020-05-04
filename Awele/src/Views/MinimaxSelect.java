@@ -1,7 +1,6 @@
 package Views;
 
 import Controllers.BoardController;
-import Models.Board;
 import Models.Point;
 
 import java.util.ArrayList;
@@ -85,9 +84,9 @@ public class MinimaxSelect implements iSelectable{
      * @return Best Slot to select
      */
     private int miniMax(BoardController parent, Point p, int depth, int alpha, int beta, boolean maximiser){
-        Board buffer = new Board(parent.getBoard());
+        parent.pushStack();
         if (parent.playSlot(p) < 0 ) {
-            parent.setBoard(buffer);
+            parent.popStack();
             return ERROR;
         }
 
@@ -107,7 +106,7 @@ public class MinimaxSelect implements iSelectable{
                 if (beta <= alpha)
                     break;
             }
-            parent.setBoard(buffer);
+            parent.popStack();
             return maxEval;
         }
         else {
@@ -120,7 +119,7 @@ public class MinimaxSelect implements iSelectable{
                 if (beta <= alpha)
                     break;
             }
-            parent.setBoard(buffer);
+            parent.popStack();
             return minEval;
         }
     }

@@ -1,21 +1,23 @@
 package Controllers;
 
 import Models.Board;
-import Models.Game;
 import Models.Point;
 import Views.BoardView;
 import java.security.InvalidParameterException;
+import java.util.Stack;
 
 public class BoardController {
     Board m_board;
     BoardView m_boardView;
+    Stack<Board> m_stack;
 
     /**
      * Create a new Board controller
      */
     public BoardController(){
-
         this.m_board = null;
+        this.m_boardView = null;
+        this.m_stack = new Stack<>();
     }
 
     /**
@@ -28,6 +30,8 @@ public class BoardController {
             throw new NullPointerException("NULL instance of Board");
 
         this.m_board = b;
+        this.m_boardView = null;
+        this.m_stack = new Stack<>();
     }
 
     /**
@@ -87,6 +91,28 @@ public class BoardController {
         if(board == null)
             throw new NullPointerException("BoardController.setBoardView() : NULL instance of Board");
         this.m_boardView = board;
+    }
+
+    /**
+     * Push a copy of the current board in a stack
+     * @throws NullPointerException
+     */
+    public void pushStack() throws NullPointerException {
+        if(this.m_stack == null)
+            throw new NullPointerException("BoardController.setBoardView() : Stack not instantiated");
+
+        this.m_stack.push(new Board(this.getBoard()));
+    }
+
+    /**
+     * Pop a Board from the stack and assign it as the current one
+     * @throws NullPointerException
+     */
+    public void popStack() throws NullPointerException {
+        if(this.m_stack == null)
+            throw new NullPointerException("BoardController.setBoardView() : Stack not instantiated");
+
+        this.setBoard(this.m_stack.pop());
     }
 
     /**
