@@ -1,7 +1,6 @@
 package Controllers;
 
 import Models.Board;
-import Models.Game;
 import Models.Point;
 import Views.BoardView;
 import org.junit.jupiter.api.Assertions;
