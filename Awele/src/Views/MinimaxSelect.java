@@ -3,8 +3,6 @@ package Views;
 import Controllers.BoardController;
 import Models.Point;
 
-import java.util.ArrayList;
-
 public class MinimaxSelect implements iSelectable{
     private BoardController m_controller;
     private int m_id;

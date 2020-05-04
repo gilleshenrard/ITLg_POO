@@ -1,6 +1,5 @@
 package Controllers;
 
-import Models.Board;
 import Models.Game;
 import Models.Point;
 import Views.GameView;

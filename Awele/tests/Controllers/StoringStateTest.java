@@ -1,13 +1,9 @@
 package Controllers;
 
-import Models.Game;
 import Views.BoardView;
 import Views.GameView;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.security.InvalidParameterException;
 
 public class StoringStateTest {
     GameController g = new GameController();
