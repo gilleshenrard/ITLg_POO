@@ -235,6 +235,9 @@ public class Board {
         this.setRemainingSeeds(1, 24);
         this.setRemainingSeeds(2, 24);
 
+        this.setStoredSeeds(1, 0);
+        this.setStoredSeeds(2, 0);
+
         Point p = new Point(0, 0);
         for (int l = 0 ; l < 2 ; l++){
             for (int c = 0 ; c < 6 ; c++){

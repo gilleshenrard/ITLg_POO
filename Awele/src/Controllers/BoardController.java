@@ -213,6 +213,8 @@ public class BoardController {
         int ret = this.checkOutcome(p);
         if (ret < 0)
             return ret;
+        else if(ret > 0)
+            this.storeSeeds(p.getY() + 1, ret);
 
         //get the number of seeds in the slot to harvest and empty it + update remaining seeds
         int nbseeds = this.getSlotSeeds(p);

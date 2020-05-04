@@ -109,7 +109,7 @@ public class GameControllerTest {
         g.getBoardController().getBoard().setSlotSeeds(new Point(4, 1), 9);
         int ret = g.playSlot(new Point(5, 0));
         Assertions.assertEquals(5, ret);
-        Assertions.assertEquals(0, g.getStoredSeeds(1));
+        Assertions.assertEquals(3, g.getStoredSeeds(1));
         Assertions.assertEquals(0, g.getStoredSeeds(2));
     }
 
@@ -149,7 +149,7 @@ public class GameControllerTest {
         g.getBoardController().getBoard().setStoredSeeds(1, 20);
         int ret = g.playSlot(new Point(5, 0));
         Assertions.assertEquals(5, ret);
-        Assertions.assertEquals(20, g.getStoredSeeds(1));
+        Assertions.assertEquals(23, g.getStoredSeeds(1));
         Assertions.assertEquals(0, g.getStoredSeeds(2));
     }
 
@@ -159,6 +159,7 @@ public class GameControllerTest {
     @DisplayName("playSlot() with self-starvation to other row - should not fail")
     @Test
     void playSlot_selfStarvation_otherRow_shouldnot_fail() {
+        g.resetGame();
         g.getBoardController().getBoard().setStoredSeeds(1, 0);
         g.getBoardController().getBoard().setStoredSeeds(2, 0);
         g.getBoardController().getBoard().emptySlotSeeds(new Point(0, 0));

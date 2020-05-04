@@ -14,20 +14,6 @@ public class StoringStateTest {
     GameView gv = new GameView(g);
 
     /**
-     * Check if handleState() throws an exception when storing above 48
-     */
-    @DisplayName("handleState() above 48 - should fail")
-    @Test
-    void handleState_above48_should_fail() {
-        g.setNextState(GameController.m_storing);
-        g.setCurrentPlayer(1);
-        g.getBoardController().getBoard().setStoredSeeds(1, 23);
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            g.handleState(49);
-        });
-    }
-
-    /**
      * Check if handleState() fails storing seeds
      */
     @DisplayName("handleState() - should not fail")
