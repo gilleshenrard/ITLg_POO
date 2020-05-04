@@ -4,6 +4,8 @@ import Controllers.GameController;
 import Models.Board;
 import Models.Point;
 
+import java.util.ArrayList;
+
 public class MinimaxSelect implements iSelectable{
     private GameController m_game;
     private int m_id;
@@ -53,10 +55,12 @@ public class MinimaxSelect implements iSelectable{
         Point p = new Point(0, 0);
 
         //for each of the root children, find the best move
+        ArrayList<Integer> data = new ArrayList<>();
         for (int slot=0 ; slot<6 ; slot++){
             p.setCoordinates(slot, this.m_id - 1);
-            Board b = new Board(this.m_game.getBoardController().getBoard());
-            int val = evaluate(b, 0, this.m_id, p, -ERROR);
+            this.m_game.memoryBackup(data);
+            int val = evaluate(this.m_game.getBoardController().getBoard(), 0, this.m_id, p, -ERROR);
+            this.m_game.memoryRestore(data);
             if (val == ERROR)
                 continue;
 
@@ -93,10 +97,12 @@ public class MinimaxSelect implements iSelectable{
         Point p = new Point(0, 0);
 
         //for each slot (child nodes), make a copy of the board and evaluate it
+        ArrayList<Integer> data = new ArrayList<>();
         for(int slot=0 ; slot<6 ; slot++){
-            Board b = new Board(parent);
             p.setCoordinates(slot, ID-1);
-            val = evaluate(b, depth, ID, p, alpha);
+            this.m_game.memoryBackup(data);
+            val = evaluate(parent, depth, ID, p, alpha);
+            this.m_game.memoryRestore(data);
 
             //if the evaluation return an error, process the next child
             if (val == ERROR)

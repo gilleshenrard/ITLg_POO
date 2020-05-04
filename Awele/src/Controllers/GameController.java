@@ -5,6 +5,7 @@ import Models.Point;
 import Views.GameView;
 
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 
 public class GameController {
     private BoardController m_board;
@@ -164,6 +165,35 @@ public class GameController {
         Game.getInstance().resetGame();
         this.m_board.resetBoard();
     }
+
+    /**
+     * Save the captured seeds and the board current state in an array
+     * @param data Array in which backup the game
+     */
+    public void memoryBackup(ArrayList<Integer> data){
+        data.clear();
+
+        data.add(this.getSeeds(1));
+        data.add(this.getSeeds(2));
+
+        this.m_board.memoryBackup(data);
+    }
+
+    /**
+     * Reset the board with the information enclosed in data
+     * @param data Array from which pull the information
+     */
+    public void memoryRestore(ArrayList<Integer> data){
+        Game.getInstance().setSeeds(1, data.get(0));
+        data.remove(0);
+        Game.getInstance().setSeeds(2, data.get(0));
+        data.remove(0);
+
+        this.m_board.memoryRestore(data);
+
+        data.clear();
+    }
+
     /**
      * Display a message in the out channel
      * @param msg Message to display

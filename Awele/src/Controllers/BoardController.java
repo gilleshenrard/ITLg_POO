@@ -4,6 +4,7 @@ import Models.Board;
 import Models.Point;
 import Views.BoardView;
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 
 public class BoardController {
     Board m_board;
@@ -197,6 +198,43 @@ public class BoardController {
      */
     public void resetBoard(){
         this.m_board.reset();
+    }
+
+    /**
+     * Concatenate all the board info in an array
+     * @param data Array in which concatenate the info
+     */
+    public void memoryBackup(ArrayList<Integer> data){
+        data.add(this.m_board.getRemainingSeeds(1));
+        data.add(this.m_board.getRemainingSeeds(2));
+
+        Point p = new Point(0, 0);
+        for (int y=0; y < 2 ; y++){
+            for (int x=0; x < 2 ; x++){
+                p.setCoordinates(x, y);
+                data.add(this.getSlotSeeds(p));
+            }
+        }
+    }
+
+    /**
+     * Reset the board with the information enclosed in data
+     * @param data Array from which pull the information
+     */
+    public void memoryRestore(ArrayList<Integer> data){
+        this.m_board.setRemainingSeeds(1, data.get(0));
+        data.remove(0);
+        this.m_board.setRemainingSeeds(2, data.get(0));
+        data.remove(0);
+
+        Point p = new Point(0, 0);
+        for (int y=0; y < 2 ; y++){
+            for (int x=0; x < 2 ; x++){
+                p.setCoordinates(x, y);
+                this.m_board.setSlotSeeds(p, data.get(0));
+                data.remove(0);
+            }
+        }
     }
 
     /**
