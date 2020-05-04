@@ -33,6 +33,7 @@ public class Board {
         this.setRemainingSeeds(2, board.getRemainingSeeds(2));
 
         Point p = new Point(0, 0);
+        this.m_slots = new Slot[2][6];
         for (int l = 0 ; l < 2 ; l++){
             for (int c = 0 ; c < 6 ; c++){
                 p.setCoordinates(c, l);
