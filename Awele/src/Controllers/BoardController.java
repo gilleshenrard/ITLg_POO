@@ -11,6 +11,14 @@ public class BoardController {
 
     /**
      * Create a new Board controller
+     */
+    public BoardController(){
+
+        this.m_board = null;
+    }
+
+    /**
+     * Create a new Board controller
      * @param b Board to assign to the controller
      * @throws NullPointerException
      */

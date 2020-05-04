@@ -1,5 +1,6 @@
 package Views;
 
+import Controllers.BoardController;
 import Controllers.GameController;
 import Models.Board;
 import Models.Point;
@@ -53,10 +54,12 @@ public class MinimaxSelect implements iSelectable{
         Point p = new Point(0, 0);
 
         //for each of the root children, find the best move
+        BoardController bc = new BoardController();
         for (int slot=0 ; slot<6 ; slot++){
             p.setCoordinates(slot, this.m_id - 1);
             Board b = new Board(this.m_game.getBoardController().getBoard());
-            int val = evaluate(b, 0, this.m_id, p, -ERROR);
+            bc.setBoard(b);
+            int val = evaluate(bc, 0, this.m_id, p, -ERROR);
             if (val == ERROR)
                 continue;
 
@@ -77,9 +80,9 @@ public class MinimaxSelect implements iSelectable{
      * @param alpha Alpha value (Alpha-Beta Pruning)
      * @return Best move evaluated in the current tree
      */
-    private int evaluate(Board parent, int depth, int ID, Point move, int alpha){
+    private int evaluate(BoardController parent, int depth, int ID, Point move, int alpha){
         //return error if move is not possible
-        if (this.m_game.playSlot(move) < 0)
+        if (parent.playSlot(move) < 0)
             return ERROR;
 
         //if a leaf has been reached, evaluate the game status
@@ -93,10 +96,12 @@ public class MinimaxSelect implements iSelectable{
         Point p = new Point(0, 0);
 
         //for each slot (child nodes), make a copy of the board and evaluate it
+        BoardController bc = new BoardController();
         for(int slot=0 ; slot<6 ; slot++){
-            Board b = new Board(parent);
+            Board b = new Board(parent.getBoard());
+            bc.setBoard(b);
             p.setCoordinates(slot, ID-1);
-            val = evaluate(b, depth, ID, p, alpha);
+            val = evaluate(bc, depth, ID, p, alpha);
 
             //if the evaluation return an error, process the next child
             if (val == ERROR)
