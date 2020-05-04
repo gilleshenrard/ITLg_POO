@@ -41,26 +41,21 @@ public class MinimaxSelect implements iSelectable{
      */
     @Override
     public int selectSlot() {
-        int find = findBest();
-        return find + 1;
-    }
-
-    /**
-     * Find the value in the current game state
-     * @return best shot possible, or -3 if error
-     */
-    private int findBest(){
         int bestVal = ERROR;
         int bestShot = -3;
 
+        //test each legal shot for the best value
         Point p = new Point(0, 0);
         for(int i=0 ; i<6 ; i++){
             p.setCoordinates(i, this.m_id - 1);
             if (this.m_controller.isLegal(p)) {
+
+                //use minimax to find the best value in the current slot
                 int val = miniMax(this.m_controller, p, this.m_maxDepth, NEGINFINITE, POSINFINITE, true);
                 if (val == ERROR)
                     continue;
 
+                //if no error, update the best value and the best slot
                 if (val > bestVal) {
                     bestVal = val;
                     bestShot = p.getX();
@@ -68,7 +63,8 @@ public class MinimaxSelect implements iSelectable{
             }
         }
 
-        return bestShot;
+        //return the best slot
+        return bestShot + 1;
     }
 
     /**
