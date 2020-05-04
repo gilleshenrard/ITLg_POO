@@ -11,6 +11,7 @@ public class MinimaxSelect implements iSelectable{
     private int m_maxDepth;
     private final static int POSINFINITE = 200000;
     private final static int NEGINFINITE = -POSINFINITE;
+    private final static int ERROR = Integer.MIN_VALUE;
 
     /**
      * Create a new Minimax selection behaviour
@@ -38,40 +39,39 @@ public class MinimaxSelect implements iSelectable{
 
     /**
      * Select a slot using the Minimax algorithm
-     * @return Selection
+     * @return Selection, or -2 if error
      */
     @Override
     public int selectSlot() {
-        return findBest() + 1;
+        int find = findBest();
+        return find + 1;
     }
 
     /**
      * Find the value in the current game state
-     * @return best value
+     * @return best shot possible, or -3 if error
      */
     private int findBest(){
-        ArrayList<Point> legalShots = new ArrayList<>();
+        int bestVal = ERROR;
+        int bestShot = -3;
 
+        Point p = new Point(0, 0);
         for(int i=0 ; i<6 ; i++){
-            Point p = new Point(i, this.m_id - 1);
-            if (this.m_controller.isLegal(p))
-                legalShots.add(p);
-        }
+            p.setCoordinates(i, this.m_id - 1);
+            if (this.m_controller.isLegal(p)) {
 
-        if (legalShots.size() > 0){
-            int bestVal = (this.m_id == 1 ? POSINFINITE : NEGINFINITE);
-            for (Point tmp : legalShots){
-                int val = miniMax(this.m_controller, tmp, this.m_maxDepth, NEGINFINITE, POSINFINITE, (this.m_id == 1 ? false : true));
-                if(this.m_id == 1 && val > bestVal)
-                    bestVal = val;
+                int val = miniMax(this.m_controller, p, this.m_maxDepth, NEGINFINITE, POSINFINITE, true);
+                if (val == ERROR)
+                    continue;
 
-                if (this.m_id == 2 && val < bestVal)
+                if (val > bestVal) {
                     bestVal = val;
+                    bestShot = p.getX();
+                }
             }
-            return bestVal;
         }
-        else
-            return -2;
+
+        return bestShot;
     }
 
     /**
@@ -88,7 +88,7 @@ public class MinimaxSelect implements iSelectable{
         parent.pushStack();
         if (parent.playSlot(p) < 0 ) {
             parent.popStack();
-            return (maximiser ? Integer.MIN_VALUE : Integer.MAX_VALUE);
+            return ERROR;
         }
 
         int outcome = evaluateState(parent);
