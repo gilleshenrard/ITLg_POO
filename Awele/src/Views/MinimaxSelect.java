@@ -78,45 +78,61 @@ public class MinimaxSelect implements iSelectable{
      * @return Best Slot to select
      */
     private int miniMax(BoardController parent, Point p, int depth, int alpha, int beta, boolean maximiser){
+        //save a copy of the current node
         parent.pushStack();
+
+        //test its outcome and return an error if not legal
         if (parent.playSlot(p) < 0 ) {
             parent.popStack();
             return ERROR;
         }
 
+        //evaluate the current node and return its value if leaf or game won
         int outcome = evaluateState(parent);
         if (depth == 0 || outcome == POSINFINITE || outcome == NEGINFINITE ) {
             parent.popStack();
             return outcome;
         }
 
+        //if maximiser
         if (maximiser){
+            //look for the best value in the subchildren
             int maxEval = NEGINFINITE;
             for(int i=0 ; i<6 ; i++){
                 Point tmp = new Point(i, this.m_id - 1);
                 int eval = miniMax(parent, tmp, depth - 1, alpha, beta, false);
                 if (eval == ERROR)
                     continue;
+
+                //if no error, update the max value in the subchildren and the alpha value
                 maxEval = Math.max(maxEval, eval);
                 alpha = Math.max(alpha, eval);
                 if (beta <= alpha)
                     break;
             }
+
+            //restore the parent status and return the current node best evaluation
             parent.popStack();
             return maxEval;
         }
+        //if minimiser
         else {
+            //look for the best value in the subchildren
             int minEval = POSINFINITE;
             for(int i=0 ; i<6 ; i++){
                 Point tmp = new Point(i, 2 - this.m_id);
                 int eval = miniMax(parent, tmp, depth - 1, alpha, beta, true);
                 if (eval == ERROR)
                     continue;
+
+                //if no error, update the min value in the subchildren and the beta value
                 minEval = Math.min(minEval, eval);
                 beta = Math.min(beta, eval);
                 if (beta <= alpha)
                     break;
             }
+
+            //restore the parent status and return the current node best evaluation
             parent.popStack();
             return minEval;
         }
@@ -150,6 +166,7 @@ public class MinimaxSelect implements iSelectable{
             }
         }
 
+        //return the evaluation code
         return eval[this.m_id - 1] - eval[2 - this.m_id];
     }
 }
