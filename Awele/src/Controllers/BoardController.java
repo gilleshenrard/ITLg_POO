@@ -88,7 +88,7 @@ public class BoardController {
     /**
      * Test a slot for an outcome code
      * @param p The slot to test
-     * @return -2 if empty, -1 if starvation, 0 if simple scattering, 1 if capture
+     * @return -2 if empty, -1 if starvation, amount captured otherwise
      * @throws InvalidParameterException
      * @throws NullPointerException
      */
@@ -136,7 +136,7 @@ public class BoardController {
                || capturable[1] + backup[1] == this.m_board.getRemainingSeeds(2))
                 return -1;
             else
-                return 1;
+                return capturable[0] + capturable[1];
         }
         //starvation occurring during a scattering
         else {
@@ -182,7 +182,7 @@ public class BoardController {
                 int tmp = this.getSlotSeeds(pNext);
 
                 //if capture case, store the seeds, empty the slot and update remaining
-                if (ret == 1 && (tmp == 1 || tmp == 2)) {
+                if (ret > 0 && (tmp == 1 || tmp == 2)) {
                     total += tmp + 1;
                     this.m_board.emptySlotSeeds(pNext);
                     this.m_board.removeRemainingSeeds(pNext.getY()+1, tmp);
