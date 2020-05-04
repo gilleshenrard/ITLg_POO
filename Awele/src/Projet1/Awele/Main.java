@@ -4,9 +4,9 @@ import Controllers.GameController;
 import Models.Game;
 import Views.BoardView;
 import Views.KeyboardSelect;
-import Views.RandomSelect;
 import Models.Player;
 import Views.GameView;
+import Views.MinimaxSelect;
 
 public class Main {
 
@@ -18,7 +18,7 @@ public class Main {
 
         //players setup
         Game.getInstance().setPlayer(new Player(1, "Gilles", new KeyboardSelect()));
-        Game.getInstance().setPlayer(new Player(2, "AI", new RandomSelect(game.getBoardController(), 2)));
+        Game.getInstance().setPlayer(new Player(2, "AI", new MinimaxSelect(game, 2)));
 
         //state variables
         int outcome = 0;
