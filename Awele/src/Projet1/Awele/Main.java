@@ -23,13 +23,18 @@ public class Main {
         //state variables
         int outcome = 0;
 
-        //main game loop, while no victory
-        while (outcome != -2){
-            outcome = game.handleState(outcome);
-
-            //system error, exit with an error
-            if (outcome == -1)
-                System.exit(-1);
+        try {
+            //main game loop, while no victory
+            while (outcome != -2 && outcome != -1) {
+                outcome = game.handleState(outcome);
+            }
         }
+        catch (Exception e){
+            game.displayError(e.getMessage());
+            System.exit(-1);
+        }
+        //system error, exit with an error
+        if (outcome == -1)
+            System.exit(outcome);
     }
 }

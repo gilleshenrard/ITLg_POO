@@ -2,33 +2,18 @@ package Controllers;
 
 import Models.Point;
 
-import java.security.InvalidParameterException;
-
 public class PlayingState implements iGameState {
 
     /**
      * Make the player play a slot
      * @param controller Game controller to use
      * @param input Slot selected by the user
-     * @return -1 if error, 0 if starvation or empty, amount captured otherwise
+     * @return 0 if starvation or empty, amount captured otherwise
      */
     @Override
     public int handleState(GameController controller, int input){
         //play the slot selected
-        int outcome = 0;
-        try {
-            outcome = controller.playSlot(new Point(input - 1, controller.getCurrentPlayer() - 1));
-        }
-        //System error. Display error message and quit
-        catch (NullPointerException e){
-            controller.displayError(e.getMessage());
-            return -1;
-        }
-        //Slot out of range or other system error. Display error message and quit
-        catch (InvalidParameterException e){
-            controller.displayError(e.getMessage());
-            return -1;
-        }
+        int outcome = controller.playSlot(new Point(input - 1, controller.getCurrentPlayer() - 1));
 
         if (outcome < 0) {  //player starved or empty slot, get back to prompting state and display forfeit
             controller.setNextState(controller.m_prompting);
