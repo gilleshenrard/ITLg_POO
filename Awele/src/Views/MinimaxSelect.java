@@ -52,11 +52,9 @@ public class MinimaxSelect implements iSelectable{
 
                 //use minimax to find the best value in the current slot
                 int val = miniMax(p, this.m_maxDepth, NEGINFINITE, POSINFINITE, true);
-                if (val == ERROR)
-                    continue;
 
                 //if no error, update the best value and the best slot
-                if (val > bestVal) {
+                if (val != ERROR && val > bestVal) {
                     bestVal = val;
                     bestShot = p.getX();
                 }
@@ -97,18 +95,18 @@ public class MinimaxSelect implements iSelectable{
         if (maximiser){
             //look for the best value in the subchildren
             int maxEval = NEGINFINITE;
-            for(int i=0 ; i<6 ; i++){
+            int i = 0;
+            do{
                 Point tmp = new Point(i, this.m_id - 1);
                 int eval = miniMax(tmp, depth - 1, alpha, beta, false);
-                if (eval == ERROR)
-                    continue;
 
                 //if no error, update the max value in the subchildren and the alpha value
-                maxEval = Math.max(maxEval, eval);
-                alpha = Math.max(alpha, eval);
-                if (beta <= alpha)
-                    break;
-            }
+                if (eval != ERROR) {
+                    maxEval = Math.max(maxEval, eval);
+                    alpha = Math.max(alpha, eval);
+                }
+                i++;
+            }while(i<6 && beta > alpha);
 
             //restore the parent status and return the current node best evaluation
             this.m_controller.popStack();
@@ -118,18 +116,18 @@ public class MinimaxSelect implements iSelectable{
         else {
             //look for the best value in the subchildren
             int minEval = POSINFINITE;
-            for(int i=0 ; i<6 ; i++){
+            int i = 0;
+            do{
                 Point tmp = new Point(i, 2 - this.m_id);
                 int eval = miniMax(tmp, depth - 1, alpha, beta, true);
-                if (eval == ERROR)
-                    continue;
 
                 //if no error, update the min value in the subchildren and the beta value
-                minEval = Math.min(minEval, eval);
-                beta = Math.min(beta, eval);
-                if (beta <= alpha)
-                    break;
-            }
+                if (eval != ERROR) {
+                    minEval = Math.min(minEval, eval);
+                    beta = Math.min(beta, eval);
+                }
+                i++;
+            }while(i<6 && beta > alpha);
 
             //restore the parent status and return the current node best evaluation
             this.m_controller.popStack();
