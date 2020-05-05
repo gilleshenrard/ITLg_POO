@@ -32,6 +32,15 @@ public class BoardView {
      * @param ID ID of the current player
      */
     public void displayBoard(int ID){
+        //display the board
+        //|  0 |
+        //|  6 ||  5 ||  4 ||  3 ||  2 ||  1 |
+        //|  1 ||  2 ||  3 ||  4 ||  5 ||  6 |
+        //|  0 |
+
+        this.displaySlot(this.m_board.getStoredSeeds(2), false);
+        System.out.println();
+
         Point p = new Point(0, 0);
         for(int l=1 ; l>=0 ; l--) {
             for (int c = 0; c < 6; c++) {
@@ -40,6 +49,9 @@ public class BoardView {
             }
             System.out.println();
         }
+
+        this.displaySlot(this.m_board.getStoredSeeds(1), false);
+        System.out.println();
 
     }
 }
