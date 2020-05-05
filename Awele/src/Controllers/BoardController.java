@@ -97,13 +97,19 @@ public class BoardController {
 
     /**
      * Pop a Board from the stack and assign it as the current one
+     * @return 1 if a board has been popped, 0 otherwise
      * @throws NullPointerException
      */
-    public void popStack() throws NullPointerException {
+    public int popStack() throws NullPointerException {
         if(this.m_stack == null)
             throw new NullPointerException("BoardController.setBoardView() : Stack not instantiated");
 
-        this.setBoard(this.m_stack.pop());
+        if (this.m_stack.size() > 0) {
+            this.setBoard(this.m_stack.pop());
+            return 1;
+        }
+        else
+            return 0;
     }
 
     /**
