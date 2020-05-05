@@ -7,13 +7,13 @@ public class MinimaxSelect implements iSelectable{
     private BoardController m_controller;
     private int m_id;
     private int m_maxDepth;
-    private final static int POSINFINITE = 200000;
-    private final static int NEGINFINITE = -POSINFINITE;
+    private final static int INFINITE_POS = 200000;
+    private final static int INFINITE_NEG = -INFINITE_POS;
     private final static int ERROR = Integer.MIN_VALUE;
 
     /**
      * Create a new Minimax selection behaviour
-     * @param game The game controller to use
+     * @param controller The board controller to use
      * @param ID The ID of the player to which set the behaviour
      * @throws NullPointerException
      */
@@ -42,21 +42,21 @@ public class MinimaxSelect implements iSelectable{
     @Override
     public int selectSlot() {
         int bestVal = ERROR;
-        int bestShot = -3;
+        int bestShot = -3;  //initialised with error code - 1
 
-        //test each legal shot for the best value
-        Point p = new Point(0, 0);
-        for(int i=0 ; i<6 ; i++){
-            p.setCoordinates(i, this.m_id - 1);
-            if (this.m_controller.isLegal(p)) {
+        //test each legal slots for the best value
+        Point slot = new Point(0, 0);
+        for(int x=0 ; x<6 ; x++){
+            slot.setCoordinates(x, this.m_id - 1);
 
-                //use minimax to find the best value in the current slot
-                int val = miniMax(p, this.m_maxDepth, NEGINFINITE, POSINFINITE, true);
+            //if slot is legal, get its minimax value (AI considers itself the maximiser and the opponent the minimiser)
+            if (this.m_controller.isLegal(slot)) {
+                int val = miniMax(slot, this.m_maxDepth, INFINITE_NEG, INFINITE_POS, true);
 
                 //if no error, update the best value and the best slot
                 if (val != ERROR && val > bestVal) {
                     bestVal = val;
-                    bestShot = p.getX();
+                    bestShot = slot.getX();
                 }
             }
         }
@@ -67,67 +67,68 @@ public class MinimaxSelect implements iSelectable{
 
     /**
      * Use the Minimax algorithm to determine the best move
-     * @param p Slot to select in this node
+     * @param slot Slot to play in this node
      * @param depth Depth of the current node
      * @param alpha Alpha value in this pruning state
      * @param beta Beta value in this pruning state
-     * @param maximiser Flag determining if the current node concerns the maximiser or the minimiser (player 2 is the maximiser by default)
+     * @param maximiser Flag determining if the current node concerns the maximiser or the minimiser (AI considers itself the maximiser)
      * @return Best Slot to select
      */
-    private int miniMax(Point p, int depth, int alpha, int beta, boolean maximiser){
-        //save a copy of the current node
+    private int miniMax(Point slot, int depth, int alpha, int beta, boolean maximiser){
+        //save a copy of the parent node state
         this.m_controller.pushStack();
 
-        //test its outcome and return an error if not legal
-        if (this.m_controller.playSlot(p) < 0 ) {
+        //play the current node slot and, if error,
+        //  restore the parent board and return error code
+        if (this.m_controller.playSlot(slot) < 0 ) {
             this.m_controller.popStack();
             return ERROR;
         }
 
-        //evaluate the current node and return its value if leaf or game won
-        int outcome = evaluateState();
-        if (depth == 0 || outcome == POSINFINITE || outcome == NEGINFINITE ) {
+        //evaluate the current node and return its value if tree leaf reached or game won
+        int evaluation = evaluateState();
+        if (depth == 0 || evaluation == INFINITE_POS || evaluation == INFINITE_NEG) {
             this.m_controller.popStack();
-            return outcome;
+            return evaluation;
         }
 
-        //if maximiser
         if (maximiser){
-            //look for the best value in the subchildren
-            int maxEval = NEGINFINITE;
-            int i = 0;
+            //look for the best maximising value in all the minimising children
+            int maxEval = INFINITE_NEG;
+            int x = 0;
             do{
-                Point tmp = new Point(i, this.m_id - 1);
-                int eval = miniMax(tmp, depth - 1, alpha, beta, false);
+                //AI is the maximiser, so the slots evaluated must be on AI side
+                Point childSlot = new Point(x, this.m_id - 1);
+                int eval = miniMax(childSlot, depth - 1, alpha, beta, false);
 
-                //if no error, update the max value in the subchildren and the alpha value
+                //if no error, update the most maximising evaluation and the alpha value
                 if (eval != ERROR) {
                     maxEval = Math.max(maxEval, eval);
                     alpha = Math.max(alpha, eval);
                 }
-                i++;
-            }while(i<6 && beta > alpha);
+                x++;
+            }while(x<6 && beta > alpha);
 
             //restore the parent status and return the current node best evaluation
             this.m_controller.popStack();
             return maxEval;
         }
-        //if minimiser
         else {
-            //look for the best value in the subchildren
-            int minEval = POSINFINITE;
-            int i = 0;
+            //look for the best minimising value in all the maximising children
+            int minEval = INFINITE_POS;
+            int x = 0;
             do{
-                Point tmp = new Point(i, 2 - this.m_id);
-                int eval = miniMax(tmp, depth - 1, alpha, beta, true);
+                //opponent is the minimiser, so the slots evaluated must be on opponent side
+                Point childSlot = new Point(x, 2 - this.m_id);
+                int eval = miniMax(childSlot, depth - 1, alpha, beta, true);
 
-                //if no error, update the min value in the subchildren and the beta value
+                //if no error, update the most minimising evaluation and the beta value
                 if (eval != ERROR) {
                     minEval = Math.min(minEval, eval);
                     beta = Math.min(beta, eval);
                 }
-                i++;
-            }while(i<6 && beta > alpha);
+                x++;
+            }while(x<6 && beta > alpha);
 
             //restore the parent status and return the current node best evaluation
             this.m_controller.popStack();
@@ -143,20 +144,20 @@ public class MinimaxSelect implements iSelectable{
         int[] eval = new int[2];
         Point p = new Point(0, 0);
 
-        //if minimiser won the game
+        //if minimiser (opponent) won the game
         if (this.m_controller.getStoredSeeds(3 - this.m_id) > 24)
-            return NEGINFINITE;
+            return INFINITE_NEG;
 
-        //if maximiser won the game
+        //if maximiser (AI) won the game
         if (this.m_controller.getStoredSeeds(this.m_id) > 24)
-            return POSINFINITE;
+            return INFINITE_POS;
 
         //process the evaluation for both players
         for (int player=0 ; player < 2 ; player++){
-            //initialise the evaluation with the amount of seeds captured with a lot of weight
+            //initialise the evaluation with the amount of seeds captured and add a lot of weight to it
             eval[player] = 300 * this.m_controller.getStoredSeeds(player + 1);
 
-            //add the content of the player's slots, each weighted
+            //add the content of the player's slots, each weighted depending on their place (right more weighted)
             for (int slot=0 ; slot < 6 ; slot++) {
                 p.setCoordinates(slot, player);
                 eval[player] += this.m_controller.getSlotSeeds(p) * (slot+1);
