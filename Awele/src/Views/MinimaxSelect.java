@@ -51,7 +51,7 @@ public class MinimaxSelect implements iSelectable{
             if (this.m_controller.isLegal(p)) {
 
                 //use minimax to find the best value in the current slot
-                int val = miniMax(this.m_controller, p, this.m_maxDepth, NEGINFINITE, POSINFINITE, true);
+                int val = miniMax(p, this.m_maxDepth, NEGINFINITE, POSINFINITE, true);
                 if (val == ERROR)
                     continue;
 
@@ -69,7 +69,6 @@ public class MinimaxSelect implements iSelectable{
 
     /**
      * Use the Minimax algorithm to determine the best move
-     * @param parent BoardController hosting a Board representing the current node of the tree
      * @param p Slot to select in this node
      * @param depth Depth of the current node
      * @param alpha Alpha value in this pruning state
@@ -77,20 +76,20 @@ public class MinimaxSelect implements iSelectable{
      * @param maximiser Flag determining if the current node concerns the maximiser or the minimiser (player 2 is the maximiser by default)
      * @return Best Slot to select
      */
-    private int miniMax(BoardController parent, Point p, int depth, int alpha, int beta, boolean maximiser){
+    private int miniMax(Point p, int depth, int alpha, int beta, boolean maximiser){
         //save a copy of the current node
-        parent.pushStack();
+        this.m_controller.pushStack();
 
         //test its outcome and return an error if not legal
-        if (parent.playSlot(p) < 0 ) {
-            parent.popStack();
+        if (this.m_controller.playSlot(p) < 0 ) {
+            this.m_controller.popStack();
             return ERROR;
         }
 
         //evaluate the current node and return its value if leaf or game won
-        int outcome = evaluateState(parent);
+        int outcome = evaluateState();
         if (depth == 0 || outcome == POSINFINITE || outcome == NEGINFINITE ) {
-            parent.popStack();
+            this.m_controller.popStack();
             return outcome;
         }
 
@@ -100,7 +99,7 @@ public class MinimaxSelect implements iSelectable{
             int maxEval = NEGINFINITE;
             for(int i=0 ; i<6 ; i++){
                 Point tmp = new Point(i, this.m_id - 1);
-                int eval = miniMax(parent, tmp, depth - 1, alpha, beta, false);
+                int eval = miniMax(tmp, depth - 1, alpha, beta, false);
                 if (eval == ERROR)
                     continue;
 
@@ -112,7 +111,7 @@ public class MinimaxSelect implements iSelectable{
             }
 
             //restore the parent status and return the current node best evaluation
-            parent.popStack();
+            this.m_controller.popStack();
             return maxEval;
         }
         //if minimiser
@@ -121,7 +120,7 @@ public class MinimaxSelect implements iSelectable{
             int minEval = POSINFINITE;
             for(int i=0 ; i<6 ; i++){
                 Point tmp = new Point(i, 2 - this.m_id);
-                int eval = miniMax(parent, tmp, depth - 1, alpha, beta, true);
+                int eval = miniMax(tmp, depth - 1, alpha, beta, true);
                 if (eval == ERROR)
                     continue;
 
@@ -133,7 +132,7 @@ public class MinimaxSelect implements iSelectable{
             }
 
             //restore the parent status and return the current node best evaluation
-            parent.popStack();
+            this.m_controller.popStack();
             return minEval;
         }
     }
@@ -142,27 +141,27 @@ public class MinimaxSelect implements iSelectable{
      * Generate an evaluation value for the current state of the game
      * @return Evaluation value
      */
-    private int evaluateState(BoardController bc){
+    private int evaluateState(){
         int[] eval = new int[2];
         Point p = new Point(0, 0);
 
         //if minimiser won the game
-        if (bc.getStoredSeeds(3 - this.m_id) > 24)
+        if (this.m_controller.getStoredSeeds(3 - this.m_id) > 24)
             return NEGINFINITE;
 
         //if maximiser won the game
-        if (bc.getStoredSeeds(this.m_id) > 24)
+        if (this.m_controller.getStoredSeeds(this.m_id) > 24)
             return POSINFINITE;
 
         //process the evaluation for both players
         for (int player=0 ; player < 2 ; player++){
             //initialise the evaluation with the amount of seeds captured with a lot of weight
-            eval[player] = 300 * bc.getStoredSeeds(player + 1);
+            eval[player] = 300 * this.m_controller.getStoredSeeds(player + 1);
 
             //add the content of the player's slots, each weighted
             for (int slot=0 ; slot < 6 ; slot++) {
                 p.setCoordinates(slot, player);
-                eval[player] += bc.getSlotSeeds(p) * (slot+1);
+                eval[player] += this.m_controller.getSlotSeeds(p) * (slot+1);
             }
         }
 
