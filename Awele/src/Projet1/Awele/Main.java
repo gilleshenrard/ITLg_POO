@@ -1,7 +1,6 @@
 package Projet1.Awele;
 
 import Controllers.GameController;
-import Models.Game;
 import Views.BoardView;
 import Views.KeyboardSelect;
 import Models.Player;
@@ -17,8 +16,8 @@ public class Main {
         BoardView boardView = new BoardView(game.getBoardController());
 
         //players setup
-        Game.getInstance().setPlayer(new Player(1, "Gilles", new KeyboardSelect()));
-        Game.getInstance().setPlayer(new Player(2, "AI", new MinimaxSelect(game.getBoardController(), 2)));
+        game.setPlayer(new Player(1, "Gilles", new KeyboardSelect()));
+        game.setPlayer(new Player(2, "AI", new MinimaxSelect(game.getBoardController(), 2)));
 
         //state variables
         int outcome = 0;

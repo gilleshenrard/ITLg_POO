@@ -50,8 +50,7 @@ public class Game {
     }
 
     /**
-     * Set the instance of the player with regards to its ID
-     * @param ID ID of the player
+     * Set an instance of Player
      * @param player Player to set
      * @throws InvalidParameterException
      * @throws NullPointerException

@@ -1,6 +1,7 @@
 package Controllers;
 
 import Models.Game;
+import Models.Player;
 import Models.Point;
 import Views.GameView;
 
@@ -58,6 +59,28 @@ public class GameController {
      */
     public int getCurrentPlayer(){
         return this.m_currentPlayer;
+    }
+
+    /**
+     * Set an instance of Player
+     * @param player Player to set
+     * @throws InvalidParameterException
+     * @throws NullPointerException
+     */
+    public void setPlayer(Player player) throws InvalidParameterException, NullPointerException{
+        Game.getInstance().setPlayer(player);
+    }
+
+    /**
+     * Return a player according to its ID
+     * @param ID ID of the player to return
+     * @return Player to return
+     * @throws InvalidParameterException
+     */
+    public Player getPlayer(int ID) throws InvalidParameterException{
+        Game.validateID(ID, "Game.getPlayer()");
+
+        return Game.getInstance().getPlayer(ID);
     }
 
     /**
