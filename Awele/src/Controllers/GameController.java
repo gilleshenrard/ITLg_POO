@@ -96,10 +96,10 @@ public class GameController {
      * @throws NullPointerException
      */
     public int getStoredSeeds(int ID) throws InvalidParameterException, NullPointerException {
-        if(this.m_board == null)
+        if(this.getBoardController() == null)
             throw new NullPointerException("GameController.setBoard() : BoardController not instantiated");
 
-        return this.m_board.getStoredSeeds(ID);
+        return this.getBoardController().getStoredSeeds(ID);
     }
 
     /**
@@ -155,15 +155,15 @@ public class GameController {
      * @throws InvalidParameterException
      */
     public int playSlot(Point p) throws InvalidParameterException{
-      return this.m_board.playSlot(p);
+      return this.getBoardController().playSlot(p);
     }
 
     /**
-     * Reset the Game to an inial value
+     * Reset the Game and its related board to an inital value
      */
     public void resetGame(){
         Game.getInstance().reset();
-        this.m_board.resetBoard();
+        this.getBoardController().resetBoard();
     }
     /**
      * Display a message in the out channel
