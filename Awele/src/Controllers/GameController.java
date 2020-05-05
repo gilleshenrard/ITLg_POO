@@ -72,18 +72,6 @@ public class GameController {
     }
 
     /**
-     * Return a player according to its ID
-     * @param ID ID of the player to return
-     * @return Player to return
-     * @throws InvalidParameterException
-     */
-    public Player getPlayer(int ID) throws InvalidParameterException{
-        Game.validateID(ID, "Game.getPlayer()");
-
-        return Game.getInstance().getPlayer(ID);
-    }
-
-    /**
      * Handle the current game state
      * @param input Input for the current state
      * @return Output of the current state
@@ -231,16 +219,6 @@ public class GameController {
      */
     public void displayBoard() throws NullPointerException{
         this.getBoardController().displayBoard(this.m_currentPlayer);
-    }
-
-    /**
-     * Display a fixed size slot
-     * @param amount Amount to display in the slot
-     * @param highlight Flag to indicate whether the slot should be highlighted
-     * @throws NullPointerException
-     */
-    public void displaySlot(int amount, boolean highlight) throws NullPointerException{
-        this.getBoardController().displaySlot(amount, highlight);
     }
 
     /**
