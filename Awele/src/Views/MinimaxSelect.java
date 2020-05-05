@@ -48,21 +48,28 @@ public class MinimaxSelect implements iSelectable{
         int bestVal = ERROR;
         int bestShot = -3;  //initialised with error code - 1
 
-        //test each legal slots for the best value
-        Point slot = new Point(0, 0);
-        for(int x=0 ; x<6 ; x++){
-            slot.setCoordinates(x, this.m_id - 1);
+        try {
+            //test each legal slots for the best value
+            Point slot = new Point(0, 0);
+            for (int x = 0; x < 6; x++) {
+                slot.setCoordinates(x, this.m_id - 1);
 
-            //if slot is legal, get its minimax value (AI considers itself the maximiser and the opponent the minimiser)
-            if (this.m_controller.isLegal(slot)) {
-                int val = miniMax(slot, this.m_maxDepth, INFINITE_NEG, INFINITE_POS, true);
+                //if slot is legal, get its minimax value (AI considers itself the maximiser and the opponent the minimiser)
+                if (this.m_controller.isLegal(slot)) {
+                    int val = miniMax(slot, this.m_maxDepth, INFINITE_NEG, INFINITE_POS, true);
 
-                //if no error, update the best value and the best slot
-                if (val != ERROR && val > bestVal) {
-                    bestVal = val;
-                    bestShot = slot.getX();
+                    //if no error, update the best value and the best slot
+                    if (val != ERROR && val > bestVal) {
+                        bestVal = val;
+                        bestShot = slot.getX();
+                    }
                 }
             }
+        }
+        catch (Exception e){
+            //empty the BoardController stack, then rethrow the exception caught
+            while (this.m_controller != null && this.m_controller.popStack() > 0){}
+            throw e;
         }
 
         //return the best slot
