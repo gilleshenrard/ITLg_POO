@@ -17,10 +17,7 @@ public class BoardController {
      * @throws NullPointerException
      */
     public BoardController(Board b) throws NullPointerException{
-        if(b == null)
-            throw new NullPointerException("NULL instance of Board");
-
-        this.m_board = b;
+        this.setBoard(b);
         this.m_boardView = null;
         this.m_stack = new Stack<>();
     }
