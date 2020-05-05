@@ -107,48 +107,31 @@ public class MinimaxSelect implements iSelectable{
             return evaluation;
         }
 
-        if (maximiser){
-            //look for the best maximising value in all the minimising children
-            int maxEval = INFINITE_NEG;
-            int x = 0;
-            do{
-                //AI is the maximiser, so the slots evaluated must be on AI side
-                Point childSlot = new Point(x, this.m_id - 1);
-                int eval = miniMax(childSlot, depth - 1, alpha, beta, false);
+        //look for the best maximising value in all the minimising children, or the best minimising in each maximising children
+        int bestEvaluation = (maximiser ? INFINITE_NEG : INFINITE_POS);
+        int x = 0;
+        do{
+            //AI is the maximiser, opponent is the minimiser, each evaluate on its side
+            Point childSlot = new Point(x, (maximiser ? this.m_id-1 : 2-this.m_id));
+            evaluation = miniMax(childSlot, depth - 1, alpha, beta, !maximiser);
 
-                //if no error, update the most maximising evaluation and the alpha value
-                if (eval != ERROR) {
-                    maxEval = Math.max(maxEval, eval);
-                    alpha = Math.max(alpha, eval);
+            //if no error, update the best evaluation, alpha and beta values
+            if (evaluation != ERROR) {
+                if (maximiser) {
+                    bestEvaluation = Math.max(bestEvaluation, evaluation);
+                    alpha = Math.max(alpha, evaluation);
                 }
-                x++;
-            }while(x<6 && beta > alpha);
-
-            //restore the parent status and return the current node best evaluation
-            this.m_controller.popStack();
-            return maxEval;
-        }
-        else {
-            //look for the best minimising value in all the maximising children
-            int minEval = INFINITE_POS;
-            int x = 0;
-            do{
-                //opponent is the minimiser, so the slots evaluated must be on opponent side
-                Point childSlot = new Point(x, 2 - this.m_id);
-                int eval = miniMax(childSlot, depth - 1, alpha, beta, true);
-
-                //if no error, update the most minimising evaluation and the beta value
-                if (eval != ERROR) {
-                    minEval = Math.min(minEval, eval);
-                    beta = Math.min(beta, eval);
+                else {
+                    bestEvaluation = Math.min(bestEvaluation, evaluation);
+                    beta = Math.min(beta, evaluation);
                 }
-                x++;
-            }while(x<6 && beta > alpha);
+            }
+            x++;
+        }while(x<6 && beta > alpha);
 
-            //restore the parent status and return the current node best evaluation
-            this.m_controller.popStack();
-            return minEval;
-        }
+        //restore the parent status and return the current node best evaluation
+        this.m_controller.popStack();
+        return bestEvaluation;
     }
 
     /**
