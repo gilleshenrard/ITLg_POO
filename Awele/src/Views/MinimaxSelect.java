@@ -54,7 +54,7 @@ public class MinimaxSelect implements iSelectable{
             for (int x = 0; x < 6; x++) {
                 slot.setCoordinates(x, this.m_id - 1);
 
-                //if slot is legal, get its minimax value (AI considers itself the maximiser and the opponent the minimiser)
+                //if slot is legal, get its minimax value (AI is the maximiser, the opponent is the minimiser)
                 if (this.m_controller.isLegal(slot)) {
                     int val = miniMax(slot, this.m_maxDepth, INFINITE_NEG, INFINITE_POS, true);
 
