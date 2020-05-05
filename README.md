@@ -1,5 +1,5 @@
 # ITLg_POO
-## Project Awele - Part 1 - v3.1
+## Project Awele - Part 1 - v3.2
 
 ---
 ### 1. Introduction
