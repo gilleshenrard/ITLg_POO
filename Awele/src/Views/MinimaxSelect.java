@@ -38,9 +38,13 @@ public class MinimaxSelect implements iSelectable{
     /**
      * Select a slot using the Minimax algorithm
      * @return Selection, or -2 if error
+     * @throws NullPointerException
      */
     @Override
-    public int selectSlot() {
+    public int selectSlot() throws NullPointerException{
+        if (this.m_controller == null)
+            throw new NullPointerException("MinimaxSelect.SelectSlot() : Board controller is not instantiated");
+
         int bestVal = ERROR;
         int bestShot = -3;  //initialised with error code - 1
 
@@ -73,8 +77,12 @@ public class MinimaxSelect implements iSelectable{
      * @param beta Beta value in this pruning state
      * @param maximiser Flag determining if the current node concerns the maximiser or the minimiser (AI considers itself the maximiser)
      * @return Best Slot to select
+     * @throws NullPointerException
      */
-    private int miniMax(Point slot, int depth, int alpha, int beta, boolean maximiser){
+    private int miniMax(Point slot, int depth, int alpha, int beta, boolean maximiser) throws NullPointerException{
+        if (this.m_controller == null)
+            throw new NullPointerException("MinimaxSelect.miniMax() : Board controller is not instantiated");
+
         //save a copy of the parent node state
         this.m_controller.pushStack();
 
@@ -139,8 +147,12 @@ public class MinimaxSelect implements iSelectable{
     /**
      * Generate an evaluation value for the current state of the game
      * @return Evaluation value
+     * @throws NullPointerException
      */
-    private int evaluateState(){
+    private int evaluateState() throws NullPointerException{
+        if (this.m_controller == null)
+            throw new NullPointerException("MinimaxSelect.evaluateState() : Board controller is not instantiated");
+
         int[] eval = new int[2];
         Point p = new Point(0, 0);
 
