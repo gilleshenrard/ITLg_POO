@@ -13,7 +13,7 @@
    <top>
       <HBox maxHeight="-Infinity" maxWidth="1024.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
          <children>
-            <Label maxHeight="-Infinity" maxWidth="1024.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="974.0" text="Label" fx:id="m_title"/>
+            <Label maxHeight="-Infinity" maxWidth="1024.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="974.0" text="Awele" fx:id="m_title"/>
             <Button maxHeight="-Infinity" maxWidth="1024.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" fx:id="m_menuButton" />
          </children>
       </HBox>
