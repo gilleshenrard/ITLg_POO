@@ -73,6 +73,6 @@ class GameViewTest {
         gc.getBoardController().attach(new BoardView());
         Game.getInstance().setPlayer(new Player(1, "Test1"));
         Game.getInstance().setPlayer(new Player(2, "Test2"));
-        gc.displayGame();
+        gc.updateObservers();
     }
 }

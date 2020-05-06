@@ -27,6 +27,6 @@ class BoardViewTest {
     void displayBoard_shouldnot_fail() {
         GameController g = new GameController();
         g.getBoardController().attach(new BoardView());
-        g.displayGame();
+        g.updateObservers();
     }
 }

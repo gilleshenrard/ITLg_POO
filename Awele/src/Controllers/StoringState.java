@@ -12,7 +12,7 @@ public class StoringState implements iGameState {
     public int handleState(GameController controller, int input){
         //Game is won by the current player.
         if (controller.getStoredSeeds(controller.getCurrentPlayer()) > 24) {
-            controller.displayGame();
+            controller.updateObservers();
             controller.displayMessage(controller.getName(controller.getCurrentPlayer()) + " won the game !");
 
             return -2;

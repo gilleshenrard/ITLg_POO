@@ -207,10 +207,7 @@ public class GameController {
      * @throws InvalidParameterException
      * @throws NullPointerException
      */
-    public void displayGame() throws InvalidParameterException, NullPointerException {
-        if (this.m_gameView == null)
-            throw new NullPointerException("GameController.displayGame() : GameView not instantiated");
-
+    public void updateObservers() throws InvalidParameterException, NullPointerException {
         this.getBoardController().updateObservers();
     }
 
