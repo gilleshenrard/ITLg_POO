@@ -16,6 +16,7 @@ public class GameView extends SystemMessage{
      * Display a message in the out channel
      * @param msg Message to display
      */
+    @Override
     public void displayMessage(String msg){
         System.out.println(msg);
     }
@@ -24,6 +25,7 @@ public class GameView extends SystemMessage{
      * Display a warning message in the out channel
      * @param msg Message to display
      */
+    @Override
     public void displayWarning(String msg){
         this.displayMessage(msg);
     }
@@ -32,14 +34,8 @@ public class GameView extends SystemMessage{
      * Display an error message in the err channel
      * @param msg Message to display
      */
+    @Override
     public void displayError(String msg){
         System.err.println(msg);
-    }
-
-    /**
-     * Display a separator in the console
-     */
-    public void displaySeparator(){
-        System.out.println("=====================================================");
     }
 }

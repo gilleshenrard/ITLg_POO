@@ -15,10 +15,6 @@ public class SwitchingPlayerState implements iGameState {
         else
             controller.setCurrentPlayer(1);
 
-        //display the current player's name
-        controller.displaySeparator();
-        controller.displayMessage("This is " + controller.getName(controller.getCurrentPlayer()) + "'s season");
-
         //plug in the Prompting state
         controller.setNextState(controller.m_prompting);
 

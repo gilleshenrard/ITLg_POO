@@ -210,14 +210,4 @@ public class GameController {
     public void updateObservers() throws InvalidParameterException, NullPointerException {
         this.getBoardController().updateObservers();
     }
-
-    /**
-     * Display a separator in the console
-     */
-    public void displaySeparator(){
-        if (this.m_gameView == null)
-            throw new NullPointerException("GameController.displayGame() : GameView not instantiated");
-
-        this.m_gameView.displaySeparator();
-    }
 }
