@@ -60,7 +60,7 @@ public class BoardView implements iObserver{
     }
 
     @Override
-    public void setController(BoardController controller) {
-        this.m_board = controller;
+    public void setController(Object controller) {
+        this.m_board = (BoardController) controller;
     }
 }
