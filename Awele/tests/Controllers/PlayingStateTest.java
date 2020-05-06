@@ -3,7 +3,7 @@ package Controllers;
 import Models.Game;
 import Models.Player;
 import Models.Point;
-import Views.GameView;
+import Views.GameConsoleView;
 import Views.RandomSelect;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 
 public class PlayingStateTest {
     GameController g = new GameController();
-    GameView gv = new GameView(g);
+    GameConsoleView gv = new GameConsoleView(g);
 
     /**
      * Check if handleState() processes a simple scattering properly (no capture, no starvation)

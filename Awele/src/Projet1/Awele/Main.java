@@ -1,10 +1,10 @@
 package Projet1.Awele;
 
 import Controllers.GameController;
-import Views.BoardView;
+import Views.BoardConsoleView;
 import Views.KeyboardSelect;
 import Models.Player;
-import Views.GameView;
+import Views.GameConsoleView;
 import Views.MinimaxSelect;
 
 public class Main {
@@ -12,8 +12,8 @@ public class Main {
     public static void main(String[] args) {
         //game setup
         GameController game = new GameController();
-        GameView gameView = new GameView(game);
-        game.getBoardController().attach(new BoardView());
+        GameConsoleView gameConsoleView = new GameConsoleView(game);
+        game.getBoardController().attach(new BoardConsoleView());
 
         //players setup
         game.setPlayer(new Player(1, "Gilles", new KeyboardSelect()));

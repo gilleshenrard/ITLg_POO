@@ -9,7 +9,7 @@ import java.security.InvalidParameterException;
 
 public class GameController {
     private BoardController m_board;
-    private SystemMessage m_gameView;
+    private SystemMessage m_view;
     private iGameState m_currentState;
     private int m_currentPlayer;
     public static SwitchingPlayerState m_switching = new SwitchingPlayerState();
@@ -23,7 +23,7 @@ public class GameController {
     public GameController(){
         this.m_board = new BoardController(Game.getInstance().getBoard());
         this.m_board.setGameController(this);
-        this.m_gameView = null;
+        this.m_view = null;
         this.m_currentPlayer = 1;
         this.m_currentState = GameController.m_prompting;
     }
@@ -111,7 +111,7 @@ public class GameController {
     public void setView(SystemMessage gameView) throws NullPointerException{
         if(gameView == null)
             throw new NullPointerException("GameController.setView() : NULL instance of SystemMessage");
-        this.m_gameView = gameView;
+        this.m_view = gameView;
     }
 
     /**
@@ -172,10 +172,10 @@ public class GameController {
      * @throws NullPointerException
      */
     public void displayMessage(String msg) throws NullPointerException{
-        if (this.m_gameView == null)
+        if (this.m_view == null)
             throw new NullPointerException("GameController.displayMessage() : GameView not instantiated");
 
-        this.m_gameView.displayMessage(msg);
+        this.m_view.displayMessage(msg);
     }
 
     /**
@@ -184,10 +184,10 @@ public class GameController {
      * @throws NullPointerException
      */
     public void displayWarning(String msg) throws NullPointerException{
-        if (this.m_gameView == null)
+        if (this.m_view == null)
             throw new NullPointerException("GameController.displayWarning() : GameView not instantiated");
 
-        this.m_gameView.displayWarning(msg);
+        this.m_view.displayWarning(msg);
     }
 
     /**
@@ -196,10 +196,10 @@ public class GameController {
      * @throws NullPointerException
      */
     public void displayError(String msg) throws NullPointerException{
-        if (this.m_gameView == null)
+        if (this.m_view == null)
             throw new NullPointerException("GameController.displayError() : GameView not instantiated");
 
-        this.m_gameView.displayError(msg);
+        this.m_view.displayError(msg);
     }
 
     /**

@@ -3,8 +3,8 @@ package Controllers;
 import Models.Game;
 import Models.Player;
 import Models.Point;
-import Views.BoardView;
-import Views.GameView;
+import Views.BoardConsoleView;
+import Views.GameConsoleView;
 import Views.RandomSelect;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test;
 
 public class PromptingStateTest {
     GameController g = new GameController();
-    BoardView bv = new BoardView();
-    GameView gv = new GameView(g);
+    BoardConsoleView bv = new BoardConsoleView();
+    GameConsoleView gv = new GameConsoleView(g);
 
     /**
      * Check if handleState() gets the proper value selected

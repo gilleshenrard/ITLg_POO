@@ -2,13 +2,13 @@ package Views;
 
 import Controllers.GameController;
 
-public class GameView extends SystemMessage{
+public class GameConsoleView extends SystemMessage{
 
     /**
      * Create a new GameView
      * @param g Game controller to use
      */
-    public GameView(GameController g){
+    public GameConsoleView(GameController g){
         super(g);
     }
 

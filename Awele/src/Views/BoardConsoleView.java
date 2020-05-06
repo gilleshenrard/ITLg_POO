@@ -3,7 +3,7 @@ import Controllers.BoardController;
 import Models.Point;
 import Controllers.iObserver;
 
-public class BoardView implements iObserver{
+public class BoardConsoleView implements iObserver{
     private BoardController m_board;
 
     /**
@@ -11,7 +11,7 @@ public class BoardView implements iObserver{
      * @param board Board to view
      * @throws NullPointerException
      */
-    public BoardView() throws NullPointerException{
+    public BoardConsoleView() throws NullPointerException{
         this.m_board = null;
     }
 

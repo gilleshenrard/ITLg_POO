@@ -6,7 +6,7 @@ import Models.Board;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class BoardViewTest {
+class BoardConsoleViewTest {
     BoardController b = new BoardController(new Board());
 
     /**
@@ -15,7 +15,7 @@ class BoardViewTest {
     @DisplayName("displaySlot() - should not fail")
     @Test
     void displaySlot_shouldnot_fail() {
-        BoardView bv = new BoardView();
+        BoardConsoleView bv = new BoardConsoleView();
         bv.displaySlot(2, true);
     }
 
@@ -26,7 +26,7 @@ class BoardViewTest {
     @Test
     void displayBoard_shouldnot_fail() {
         GameController g = new GameController();
-        g.getBoardController().attach(new BoardView());
+        g.getBoardController().attach(new BoardConsoleView());
         g.updateObservers();
     }
 }

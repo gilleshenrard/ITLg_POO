@@ -6,9 +6,9 @@ import Models.Player;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class GameViewTest {
+class GameConsoleViewTest {
     GameController gc = new GameController();
-    GameView g = new GameView(gc);
+    GameConsoleView g = new GameConsoleView(gc);
 
     /**
      * Check if displayMessage() fails displaying the winning message
@@ -70,7 +70,7 @@ class GameViewTest {
     @DisplayName("displayGame() - should not fail")
     @Test
     void displayGame_shouldnot_fail() {
-        gc.getBoardController().attach(new BoardView());
+        gc.getBoardController().attach(new BoardConsoleView());
         Game.getInstance().setPlayer(new Player(1, "Test1"));
         Game.getInstance().setPlayer(new Player(2, "Test2"));
         gc.updateObservers();
