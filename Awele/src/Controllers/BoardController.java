@@ -4,12 +4,14 @@ import Models.Board;
 import Models.Point;
 import Views.BoardView;
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class BoardController {
     Board m_board;
     BoardView m_boardView;
     Stack<Board> m_stack;
+    ArrayList<iObserver> m_observers;
 
     /**
      * Create a new Board controller
@@ -20,6 +22,7 @@ public class BoardController {
         this.setBoard(b);
         this.m_boardView = null;
         this.m_stack = new Stack<>();
+        this.m_observers = new ArrayList<>();
     }
 
     /**
@@ -269,5 +272,17 @@ public class BoardController {
             throw new NullPointerException("BoardController.displayRow() : NULL instance of BoardView");
 
         this.m_boardView.displayBoard(ID);
+    }
+
+    /**
+     * Attach a new observer to the board controller
+     * @param observer Observer to attach
+     * @throws NullPointerException
+     */
+    public void attach(iObserver observer) throws NullPointerException{
+        if (observer == null)
+            throw new NullPointerException("BoardController.attach() : NULL instance of iObserver");
+
+        this.m_observers.add(observer);
     }
 }
