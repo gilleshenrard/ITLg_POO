@@ -3,7 +3,6 @@ package Controllers;
 import Models.Game;
 import Models.Player;
 import Models.Point;
-import Views.GameView;
 import Views.SystemMessage;
 
 import java.security.InvalidParameterException;
