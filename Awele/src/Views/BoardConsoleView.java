@@ -61,6 +61,11 @@ public class BoardConsoleView implements iObserver{
     }
 
     @Override
+    public Object getContent() {
+        return null;
+    }
+
+    @Override
     public void setController(BoardController controller) {
         this.m_board = controller;
     }

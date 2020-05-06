@@ -4,10 +4,12 @@ import Controllers.BoardController;
 import Controllers.iObserver;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 
 import java.io.IOException;
 
 public class BoardJFXView implements iObserver{
+    private Scene m_scene = null;
     private BoardController m_controller;
 
     /**
@@ -19,6 +21,7 @@ public class BoardJFXView implements iObserver{
         loader.setLocation(getClass().getResource("Views/Layouts/mainScene.fxml"));
         try {
             Parent graph = loader.load();
+            this.m_scene = new Scene(graph);
         }
         catch (IOException e){
             System.err.println(e.getMessage());
@@ -31,6 +34,15 @@ public class BoardJFXView implements iObserver{
      */
     @Override
     public void update() {}
+
+    /**
+     * Get the current Board scene
+     * @return Current scene
+     */
+    @Override
+    public Object getContent() {
+        return this.m_scene;
+    }
 
     /**
      * Set the board controller to use in this scene
