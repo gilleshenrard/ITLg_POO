@@ -2,15 +2,20 @@ package Views;
 
 import Controllers.BoardController;
 import Controllers.iObserver;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 import java.io.IOException;
 
 public class BoardJFXView implements iObserver{
     private Scene m_scene = null;
     private BoardController m_controller;
+    @FXML Button m_menuButton;
+    @FXML Label m_title;
 
     /**
      * Initialise all nodes in the Scene
