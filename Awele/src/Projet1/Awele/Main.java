@@ -31,6 +31,8 @@ public class Main extends Application{
         game.setPlayer(new Player(1, "Gilles", new KeyboardSelect()));
         game.setPlayer(new Player(2, "AI", new MinimaxSelect(game.getBoardController(), 2)));
 
+        //primary Stage setup
+        primaryStage.setTitle("POO - Awele");
         primaryStage.setScene((Scene)bv.getContent());
         primaryStage.show();
 /*
