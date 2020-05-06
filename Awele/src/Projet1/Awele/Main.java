@@ -2,12 +2,12 @@ package Projet1.Awele;
 
 import javafx.application.Application;
 import Controllers.GameController;
-import Views.BoardConsoleView;
-import Views.KeyboardSelect;
 import Models.Player;
+import javafx.stage.Stage;
+import Views.KeyboardSelect;
 import Views.GameConsoleView;
 import Views.MinimaxSelect;
-import javafx.stage.Stage;
+import Views.BoardJFXView;
 
 public class Main extends Application{
 
@@ -16,11 +16,11 @@ public class Main extends Application{
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage primaryStage) throws Exception {
         //game setup
         GameController game = new GameController();
         GameConsoleView gameConsoleView = new GameConsoleView(game);
-        game.getBoardController().attach(new BoardConsoleView());
+        game.getBoardController().attach(new BoardJFXView());
 
         //players setup
         game.setPlayer(new Player(1, "Gilles", new KeyboardSelect()));
