@@ -3,6 +3,7 @@ package Projet1.Awele;
 import javafx.application.Application;
 import Controllers.GameController;
 import Models.Player;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import Views.KeyboardSelect;
 import Views.GameConsoleView;
@@ -30,6 +31,9 @@ public class Main extends Application{
         game.setPlayer(new Player(1, "Gilles", new KeyboardSelect()));
         game.setPlayer(new Player(2, "AI", new MinimaxSelect(game.getBoardController(), 2)));
 
+        primaryStage.setScene((Scene)bv.getContent());
+        primaryStage.show();
+/*
         //state variables
         int outcome = 0;
 
@@ -46,5 +50,6 @@ public class Main extends Application{
         //system error, exit with an error
         if (outcome == -1)
             System.exit(outcome);
+*/
     }
 }
