@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 public class BoardController {
-    Board m_board;
-    BoardView m_boardView;
-    Stack<Board> m_stack;
-    ArrayList<iObserver> m_observers;
+    private Board m_board;
+    private BoardView m_boardView;
+    private Stack<Board> m_stack;
+    private ArrayList<iObserver> m_observers;
 
     /**
      * Create a new Board controller
