@@ -37,7 +37,7 @@ public class BoardJFXView implements iObserver{
      * @param controller Board controller to use
      */
     @Override
-    public void setController(Object controller) {
-        this.m_controller = (BoardController) controller;
+    public void setController(BoardController controller) {
+        this.m_controller = controller;
     }
 }
