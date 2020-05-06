@@ -18,7 +18,7 @@ public class BoardJFXView implements iObserver{
     @Override
     public void init() {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("Views/Layouts/mainScene.fxml"));
+        loader.setLocation(getClass().getResource("Layouts/mainScene.fxml"));
         try {
             Parent graph = loader.load();
             this.m_scene = new Scene(graph);
