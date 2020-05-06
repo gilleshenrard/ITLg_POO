@@ -3,8 +3,6 @@ package Views;
 import Controllers.GameController;
 
 public class GameView {
-    private GameController m_controller;
-
     /**
      * Create a new GameView
      * @param controller Game controller to use
@@ -14,8 +12,7 @@ public class GameView {
         if (controller == null)
             throw new NullPointerException("GameView() : NULL instance of GameController");
 
-        this.m_controller = controller;
-        this.m_controller.setView(this);
+        controller.setView(this);
     }
 
     /**
