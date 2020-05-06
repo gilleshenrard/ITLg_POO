@@ -1,15 +1,22 @@
 package Projet1.Awele;
 
+import javafx.application.Application;
 import Controllers.GameController;
 import Views.BoardConsoleView;
 import Views.KeyboardSelect;
 import Models.Player;
 import Views.GameConsoleView;
 import Views.MinimaxSelect;
+import javafx.stage.Stage;
 
-public class Main {
+public class Main extends Application{
 
     public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
         //game setup
         GameController game = new GameController();
         GameConsoleView gameConsoleView = new GameConsoleView(game);
