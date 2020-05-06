@@ -13,7 +13,7 @@ public class Main {
         //game setup
         GameController game = new GameController();
         GameView gameView = new GameView(game);
-        BoardView boardView = new BoardView(game.getBoardController());
+        game.getBoardController().attach(new BoardView());
 
         //players setup
         game.setPlayer(new Player(1, "Gilles", new KeyboardSelect()));

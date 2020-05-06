@@ -1,8 +1,9 @@
 package Views;
 import Controllers.BoardController;
 import Models.Point;
+import Controllers.iObserver;
 
-public class BoardView {
+public class BoardView implements iObserver{
     private BoardController m_board;
 
     /**
@@ -10,12 +11,8 @@ public class BoardView {
      * @param board Board to view
      * @throws NullPointerException
      */
-    public BoardView(BoardController board) throws NullPointerException{
-        if(board == null)
-            throw new NullPointerException("BoardView() : NULL instance of Board");
-
-        this.m_board = board;
-        this.m_board.setBoardView(this);
+    public BoardView() throws NullPointerException{
+        this.m_board = null;
     }
 
     /**
@@ -53,5 +50,15 @@ public class BoardView {
         this.displaySlot(this.m_board.getStoredSeeds(1), false);
         System.out.println();
 
+    }
+
+    @Override
+    public void update(int ID) {
+        displayBoard(ID);
+    }
+
+    @Override
+    public void setController(BoardController controller) {
+        this.m_board = controller;
     }
 }

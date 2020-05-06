@@ -218,7 +218,7 @@ public class GameController {
      * @throws NullPointerException
      */
     public void displayBoard() throws NullPointerException{
-        this.getBoardController().displayBoard(this.m_currentPlayer);
+        this.getBoardController().updateObservers(this.m_currentPlayer);
     }
 
     /**

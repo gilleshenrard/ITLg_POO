@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 public class PromptingStateTest {
     GameController g = new GameController();
-    BoardView bv = new BoardView(g.getBoardController());
+    BoardView bv = new BoardView();
     GameView gv = new GameView(g);
 
     /**

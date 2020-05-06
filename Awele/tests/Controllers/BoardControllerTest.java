@@ -45,26 +45,6 @@ public class BoardControllerTest {
     }
 
     /**
-     * Check if setBoardView() throws an exception with a null instance
-     */
-    @DisplayName("setBoardView() with a NULL instance - should fail")
-    @Test
-    void setBoardView_nullBoard_should_fail() {
-        Assertions.assertThrows(NullPointerException.class, () -> {
-            b.setBoardView(null);
-        });
-    }
-
-    /**
-     * Check if setBoardView() fails setting an instance of Board
-     */
-    @DisplayName("setBoardView() - should not fail")
-    @Test
-    void setBoardView_shouldnot_fail() {
-        b.setBoardView(new BoardView(b));
-    }
-
-    /**
      * Check if getSlotSeeds() throws an exception with an X value over 5
      */
     @DisplayName("getSlotSeeds() with X over 5 - should fail")

@@ -15,7 +15,7 @@ public class StoringStateTest {
     @DisplayName("handleState() - should not fail")
     @Test
     void handleState_shouldnot_fail() {
-        BoardView bv = new BoardView(g.getBoardController());
+        g.getBoardController().attach(new BoardView());
         g.setNextState(GameController.m_storing);
         g.setCurrentPlayer(1);
         g.getBoardController().getBoard().setStoredSeeds(1, 23);

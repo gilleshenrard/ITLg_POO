@@ -9,7 +9,6 @@ import java.util.Stack;
 
 public class BoardController {
     private Board m_board;
-    private BoardView m_boardView;
     private Stack<Board> m_stack;
     private ArrayList<iObserver> m_observers;
 
@@ -20,7 +19,6 @@ public class BoardController {
      */
     public BoardController(Board b) throws NullPointerException{
         this.setBoard(b);
-        this.m_boardView = null;
         this.m_stack = new Stack<>();
         this.m_observers = new ArrayList<>();
     }
@@ -71,17 +69,6 @@ public class BoardController {
      */
     public Board getBoard(){
         return this.m_board;
-    }
-
-    /**
-     * Set the board view on which to play the current game
-     * @param board Board view to set
-     * @throws NullPointerException
-     */
-    public void setBoardView(BoardView board) throws NullPointerException{
-        if(board == null)
-            throw new NullPointerException("BoardController.setBoardView() : NULL instance of Board");
-        this.m_boardView = board;
     }
 
     /**
@@ -263,18 +250,6 @@ public class BoardController {
     }
 
     /**
-     * Display all the slots of the board
-     * @param ID ID of the current player
-     * @throws NullPointerException
-     */
-    public void displayBoard(int ID) throws NullPointerException{
-        if (this.m_boardView == null)
-            throw new NullPointerException("BoardController.displayRow() : NULL instance of BoardView");
-
-        this.m_boardView.displayBoard(ID);
-    }
-
-    /**
      * Attach a new observer to the board controller
      * @param observer Observer to attach
      * @throws NullPointerException
@@ -284,5 +259,16 @@ public class BoardController {
             throw new NullPointerException("BoardController.attach() : NULL instance of iObserver");
 
         this.m_observers.add(observer);
+        observer.setController(this);
+    }
+
+    /**
+     * Update all the attached observers
+     * @param ID ID of the current player
+     */
+    public void updateObservers(int ID){
+        for (iObserver o:this.m_observers) {
+            o.update(ID);
+        }
     }
 }

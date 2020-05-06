@@ -7,18 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class BoardViewTest {
-    BoardView bv = new BoardView(new BoardController(new Board()));
-
-    /**
-     * Check if boardView() throws an exception when given a null instance
-     */
-    @DisplayName("boardView() with a NULL Board instance - should fail")
-    @Test
-    void boardView_nullBoard_should_fail() {
-        Assertions.assertThrows(NullPointerException.class, () -> {
-            BoardView b2 = new BoardView(null);
-        });
-    }
+    BoardController b = new BoardController(new Board());
 
     /**
      * Check if displaySlot() fails displaying a slot
@@ -26,6 +15,7 @@ class BoardViewTest {
     @DisplayName("displaySlot() - should not fail")
     @Test
     void displaySlot_shouldnot_fail() {
+        BoardView bv = new BoardView();
         bv.displaySlot(2, true);
     }
 
@@ -35,6 +25,7 @@ class BoardViewTest {
     @DisplayName("displayBoard() - should not fail")
     @Test
     void displayBoard_shouldnot_fail() {
-        bv.displayBoard(1);
+        b.attach(new BoardView());
+        b.updateObservers(1);
     }
 }
