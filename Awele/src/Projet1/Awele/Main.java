@@ -20,7 +20,11 @@ public class Main extends Application{
         //game setup
         GameController game = new GameController();
         GameConsoleView gameConsoleView = new GameConsoleView(game);
-        game.getBoardController().attach(new BoardJFXView());
+
+        //Board setup
+        BoardJFXView bv = new BoardJFXView();
+        game.getBoardController().attach(bv);
+        bv.init();
 
         //players setup
         game.setPlayer(new Player(1, "Gilles", new KeyboardSelect()));
