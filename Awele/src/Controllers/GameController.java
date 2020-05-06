@@ -22,6 +22,7 @@ public class GameController {
      */
     public GameController(){
         this.m_board = new BoardController(Game.getInstance().getBoard());
+        this.m_board.setGameController(this);
         this.m_gameView = null;
         this.m_currentPlayer = 1;
         this.m_currentState = GameController.m_prompting;
@@ -210,15 +211,7 @@ public class GameController {
         if (this.m_gameView == null)
             throw new NullPointerException("GameController.displayGame() : GameView not instantiated");
 
-        this.m_gameView.displayGame();
-    }
-
-    /**
-     * Display all the slots of the board
-     * @throws NullPointerException
-     */
-    public void displayBoard() throws NullPointerException{
-        this.getBoardController().updateObservers(this.m_currentPlayer);
+        this.getBoardController().updateObservers();
     }
 
     /**

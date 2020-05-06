@@ -1,12 +1,14 @@
 package Controllers;
 
 import Models.Board;
+import Models.Game;
 import Models.Point;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Stack;
 
 public class BoardController {
+    private GameController m_game;
     private Board m_board;
     private Stack<Board> m_stack;
     private ArrayList<iObserver> m_observers;
@@ -20,6 +22,18 @@ public class BoardController {
         this.setBoard(b);
         this.m_stack = new Stack<>();
         this.m_observers = new ArrayList<>();
+    }
+
+    /**
+     * Set the Game controller linked to this board controller
+     * @param controller Game controller to use
+     * @throws NullPointerException
+     */
+    public void setGameController(GameController controller) throws NullPointerException {
+        if (controller == null)
+            throw new NullPointerException("BoardController.setGameController() : NULL instance of GameController");
+
+        this.m_game = controller;
     }
 
     /**
@@ -106,6 +120,25 @@ public class BoardController {
      */
     public int getSlotSeeds(Point point) throws InvalidParameterException{
         return this.m_board.getSlotSeeds(point);
+    }
+
+    /**
+     * Fetch the name of a player via its ID
+     * @param ID ID of the player
+     * @return Name of the player
+     * @throws InvalidParameterException
+     * @throws NullPointerException
+     */
+    public String getName(int ID) throws InvalidParameterException, NullPointerException{
+        return this.m_game.getName(ID);
+    }
+
+    /**
+     * Get the ID of the current player
+     * @return ID of the current player
+     */
+    public int getCurrentPlayer(){
+        return this.m_game.getCurrentPlayer();
     }
 
     /**
@@ -265,9 +298,9 @@ public class BoardController {
      * Update all the attached observers
      * @param ID ID of the current player
      */
-    public void updateObservers(int ID){
+    public void updateObservers(){
         for (iObserver o:this.m_observers) {
-            o.update(ID);
+            o.update();
         }
     }
 }

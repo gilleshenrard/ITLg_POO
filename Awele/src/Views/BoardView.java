@@ -28,13 +28,14 @@ public class BoardView implements iObserver{
      * Display all the slots of the board
      * @param ID ID of the current player
      */
-    public void displayBoard(int ID){
+    public void displayBoard(){
         //display the board
         //|  0 |
         //|  6 ||  5 ||  4 ||  3 ||  2 ||  1 |
         //|  1 ||  2 ||  3 ||  4 ||  5 ||  6 |
         //|  0 |
 
+        System.out.println(this.m_board.getName(2));
         this.displaySlot(this.m_board.getStoredSeeds(2), false);
         System.out.println();
 
@@ -42,19 +43,20 @@ public class BoardView implements iObserver{
         for(int l=1 ; l>=0 ; l--) {
             for (int c = 0; c < 6; c++) {
                 p.setCoordinates((l > 0 ? 5 - c : c), l);
-                this.displaySlot(this.m_board.getSlotSeeds(p),  l == ID-1 && this.m_board.isLegal(p));
+                this.displaySlot(this.m_board.getSlotSeeds(p),  l == this.m_board.getCurrentPlayer()-1 && this.m_board.isLegal(p));
             }
             System.out.println();
         }
 
         this.displaySlot(this.m_board.getStoredSeeds(1), false);
         System.out.println();
+        System.out.println(this.m_board.getName(1));
 
     }
 
     @Override
-    public void update(int ID) {
-        displayBoard(ID);
+    public void update() {
+        this.displayBoard();
     }
 
     @Override

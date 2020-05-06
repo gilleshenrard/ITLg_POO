@@ -1,6 +1,7 @@
 package Views;
 
 import Controllers.BoardController;
+import Controllers.GameController;
 import Models.Board;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -24,7 +25,8 @@ class BoardViewTest {
     @DisplayName("displayBoard() - should not fail")
     @Test
     void displayBoard_shouldnot_fail() {
-        b.attach(new BoardView());
-        b.updateObservers(1);
+        GameController g = new GameController();
+        g.getBoardController().attach(new BoardView());
+        g.displayGame();
     }
 }

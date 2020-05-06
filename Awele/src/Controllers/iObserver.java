@@ -1,6 +1,6 @@
 package Controllers;
 
 public interface iObserver {
-    void update(int ID);
+    void update();
     void setController(BoardController controller);
 }

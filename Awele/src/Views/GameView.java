@@ -2,8 +2,6 @@ package Views;
 
 import Controllers.GameController;
 
-import java.security.InvalidParameterException;
-
 public class GameView {
     private GameController m_controller;
 
@@ -42,28 +40,6 @@ public class GameView {
      */
     public void displayError(String msg){
         System.err.println(msg);
-    }
-
-    /**
-     * Display the whole board and score of the two players
-     * @throws InvalidParameterException
-     * @throws NullPointerException
-     */
-    public void displayGame() throws InvalidParameterException, NullPointerException {
-        if (this.m_controller == null)
-            throw new NullPointerException("GameView.displayGame() : NULL instance of GameController");
-
-        //display the board
-        //OPPONENT
-        //|  0 |
-        //|  6 ||  5 ||  4 ||  3 ||  2 ||  1 |
-        //|  1 ||  2 ||  3 ||  4 ||  5 ||  6 |
-        //|  0 |
-        //PLAYER
-
-        System.out.println(this.m_controller.getName(2));
-        this.m_controller.displayBoard();
-        System.out.println(this.m_controller.getName(1));
     }
 
     /**
