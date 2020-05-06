@@ -2,6 +2,10 @@ package Views;
 
 import Controllers.BoardController;
 import Controllers.iObserver;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+
+import java.io.IOException;
 
 public class BoardJFXView implements iObserver{
     private BoardController m_controller;
@@ -10,7 +14,17 @@ public class BoardJFXView implements iObserver{
      * Initialise all nodes in the Scene
      */
     @Override
-    public void init() {}
+    public void init() {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("Views/Layouts/mainScene.fxml"));
+        try {
+            Parent graph = loader.load();
+        }
+        catch (IOException e){
+            System.err.println(e.getMessage());
+            System.exit(-1);
+        }
+    }
 
     /**
      * Update nodes values in the scene
