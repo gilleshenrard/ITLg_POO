@@ -2,7 +2,6 @@ package Views;
 
 import Controllers.BoardController;
 import Models.Board;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
