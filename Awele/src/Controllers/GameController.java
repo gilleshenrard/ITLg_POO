@@ -4,12 +4,13 @@ import Models.Game;
 import Models.Player;
 import Models.Point;
 import Views.GameView;
+import Views.SystemMessage;
 
 import java.security.InvalidParameterException;
 
 public class GameController {
     private BoardController m_board;
-    private GameView m_gameView;
+    private SystemMessage m_gameView;
     private iGameState m_currentState;
     private int m_currentPlayer;
     public static SwitchingPlayerState m_switching = new SwitchingPlayerState();
@@ -108,9 +109,9 @@ public class GameController {
      * @param gameView Game view to use
      * @throws NullPointerException
      */
-    public void setView(GameView gameView) throws NullPointerException{
+    public void setView(SystemMessage gameView) throws NullPointerException{
         if(gameView == null)
-            throw new NullPointerException("GameController.setView() : NULL instance of GameView");
+            throw new NullPointerException("GameController.setView() : NULL instance of SystemMessage");
         this.m_gameView = gameView;
     }
 

@@ -2,17 +2,14 @@ package Views;
 
 import Controllers.GameController;
 
-public class GameView {
+public class GameView extends SystemMessage{
+
     /**
      * Create a new GameView
-     * @param controller Game controller to use
-     * @throws NullPointerException
+     * @param g Game controller to use
      */
-    public GameView(GameController controller) throws NullPointerException{
-        if (controller == null)
-            throw new NullPointerException("GameView() : NULL instance of GameController");
-
-        controller.setView(this);
+    public GameView(GameController g){
+        super(g);
     }
 
     /**
