@@ -55,7 +55,6 @@ public class BoardConsoleView implements iObserver{
         System.out.println(this.m_board.getName(1));
 
     }
-
     @Override
     public void update() {
         this.displayBoard();
@@ -65,4 +64,7 @@ public class BoardConsoleView implements iObserver{
     public void setController(Object controller) {
         this.m_board = (BoardController) controller;
     }
+
+    @Override
+    public void init() {}
 }
