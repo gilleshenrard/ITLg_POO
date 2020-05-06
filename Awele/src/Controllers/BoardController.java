@@ -1,7 +1,6 @@
 package Controllers;
 
 import Models.Board;
-import Models.Game;
 import Models.Point;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
