@@ -30,10 +30,12 @@ public class BoardView implements iObserver{
      */
     public void displayBoard(){
         //display the board
+        //OPPONENT
         //|  0 |
         //|  6 ||  5 ||  4 ||  3 ||  2 ||  1 |
         //|  1 ||  2 ||  3 ||  4 ||  5 ||  6 |
         //|  0 |
+        //PLAYER
 
         System.out.println(this.m_board.getName(2));
         this.displaySlot(this.m_board.getStoredSeeds(2), false);
