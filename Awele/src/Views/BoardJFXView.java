@@ -27,20 +27,19 @@ public class BoardJFXView implements iObserver{
      * Initialise all nodes in the Scene
      */
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException {
+        //load FXML graph
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("Layouts/mainScene.fxml"));
-        try {
-            Parent graph = loader.load();
-            this.m_scene = new Scene(graph);
-            this.m_slots = new SimpleIntegerProperty[2][6];
-            this.m_storedSeeds = new SimpleIntegerProperty[2];
-            this.m_names = new SimpleStringProperty[2];
-        }
-        catch (IOException e){
-            System.err.println(e.getMessage());
-            System.exit(-1);
-        }
+        Parent graph = loader.load();
+
+        //create a new scene from the graph
+        this.m_scene = new Scene(graph);
+
+        //initialise all the properties
+        this.m_slots = new SimpleIntegerProperty[2][6];
+        this.m_storedSeeds = new SimpleIntegerProperty[2];
+        this.m_names = new SimpleStringProperty[2];
     }
 
     /**
