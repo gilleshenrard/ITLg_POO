@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,8 +15,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class BoardJFXView implements iObserver {
+public class BoardJFXView extends BorderPane implements iObserver, Initializable {
     private Scene m_scene = null;
     private BoardController m_controller;
     private SimpleIntegerProperty[][] m_slots;
@@ -35,19 +38,17 @@ public class BoardJFXView implements iObserver {
      */
     public BoardJFXView() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Layouts/mainScene.fxml"));
-            loader.setController(this);
-            BorderPane graph = loader.load();
-
-            //intantiate all the properties
+            //intantiate all the non-FXML properties
             this.m_slots = new SimpleIntegerProperty[2][6];
             this.m_storedPlayer1 = new SimpleIntegerProperty();
             this.m_storedPlayer2 = new SimpleIntegerProperty();
             this.m_namePlayer1 = new SimpleStringProperty();
             this.m_namePlayer2 = new SimpleStringProperty();
 
-            //call the initialisation procedure
-            this.init();
+            //load the FXML document
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Layouts/mainScene.fxml"));
+            loader.setController(this);
+            BorderPane graph = loader.load();
 
             //create a new scene from the graph
             this.m_scene = new Scene(graph);
@@ -60,7 +61,8 @@ public class BoardJFXView implements iObserver {
     /**
      * Perform all the bindings and configurations necessary
      */
-    private void init() {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         //initialize the elements in the central gridpane
         //  + bind them and add them to said gridpane
         for (int l = 0; l < 2; l++) {
