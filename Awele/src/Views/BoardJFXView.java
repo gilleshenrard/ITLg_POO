@@ -7,39 +7,53 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 
 import java.io.IOException;
 
-public class BoardJFXView implements iObserver{
+public class BoardJFXView implements iObserver {
     private Scene m_scene = null;
     private BoardController m_controller;
     private SimpleIntegerProperty[][] m_slots;
     private SimpleIntegerProperty[] m_storedSeeds;
     private SimpleStringProperty[] m_names;
     @FXML Button m_menuButton;
-    @FXML Label m_title;
+    @FXML GridPane m_grid;
 
     /**
-     * Initialise all nodes in the Scene
+     * Initialise all FXML elements in the scene
      */
-    @FXML
-    public void initialize() throws IOException {
-        //load FXML graph
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("Layouts/mainScene.fxml"));
-        Parent graph = loader.load();
+    public BoardJFXView() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Layouts/mainScene.fxml"));
+            loader.setController(this);
+            BorderPane graph = loader.load();
 
-        //create a new scene from the graph
-        this.m_scene = new Scene(graph);
+            //initialise all the properties
+            this.m_slots = new SimpleIntegerProperty[2][6];
+            this.m_storedSeeds = new SimpleIntegerProperty[2];
+            this.m_names = new SimpleStringProperty[2];
 
-        //initialise all the properties
-        this.m_slots = new SimpleIntegerProperty[2][6];
-        this.m_storedSeeds = new SimpleIntegerProperty[2];
-        this.m_names = new SimpleStringProperty[2];
+            //initialize the elements in the central gridpane
+            for (int l = 0; l < 2; l++) {
+                for (int c = 0; c < 6; c++) {
+                    Label tmp = new Label();
+                    this.m_slots[l][c] = new SimpleIntegerProperty();
+                    tmp.textProperty().bind(this.m_slots[l][c].asString());
+                    this.m_grid.add(tmp, c, l);
+                }
+            }
+
+            //create a new scene from the graph
+            this.m_scene = new Scene(graph);
+        }
+        catch (IOException e){
+            System.err.println(e.getMessage());
+        }
     }
 
     /**
