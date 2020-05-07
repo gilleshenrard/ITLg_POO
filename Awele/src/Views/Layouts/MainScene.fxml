@@ -21,18 +21,18 @@
       <HBox prefHeight="100.0" prefWidth="1024.0" BorderPane.alignment="CENTER" />
    </bottom>
    <center>
-      <GridPane BorderPane.alignment="CENTER" fx:id="m_grid">
+      <GridPane fx:id="m_grid" BorderPane.alignment="CENTER">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="100.0" percentWidth="16.666" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="100.0" percentWidth="16.667" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="100.0" percentWidth="16.667" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="100.0" percentWidth="16.667" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="100.0" percentWidth="16.667" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="100.0" percentWidth="16.666" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints maxHeight="181.0" minHeight="181.0" prefHeight="181.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="181.0" minHeight="181.0" prefHeight="181.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="181.0" minHeight="181.0" percentHeight="50.0" prefHeight="181.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="181.0" minHeight="181.0" percentHeight="50.0" prefHeight="181.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <Label prefHeight="203.0" prefWidth="187.0" text="Label" GridPane.columnIndex="0" GridPane.rowIndex="0" />
