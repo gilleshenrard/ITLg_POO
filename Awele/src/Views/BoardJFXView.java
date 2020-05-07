@@ -26,8 +26,8 @@ public class BoardJFXView implements iObserver{
     /**
      * Initialise all nodes in the Scene
      */
-    @Override
-    public void init() {
+    @FXML
+    public void initialize() {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("Layouts/mainScene.fxml"));
         try {
