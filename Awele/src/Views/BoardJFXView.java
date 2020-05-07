@@ -48,7 +48,7 @@ public class BoardJFXView implements iObserver {
                     Label tmp = new Label();
                     this.m_slots[l][c] = new SimpleIntegerProperty();
                     tmp.textProperty().bind(this.m_slots[l][c].asString());
-                    this.m_grid.add(tmp, c, l);
+                    this.m_grid.add(tmp, (l==0 ? c : 5-c), 1-l);
                 }
             }
 
