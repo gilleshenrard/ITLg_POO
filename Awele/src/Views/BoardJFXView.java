@@ -38,7 +38,7 @@ public class BoardJFXView implements iObserver {
             //intantiate all the properties
             this.m_slots = new SimpleIntegerProperty[2][6];
             this.m_storedPlayer1 = new SimpleIntegerProperty();
-            this.m_storedPlayer1 = new SimpleIntegerProperty();
+            this.m_storedPlayer2 = new SimpleIntegerProperty();
             this.m_namePlayer1 = new SimpleStringProperty();
             this.m_namePlayer2 = new SimpleStringProperty();
 
@@ -59,12 +59,16 @@ public class BoardJFXView implements iObserver {
     private void init() {
         //initialize the elements in the central gridpane
         //  + bind them and add them to said gridpane
+        int i = 0;
         for (int l = 0; l < 2; l++) {
-            for (int c = 0; c < 6; c++) {
-                Label tmp = new Label();
+            for (int c = 0; c < 6; c++, i++) {
+                //get the grid pane child corresponding to the proper element in the array
+                int index = (l == 0 ? 6 : 0) + (l == 0 ? c : 5-c);
+                Label tmp = (Label) this.m_grid.getChildren().get(index);
+
+                //make sure to instantiate the Property buffer and bind it to the grid pane child
                 this.m_slots[l][c] = new SimpleIntegerProperty();
                 tmp.textProperty().bind(this.m_slots[l][c].asString());
-                this.m_grid.add(tmp, (l==0 ? c : 5-c), 1-l);
             }
         }
     }

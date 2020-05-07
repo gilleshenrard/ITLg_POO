@@ -9,33 +9,25 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 <BorderPane maxHeight="512" maxWidth="1024.0" minHeight="512" minWidth="1024.0" prefHeight="512.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
-      <HBox maxHeight="-Infinity" maxWidth="1024.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label fx:id="m_title" maxHeight="-Infinity" maxWidth="1024.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="974.0" text="Awele" />
-            <Button fx:id="m_menuButton" maxHeight="-Infinity" maxWidth="1024.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" />
-         </children>
-      </HBox>
-   </top>
    <bottom>
       <HBox prefHeight="100.0" prefWidth="1024.0" BorderPane.alignment="CENTER" />
    </bottom>
    <center>
       <GridPane fx:id="m_grid" BorderPane.alignment="CENTER">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="100.0" percentWidth="16.666" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="100.0" percentWidth="16.667" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="100.0" percentWidth="16.667" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="100.0" percentWidth="16.667" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="100.0" percentWidth="16.667" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" prefWidth="100.0" percentWidth="16.666" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" percentWidth="16.666" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" percentWidth="16.667" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" percentWidth="16.667" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" percentWidth="16.667" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" percentWidth="16.667" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" percentWidth="16.666" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints maxHeight="181.0" minHeight="181.0" percentHeight="50.0" prefHeight="181.0" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="181.0" minHeight="181.0" percentHeight="50.0" prefHeight="181.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <!--Label prefHeight="203.0" prefWidth="187.0" text="Label" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <Label prefHeight="203.0" prefWidth="187.0" text="Label" GridPane.columnIndex="0" GridPane.rowIndex="0" />
             <Label prefHeight="211.0" prefWidth="194.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="0" />
             <Label prefHeight="211.0" prefWidth="202.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="0" />
             <Label prefHeight="210.0" prefWidth="196.0" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="0" />
@@ -46,8 +38,15 @@
             <Label prefHeight="198.0" prefWidth="186.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <Label prefHeight="214.0" prefWidth="210.0" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <Label prefHeight="203.0" prefWidth="196.0" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-            <Label prefHeight="210.0" prefWidth="199.0" text="Label" GridPane.columnIndex="5" GridPane.rowIndex="1" /-->
+            <Label prefHeight="210.0" prefWidth="199.0" text="Label" GridPane.columnIndex="5" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </center>
+   <top>
+      <Label fx:id="m_title" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="1024.0" text="Awele" BorderPane.alignment="CENTER">
+         <graphic>
+            <Button fx:id="m_menuButton" maxHeight="-Infinity" maxWidth="1024.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" />
+         </graphic>
+      </Label>
+   </top>
 </BorderPane>
