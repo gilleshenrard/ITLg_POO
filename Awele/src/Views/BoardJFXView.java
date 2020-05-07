@@ -19,8 +19,10 @@ public class BoardJFXView implements iObserver {
     private Scene m_scene = null;
     private BoardController m_controller;
     private SimpleIntegerProperty[][] m_slots;
-    private SimpleIntegerProperty[] m_storedSeeds;
-    private SimpleStringProperty[] m_names;
+    private SimpleIntegerProperty m_storedPlayer1;
+    private SimpleIntegerProperty m_storedPlayer2;
+    private SimpleStringProperty m_namePlayer1;
+    private SimpleStringProperty m_namePlayer2;
     @FXML Button m_menuButton;
     @FXML GridPane m_grid;
 
@@ -35,8 +37,10 @@ public class BoardJFXView implements iObserver {
 
             //initialise all the properties
             this.m_slots = new SimpleIntegerProperty[2][6];
-            this.m_storedSeeds = new SimpleIntegerProperty[2];
-            this.m_names = new SimpleStringProperty[2];
+            this.m_storedPlayer1 = new SimpleIntegerProperty();
+            this.m_storedPlayer1 = new SimpleIntegerProperty();
+            this.m_namePlayer1 = new SimpleStringProperty();
+            this.m_namePlayer2 = new SimpleStringProperty();
 
             //initialize the elements in the central gridpane
             for (int l = 0; l < 2; l++) {
@@ -71,12 +75,12 @@ public class BoardJFXView implements iObserver {
         }
 
         //update the stored seeds count for both players
-        this.m_storedSeeds[0].set(this.m_controller.getStoredSeeds(1));
-        this.m_storedSeeds[1].set(this.m_controller.getStoredSeeds(2));
+        this.m_storedPlayer1.set(this.m_controller.getStoredSeeds(1));
+        this.m_storedPlayer1.set(this.m_controller.getStoredSeeds(2));
 
         //update the name of both players
-        this.m_names[0].set(this.m_controller.getName(1));
-        this.m_names[1].set(this.m_controller.getName(2));
+        this.m_namePlayer1.set(this.m_controller.getName(1));
+        this.m_namePlayer2.set(this.m_controller.getName(2));
     }
 
     /**
