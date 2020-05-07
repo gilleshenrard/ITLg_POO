@@ -85,7 +85,7 @@ public class BoardJFXView implements iObserver {
 
         //update the stored seeds count for both players
         this.m_storedPlayer1.set(this.m_controller.getStoredSeeds(1));
-        this.m_storedPlayer1.set(this.m_controller.getStoredSeeds(2));
+        this.m_storedPlayer2.set(this.m_controller.getStoredSeeds(2));
 
         //update the name of both players
         this.m_namePlayer1.set(this.m_controller.getName(1));
