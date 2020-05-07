@@ -37,14 +37,14 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
      * Create a new Board Java FX view
      */
     public BoardJFXView() {
-        try {
-            //intantiate all the non-FXML properties
-            this.m_slots = new SimpleIntegerProperty[2][6];
-            this.m_storedPlayer1 = new SimpleIntegerProperty();
-            this.m_storedPlayer2 = new SimpleIntegerProperty();
-            this.m_namePlayer1 = new SimpleStringProperty();
-            this.m_namePlayer2 = new SimpleStringProperty();
+        //intantiate all the non-FXML properties
+        this.m_slots = new SimpleIntegerProperty[2][6];
+        this.m_storedPlayer1 = new SimpleIntegerProperty();
+        this.m_storedPlayer2 = new SimpleIntegerProperty();
+        this.m_namePlayer1 = new SimpleStringProperty();
+        this.m_namePlayer2 = new SimpleStringProperty();
 
+        try {
             //load the FXML document
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Layouts/mainScene.fxml"));
             loader.setController(this);
