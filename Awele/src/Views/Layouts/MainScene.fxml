@@ -5,48 +5,54 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.TilePane?>
 
-<BorderPane maxHeight="512" maxWidth="1024.0" minHeight="512" minWidth="1024.0" prefHeight="512.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <bottom>
-      <HBox prefHeight="100.0" prefWidth="1024.0" BorderPane.alignment="CENTER" />
-   </bottom>
+<BorderPane maxHeight="512.0" maxWidth="1024.0" minHeight="512.0" minWidth="1024.0" prefHeight="512.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" >
+    <top>
+        <Label fx:id="m_title" maxHeight="50.0" maxWidth="1024.0" minHeight="50.0" minWidth="1024.0" prefHeight="50.0" prefWidth="1024.0" text="Awele" BorderPane.alignment="CENTER">
+            <graphic>
+                <Button fx:id="m_menuButton" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" />
+            </graphic>
+        </Label>
+    </top>
    <center>
-      <GridPane fx:id="m_grid" BorderPane.alignment="CENTER">
+      <GridPane fx:id="m_grid" prefHeight="334.0" BorderPane.alignment="CENTER">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" percentWidth="16.666" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" percentWidth="16.667" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" percentWidth="16.667" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" percentWidth="16.667" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" percentWidth="16.667" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="100.0" percentWidth="16.666" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="16.666" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="16.667" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="16.667" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="16.667" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="16.667" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="16.666" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints maxHeight="181.0" minHeight="181.0" percentHeight="50.0" prefHeight="181.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="181.0" minHeight="181.0" percentHeight="50.0" prefHeight="181.0" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="50.0" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="50.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label prefHeight="203.0" prefWidth="187.0" text="Label" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <Label prefHeight="211.0" prefWidth="194.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-            <Label prefHeight="211.0" prefWidth="202.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-            <Label prefHeight="210.0" prefWidth="196.0" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="0" />
-            <Label prefHeight="210.0" prefWidth="205.0" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="0" />
-            <Label prefHeight="237.0" prefWidth="181.0" text="Label" GridPane.columnIndex="5" GridPane.rowIndex="0" />
-            <Label prefHeight="225.0" prefWidth="226.0" text="Label" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <Label prefHeight="207.0" prefWidth="192.0" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label prefHeight="198.0" prefWidth="186.0" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Label prefHeight="214.0" prefWidth="210.0" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <Label prefHeight="203.0" prefWidth="196.0" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-            <Label prefHeight="210.0" prefWidth="199.0" text="Label" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+            <Label text="Label" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <Label text="Label" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+            <Label text="Label" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+            <Label text="Label" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+            <Label text="Label" GridPane.columnIndex="5" GridPane.rowIndex="0" />
+            <Label text="Label" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label text="Label" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Label text="Label" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <Label text="Label" GridPane.columnIndex="5" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </center>
-   <top>
-      <Label fx:id="m_title" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="1024.0" text="Awele" BorderPane.alignment="CENTER">
-         <graphic>
-            <Button fx:id="m_menuButton" maxHeight="-Infinity" maxWidth="1024.0" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" />
-         </graphic>
-      </Label>
-   </top>
+   <bottom>
+      <TilePane prefHeight="128.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
+         <children>
+            <Region prefHeight="200.0" prefWidth="200.0" />
+            <Region prefHeight="200.0" prefWidth="200.0" />
+         </children>
+      </TilePane>
+   </bottom>
 </BorderPane>
