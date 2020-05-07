@@ -17,7 +17,7 @@ public class Main extends Application{
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage primaryStage) {
         //game setup
         GameController game = new GameController();
         GameConsoleView gameConsoleView = new GameConsoleView(game);
