@@ -75,9 +75,11 @@ public class BoardJFXView implements iObserver {
             }
         }
 
-        //bind labels holding players' names
+        //bind labels holding players' names and give them a default value
         l_namePl1.textProperty().bind(this.m_namePlayer1);
+        this.m_namePlayer1.setValue("Player 1");
         l_namePl2.textProperty().bind(this.m_namePlayer2);
+        this.m_namePlayer2.setValue("Player 2");
 
         //bind labels holding players' scores
         l_scorePl1.textProperty().bind(this.m_storedPlayer1.asString());
