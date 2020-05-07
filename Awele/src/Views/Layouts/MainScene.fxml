@@ -5,11 +5,11 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="512.0" maxWidth="1024.0" minHeight="512.0" minWidth="1024.0" prefHeight="512.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" >
+<BorderPane maxHeight="512.0" maxWidth="1024.0" minHeight="512.0" minWidth="1024.0" prefHeight="512.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <top>
         <Label fx:id="m_title" maxHeight="50.0" maxWidth="1024.0" minHeight="50.0" minWidth="1024.0" prefHeight="50.0" prefWidth="1024.0" text="Awele" BorderPane.alignment="CENTER">
             <graphic>
@@ -18,7 +18,7 @@
         </Label>
     </top>
    <center>
-      <GridPane fx:id="m_grid" prefHeight="334.0" minHeight="334.0" maxHeight="334.0" minWidth="1024.0"  maxWidth="1024.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
+      <GridPane fx:id="m_grid" maxHeight="334.0" maxWidth="1024.0" minHeight="334.0" minWidth="1024.0" prefHeight="334.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" percentWidth="16.666" />
             <ColumnConstraints hgrow="SOMETIMES" percentWidth="16.667" />
@@ -48,10 +48,20 @@
       </GridPane>
    </center>
    <bottom>
-      <TilePane prefHeight="128.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
+      <TilePane prefHeight="128.0" prefWidth="1024.0" minHeight="128.0" minWidth="1024.0" maxHeight="128.0" maxWidth="1024.0" BorderPane.alignment="CENTER">
          <children>
-             <Region prefHeight="128.0" prefWidth="512.0" minHeight="128.0" minWidth="512.0" maxHeight="128.0" maxWidth="512.0" />
-             <Region prefHeight="128.0" prefWidth="512.0" minHeight="128.0" minWidth="512.0" maxHeight="128.0" maxWidth="512.0" />
+            <VBox prefHeight="128.0" prefWidth="512.0" minHeight="128.0" minWidth="512.0" maxHeight="128.0" maxWidth="512.0" >
+               <children>
+                   <Label prefHeight="64.0" prefWidth="512.0" minHeight="64.0" minWidth="512.0" maxHeight="64.0" maxWidth="512.0" text="Label" fx:id="l_namePl1"/>
+                   <Label prefHeight="64.0" prefWidth="512.0" minHeight="64.0" minWidth="512.0" maxHeight="64.0" maxWidth="512.0" text="Label" fx:id="l_scorePl1"/>
+               </children>
+            </VBox>
+             <VBox prefHeight="128.0" prefWidth="512.0" minHeight="128.0" minWidth="512.0" maxHeight="128.0" maxWidth="512.0" >
+                 <children>
+                     <Label prefHeight="64.0" prefWidth="512.0" minHeight="64.0" minWidth="512.0" maxHeight="64.0" maxWidth="512.0" text="Label" fx:id="l_namePl2"/>
+                     <Label prefHeight="64.0" prefWidth="512.0" minHeight="64.0" minWidth="512.0" maxHeight="64.0" maxWidth="512.0" text="Label" fx:id="l_scorePl2"/>
+                 </children>
+             </VBox>
          </children>
       </TilePane>
    </bottom>

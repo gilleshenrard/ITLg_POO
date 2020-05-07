@@ -25,6 +25,10 @@ public class BoardJFXView implements iObserver {
     private SimpleStringProperty m_namePlayer2;
     @FXML Button m_menuButton;
     @FXML GridPane m_grid;
+    @FXML Label l_namePl1;
+    @FXML Label l_namePl2;
+    @FXML Label l_scorePl1;
+    @FXML Label l_scorePl2;
 
     /**
      * Create a new Board Java FX view
@@ -59,9 +63,8 @@ public class BoardJFXView implements iObserver {
     private void init() {
         //initialize the elements in the central gridpane
         //  + bind them and add them to said gridpane
-        int i = 0;
         for (int l = 0; l < 2; l++) {
-            for (int c = 0; c < 6; c++, i++) {
+            for (int c = 0; c < 6; c++) {
                 //get the grid pane child corresponding to the proper element in the array
                 int index = (l == 0 ? 6 : 0) + (l == 0 ? c : 5-c);
                 Label tmp = (Label) this.m_grid.getChildren().get(index);
@@ -71,6 +74,14 @@ public class BoardJFXView implements iObserver {
                 tmp.textProperty().bind(this.m_slots[l][c].asString());
             }
         }
+
+        //bind labels holding players' names
+        l_namePl1.textProperty().bind(this.m_namePlayer1);
+        l_namePl2.textProperty().bind(this.m_namePlayer2);
+
+        //bind labels holding players' scores
+        l_scorePl1.textProperty().bind(this.m_storedPlayer1.asString());
+        l_scorePl2.textProperty().bind(this.m_storedPlayer2.asString());
     }
 
     /**
@@ -92,8 +103,8 @@ public class BoardJFXView implements iObserver {
         this.m_storedPlayer2.set(this.m_controller.getStoredSeeds(2));
 
         //update the name of both players
-        this.m_namePlayer1.set(this.m_controller.getName(1));
-        this.m_namePlayer2.set(this.m_controller.getName(2));
+        this.m_namePlayer1.setValue(this.m_controller.getName(1));
+        this.m_namePlayer2.setValue(this.m_controller.getName(2));
     }
 
     /**
