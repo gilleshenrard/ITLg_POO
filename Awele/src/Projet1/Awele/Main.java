@@ -25,7 +25,6 @@ public class Main extends Application{
         //Board setup
         BoardJFXView bv = new BoardJFXView();
         game.getBoardController().attach(bv);
-        bv.init();
 
         //players setup
         game.setPlayer(new Player(1, "Gilles", new KeyboardSelect()));
