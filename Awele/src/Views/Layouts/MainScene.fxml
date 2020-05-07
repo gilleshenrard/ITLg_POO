@@ -18,7 +18,7 @@
         </Label>
     </top>
    <center>
-      <GridPane fx:id="m_grid" prefHeight="334.0" BorderPane.alignment="CENTER">
+      <GridPane fx:id="m_grid" prefHeight="334.0" minHeight="334.0" maxHeight="334.0" minWidth="1024.0"  maxWidth="1024.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" percentWidth="16.666" />
             <ColumnConstraints hgrow="SOMETIMES" percentWidth="16.667" />
@@ -50,8 +50,8 @@
    <bottom>
       <TilePane prefHeight="128.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
          <children>
-            <Region prefHeight="200.0" prefWidth="200.0" />
-            <Region prefHeight="200.0" prefWidth="200.0" />
+             <Region prefHeight="128.0" prefWidth="512.0" minHeight="128.0" minWidth="512.0" maxHeight="128.0" maxWidth="512.0" />
+             <Region prefHeight="128.0" prefWidth="512.0" minHeight="128.0" minWidth="512.0" maxHeight="128.0" maxWidth="512.0" />
          </children>
       </TilePane>
    </bottom>
