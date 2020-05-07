@@ -27,7 +27,7 @@ public class BoardJFXView implements iObserver {
     @FXML GridPane m_grid;
 
     /**
-     * Initialise all FXML elements in the scene
+     * Create a new Board Java FX view
      */
     public BoardJFXView() {
         try {
@@ -35,28 +35,37 @@ public class BoardJFXView implements iObserver {
             loader.setController(this);
             BorderPane graph = loader.load();
 
-            //initialise all the properties
+            //intantiate all the properties
             this.m_slots = new SimpleIntegerProperty[2][6];
             this.m_storedPlayer1 = new SimpleIntegerProperty();
             this.m_storedPlayer1 = new SimpleIntegerProperty();
             this.m_namePlayer1 = new SimpleStringProperty();
             this.m_namePlayer2 = new SimpleStringProperty();
 
-            //initialize the elements in the central gridpane
-            for (int l = 0; l < 2; l++) {
-                for (int c = 0; c < 6; c++) {
-                    Label tmp = new Label();
-                    this.m_slots[l][c] = new SimpleIntegerProperty();
-                    tmp.textProperty().bind(this.m_slots[l][c].asString());
-                    this.m_grid.add(tmp, (l==0 ? c : 5-c), 1-l);
-                }
-            }
+            //call the initialisation procedure
+            this.init();
 
             //create a new scene from the graph
             this.m_scene = new Scene(graph);
         }
         catch (IOException e){
             System.err.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Perform all the bindings and configurations necessary
+     */
+    private void init() {
+        //initialize the elements in the central gridpane
+        //  + bind them and add them to said gridpane
+        for (int l = 0; l < 2; l++) {
+            for (int c = 0; c < 6; c++) {
+                Label tmp = new Label();
+                this.m_slots[l][c] = new SimpleIntegerProperty();
+                tmp.textProperty().bind(this.m_slots[l][c].asString());
+                this.m_grid.add(tmp, (l==0 ? c : 5-c), 1-l);
+            }
         }
     }
 
