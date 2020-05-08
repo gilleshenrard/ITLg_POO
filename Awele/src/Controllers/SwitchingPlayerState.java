@@ -4,11 +4,10 @@ public class SwitchingPlayerState implements iGameState {
     /**
      * Switch players (1 becomes 2, 2 becomes 1)
      * @param controller Game controller to use
-     * @param input /
      * @return /
      */
     @Override
-    public int handleState(GameController controller, int input){
+    public int handleState(GameController controller){
         //switch user
         if(controller.getCurrentPlayer() == 1)
             controller.setCurrentPlayer(2);

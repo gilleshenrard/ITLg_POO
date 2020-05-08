@@ -136,6 +136,6 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
     public void onSlotClicked(MouseEvent mouseEvent) {
         Point p = new Point((int)(mouseEvent.getX()/(this.m_grid.getWidth()/6)), 1 - (int)(mouseEvent.getY()/(this.m_grid.getHeight()/2)));
         this.m_controller.setLastSelected(p);
-        this.m_controller.handleState(0);
+        this.m_controller.handleState();
     }
 }

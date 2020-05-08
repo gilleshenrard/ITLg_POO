@@ -23,7 +23,8 @@ public class PlayingStateTest {
         g.getBoardController().getBoard().setStoredSeeds(2, 0);
         g.setNextState(GameController.m_playing);
         g.setCurrentPlayer(1);
-        int ret = g.handleState(6);
+        g.m_playing.setInput(6);
+        int ret = g.handleState();
         Assertions.assertEquals(0, ret);
         Assertions.assertTrue(g.getNextState() instanceof StoringState);
     }
@@ -42,7 +43,8 @@ public class PlayingStateTest {
         g.getBoardController().getBoard().setSlotSeeds(new Point(4, 1), 9);
         g.setNextState(GameController.m_playing);
         g.setCurrentPlayer(1);
-        int ret = g.handleState(6);
+        g.m_playing.setInput(6);
+        int ret = g.handleState();
         Assertions.assertEquals(5, ret);
         Assertions.assertTrue(g.getNextState() instanceof StoringState);
     }
@@ -68,7 +70,8 @@ public class PlayingStateTest {
         g.getBoardController().getBoard().setRemainingSeeds(1, 22);
         g.setNextState(GameController.m_playing);
         g.setCurrentPlayer(1);
-        int ret = g.handleState(6);
+        g.m_playing.setInput(6);
+        int ret = g.handleState();
         Assertions.assertEquals(0, ret);
         Assertions.assertTrue(g.getNextState() instanceof PromptingState);
     }
@@ -92,7 +95,8 @@ public class PlayingStateTest {
         g.getBoardController().getBoard().setRemainingSeeds(1, 1);
         g.setNextState(GameController.m_playing);
         g.setCurrentPlayer(1);
-        int ret = g.handleState(6);
+        g.m_playing.setInput(6);
+        int ret = g.handleState();
         Assertions.assertEquals(0, ret);
         Assertions.assertTrue(g.getNextState() instanceof PromptingState);
     }
@@ -117,7 +121,8 @@ public class PlayingStateTest {
         g.getBoardController().getBoard().setRemainingSeeds(1, 2);
         g.setCurrentPlayer(1);
         g.setNextState(GameController.m_playing);
-        int ret = g.handleState(5);
+        g.m_playing.setInput(5);
+        int ret = g.handleState();
         Assertions.assertEquals(0, ret);
         Assertions.assertTrue(g.getNextState() instanceof PromptingState);
     }

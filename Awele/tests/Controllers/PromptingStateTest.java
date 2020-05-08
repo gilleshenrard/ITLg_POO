@@ -24,7 +24,7 @@ public class PromptingStateTest {
         Game.getInstance().setPlayer(new Player(1, "Test", new RandomSelect(g.getBoardController(), 1)));
         Game.getInstance().setPlayer(new Player(2, "Test", new RandomSelect(g.getBoardController(), 2)));
         g.setNextState(GameController.m_prompting);
-        int output = g.handleState(0);
+        int output = g.handleState();
         Assertions.assertTrue(output > 0 && output < 7);
         Assertions.assertTrue(g.getNextState() instanceof PlayingState);
     }
@@ -48,7 +48,7 @@ public class PromptingStateTest {
         g.getBoardController().getBoard().setRemainingSeeds(1, 1);
         g.setNextState(GameController.m_prompting);
         g.setCurrentPlayer(1);
-        int ret = g.handleState(6);
+        int ret = g.handleState();
         Assertions.assertEquals(-2, ret);
     }
 }

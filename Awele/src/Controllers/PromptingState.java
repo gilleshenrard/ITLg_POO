@@ -1,15 +1,13 @@
 package Controllers;
 
 public class PromptingState implements iGameState {
-
     /**
      * Make the player select its entry and display it on the screen
      * @param controller Game controller to use
-     * @param input /
      * @return Value to return to the main loop (-2 if forfeit, Player's choice otherwise)
      */
     @Override
-    public int handleState(GameController controller, int input){
+    public int handleState(GameController controller){
         //display the game board
         controller.updateObservers();
 
@@ -21,6 +19,7 @@ public class PromptingState implements iGameState {
 
             //plug in the Playing state
             controller.setNextState(controller.m_playing);
+            controller.m_playing.setInput(choice);
 
             return choice;
         }

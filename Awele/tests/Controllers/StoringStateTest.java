@@ -19,6 +19,6 @@ public class StoringStateTest {
         g.setNextState(GameController.m_storing);
         g.setCurrentPlayer(1);
         g.getBoardController().getBoard().setStoredSeeds(1, 23);
-        g.handleState(25);
+        g.handleState();
     }
 }

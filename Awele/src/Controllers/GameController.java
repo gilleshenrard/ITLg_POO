@@ -74,11 +74,10 @@ public class GameController {
 
     /**
      * Handle the current game state
-     * @param input Input for the current state
      * @return Output of the current state
      */
-    public int handleState(int input){
-        return this.m_currentState.handleState(this, input);
+    public int handleState(){
+        return this.m_currentState.handleState(this);
     };
 
     /**

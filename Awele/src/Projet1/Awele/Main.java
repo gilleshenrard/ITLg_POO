@@ -71,7 +71,7 @@ public class Main extends Application{
         try {
             //main game loop, while no victory
             while (outcome != -2 && outcome != -1) {
-                outcome = game.handleState(outcome);
+                outcome = game.handleState();
             }
         }
         catch (Exception e){
