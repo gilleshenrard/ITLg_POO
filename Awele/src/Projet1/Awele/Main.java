@@ -45,6 +45,7 @@ public class Main extends Application{
         //primary Stage setup
         primaryStage.setTitle("POO - Awele");
         primaryStage.setScene((Scene)bv.getContent());
+        game.updateObservers();
         primaryStage.show();
     }
 
