@@ -11,6 +11,7 @@ public class BoardController {
     private Board m_board;
     private Stack<Board> m_stack;
     private ArrayList<iObserver> m_observers;
+    private Point m_lastSelected;
 
     /**
      * Create a new Board controller
@@ -21,6 +22,7 @@ public class BoardController {
         this.setBoard(b);
         this.m_stack = new Stack<>();
         this.m_observers = new ArrayList<>();
+        this.m_lastSelected = null;
     }
 
     /**
@@ -301,5 +303,21 @@ public class BoardController {
         for (iObserver o:this.m_observers) {
             o.update();
         }
+    }
+
+    /**
+     * Get the last slot selected by a player
+     * @return Last Slot selected
+     */
+    public Point getLastSelected() {
+        return this.m_lastSelected;
+    }
+
+    /**
+     * Set the last slot selected by a player
+     * @param last Last slot selected
+     */
+    public void setLastSelected(Point last) {
+        this.m_lastSelected = last;
     }
 }
