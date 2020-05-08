@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
@@ -63,6 +64,9 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //set the click handler to the grid panel
+        this.m_grid.setOnMouseClicked(this::onSlotClicked);
+
         //initialize the elements in the central gridpane
         //  + bind them and add them to said gridpane
         for (int l = 0; l < 2; l++) {
@@ -127,5 +131,11 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
     @Override
     public void setController(BoardController controller) {
         this.m_controller = controller;
+    }
+
+    public void onSlotClicked(MouseEvent mouseEvent) {
+        Point p = new Point((int)(mouseEvent.getX()/(this.m_grid.getWidth()/6)), 1 - (int)(mouseEvent.getY()/(this.m_grid.getHeight()/2)));
+        this.m_controller.setLastSelected(p);
+        this.m_controller.handleState(0);
     }
 }
