@@ -24,12 +24,12 @@ public class PlayingState implements iGameState {
         int outcome = controller.playSlot(new Point(this.m_slot - 1, controller.getCurrentPlayer() - 1));
 
         if (outcome < 0) {  //player starved or empty slot, get back to prompting state and display forfeit
-            controller.setNextState(controller.m_prompting);
+            controller.setNextState(State.PROMPTING.getState());
             handleOutcome(controller, outcome);
             return 0;
         }
         else {  //Go to the Storing state
-            controller.setNextState(controller.m_storing);
+            controller.setNextState(State.STORING.getState());
             return outcome;
         }
     }

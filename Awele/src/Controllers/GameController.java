@@ -12,10 +12,6 @@ public class GameController {
     private SystemMessage m_view;
     private iGameState m_currentState;
     private int m_currentPlayer;
-    public static SwitchingPlayerState m_switching = new SwitchingPlayerState();
-    public static PromptingState m_prompting = new PromptingState();
-    public static PlayingState m_playing = new PlayingState();
-    public static StoringState m_storing = new StoringState();
 
     /**
      * Create a new Game Controller
@@ -25,7 +21,7 @@ public class GameController {
         this.m_board.setGameController(this);
         this.m_view = null;
         this.m_currentPlayer = 1;
-        this.m_currentState = GameController.m_prompting;
+        this.m_currentState = State.PROMPTING.getState();
     }
 
     /**

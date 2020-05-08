@@ -18,8 +18,8 @@ public class PromptingState implements iGameState {
                 controller.displayMessage(controller.getName(controller.getCurrentPlayer()) + " harvests the slot " + choice);
 
             //plug in the Playing state
-            controller.setNextState(controller.m_playing);
-            controller.m_playing.setInput(choice);
+            controller.setNextState(State.PLAYING.getState());
+            ((PlayingState)State.PLAYING.getState()).setInput(choice);
 
             return choice;
         }
