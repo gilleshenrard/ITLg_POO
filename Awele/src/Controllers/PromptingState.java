@@ -8,9 +8,6 @@ public class PromptingState implements iGameState {
      */
     @Override
     public int handleState(GameController controller){
-        //display the game board
-        controller.updateObservers();
-
         //get the choice from the user
         int choice = controller.selectSlot(controller.getCurrentPlayer());
         if(choice > 0) {

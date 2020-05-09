@@ -8,6 +8,9 @@ public class SwitchingPlayerState implements iGameState {
      */
     @Override
     public int handleState(GameController controller){
+        //update the game board
+        controller.updateObservers();
+
         //switch user
         if(controller.getCurrentPlayer() == 1)
             controller.setCurrentPlayer(2);
