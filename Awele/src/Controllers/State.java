@@ -23,4 +23,13 @@ public enum State{
     public iGameState getState(){
         return this.m_state;
     }
+
+    /**
+     * Process everything which has to be done in the state
+     * @param game Game controller to use
+     * @return State output
+     */
+    public int handleState(GameController game){
+        return this.m_state.handleState(game);
+    }
 }

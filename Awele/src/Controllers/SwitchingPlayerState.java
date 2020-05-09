@@ -15,7 +15,7 @@ public class SwitchingPlayerState implements iGameState {
             controller.setCurrentPlayer(1);
 
         //plug in the Prompting state
-        controller.setNextState(State.PROMPTING.getState());
+        controller.setNextState(State.PROMPTING);
 
         return 0;
     }

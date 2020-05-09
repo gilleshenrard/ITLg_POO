@@ -16,7 +16,7 @@ public class StoringStateTest {
     @Test
     void handleState_shouldnot_fail() {
         g.getBoardController().attach(new BoardConsoleView());
-        g.setNextState(State.STORING.getState());
+        g.setNextState(State.STORING);
         g.setCurrentPlayer(1);
         g.getBoardController().getBoard().setStoredSeeds(1, 23);
         g.handleState();
