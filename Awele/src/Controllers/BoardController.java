@@ -151,6 +151,14 @@ public class BoardController {
     }
 
     /**
+     * Play a whole player's season
+     * @return 0
+     */
+    public int playSeason(){
+        return this.m_game.playSeason();
+    }
+
+    /**
      * Check if playing p is legal
      * @param p The slot to test
      * @return true = legal, false otherwise
