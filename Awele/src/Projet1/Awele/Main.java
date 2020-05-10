@@ -32,7 +32,7 @@ public class Main extends Application{
     public void start(Stage primaryStage) {
         //game setup
         GameController game = new GameController();
-        GameConsoleView gameConsoleView = new GameConsoleView(game);
+        GameJFXView gameView = new GameJFXView(game);
 
         //Board setup
         BoardJFXView bv = new BoardJFXView();
