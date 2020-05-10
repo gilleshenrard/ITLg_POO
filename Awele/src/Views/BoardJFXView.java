@@ -20,6 +20,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class BoardJFXView extends BorderPane implements iObserver, Initializable {
+    private Thread m_selectThread = null;
     private Scene m_scene = null;
     private BoardController m_controller;
     private SimpleIntegerProperty[][] m_slots;
@@ -57,6 +58,10 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
         catch (IOException e){
             System.err.println(e.getMessage());
         }
+    }
+
+    public void setSelectThread(Thread thread){
+        this.m_selectThread = thread;
     }
 
     /**
@@ -144,11 +149,16 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
 
         //set the coordinates selected by the player, and play its season
         this.m_controller.setLastSelected(p);
-        this.m_controller.playSeason();
+
+        //notify the main loop thread once a slot has been selected
+        this.m_selectThread.notifyAll();
+
+
+/*        this.m_controller.playSeason();
 
         //if the next player is an AI, play its season
         if (this.m_controller.isPlayerIA(this.m_controller.getCurrentPlayer())){
             this.m_controller.playSeason();
         }
-    }
+*/    }
 }

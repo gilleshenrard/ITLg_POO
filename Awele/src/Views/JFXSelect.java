@@ -19,6 +19,16 @@ public class JFXSelect implements iSelectable {
 
     @Override
     public int selectSlot() {
+        //make the current thread wait for a notification given by the slot click event handler
+        try {
+            synchronized (this) {
+                Thread.currentThread().wait();
+                System.out.println("test");
+            }
+        }
+        catch (InterruptedException e){};
+
+        //process the player's choice
         Point p = this.m_controller.getLastSelected();
         if (p == null)
             return 0;
