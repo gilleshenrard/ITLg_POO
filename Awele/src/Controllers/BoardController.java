@@ -159,6 +159,15 @@ public class BoardController {
     }
 
     /**
+     * Indicate whether a player is an AI
+     * @param ID ID of the player to enquire
+     * @return true if AI, false otherwise
+     */
+    public boolean isPlayerIA(int ID){
+        return this.m_game.isPlayerAI(ID);
+    }
+
+    /**
      * Check if playing p is legal
      * @param p The slot to test
      * @return true = legal, false otherwise
