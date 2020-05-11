@@ -6,7 +6,7 @@ import Models.Player;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-class GameViewTest {
+class GameConsoleViewTest {
     GameController gc = new GameController();
     GameView g = new GameView(gc);
 
