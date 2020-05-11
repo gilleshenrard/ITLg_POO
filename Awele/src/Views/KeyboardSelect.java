@@ -1,3 +1,10 @@
+/****************************************************************************************************/
+/*  Class KeyboardSelect                                                                            */
+/*  Implementation of the Strategy design pattern                                                   */
+/*  Allows a player to select a slot via a keyboard in console mode                                 */
+/*  Author : Gilles Henrard                                                                         */
+/*  Last update : 11/05/2020                                                                        */
+/****************************************************************************************************/
 package Views;
 
 import java.util.Scanner;
