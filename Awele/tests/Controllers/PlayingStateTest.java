@@ -21,6 +21,8 @@ public class PlayingStateTest {
     void handleState_noCaptureNoStarve_shouldnot_fail() {
         g.getBoardController().getBoard().setStoredSeeds(1, 0);
         g.getBoardController().getBoard().setStoredSeeds(2, 0);
+        g.getBoardController().getBoard().setSlotSeeds(new Point(5, 0), 4);
+        g.getBoardController().getBoard().setRemainingSeeds(1, 4);
         g.setNextState(GameController.m_playing);
         g.setCurrentPlayer(1);
         int ret = g.handleState(6);
@@ -74,11 +76,11 @@ public class PlayingStateTest {
     }
 
     /**
-     * Check if handleState() forbids a self-starvation by scattering to another row
+     * Check if handleState() processes a self-starvation by scattering to another row
      */
-    @DisplayName("handleState() with self-starvation to other row, forfeit - should not fail")
+    @DisplayName("handleState() with self-starvation to other row, no forfeit - should not fail")
     @Test
-    void handleState_selfStarvationForfeit_otherRow_shouldnot_fail() {
+    void handleState_selfStarvationNoForfeit_otherRow_shouldnot_fail() {
         g.getBoardController().getBoard().setStoredSeeds(1, 0);
         g.getBoardController().getBoard().setStoredSeeds(2, 0);
         Game.getInstance().setPlayer(new Player(1, "Test", new RandomSelect(g.getBoardController(), 1)));
@@ -94,11 +96,11 @@ public class PlayingStateTest {
         g.setCurrentPlayer(1);
         int ret = g.handleState(6);
         Assertions.assertEquals(0, ret);
-        Assertions.assertTrue(g.getNextState() instanceof PromptingState);
+        Assertions.assertTrue(g.getNextState() instanceof StoringState);
     }
 
     /**
-     * Check if handleState() forbids a self-starvation by scattering within a row
+     * Check if handleState() processes a self-starvation by scattering within a row
      */
     @DisplayName("handleState() with self-starvation within a row, no forfeit - should not fail")
     @Test
@@ -119,6 +121,6 @@ public class PlayingStateTest {
         g.setNextState(GameController.m_playing);
         int ret = g.handleState(5);
         Assertions.assertEquals(0, ret);
-        Assertions.assertTrue(g.getNextState() instanceof PromptingState);
+        Assertions.assertTrue(g.getNextState() instanceof StoringState);
     }
 }

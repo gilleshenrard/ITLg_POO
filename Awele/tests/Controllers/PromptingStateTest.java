@@ -30,11 +30,11 @@ public class PromptingStateTest {
     }
 
     /**
-     * Check if handleState() forbids a self-starvation by scattering to another row
+     * Check if handleState() processes a self-starvation by scattering to another row
      */
-    @DisplayName("handleState() with self-starvation to other row, forfeit - should not fail")
+    @DisplayName("handleState() with self-starvation to other row, no forfeit - should not fail")
     @Test
-    void handleState_selfStarvationForfeit_otherRow_shouldnot_fail() {
+    void handleState_selfStarvationNoForfeit_otherRow_shouldnot_fail() {
         g.getBoardController().getBoard().setStoredSeeds(1, 0);
         g.getBoardController().getBoard().setStoredSeeds(2, 0);
         Game.getInstance().setPlayer(new Player(1, "Test", new RandomSelect(g.getBoardController(), 1)));
@@ -49,6 +49,6 @@ public class PromptingStateTest {
         g.setNextState(GameController.m_prompting);
         g.setCurrentPlayer(1);
         int ret = g.handleState(6);
-        Assertions.assertEquals(-2, ret);
+        Assertions.assertEquals(6, ret);
     }
 }
