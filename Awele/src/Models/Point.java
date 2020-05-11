@@ -1,3 +1,10 @@
+/****************************************************************************************************/
+/*  Class Point                                                                                     */
+/*  Deals with Points coordinates manipulation (x, y)                                               */
+/*  Author : Gilles Henrard                                                                         */
+/*  Last update : 11/05/2020                                                                        */
+/****************************************************************************************************/
+
 package Models;
 
 import java.util.Objects;
