@@ -1,3 +1,11 @@
+/****************************************************************************************************/
+/*  Class Game                                                                                      */
+/*  Encloses the game manipulations                                                                 */
+/*  The game consists of a Board and two players. It is a Singleton, as only one instance           */
+/*      is playable                                                                                 */
+/*  Author : Gilles Henrard                                                                         */
+/*  Last update : 11/05/2020                                                                        */
+/****************************************************************************************************/
 package Models;
 
 import java.security.InvalidParameterException;
