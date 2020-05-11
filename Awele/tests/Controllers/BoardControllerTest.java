@@ -214,7 +214,7 @@ public class BoardControllerTest {
         b.getBoard().setSlotSeeds(new Point(3, 1), 1);
         b.getBoard().setSlotSeeds(new Point(4, 1), 9);
         int ret = b.checkOutcome(new Point(5, 0));
-        Assertions.assertEquals(3, ret);
+        Assertions.assertEquals(5, ret);
     }
 
     /**
@@ -245,7 +245,7 @@ public class BoardControllerTest {
         b.getBoard().setSlotSeeds(new Point(3, 1), 1);
         b.getBoard().setSlotSeeds(new Point(1, 1), 2);
         int ret = b.checkOutcome(new Point(5, 0));
-        Assertions.assertEquals(3, ret);
+        Assertions.assertEquals(5, ret);
     }
 
     /**

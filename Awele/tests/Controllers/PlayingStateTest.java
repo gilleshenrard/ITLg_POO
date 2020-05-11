@@ -120,7 +120,7 @@ public class PlayingStateTest {
         g.setCurrentPlayer(1);
         g.setNextState(GameController.m_playing);
         int ret = g.handleState(5);
-        Assertions.assertEquals(0, ret);
+        Assertions.assertEquals(2, ret);
         Assertions.assertTrue(g.getNextState() instanceof StoringState);
     }
 }

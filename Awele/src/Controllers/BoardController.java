@@ -173,16 +173,15 @@ public class BoardController {
             tmp = this.m_board.getNext(tmp);
             if (!tmp.equals(p)) {
                 if (this.getSlotSeeds(tmp) == 1 || this.getSlotSeeds(tmp) == 2)
-                    capturable[tmp.getY()] += getSlotSeeds(tmp);
-                else
-                    scattered[tmp.getY()]++;
+                    capturable[tmp.getY()] += getSlotSeeds(tmp) + 1;
+                scattered[tmp.getY()]++;
                 nbseeds--;
             }
         }while (nbseeds > 0);
 
         //starvation occurring during a capture
         if(this.getSlotSeeds(tmp) == 1 || this.getSlotSeeds(tmp) == 2){
-            if(capturable[1 - p.getY()] == this.m_board.getRemainingSeeds(2 - p.getY()))
+            if(capturable[1 - p.getY()] - scattered[1 - p.getY()] == this.m_board.getRemainingSeeds(2 - p.getY()))
                 return -1;
             else
                 return capturable[0] + capturable[1];
