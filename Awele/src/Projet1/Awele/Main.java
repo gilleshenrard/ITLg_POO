@@ -64,8 +64,8 @@ public class Main extends Application{
                     //main game loop, while no victory
                     do {
                         outcome = game.handleState();
-                        System.out.println("main loop output : " + outcome);
-                    }while (outcome != -2 && outcome != -1);
+                        System.out.println("test");
+                    }while (game.getNextState() != Controllers.State.PROMPTING && outcome != -2 && outcome != -1);
                 }
                 catch (Exception e){
                     game.displayError(e.getMessage());
