@@ -186,7 +186,7 @@ public class BoardController {
     /**
      * Test a slot for an outcome code
      * @param p The slot to test
-     * @return -2 if empty, -1 if starvation, amount captured otherwise
+     * @return -3 if not owner, -2 if empty, -1 if starvation, amount captured otherwise
      * @throws InvalidParameterException
      * @throws NullPointerException
      */
@@ -195,6 +195,10 @@ public class BoardController {
             throw new NullPointerException("BoardController.checkOutcome() : NULL instance of Point");
         Board.validateID(p.getY() + 1, "BoardController.checkOutcome()");
         Board.validateCoordinates(p, "Board.checkOutcome()");
+
+        //check if the current player owns the slot checked
+        if (p.getY() + 1 != this.m_game.getCurrentPlayer())
+            return -3;
 
         //recover the amount of seeds it the slot tested
         int nbseeds = this.getSlotSeeds(p);
