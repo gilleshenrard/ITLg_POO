@@ -1,3 +1,9 @@
+/****************************************************************************************************/
+/*  Interface iGameState                                                                            */
+/*  Defines the base of a Finite Machine State pattern holding all the game states possible         */
+/*  Author : Gilles Henrard                                                                         */
+/*  Last update : 11/05/2020                                                                        */
+/****************************************************************************************************/
 package Controllers;
 
 public interface iGameState {
