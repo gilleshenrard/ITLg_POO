@@ -1,7 +1,7 @@
 /****************************************************************************************************/
 /*  Class SwitchingPlayerState                                                                      */
 /*  Implementation of the FSM design pattern                                                        */
-/*  Switches between player 1 and player 2, then leads to the Prompting state                       */
+/*  Updates the UI, switches between player 1 and player 2, then leads to the Prompting state       */
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
