@@ -1,3 +1,10 @@
+/****************************************************************************************************/
+/*  Class Player                                                                                    */
+/*  Encloses the players manipulations                                                              */
+/*  Each player has an ID, a name and a behaviour to select slots during the game                   */
+/*  Author : Gilles Henrard                                                                         */
+/*  Last update : 11/05/2020                                                                        */
+/****************************************************************************************************/
 package Models;
 
 import Views.iSelectable;
