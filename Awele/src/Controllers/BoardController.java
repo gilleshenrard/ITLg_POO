@@ -178,6 +178,16 @@ public class BoardController {
     }
 
     /**
+     * Indicate whether the player is owner of the Point or not
+     * @param ID ID of the player to test
+     * @param p Point of which to test the ownership
+     * @return true if the player owns the Point, false otherwise
+     */
+    public boolean isOwner(int ID, Point p){
+        return this.m_game.isOwner(ID, p);
+    }
+
+    /**
      * Check if playing p is legal
      * @param p The slot to test
      * @return true = legal, false otherwise

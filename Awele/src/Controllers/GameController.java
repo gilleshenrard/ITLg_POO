@@ -99,6 +99,16 @@ public class GameController {
     }
 
     /**
+     * Indicate whether the player is owner of the Point or not
+     * @param ID ID of the player to test
+     * @param p Point of which to test the ownership
+     * @return true if the player owns the Point, false otherwise
+     */
+    public boolean isOwner(int ID, Point p){
+        return ID == p.getY() + 1;
+    }
+
+    /**
      * Set an instance of Player
      * @param player Player to set
      * @throws InvalidParameterException

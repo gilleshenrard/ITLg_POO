@@ -149,13 +149,16 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
         //retrieve the slot coordinates from the mouse click coordinates
         Point p = new Point((int)(mouseEvent.getX()/(this.m_grid.getWidth()/6)), 1 - (int)(mouseEvent.getY()/(this.m_grid.getHeight()/2)));
 
-        //set the coordinates selected by the player, and play its season
-        this.m_controller.setLastSelected(p);
-        this.m_controller.playSeason();
-
-        //if the next player is an AI, play its season
-        if (this.m_controller.isPlayerIA(this.m_controller.getCurrentPlayer())){
+        //check if the current player is owner of the slot clicked
+        if (this.m_controller.isOwner(this.m_controller.getCurrentPlayer(), p)) {
+            //set the coordinates selected by the player, and play its season
+            this.m_controller.setLastSelected(p);
             this.m_controller.playSeason();
+
+            //if the next player is an AI, play its season
+            if (this.m_controller.isPlayerIA(this.m_controller.getCurrentPlayer())) {
+                this.m_controller.playSeason();
+            }
         }
     }
 }
