@@ -1,3 +1,11 @@
+/****************************************************************************************************/
+/*  Class BoardController                                                                           */
+/*  Deals with game board indirect manipulations (playing a slot, saving the current board, ...),   */
+/*      and acts as a buffer between the Board and the Board view. Must not be used directly in     */
+/*      the main method.                                                                            */
+/*  Author : Gilles Henrard                                                                         */
+/*  Last update : 11/05/2020                                                                        */
+/****************************************************************************************************/
 package Controllers;
 
 import Models.Board;

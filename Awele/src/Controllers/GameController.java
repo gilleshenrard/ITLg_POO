@@ -1,3 +1,10 @@
+/****************************************************************************************************/
+/*  Class GameController                                                                            */
+/*  Deals with game indirect manipulations (getting the current state, ...), and acts as a buffer   */
+/*      between the Game and the Game view. Must be primarily used in the Main method               */
+/*  Author : Gilles Henrard                                                                         */
+/*  Last update : 11/05/2020                                                                        */
+/****************************************************************************************************/
 package Controllers;
 
 import Models.Game;
