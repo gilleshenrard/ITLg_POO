@@ -1,3 +1,9 @@
+/****************************************************************************************************/
+/*  Class BoardView                                                                                 */
+/*  Provides game board display methods, and thus communicates with the board controller            */
+/*  Author : Gilles Henrard                                                                         */
+/*  Last update : 11/05/2020                                                                        */
+/****************************************************************************************************/
 package Views;
 import Controllers.BoardController;
 import Models.Point;
