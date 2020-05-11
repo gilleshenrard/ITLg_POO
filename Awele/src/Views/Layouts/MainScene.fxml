@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="512.0" maxWidth="1024.0" minHeight="512.0" minWidth="1024.0" prefHeight="512.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="512.0" maxWidth="1024.0" minHeight="512.0" minWidth="1024.0" prefHeight="512.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../Styles/base.css">
     <top>
         <Label fx:id="m_title" maxHeight="50.0" maxWidth="1024.0" minHeight="50.0" minWidth="1024.0" prefHeight="50.0" prefWidth="1024.0" text="Awele" BorderPane.alignment="CENTER">
             <graphic>
