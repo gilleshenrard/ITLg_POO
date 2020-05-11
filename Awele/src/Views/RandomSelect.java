@@ -1,3 +1,10 @@
+/****************************************************************************************************/
+/*  Class RandomSelect                                                                              */
+/*  Implementation of the Strategy design pattern                                                   */
+/*  Allows a player to select a slot randomly among all legal slots he owns                         */
+/*  Author : Gilles Henrard                                                                         */
+/*  Last update : 11/05/2020                                                                        */
+/****************************************************************************************************/
 package Views;
 
 import Controllers.BoardController;
