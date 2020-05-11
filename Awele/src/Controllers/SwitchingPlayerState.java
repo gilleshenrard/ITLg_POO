@@ -12,10 +12,7 @@ public class SwitchingPlayerState implements iGameState {
         controller.updateObservers();
 
         //switch user
-        if(controller.getCurrentPlayer() == 1)
-            controller.setCurrentPlayer(2);
-        else
-            controller.setCurrentPlayer(1);
+        controller.setCurrentPlayer(controller.getOpponent());
 
         //plug in the Prompting state
         controller.setNextState(State.PROMPTING);

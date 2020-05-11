@@ -84,6 +84,14 @@ public class GameController {
     }
 
     /**
+     * Get the ID of the opponent of the current player
+     * @return ID of the opponent
+     */
+    public int getOpponent(){
+        return (this.getCurrentPlayer() == 1 ? 2 : 1);
+    }
+
+    /**
      * Set an instance of Player
      * @param player Player to set
      * @throws InvalidParameterException
