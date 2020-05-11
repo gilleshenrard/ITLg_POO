@@ -1,3 +1,11 @@
+/****************************************************************************************************/
+/*  Class PlayingState                                                                              */
+/*  Implementation of the FSM design pattern                                                        */
+/*  Makes the player play the slot selected in the Prompting state, then                            */
+/*      either leads back to the Prompting state, or leads to the Storing state                     */
+/*  Author : Gilles Henrard                                                                         */
+/*  Last update : 11/05/2020                                                                        */
+/****************************************************************************************************/
 package Controllers;
 
 import Models.Point;

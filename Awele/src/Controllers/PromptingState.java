@@ -1,3 +1,11 @@
+/****************************************************************************************************/
+/*  Class PromptingState                                                                            */
+/*  Implementation of the FSM design pattern                                                        */
+/*  Makes the player select a slot, then either leads to the Playing state,                         */
+/*      or returns an error code (-2 in case of forfeit)                                            */
+/*  Author : Gilles Henrard                                                                         */
+/*  Last update : 11/05/2020                                                                        */
+/****************************************************************************************************/
 package Controllers;
 
 public class PromptingState implements iGameState {
