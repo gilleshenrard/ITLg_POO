@@ -1,3 +1,11 @@
+/****************************************************************************************************/
+/*  Class Slot                                                                                      */
+/*  Encloses Slot manipulations                                                                     */
+/*  A slot is a Point, with additional seeds count                                                  */
+/*  Author : Gilles Henrard                                                                         */
+/*  Last update : 11/05/2020                                                                        */
+/****************************************************************************************************/
+
 package Models;
 
 import java.security.InvalidParameterException;
