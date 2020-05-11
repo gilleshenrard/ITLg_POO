@@ -1,0 +1,35 @@
+/*main frame*/
+.main{
+    -fx-background-color : #0A092D; /*midnight blue*/
+    -fx-text-alignment : center;
+    -fx-text-fill: #DA4FDE; /*medium orchid*/
+    -fx-font-size: 30;
+    -fx-font-weight: bold;
+}
+
+/*title section*/
+.title{
+    -fx-text-fill: #DA4FDE; /*medium orchid*/
+    -fx-border-color : #DA4FDE; /*medium orchid*/
+    -fx-border-width : 10px;
+}
+
+/*Slots*/
+.slots .label{
+    -fx-background-color : rgba(0,0,0,0);
+    -fx-text-fill: #DA4FDE; /*medium orchid*/
+    -fx-alignment : center;
+}
+
+/*vbox inside the scoreboard*/
+.scores .scorepanel{
+    -fx-border-color : #DA4FDE; /*medium orchid*/
+    -fx-border-width : 10px;
+}
+
+/*Boards indicating player name and score*/
+.scores .label{
+    -fx-background-color : rgba(0,0,0,0);
+    -fx-alignment : center;
+    -fx-text-fill: #DA4FDE; /*medium orchid*/
+}

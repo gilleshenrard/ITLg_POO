@@ -9,16 +9,16 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="512.0" maxWidth="1024.0" minHeight="512.0" minWidth="1024.0" prefHeight="512.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../Styles/base.css">
+<BorderPane maxHeight="512.0" maxWidth="1024.0" minHeight="512.0" minWidth="1024.0" prefHeight="512.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../Styles/neon.css" styleClass="main">
     <top>
-        <Label fx:id="m_title" maxHeight="50.0" maxWidth="1024.0" minHeight="50.0" minWidth="1024.0" prefHeight="50.0" prefWidth="1024.0" text="Awele" BorderPane.alignment="CENTER">
+        <Label fx:id="m_title" maxHeight="50.0" maxWidth="1024.0" minHeight="50.0" minWidth="1024.0" prefHeight="50.0" prefWidth="1024.0" text="Awele" BorderPane.alignment="CENTER" styleClass="title">
             <graphic>
                 <Button fx:id="m_menuButton" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" />
             </graphic>
         </Label>
     </top>
    <center>
-      <GridPane fx:id="m_grid" maxHeight="334.0" maxWidth="1024.0" minHeight="334.0" minWidth="1024.0" prefHeight="334.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
+      <GridPane fx:id="m_grid" maxHeight="334.0" maxWidth="1024.0" minHeight="334.0" minWidth="1024.0" prefHeight="334.0" prefWidth="1024.0" BorderPane.alignment="CENTER" styleClass="slots">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" percentWidth="16.666" />
             <ColumnConstraints hgrow="SOMETIMES" percentWidth="16.667" />
@@ -32,31 +32,31 @@
             <RowConstraints percentHeight="50.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Label" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-            <Label text="Label" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-            <Label text="Label" GridPane.columnIndex="3" GridPane.rowIndex="0" />
-            <Label text="Label" GridPane.columnIndex="4" GridPane.rowIndex="0" />
-            <Label text="Label" GridPane.columnIndex="5" GridPane.rowIndex="0" />
-            <Label text="Label" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <Label text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Label text="Label" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <Label text="Label" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-            <Label text="Label" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="0" />
+            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="0" />
+            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="0" />
+            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="5" GridPane.rowIndex="0" />
+            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="5" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </center>
    <bottom>
-      <TilePane prefHeight="128.0" prefWidth="1024.0" minHeight="128.0" minWidth="1024.0" maxHeight="128.0" maxWidth="1024.0" BorderPane.alignment="CENTER">
+      <TilePane prefHeight="128.0" prefWidth="1024.0" minHeight="128.0" minWidth="1024.0" maxHeight="128.0" maxWidth="1024.0" BorderPane.alignment="CENTER" styleClass="scores">
          <children>
-            <VBox prefHeight="128.0" prefWidth="512.0" minHeight="128.0" minWidth="512.0" maxHeight="128.0" maxWidth="512.0" >
+            <VBox prefHeight="128.0" prefWidth="512.0" minHeight="128.0" minWidth="512.0" maxHeight="128.0" maxWidth="512.0" styleClass="scorepanel" >
                <children>
                    <Label prefHeight="64.0" prefWidth="512.0" minHeight="64.0" minWidth="512.0" maxHeight="64.0" maxWidth="512.0" text="Label" fx:id="l_namePl1"/>
                    <Label prefHeight="64.0" prefWidth="512.0" minHeight="64.0" minWidth="512.0" maxHeight="64.0" maxWidth="512.0" text="Label" fx:id="l_scorePl1"/>
                </children>
             </VBox>
-             <VBox prefHeight="128.0" prefWidth="512.0" minHeight="128.0" minWidth="512.0" maxHeight="128.0" maxWidth="512.0" >
+             <VBox prefHeight="128.0" prefWidth="512.0" minHeight="128.0" minWidth="512.0" maxHeight="128.0" maxWidth="512.0" styleClass="scorepanel" >
                  <children>
                      <Label prefHeight="64.0" prefWidth="512.0" minHeight="64.0" minWidth="512.0" maxHeight="64.0" maxWidth="512.0" text="Label" fx:id="l_namePl2"/>
                      <Label prefHeight="64.0" prefWidth="512.0" minHeight="64.0" minWidth="512.0" maxHeight="64.0" maxWidth="512.0" text="Label" fx:id="l_scorePl2"/>
