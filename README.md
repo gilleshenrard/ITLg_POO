@@ -1,5 +1,5 @@
 # ITLg_POO
-## Project Awele - Part 1 - v3.2
+## Project Awele - Part 1 - v3.3
 
 ---
 ### 1. Introduction
@@ -99,16 +99,10 @@ As per the pattern rules, a state is always active and present as a member of th
 The unit tests for each class can be found in the mirrored directory tests/ (tests/Models, tests/Views, tests/Controllers).
 
 ---
-### 4. Change list (since v3.0)
+### 4. Change list (since v3.2)
 
-- Split playSlot() into checkOutcome() and playSlot()
-- Implement isLegal() to verify if a slot is legally playable
-- Make Board a member of Game to ensure only one instance of Board is used
-- Improve decoupling in general
-- Legal slots are now highlighted when displaying the board
-- Implement a minimax-based choice for AI players
-- BoardController now has a stack-based board saving and restoring mechanism
-- Move stored seeds management from Game to Board
+- The game now allows players to self-starve. Only the opponent cannot be starved during a season
+- All java files (except for unit tests) have a header with a description
 
 ---
 ### 5. Known issues
