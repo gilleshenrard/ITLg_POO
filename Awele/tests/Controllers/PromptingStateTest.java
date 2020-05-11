@@ -49,6 +49,7 @@ public class PromptingStateTest {
         g.setNextState(State.PROMPTING);
         g.setCurrentPlayer(1);
         int ret = g.handleState();
-        Assertions.assertEquals(-2, ret);
+        Assertions.assertEquals(6, ret);
+        Assertions.assertTrue(g.getNextState().getState() instanceof PlayingState);
     }
 }

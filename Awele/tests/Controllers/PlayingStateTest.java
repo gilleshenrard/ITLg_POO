@@ -21,6 +21,8 @@ public class PlayingStateTest {
     void handleState_noCaptureNoStarve_shouldnot_fail() {
         g.getBoardController().getBoard().setStoredSeeds(1, 0);
         g.getBoardController().getBoard().setStoredSeeds(2, 0);
+        g.getBoardController().getBoard().setSlotSeeds(new Point(5, 0), 4);
+        g.getBoardController().getBoard().setRemainingSeeds(1, 4);
         g.setNextState(State.PLAYING);
         g.setCurrentPlayer(1);
         ((PlayingState)State.PLAYING.getState()).setInput(6);
@@ -77,11 +79,11 @@ public class PlayingStateTest {
     }
 
     /**
-     * Check if handleState() forbids a self-starvation by scattering to another row
+     * Check if handleState() processes a self-starvation by scattering to another row
      */
-    @DisplayName("handleState() with self-starvation to other row, forfeit - should not fail")
+    @DisplayName("handleState() with self-starvation to other row, no forfeit - should not fail")
     @Test
-    void handleState_selfStarvationForfeit_otherRow_shouldnot_fail() {
+    void handleState_selfStarvationNoForfeit_otherRow_shouldnot_fail() {
         g.getBoardController().getBoard().setStoredSeeds(1, 0);
         g.getBoardController().getBoard().setStoredSeeds(2, 0);
         Game.getInstance().setPlayer(new Player(1, "Test", new RandomSelect(g.getBoardController(), 1)));
@@ -98,11 +100,11 @@ public class PlayingStateTest {
         ((PlayingState)State.PLAYING.getState()).setInput(6);
         int ret = g.handleState();
         Assertions.assertEquals(0, ret);
-        Assertions.assertTrue(g.getNextState().getState() instanceof PromptingState);
+        Assertions.assertTrue(g.getNextState().getState() instanceof StoringState);
     }
 
     /**
-     * Check if handleState() forbids a self-starvation by scattering within a row
+     * Check if handleState() processes a self-starvation by scattering within a row
      */
     @DisplayName("handleState() with self-starvation within a row, no forfeit - should not fail")
     @Test
@@ -123,7 +125,7 @@ public class PlayingStateTest {
         g.setNextState(State.PLAYING);
         ((PlayingState)State.PLAYING.getState()).setInput(5);
         int ret = g.handleState();
-        Assertions.assertEquals(0, ret);
-        Assertions.assertTrue(g.getNextState().getState() instanceof PromptingState);
+        Assertions.assertEquals(2, ret);
+        Assertions.assertTrue(g.getNextState().getState() instanceof StoringState);
     }
 }

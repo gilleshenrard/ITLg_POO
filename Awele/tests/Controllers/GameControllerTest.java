@@ -154,7 +154,7 @@ public class GameControllerTest {
     }
 
     /**
-     * Check if playSlot() forbids a self-starvation by scattering to another row
+     * Check if playSlot() processes a self-starvation by scattering to another row
      */
     @DisplayName("playSlot() with self-starvation to other row - should not fail")
     @Test
@@ -170,13 +170,13 @@ public class GameControllerTest {
         g.getBoardController().getBoard().setSlotSeeds(new Point(5, 0), 1);
         g.getBoardController().getBoard().setRemainingSeeds(1, 1);
         int ret = g.playSlot(new Point(5, 0));
-        Assertions.assertEquals(-1, ret);
+        Assertions.assertEquals(0, ret);
         Assertions.assertEquals(0, g.getStoredSeeds(1));
         Assertions.assertEquals(0, g.getStoredSeeds(2));
     }
 
     /**
-     * Check if playSlot() forbids a self-starvation by scattering within a row
+     * Check if playSlot() processes a self-starvation by scattering within a row
      */
     @DisplayName("playSlot() with self-starvation within a row - should not fail")
     @Test
@@ -191,8 +191,8 @@ public class GameControllerTest {
         g.getBoardController().getBoard().setSlotSeeds(new Point(5, 0), 1);
         g.getBoardController().getBoard().setRemainingSeeds(1, 2);
         int ret = g.playSlot(new Point(4, 0));
-        Assertions.assertEquals(-1, ret);
-        Assertions.assertEquals(0, g.getStoredSeeds(1));
+        Assertions.assertEquals(2, ret);
+        Assertions.assertEquals(2, g.getStoredSeeds(1));
         Assertions.assertEquals(0, g.getStoredSeeds(2));
     }
 

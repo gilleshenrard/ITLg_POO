@@ -193,7 +193,7 @@ public class BoardControllerTest {
         b.getBoard().setSlotSeeds(new Point(3, 1), 1);
         b.getBoard().setSlotSeeds(new Point(4, 1), 9);
         int ret = b.checkOutcome(new Point(5, 0));
-        Assertions.assertEquals(3, ret);
+        Assertions.assertEquals(5, ret);
     }
 
     /**
@@ -224,11 +224,11 @@ public class BoardControllerTest {
         b.getBoard().setSlotSeeds(new Point(3, 1), 1);
         b.getBoard().setSlotSeeds(new Point(1, 1), 2);
         int ret = b.checkOutcome(new Point(5, 0));
-        Assertions.assertEquals(3, ret);
+        Assertions.assertEquals(5, ret);
     }
 
     /**
-     * Check if checkOutcome() forbids a self-starvation by scattering to another row
+     * Check if checkOutcome() processes a self-starvation by scattering to another row
      */
     @DisplayName("checkOutcome() with self-starvation to other row - should not fail")
     @Test
@@ -241,11 +241,11 @@ public class BoardControllerTest {
         b.getBoard().setSlotSeeds(new Point(5, 0), 1);
         b.getBoard().setRemainingSeeds(1, 1);
         int ret = b.checkOutcome(new Point(5, 0));
-        Assertions.assertEquals(-1, ret);
+        Assertions.assertEquals(0, ret);
     }
 
     /**
-     * Check if checkOutcome() forbids a self-starvation by scattering within a row
+     * Check if checkOutcome() processes a self-starvation by scattering within a row
      */
     @DisplayName("checkOutcome() with self-starvation within a row - should not fail")
     @Test
@@ -258,7 +258,7 @@ public class BoardControllerTest {
         b.getBoard().setSlotSeeds(new Point(5, 0), 1);
         b.getBoard().setRemainingSeeds(1, 2);
         int ret = b.checkOutcome(new Point(4, 0));
-        Assertions.assertEquals(-1, ret);
+        Assertions.assertEquals(2, ret);
     }
 
     /**
@@ -445,7 +445,7 @@ public class BoardControllerTest {
     }
 
     /**
-     * Check if playSlot() forbids a self-starvation by scattering to another row
+     * Check if playSlot() processes a self-starvation by scattering to another row
      */
     @DisplayName("playSlot() with self-starvation to other row - should not fail")
     @Test
@@ -458,20 +458,20 @@ public class BoardControllerTest {
         b.getBoard().setSlotSeeds(new Point(5, 0), 1);
         b.getBoard().setRemainingSeeds(1, 1);
         int ret = b.playSlot(new Point(5, 0));
-        Assertions.assertEquals(-1, ret);
+        Assertions.assertEquals(0, ret);
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(0, 0)));
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(1, 0)));
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(2, 0)));
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(3, 0)));
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(4, 0)));
-        Assertions.assertEquals(1, b.getSlotSeeds(new Point(5, 0)));
-        Assertions.assertEquals(1, b.getBoard().getRemainingSeeds(1));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(5, 0)));
+        Assertions.assertEquals(0, b.getBoard().getRemainingSeeds(1));
         Assertions.assertEquals(0, b.getStoredSeeds(1));
         Assertions.assertEquals(0, b.getStoredSeeds(2));
     }
 
     /**
-     * Check if playSlot() forbids a self-starvation by scattering within a row
+     * Check if playSlot() processes a self-starvation by scattering within a row
      */
     @DisplayName("playSlot() with self-starvation within a row - should not fail")
     @Test
@@ -484,15 +484,15 @@ public class BoardControllerTest {
         b.getBoard().setSlotSeeds(new Point(5, 0), 1);
         b.getBoard().setRemainingSeeds(1, 2);
         int ret = b.playSlot(new Point(4, 0));
-        Assertions.assertEquals(-1, ret);
+        Assertions.assertEquals(2, ret);
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(0, 0)));
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(1, 0)));
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(2, 0)));
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(3, 0)));
-        Assertions.assertEquals(1, b.getSlotSeeds(new Point(4, 0)));
-        Assertions.assertEquals(1, b.getSlotSeeds(new Point(5, 0)));
-        Assertions.assertEquals(2, b.getBoard().getRemainingSeeds(1));
-        Assertions.assertEquals(0, b.getStoredSeeds(1));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(4, 0)));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(5, 0)));
+        Assertions.assertEquals(0, b.getBoard().getRemainingSeeds(1));
+        Assertions.assertEquals(2, b.getStoredSeeds(1));
         Assertions.assertEquals(0, b.getStoredSeeds(2));
     }
 
