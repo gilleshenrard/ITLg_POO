@@ -21,6 +21,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 
 import java.io.IOException;
 import java.net.URL;
@@ -57,6 +58,12 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Layouts/mainScene.fxml"));
             loader.setController(this);
             BorderPane graph = loader.load();
+
+            //load custom fonts
+            Font.loadFont(this.getClass().getResource("Styles/AirstreamNF.ttf").toExternalForm(), 12);          //-fx-font-family: 'Airstream NF'
+            Font.loadFont(this.getClass().getResource("Styles/modern_sans_serif_7.ttf").toExternalForm(), 12);  //-fx-font-family: 'Modern Sans Serif 7'
+            Font.loadFont(this.getClass().getResource("Styles/marquee-moon.ttf").toExternalForm(), 12);         //-fx-font-family: 'Marquee Moon'
+            Font.loadFont(this.getClass().getResource("Styles/MedulaOne-Regular.ttf").toExternalForm(), 12);    //-fx-font-family: 'Medula One'
 
             //create a new scene from the graph
             this.m_scene = new Scene(graph);

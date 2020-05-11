@@ -11,19 +11,22 @@
 .title{
     -fx-text-fill: #DA4FDE; /*medium orchid*/
     -fx-border-color : #DA4FDE; /*medium orchid*/
-    -fx-border-width : 10px;
+    -fx-font-family: 'Modern Sans Serif 7';
+    -fx-border-width : 0 0 10px 0;
 }
 
 /*Slots*/
 .slots .label{
     -fx-background-color : rgba(0,0,0,0);
     -fx-text-fill: #DA4FDE; /*medium orchid*/
+    -fx-font-family: 'Airstream NF';
     -fx-alignment : center;
 }
 
 /*vbox inside the scoreboard*/
 .scores .scorepanel{
     -fx-border-color : #DA4FDE; /*medium orchid*/
+    -fx-font-family: 'Marquee Moon';
     -fx-border-width : 10px;
 }
 
@@ -32,4 +35,5 @@
     -fx-background-color : rgba(0,0,0,0);
     -fx-alignment : center;
     -fx-text-fill: #DA4FDE; /*medium orchid*/
+    -fx-font-family: 'Medula One';
 }
