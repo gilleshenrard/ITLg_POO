@@ -151,9 +151,7 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
         this.m_controller.setLastSelected(p);
 
         //notify the main loop thread once a slot has been selected
-        synchronized (this.m_controller) {
-            this.m_controller.notify();
-        }
+        this.m_selectThread.notifyAll();
 
 
 /*        this.m_controller.playSeason();

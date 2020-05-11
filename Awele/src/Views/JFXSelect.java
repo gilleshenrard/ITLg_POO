@@ -21,8 +21,8 @@ public class JFXSelect implements iSelectable {
     public int selectSlot() {
         //make the current thread wait for a notification given by the slot click event handler
         try {
-            synchronized (this.m_controller) {
-                this.m_controller.wait();
+            synchronized (this) {
+                Thread.currentThread().wait();
                 System.out.println("test");
             }
         }
