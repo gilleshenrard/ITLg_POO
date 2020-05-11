@@ -1,3 +1,9 @@
+/****************************************************************************************************/
+/*  Enumeration State                                                                               */
+/*  Holds an implementation of each state available. It eases up the use of FSM in the game control.*/
+/*  Author : Gilles Henrard                                                                         */
+/*  Last update : 11/05/2020                                                                        */
+/****************************************************************************************************/
 package Controllers;
 
 public enum State{
