@@ -1,3 +1,9 @@
+/****************************************************************************************************/
+/*  Class SystemMessage                                                                             */
+/*  Base Abstract class linked to the Game Controller, providing system messages methods            */
+/*  Author : Gilles Henrard                                                                         */
+/*  Last update : 11/05/2020                                                                        */
+/****************************************************************************************************/
 package Views;
 
 import Controllers.GameController;

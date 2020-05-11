@@ -1,3 +1,10 @@
+/****************************************************************************************************/
+/*  Class GameConsoleView                                                                           */
+/*  Implements SystemMessage                                                                        */
+/*  Provides game console system messages methods, and thus communicates with the game controller   */
+/*  Author : Gilles Henrard                                                                         */
+/*  Last update : 11/05/2020                                                                        */
+/****************************************************************************************************/
 package Views;
 
 import Controllers.GameController;

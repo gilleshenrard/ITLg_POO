@@ -1,6 +1,7 @@
 /****************************************************************************************************/
-/*  Class BoardView                                                                                 */
-/*  Provides game board display methods, and thus communicates with the board controller            */
+/*  Class BoardConsoleView                                                                          */
+/*  Implements the Observer design pattern                                                          */
+/*  Provides game board console display methods, and thus communicates with the board controller    */
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
