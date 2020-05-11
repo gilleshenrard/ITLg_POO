@@ -1,3 +1,11 @@
+/****************************************************************************************************/
+/*  Class Board                                                                                     */
+/*  Encloses the game board manipulations                                                           */
+/*  The board contains a static array of slots, a players' remaining seeds count                    */
+/*      and a players' stored (saved) seeds count                                                   */
+/*  Author : Gilles Henrard                                                                         */
+/*  Last update : 11/05/2020                                                                        */
+/****************************************************************************************************/
 package Models;
 
 import java.security.InvalidParameterException;
