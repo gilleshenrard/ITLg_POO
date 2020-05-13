@@ -47,8 +47,8 @@ public class Main extends Application{
         primaryStage.setScene((Scene)bv.getContent());
         game.updateObservers();
         primaryStage.setResizable(false);
-        primaryStage.setWidth(1080);
-        primaryStage.setHeight(812);
+        primaryStage.setWidth(1920);
+        primaryStage.setHeight(1080);
         primaryStage.show();
     }
 

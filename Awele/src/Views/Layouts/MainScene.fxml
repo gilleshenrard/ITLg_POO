@@ -9,16 +9,16 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="512.0" maxWidth="1024.0" minHeight="512.0" minWidth="1024.0" prefHeight="512.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../Styles/neon.css" styleClass="main">
+<BorderPane maxHeight="998.0" maxWidth="1744.0" minHeight="998.0" minWidth="1744.0" prefHeight="998.0" prefWidth="1744.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../Styles/neon.css" styleClass="main">
     <top>
-        <Label fx:id="m_title" maxHeight="50.0" maxWidth="1024.0" minHeight="50.0" minWidth="1024.0" prefHeight="50.0" prefWidth="1024.0" text="Awele" BorderPane.alignment="CENTER" styleClass="title">
+        <Label fx:id="m_title" maxHeight="172.0" maxWidth="1744.0" minHeight="172.0" minWidth="1744.0" prefHeight="172.0" prefWidth="1744.0" text="Awele" BorderPane.alignment="CENTER" styleClass="title">
             <graphic>
-                <Button fx:id="m_menuButton" maxHeight="50.0" maxWidth="50.0" minHeight="50.0" minWidth="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Button" />
+                <Button fx:id="m_menuButton" maxHeight="172.0" maxWidth="172.0" minHeight="172.0" minWidth="172.0" prefHeight="172.0" prefWidth="50.0" mnemonicParsing="false" text="Button" />
             </graphic>
         </Label>
     </top>
    <center>
-      <GridPane fx:id="m_grid" maxHeight="334.0" maxWidth="1024.0" minHeight="334.0" minWidth="1024.0" prefHeight="334.0" prefWidth="1024.0" BorderPane.alignment="CENTER" styleClass="slots">
+      <GridPane fx:id="m_grid" maxHeight="560.0" maxWidth="1744.0" minHeight="560.0" minWidth="1744.0" prefHeight="560.0" prefWidth="1744.0" BorderPane.alignment="CENTER" styleClass="slots">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" percentWidth="16.666" />
             <ColumnConstraints hgrow="SOMETIMES" percentWidth="16.667" />
@@ -48,18 +48,18 @@
       </GridPane>
    </center>
    <bottom>
-      <TilePane prefHeight="128.0" prefWidth="1024.0" minHeight="128.0" minWidth="1024.0" maxHeight="128.0" maxWidth="1024.0" BorderPane.alignment="CENTER" styleClass="scores">
+      <TilePane prefHeight="274.0" prefWidth="1744.0" minHeight="274.0" minWidth="1744.0" maxHeight="274.0" maxWidth="1744.0" BorderPane.alignment="CENTER" styleClass="scores">
          <children>
-            <VBox prefHeight="128.0" prefWidth="512.0" minHeight="128.0" minWidth="512.0" maxHeight="128.0" maxWidth="512.0" styleClass="scorepanel" >
+            <VBox prefHeight="274.0" prefWidth="872.0" minHeight="274.0" minWidth="872.0" maxHeight="274.0" maxWidth="872.0" styleClass="scorepanel" >
                <children>
-                   <Label prefHeight="64.0" prefWidth="512.0" minHeight="64.0" minWidth="512.0" maxHeight="64.0" maxWidth="512.0" text="Label" fx:id="l_namePl1"/>
-                   <Label prefHeight="64.0" prefWidth="512.0" minHeight="64.0" minWidth="512.0" maxHeight="64.0" maxWidth="512.0" text="Label" fx:id="l_scorePl1"/>
+                   <Label prefHeight="92.0" prefWidth="872.0" minHeight="92.0" minWidth="872.0" maxHeight="92.0" maxWidth="872.0" text="Label" fx:id="l_namePl1"/>
+                   <Label prefHeight="182.0" prefWidth="872.0" minHeight="182.0" minWidth="872.0" maxHeight="182.0" maxWidth="872.0" text="Label" fx:id="l_scorePl1"/>
                </children>
             </VBox>
-             <VBox prefHeight="128.0" prefWidth="512.0" minHeight="128.0" minWidth="512.0" maxHeight="128.0" maxWidth="512.0" styleClass="scorepanel" >
+             <VBox prefHeight="274.0" prefWidth="872.0" minHeight="274.0" minWidth="872.0" maxHeight="274.0" maxWidth="872.0" styleClass="scorepanel" >
                  <children>
-                     <Label prefHeight="64.0" prefWidth="512.0" minHeight="64.0" minWidth="512.0" maxHeight="64.0" maxWidth="512.0" text="Label" fx:id="l_namePl2"/>
-                     <Label prefHeight="64.0" prefWidth="512.0" minHeight="64.0" minWidth="512.0" maxHeight="64.0" maxWidth="512.0" text="Label" fx:id="l_scorePl2"/>
+                     <Label prefHeight="92.0" prefWidth="872.0" minHeight="92.0" minWidth="872.0" maxHeight="92.0" maxWidth="872.0" text="Label" fx:id="l_namePl2"/>
+                     <Label prefHeight="182.0" prefWidth="872.0" minHeight="182.0" minWidth="872.0" maxHeight="182.0" maxWidth="872.0" text="Label" fx:id="l_scorePl2"/>
                  </children>
              </VBox>
          </children>
