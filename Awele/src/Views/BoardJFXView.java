@@ -10,6 +10,7 @@ package Views;
 import Controllers.BoardController;
 import Controllers.iObserver;
 import Models.Point;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
@@ -111,22 +112,25 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
      */
     @Override
     public void update() {
-        //update all the slots with the values from the Board
-        Point p = new Point(0, 0);
-        for (int l=0 ; l<2 ; l++){
-            for (int c=0 ; c<6 ; c++) {
-                p.setCoordinates(c, l);
-                this.m_slots[l][c].set(this.m_controller.getSlotSeeds(p));
+        //launch as a runlater task to avoid concurrency issues
+        Platform.runLater(() -> {
+            //update all the slots with the values from the Board
+            Point p = new Point(0, 0);
+            for (int l=0 ; l<2 ; l++){
+                for (int c=0 ; c<6 ; c++) {
+                    p.setCoordinates(c, l);
+                    this.m_slots[l][c].set(this.m_controller.getSlotSeeds(p));
+                }
             }
-        }
 
-        //update the stored seeds count for both players
-        this.m_storedPlayer1.set(this.m_controller.getStoredSeeds(1));
-        this.m_storedPlayer2.set(this.m_controller.getStoredSeeds(2));
+            //update the stored seeds count for both players
+            this.m_storedPlayer1.set(this.m_controller.getStoredSeeds(1));
+            this.m_storedPlayer2.set(this.m_controller.getStoredSeeds(2));
 
-        //update the name of both players
-        this.m_namePlayer1.setValue(this.m_controller.getName(1));
-        this.m_namePlayer2.setValue(this.m_controller.getName(2));
+            //update the name of both players
+            this.m_namePlayer1.setValue(this.m_controller.getName(1));
+            this.m_namePlayer2.setValue(this.m_controller.getName(2));
+        });
     }
 
     /**
@@ -160,11 +164,10 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
         if (this.m_controller.isOwner(this.m_controller.getCurrentPlayer(), p)) {
             //set the coordinates selected by the player, and play its season
             this.m_controller.setLastSelected(p);
-            this.m_controller.playSeason();
 
-            //if the next player is an AI, play its season
-            if (this.m_controller.isPlayerIA(this.m_controller.getCurrentPlayer())) {
-                this.m_controller.playSeason();
+            //notify JFXSelect that a slot has been clicked
+            synchronized (this.m_controller){
+                this.m_controller.notify();
             }
         }
     }
