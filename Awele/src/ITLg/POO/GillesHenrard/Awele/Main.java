@@ -1,8 +1,6 @@
 package ITLg.POO.GillesHenrard.Awele;
 
-import ITLg.GillesHenrard.Awele.Views.*;
 import ITLg.POO.GillesHenrard.Awele.Views.*;
-import ITLg.henrard_gilles.Awele.Views.*;
 import javafx.application.Application;
 import ITLg.POO.GillesHenrard.Awele.Controllers.GameController;
 import ITLg.POO.GillesHenrard.Awele.Models.Player;
