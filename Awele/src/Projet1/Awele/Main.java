@@ -8,6 +8,10 @@ import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Main extends Application{
 
     /**
@@ -27,6 +31,16 @@ public class Main extends Application{
      */
     @Override
     public void start(Stage primaryStage) {
+        // create the main logger, and enable all logs
+        Logger logger = Logger.getLogger("Awele");
+        logger.setLevel(Level.ALL);
+
+        //assign a Console handler to the logger, and handle FINE level logs
+        ConsoleHandler cHandler = new ConsoleHandler();
+        cHandler.setLevel(Level.FINE);
+        logger.addHandler(cHandler);
+        logger.setUseParentHandlers(false);
+
         //game setup
         GameController game = new GameController();
         GameJFXView gameView = new GameJFXView(game);
@@ -96,6 +110,7 @@ public class Main extends Application{
             }
         }
         catch (Exception e){
+            Logger.getLogger("Awele").log(Level.SEVERE, e.getMessage());
             game.displayError(e.getMessage());
             System.exit(-1);
         }

@@ -27,6 +27,8 @@ import javafx.scene.text.Font;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class BoardJFXView extends BorderPane implements iObserver, Initializable {
     private Scene m_scene = null;
@@ -113,6 +115,7 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
     @Override
     public void update() {
         //launch as a runlater task to avoid concurrency issues
+        Logger.getLogger("Awele").log(Level.FINE, "Player " + this.m_controller.getCurrentPlayer() + " updates the main scene");
         Platform.runLater(() -> {
             //update all the slots with the values from the Board
             Point p = new Point(0, 0);
@@ -161,12 +164,14 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
         Point p = new Point((int)(mouseEvent.getX()/(this.m_grid.getWidth()/6)), 1 - (int)(mouseEvent.getY()/(this.m_grid.getHeight()/2)));
 
         //check if the current player is owner of the slot clicked
+        Logger.getLogger("Awele").log(Level.INFO, "Player " + this.m_controller.getCurrentPlayer() + " : clicked on " + p);
         if (this.m_controller.isOwner(this.m_controller.getCurrentPlayer(), p)) {
             //set the coordinates selected by the player, and play its season
             this.m_controller.setLastSelected(p);
 
             //notify JFXSelect that a slot has been clicked
             synchronized (this.m_controller){
+                Logger.getLogger("Awele").log(Level.FINE, "Player " + this.m_controller.getCurrentPlayer() + " : sends a notification");
                 this.m_controller.notify();
             }
         }

@@ -10,6 +10,9 @@ package Controllers;
 
 import Models.Point;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class PlayingState implements iGameState {
     private int m_slot = 0;
 
@@ -29,14 +32,18 @@ public class PlayingState implements iGameState {
     @Override
     public int handleState(GameController controller){
         //play the slot selected
+        Logger.getLogger("Awele").log(Level.FINE, "Player " + controller.getCurrentPlayer() + " enters Playing state");
         int outcome = controller.playSlot(new Point(this.m_slot - 1, controller.getCurrentPlayer() - 1));
+        Logger.getLogger("Awele").log(Level.INFO, "Player " + controller.getCurrentPlayer() + " : playSlot() returned " + outcome);
 
         if (outcome < 0) {  //player starved or empty slot, get back to prompting state and display forfeit
+            Logger.getLogger("Awele").log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : next state -> Prompting");
             controller.setNextState(State.PROMPTING);
             handleOutcome(controller, outcome);
             return 0;
         }
         else {  //Go to the Storing state
+            Logger.getLogger("Awele").log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : next state -> Storing");
             controller.setNextState(State.STORING);
             return outcome;
         }
@@ -49,11 +56,15 @@ public class PlayingState implements iGameState {
      */
     private void handleOutcome(GameController controller, int outcome){
         //player starved
-        if (outcome == -1)
+        if (outcome == -1) {
             controller.displayWarning("A player can't be starved. Its amount of seeds can't get to 0");
+            Logger.getLogger("Awele").log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : message displayed");
+        }
 
         //empty slot played
-        if (outcome == -2)
+        if (outcome == -2) {
             controller.displayWarning("An empty slot can not be harvested");
+            Logger.getLogger("Awele").log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : message displayed");
+        }
     }
 }

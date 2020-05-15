@@ -8,6 +8,9 @@
 /****************************************************************************************************/
 package Controllers;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class PromptingState implements iGameState {
     /**
      * Make the player select its entry and display it on the screen
@@ -16,19 +19,27 @@ public class PromptingState implements iGameState {
      */
     @Override
     public int handleState(GameController controller){
+        Logger.getLogger("Awele").log(Level.FINE, "Player " + controller.getCurrentPlayer() + " enters Prompting state");
+
         //get the choice from the user
         int choice = controller.selectSlot(controller.getCurrentPlayer());
+        Logger.getLogger("Awele").log(Level.INFO, "Player " + controller.getCurrentPlayer() + " : selectSlot() returned " + choice);
+
         if(choice > 0) {
-            if (controller.isPlayerAI(controller.getCurrentPlayer()))
+            if (controller.isPlayerAI(controller.getCurrentPlayer())) {
                 controller.displayMessage(controller.getName(controller.getCurrentPlayer()) + " harvests the slot " + choice);
+                Logger.getLogger("Awele").log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : message displayed");
+            }
 
             //plug in the Playing state
+            Logger.getLogger("Awele").log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : next state -> Playing");
             controller.setNextState(State.PLAYING);
             ((PlayingState)State.PLAYING.getState()).setInput(choice);
 
             return choice;
         }
         else{
+            Logger.getLogger("Awele").log(Level.INFO, "Player " + controller.getCurrentPlayer() + " chose the slot " + choice);
             controller.displayMessage(controller.getName(controller.getCurrentPlayer()) + " can't make any move. He forfeits !");
 
             //Easter egg : when both players play randomly and one of them forfeits, he says the last quote of the W.P.O.R. in the movie Wargames
@@ -36,6 +47,7 @@ public class PromptingState implements iGameState {
                 controller.displayMessage("\n" + controller.getName(controller.getCurrentPlayer()) + " : 'A strange game... The only winning move is not to play...'");
                 controller.displayMessage(controller.getName(controller.getCurrentPlayer()) + " : '......................... How about a nice game of chess?'");
             }
+            Logger.getLogger("Awele").log(Level.INFO, "Player " + controller.getCurrentPlayer() + " : Prompting returns -2");
             return -2;
         }
     }

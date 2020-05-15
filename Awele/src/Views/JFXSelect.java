@@ -3,6 +3,9 @@ package Views;
 import Controllers.BoardController;
 import Models.Point;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class JFXSelect implements iSelectable {
     private int m_id;
     private BoardController m_controller;
@@ -22,6 +25,7 @@ public class JFXSelect implements iSelectable {
         try {
             //wait for a slot to be clicked in JFXSelect
             synchronized (this.m_controller){
+                Logger.getLogger("Awele").log(Level.INFO, "Player " + this.m_controller.getCurrentPlayer() + " : waiting for an event");
                 this.m_controller.wait();
             }
         }
@@ -29,6 +33,7 @@ public class JFXSelect implements iSelectable {
 
         //check if a choice has been made by the player
         Point p = this.m_controller.getLastSelected();
+        Logger.getLogger("Awele").log(Level.INFO, "Player " + this.m_controller.getCurrentPlayer() + " : last selected : " + p);
         if (p == null) {
             return 0;
         }

@@ -8,6 +8,9 @@
 /****************************************************************************************************/
 package Controllers;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class StoringState implements iGameState {
     /**
      * Store the seeds captured by the player
@@ -17,15 +20,19 @@ public class StoringState implements iGameState {
     @Override
     public int handleState(GameController controller){
         //Game is won by the current player.
+        Logger.getLogger("Awele").log(Level.FINE, "Player " + controller.getCurrentPlayer() + " enters Storing state");
         if (controller.getStoredSeeds(controller.getCurrentPlayer()) > 24) {
             controller.updateObservers();
             controller.displayMessage(controller.getName(controller.getCurrentPlayer()) + " won the game !");
+            Logger.getLogger("Awele").log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : message displayed");
 
             return -2;
         }
-        else
+        else {
             //Go to the player switching state
+            Logger.getLogger("Awele").log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : next state -> Switching");
             controller.setNextState(State.SWITCHING);
+        }
 
         return 0;
     }
