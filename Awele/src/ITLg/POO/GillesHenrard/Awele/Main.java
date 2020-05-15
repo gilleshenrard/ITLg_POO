@@ -44,16 +44,6 @@ public class Main extends Application{
      */
     @Override
     public void start(Stage primaryStage) {
-        // create the main logger, and enable all logs
-/*        Logger logger = Logger.getLogger(this.getClass().getPackage().getName());
-        logger.setLevel(Level.ALL);
-
-        //assign a Console handler to the logger, and handle FINE level logs
-        ConsoleHandler cHandler = new ConsoleHandler();
-        cHandler.setLevel(Level.FINE);
-        logger.addHandler(cHandler);
-        logger.setUseParentHandlers(false);
-*/
         //game setup
         GameController game = new GameController();
         GameJFXView gameView = new GameJFXView(game);
@@ -92,16 +82,6 @@ public class Main extends Application{
      * Start the game with a console UI
      */
     public static void startConsole() {
-        // create the main logger, and enable all logs
-/*        Logger logger = Logger.getLogger(Main.class.getName());
-        logger.setLevel(Level.OFF);
-
-        //assign a Console handler to the logger, and handle FINE level logs
-        ConsoleHandler cHandler = new ConsoleHandler();
-        cHandler.setLevel(Level.OFF);
-        logger.addHandler(cHandler);
-        logger.setUseParentHandlers(false);
-*/
         //game setup
         GameController game = new GameController();
         GameConsoleView gameConsoleView = new GameConsoleView(game);
