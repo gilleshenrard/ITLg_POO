@@ -1,8 +1,8 @@
 package Controllers;
 
-import ITLg.henrard_gilles.Awele.Controllers.BoardController;
-import ITLg.henrard_gilles.Awele.Models.Board;
-import ITLg.henrard_gilles.Awele.Models.Point;
+import ITLg.POO.GillesHenrard.Awele.Controllers.BoardController;
+import ITLg.POO.GillesHenrard.Awele.Models.Board;
+import ITLg.POO.GillesHenrard.Awele.Models.Point;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

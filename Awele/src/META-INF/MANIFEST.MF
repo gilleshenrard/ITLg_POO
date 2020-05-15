@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: ITLg.henrard_gilles.Awele.Main
+Main-Class: ITLg.POO.GillesHenrard.Awele.Main
 
