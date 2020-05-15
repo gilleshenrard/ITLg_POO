@@ -6,7 +6,7 @@
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
-package ITLg.henrard_gilles.Awele.Models;
+package ITLg.POO.GillesHenrard.Awele.Models;
 
 import java.security.InvalidParameterException;
 

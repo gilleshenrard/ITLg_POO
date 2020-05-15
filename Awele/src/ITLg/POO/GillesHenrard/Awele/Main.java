@@ -1,9 +1,11 @@
-package ITLg.henrard_gilles.Awele;
+package ITLg.POO.GillesHenrard.Awele;
 
+import ITLg.GillesHenrard.Awele.Views.*;
+import ITLg.POO.GillesHenrard.Awele.Views.*;
 import ITLg.henrard_gilles.Awele.Views.*;
 import javafx.application.Application;
-import ITLg.henrard_gilles.Awele.Controllers.GameController;
-import ITLg.henrard_gilles.Awele.Models.Player;
+import ITLg.POO.GillesHenrard.Awele.Controllers.GameController;
+import ITLg.POO.GillesHenrard.Awele.Models.Player;
 import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

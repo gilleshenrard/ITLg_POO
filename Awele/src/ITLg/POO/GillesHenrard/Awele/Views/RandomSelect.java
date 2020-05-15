@@ -5,10 +5,10 @@
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
-package ITLg.henrard_gilles.Awele.Views;
+package ITLg.POO.GillesHenrard.Awele.Views;
 
-import ITLg.henrard_gilles.Awele.Controllers.BoardController;
-import ITLg.henrard_gilles.Awele.Models.Point;
+import ITLg.POO.GillesHenrard.Awele.Controllers.BoardController;
+import ITLg.POO.GillesHenrard.Awele.Models.Point;
 
 import java.util.ArrayList;
 import java.util.Random;

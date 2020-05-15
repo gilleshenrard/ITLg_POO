@@ -6,9 +6,9 @@
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
-package ITLg.henrard_gilles.Awele.Controllers;
+package ITLg.POO.GillesHenrard.Awele.Controllers;
 
-import ITLg.henrard_gilles.Awele.Models.Point;
+import ITLg.POO.GillesHenrard.Awele.Models.Point;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

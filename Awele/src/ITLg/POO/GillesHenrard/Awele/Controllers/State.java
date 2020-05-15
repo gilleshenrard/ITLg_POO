@@ -4,7 +4,7 @@
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
-package ITLg.henrard_gilles.Awele.Controllers;
+package ITLg.POO.GillesHenrard.Awele.Controllers;
 
 public enum State{
     PROMPTING((iGameState) new PromptingState()),

@@ -1,11 +1,11 @@
 package Controllers;
 
-import ITLg.henrard_gilles.Awele.Controllers.*;
-import ITLg.henrard_gilles.Awele.Models.Game;
-import ITLg.henrard_gilles.Awele.Models.Player;
-import ITLg.henrard_gilles.Awele.Models.Point;
-import ITLg.henrard_gilles.Awele.Views.GameConsoleView;
-import ITLg.henrard_gilles.Awele.Views.RandomSelect;
+import ITLg.POO.GillesHenrard.Awele.Controllers.*;
+import ITLg.POO.GillesHenrard.Awele.Models.Game;
+import ITLg.POO.GillesHenrard.Awele.Models.Player;
+import ITLg.POO.GillesHenrard.Awele.Models.Point;
+import ITLg.POO.GillesHenrard.Awele.Views.GameConsoleView;
+import ITLg.POO.GillesHenrard.Awele.Views.RandomSelect;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -5,9 +5,10 @@
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
-package ITLg.henrard_gilles.Awele.Models;
+package ITLg.POO.GillesHenrard.Awele.Models;
 
-import ITLg.henrard_gilles.Awele.Views.iSelectable;
+import ITLg.POO.GillesHenrard.Awele.Views.iSelectable;
+
 import java.security.InvalidParameterException;
 import java.util.Objects;
 

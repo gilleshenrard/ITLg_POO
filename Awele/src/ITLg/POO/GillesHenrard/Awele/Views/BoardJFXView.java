@@ -5,11 +5,11 @@
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
-package ITLg.henrard_gilles.Awele.Views;
+package ITLg.POO.GillesHenrard.Awele.Views;
 
-import ITLg.henrard_gilles.Awele.Controllers.BoardController;
-import ITLg.henrard_gilles.Awele.Controllers.iObserver;
-import ITLg.henrard_gilles.Awele.Models.Point;
+import ITLg.POO.GillesHenrard.Awele.Controllers.BoardController;
+import ITLg.POO.GillesHenrard.Awele.Controllers.iObserver;
+import ITLg.POO.GillesHenrard.Awele.Models.Point;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
