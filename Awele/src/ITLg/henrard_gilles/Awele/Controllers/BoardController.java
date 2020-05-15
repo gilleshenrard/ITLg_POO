@@ -8,10 +8,10 @@
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
-package Controllers;
+package ITLg.henrard_gilles.Awele.Controllers;
 
-import Models.Board;
-import Models.Point;
+import ITLg.henrard_gilles.Awele.Models.Board;
+import ITLg.henrard_gilles.Awele.Models.Point;
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Stack;

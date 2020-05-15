@@ -1,9 +1,9 @@
 package ITLg.henrard_gilles.Awele;
 
-import Views.*;
+import ITLg.henrard_gilles.Awele.Views.*;
 import javafx.application.Application;
-import Controllers.GameController;
-import Models.Player;
+import ITLg.henrard_gilles.Awele.Controllers.GameController;
+import ITLg.henrard_gilles.Awele.Models.Player;
 import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

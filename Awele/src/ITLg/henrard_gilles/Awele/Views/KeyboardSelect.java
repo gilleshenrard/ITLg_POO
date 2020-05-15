@@ -5,7 +5,7 @@
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
-package Views;
+package ITLg.henrard_gilles.Awele.Views;
 
 import java.util.Scanner;
 

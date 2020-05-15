@@ -1,9 +1,10 @@
 package Controllers;
 
-import Models.Game;
-import Models.Player;
-import Models.Point;
-import Views.RandomSelect;
+import ITLg.henrard_gilles.Awele.Controllers.GameController;
+import ITLg.henrard_gilles.Awele.Models.Game;
+import ITLg.henrard_gilles.Awele.Models.Player;
+import ITLg.henrard_gilles.Awele.Models.Point;
+import ITLg.henrard_gilles.Awele.Views.RandomSelect;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;

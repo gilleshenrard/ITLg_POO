@@ -5,11 +5,11 @@
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
-package Views;
+package ITLg.henrard_gilles.Awele.Views;
 
-import Controllers.BoardController;
-import Controllers.iObserver;
-import Models.Point;
+import ITLg.henrard_gilles.Awele.Controllers.BoardController;
+import ITLg.henrard_gilles.Awele.Controllers.iObserver;
+import ITLg.henrard_gilles.Awele.Models.Point;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -58,7 +58,7 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
 
         try {
             //load the FXML document
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Layouts/mainScene.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Layouts/MainScene.fxml"));
             loader.setController(this);
             BorderPane graph = loader.load();
 

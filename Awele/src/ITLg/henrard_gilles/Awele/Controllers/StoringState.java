@@ -6,7 +6,7 @@
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
-package Controllers;
+package ITLg.henrard_gilles.Awele.Controllers;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

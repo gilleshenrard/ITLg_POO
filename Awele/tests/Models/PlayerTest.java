@@ -1,8 +1,7 @@
 package Models;
 
-import Controllers.BoardController;
-import Views.RandomSelect;
-import Views.KeyboardSelect;
+import ITLg.henrard_gilles.Awele.Models.Player;
+import ITLg.henrard_gilles.Awele.Views.KeyboardSelect;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

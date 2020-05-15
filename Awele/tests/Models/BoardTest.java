@@ -1,5 +1,7 @@
 package Models;
 
+import ITLg.henrard_gilles.Awele.Models.Board;
+import ITLg.henrard_gilles.Awele.Models.Point;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

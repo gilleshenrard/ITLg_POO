@@ -5,10 +5,10 @@
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
-package Views;
-import Controllers.BoardController;
-import Models.Point;
-import Controllers.iObserver;
+package ITLg.henrard_gilles.Awele.Views;
+import ITLg.henrard_gilles.Awele.Controllers.BoardController;
+import ITLg.henrard_gilles.Awele.Models.Point;
+import ITLg.henrard_gilles.Awele.Controllers.iObserver;
 
 public class BoardConsoleView implements iObserver{
     private BoardController m_board;

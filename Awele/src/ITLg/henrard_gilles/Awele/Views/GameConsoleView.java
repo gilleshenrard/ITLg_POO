@@ -5,9 +5,9 @@
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
-package Views;
+package ITLg.henrard_gilles.Awele.Views;
 
-import Controllers.GameController;
+import ITLg.henrard_gilles.Awele.Controllers.GameController;
 
 public class GameConsoleView extends SystemMessage{
 

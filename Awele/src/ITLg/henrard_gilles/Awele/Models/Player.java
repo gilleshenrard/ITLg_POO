@@ -5,9 +5,9 @@
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
-package Models;
+package ITLg.henrard_gilles.Awele.Models;
 
-import Views.iSelectable;
+import ITLg.henrard_gilles.Awele.Views.iSelectable;
 import java.security.InvalidParameterException;
 import java.util.Objects;
 

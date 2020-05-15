@@ -1,8 +1,9 @@
 package Views;
 
-import Controllers.BoardController;
-import Controllers.GameController;
-import Models.Board;
+import ITLg.henrard_gilles.Awele.Controllers.BoardController;
+import ITLg.henrard_gilles.Awele.Controllers.GameController;
+import ITLg.henrard_gilles.Awele.Models.Board;
+import ITLg.henrard_gilles.Awele.Views.BoardConsoleView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

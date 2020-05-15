@@ -1,8 +1,11 @@
 package Controllers;
 
-import Models.Game;
-import Models.Player;
-import Views.GameConsoleView;
+import ITLg.henrard_gilles.Awele.Controllers.GameController;
+import ITLg.henrard_gilles.Awele.Controllers.PromptingState;
+import ITLg.henrard_gilles.Awele.Controllers.State;
+import ITLg.henrard_gilles.Awele.Models.Game;
+import ITLg.henrard_gilles.Awele.Models.Player;
+import ITLg.henrard_gilles.Awele.Views.GameConsoleView;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

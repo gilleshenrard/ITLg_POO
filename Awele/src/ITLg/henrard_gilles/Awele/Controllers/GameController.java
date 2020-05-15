@@ -5,12 +5,12 @@
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
-package Controllers;
+package ITLg.henrard_gilles.Awele.Controllers;
 
-import Models.Game;
-import Models.Player;
-import Models.Point;
-import Views.SystemMessage;
+import ITLg.henrard_gilles.Awele.Models.Game;
+import ITLg.henrard_gilles.Awele.Models.Player;
+import ITLg.henrard_gilles.Awele.Models.Point;
+import ITLg.henrard_gilles.Awele.Views.SystemMessage;
 
 import java.security.InvalidParameterException;
 

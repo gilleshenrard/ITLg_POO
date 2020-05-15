@@ -5,10 +5,10 @@
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
-package Views;
+package ITLg.henrard_gilles.Awele.Views;
 
-import Controllers.BoardController;
-import Models.Point;
+import ITLg.henrard_gilles.Awele.Controllers.BoardController;
+import ITLg.henrard_gilles.Awele.Models.Point;
 
 public class MinimaxSelect implements iSelectable{
     private BoardController m_controller;

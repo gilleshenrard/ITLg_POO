@@ -5,7 +5,7 @@
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
 
-package Models;
+package ITLg.henrard_gilles.Awele.Models;
 
 import java.util.Objects;
 
