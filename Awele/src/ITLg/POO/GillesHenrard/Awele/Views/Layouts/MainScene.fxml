@@ -11,11 +11,21 @@
 
 <BorderPane maxHeight="998.0" maxWidth="1744.0" minHeight="998.0" minWidth="1744.0" prefHeight="998.0" prefWidth="1744.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" stylesheets="@../Styles/neon.css" styleClass="main">
     <top>
-        <Label fx:id="m_title" maxHeight="172.0" maxWidth="1744.0" minHeight="172.0" minWidth="1744.0" prefHeight="172.0" prefWidth="1744.0" text="Awele" BorderPane.alignment="CENTER" styleClass="title">
-            <graphic>
-                <Button fx:id="m_menuButton" maxHeight="172.0" maxWidth="172.0" minHeight="172.0" minWidth="172.0" prefHeight="172.0" prefWidth="50.0" mnemonicParsing="false" text="Button" />
-            </graphic>
-        </Label>
+        <GridPane maxHeight="172.0" maxWidth="1744.0" minHeight="172.0" minWidth="1744.0" prefHeight="172.0" prefWidth="1744.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" percentWidth="90" />
+                <ColumnConstraints hgrow="SOMETIMES" percentWidth="10" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints percentHeight="70.0" vgrow="SOMETIMES" />
+                <RowConstraints percentHeight="30.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label fx:id="l_title" text="Awele" BorderPane.alignment="CENTER" styleClass="title" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Button fx:id="b_menuButton" mnemonicParsing="false" text="Button"  GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Label fx:id="l_message" text="Message" BorderPane.alignment="CENTER" styleClass="message" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2" />
+            </children>
+        </GridPane>
     </top>
    <center>
       <GridPane fx:id="m_grid" maxHeight="560.0" maxWidth="1744.0" minHeight="560.0" minWidth="1744.0" prefHeight="560.0" prefWidth="1744.0" BorderPane.alignment="CENTER" styleClass="slots">

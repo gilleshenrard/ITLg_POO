@@ -38,8 +38,9 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
     private SimpleIntegerProperty m_storedPlayer2;
     private SimpleStringProperty m_namePlayer1;
     private SimpleStringProperty m_namePlayer2;
-    @FXML Button m_menuButton;
+    @FXML Button b_menuButton;
     @FXML GridPane m_grid;
+    @FXML Label l_message;
     @FXML Label l_namePl1;
     @FXML Label l_namePl2;
     @FXML Label l_scorePl1;
