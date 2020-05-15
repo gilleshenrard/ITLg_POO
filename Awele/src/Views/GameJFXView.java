@@ -8,6 +8,7 @@
 package Views;
 
 import Controllers.GameController;
+import javafx.application.Platform;
 import javafx.scene.control.Alert;
 
 public class GameJFXView extends SystemMessage {
@@ -22,28 +23,34 @@ public class GameJFXView extends SystemMessage {
 
     @Override
     public void displayMessage(String msg) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Information");
-        alert.setHeaderText(null);
-        alert.setContentText(msg);
-        alert.showAndWait();
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information");
+            alert.setHeaderText(null);
+            alert.setContentText(msg);
+            alert.showAndWait();
+        });
     }
 
     @Override
     public void displayWarning(String msg) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Warning");
-        alert.setHeaderText(null);
-        alert.setContentText(msg);
-        alert.showAndWait();
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText(null);
+            alert.setContentText(msg);
+            alert.showAndWait();
+        });
     }
 
     @Override
     public void displayError(String msg) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error");
-        alert.setHeaderText(null);
-        alert.setContentText(msg);
-        alert.showAndWait();
+        Platform.runLater(() -> {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText(msg);
+            alert.showAndWait();
+        });
     }
 }
