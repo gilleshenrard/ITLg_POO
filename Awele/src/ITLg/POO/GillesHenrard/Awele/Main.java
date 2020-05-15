@@ -32,7 +32,7 @@ public class Main extends Application{
     @Override
     public void start(Stage primaryStage) {
         // create the main logger, and enable all logs
-        Logger logger = Logger.getLogger("Awele");
+        Logger logger = Logger.getLogger(this.getClass().getClass().getName());
         logger.setLevel(Level.ALL);
 
         //assign a Console handler to the logger, and handle FINE level logs
