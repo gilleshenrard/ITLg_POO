@@ -48,31 +48,6 @@ public class GameController {
     }
 
     /**
-     * Play a whole player's season
-     * @return 0
-     */
-    public int playSeason(){
-        //state variables
-        int outcome = 0;
-
-        try {
-            //main game loop, while no victory
-            do {
-                outcome = this.handleState();
-            }while (this.getNextState() != State.PROMPTING && outcome != -2 && outcome != -1);
-        }
-        catch (Exception e){
-            this.displayError(e.getMessage());
-            System.exit(-1);
-        }
-        //system error, exit with an error
-        if (outcome == -1)
-            System.exit(outcome);
-
-        return 0;
-    }
-
-    /**
      * Set the ID of the current player
      * @param ID Next state to join
      * @throws InvalidParameterException

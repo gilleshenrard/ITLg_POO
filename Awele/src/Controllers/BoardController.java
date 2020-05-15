@@ -161,23 +161,6 @@ public class BoardController {
     }
 
     /**
-     * Play a whole player's season
-     * @return 0
-     */
-    public int playSeason(){
-        return this.m_game.playSeason();
-    }
-
-    /**
-     * Indicate whether a player is an AI
-     * @param ID ID of the player to enquire
-     * @return true if AI, false otherwise
-     */
-    public boolean isPlayerIA(int ID){
-        return this.m_game.isPlayerAI(ID);
-    }
-
-    /**
      * Indicate whether the player is owner of the Point or not
      * @param ID ID of the player to test
      * @param p Point of which to test the ownership
