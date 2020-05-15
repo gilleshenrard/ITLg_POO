@@ -19,27 +19,26 @@ public class PromptingState implements iGameState {
      */
     @Override
     public int handleState(GameController controller){
-        Logger.getLogger(this.getClass().getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " enters Prompting state");
 
         //get the choice from the user
         int choice = controller.selectSlot(controller.getCurrentPlayer());
-        Logger.getLogger(this.getClass().getClass().getName()).log(Level.INFO, "Player " + controller.getCurrentPlayer() + " : selectSlot() returned " + choice);
+        Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Player " + controller.getCurrentPlayer() + " : selectSlot() returned " + choice);
 
         if(choice > 0) {
             if (controller.isPlayerAI(controller.getCurrentPlayer())) {
                 controller.displayMessage(controller.getName(controller.getCurrentPlayer()) + " harvests the slot " + choice);
-                Logger.getLogger(this.getClass().getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : message displayed");
+                Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : message displayed");
             }
 
             //plug in the Playing state
-            Logger.getLogger(this.getClass().getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : next state -> Playing");
+            Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : next state -> Playing");
             controller.setNextState(State.PLAYING);
             ((PlayingState)State.PLAYING.getState()).setInput(choice);
 
             return choice;
         }
         else{
-            Logger.getLogger(this.getClass().getClass().getName()).log(Level.INFO, "Player " + controller.getCurrentPlayer() + " chose the slot " + choice);
+            Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Player " + controller.getCurrentPlayer() + " chose the slot " + choice);
             controller.displayMessage(controller.getName(controller.getCurrentPlayer()) + " can't make any move. He forfeits !");
 
             //Easter egg : when both players play randomly and one of them forfeits, he says the last quote of the W.P.O.R. in the movie Wargames
@@ -47,7 +46,7 @@ public class PromptingState implements iGameState {
                 controller.displayMessage("\n" + controller.getName(controller.getCurrentPlayer()) + " : 'A strange game... The only winning move is not to play...'");
                 controller.displayMessage(controller.getName(controller.getCurrentPlayer()) + " : '......................... How about a nice game of chess?'");
             }
-            Logger.getLogger(this.getClass().getClass().getName()).log(Level.INFO, "Player " + controller.getCurrentPlayer() + " : Prompting returns -2");
+            Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Player " + controller.getCurrentPlayer() + " : Prompting returns -2");
             return -2;
         }
     }

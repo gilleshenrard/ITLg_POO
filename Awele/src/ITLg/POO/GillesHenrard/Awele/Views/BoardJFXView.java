@@ -115,7 +115,7 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
     @Override
     public void update() {
         //launch as a runlater task to avoid concurrency issues
-        Logger.getLogger(this.getClass().getClass().getName()).log(Level.FINE, "Player " + this.m_controller.getCurrentPlayer() + " updates the main scene");
+        Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + this.m_controller.getCurrentPlayer() + " updates the main scene");
         Platform.runLater(() -> {
             //update all the slots with the values from the Board
             Point p = new Point(0, 0);
@@ -164,14 +164,14 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
         Point p = new Point((int)(mouseEvent.getX()/(this.m_grid.getWidth()/6)), 1 - (int)(mouseEvent.getY()/(this.m_grid.getHeight()/2)));
 
         //check if the current player is owner of the slot clicked
-        Logger.getLogger(this.getClass().getClass().getName()).log(Level.INFO, "Player " + this.m_controller.getCurrentPlayer() + " : clicked on " + p);
+        Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Player " + this.m_controller.getCurrentPlayer() + " : clicked on " + p);
         if (this.m_controller.isOwner(this.m_controller.getCurrentPlayer(), p)) {
             //set the coordinates selected by the player, and play its season
             this.m_controller.setLastSelected(p);
 
             //notify JFXSelect that a slot has been clicked
             synchronized (this.m_controller){
-                Logger.getLogger(this.getClass().getClass().getName()).log(Level.FINE, "Player " + this.m_controller.getCurrentPlayer() + " : sends a notification");
+                Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + this.m_controller.getCurrentPlayer() + " : sends a notification");
                 this.m_controller.notify();
             }
         }

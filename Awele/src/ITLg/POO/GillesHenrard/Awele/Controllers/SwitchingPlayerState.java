@@ -19,15 +19,14 @@ public class SwitchingPlayerState implements iGameState {
     @Override
     public int handleState(GameController controller){
         //update the game board
-        Logger.getLogger(this.getClass().getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " enters Switching state");
         controller.updateObservers();
 
         //switch user
         controller.setCurrentPlayer(controller.getOpponent());
-        Logger.getLogger(this.getClass().getClass().getName()).log(Level.INFO, "Player " + controller.getCurrentPlayer() + "'s turn");
+        Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Player " + controller.getCurrentPlayer() + "'s turn");
 
         //plug in the Prompting state
-        Logger.getLogger(this.getClass().getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : next state -> Prompting");
+        Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : next state -> Prompting");
         controller.setNextState(State.PROMPTING);
 
         return 0;

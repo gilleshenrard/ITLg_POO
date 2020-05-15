@@ -7,19 +7,21 @@
 package ITLg.POO.GillesHenrard.Awele.Controllers;
 
 public enum State{
-    PROMPTING((iGameState) new PromptingState()),
-    PLAYING((iGameState) new PlayingState()),
-    STORING((iGameState) new StoringState()),
-    SWITCHING((iGameState) new SwitchingPlayerState());
+    PROMPTING((iGameState) new PromptingState(), "Prompting"),
+    PLAYING((iGameState) new PlayingState(), "Playing"),
+    STORING((iGameState) new StoringState(), "Storing"),
+    SWITCHING((iGameState) new SwitchingPlayerState(), "Switching");
 
     private iGameState m_state;
+    private String m_name;
 
     /**
      * Initialise the State assigned to an enumeration
      * @param state State to assign
      */
-    State(iGameState state) {
+    State(iGameState state, String name) {
         this.m_state = state;
+        this.m_name = name;
     }
 
     /**
@@ -37,5 +39,13 @@ public enum State{
      */
     public int handleState(GameController game){
         return this.m_state.handleState(game);
+    }
+
+    /**
+     * Return the current state name as a string
+     * @return State name
+     */
+    public String toString(){
+        return this.m_name;
     }
 }

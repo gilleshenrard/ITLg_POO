@@ -32,7 +32,7 @@ public class Main extends Application{
     @Override
     public void start(Stage primaryStage) {
         // create the main logger, and enable all logs
-        Logger logger = Logger.getLogger(this.getClass().getClass().getName());
+        Logger logger = Logger.getLogger(this.getClass().getPackage().getName());
         logger.setLevel(Level.ALL);
 
         //assign a Console handler to the logger, and handle FINE level logs
@@ -106,6 +106,7 @@ public class Main extends Application{
         try {
             //main game loop, while no victory
             while (outcome != -2 && outcome != -1) {
+                Logger.getLogger(Main.class.getName()).log(Level.FINE, "Player " + game.getCurrentPlayer() + " : entering {0} state", game.getNextState().toString());
                 outcome = game.handleState();
             }
         }

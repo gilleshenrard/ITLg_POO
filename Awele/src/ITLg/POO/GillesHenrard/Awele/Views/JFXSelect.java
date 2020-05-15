@@ -25,7 +25,7 @@ public class JFXSelect implements iSelectable {
         try {
             //wait for a slot to be clicked in JFXSelect
             synchronized (this.m_controller){
-                Logger.getLogger(this.getClass().getClass().getName()).log(Level.INFO, "Player " + this.m_controller.getCurrentPlayer() + " : waiting for an event");
+                Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Player " + this.m_controller.getCurrentPlayer() + " : waiting for an event");
                 this.m_controller.wait();
             }
         }
@@ -33,7 +33,7 @@ public class JFXSelect implements iSelectable {
 
         //check if a choice has been made by the player
         Point p = this.m_controller.getLastSelected();
-        Logger.getLogger(this.getClass().getClass().getName()).log(Level.INFO, "Player " + this.m_controller.getCurrentPlayer() + " : last selected : " + p);
+        Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Player " + this.m_controller.getCurrentPlayer() + " : last selected : " + p);
         if (p == null) {
             return 0;
         }
