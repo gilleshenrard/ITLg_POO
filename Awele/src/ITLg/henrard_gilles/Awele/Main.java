@@ -1,4 +1,4 @@
-package Projet1.Awele;
+package ITLg.henrard_gilles.Awele;
 
 import Views.*;
 import javafx.application.Application;
