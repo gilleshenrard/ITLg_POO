@@ -19,10 +19,23 @@ public class Main extends Application{
      * @param args Program arguments ('console' launches the game in console mode)
      */
     public static void main(String[] args) {
-        if (args[0] == "console")
-                startConsole();
-        else
+        // create the main logger, and enable all logs
+        Logger logger = Logger.getLogger(Main.class.getName());
+        logger.setLevel(Level.ALL);
+        logger.setUseParentHandlers(false);
+
+        //assign a Console handler to the logger
+        ConsoleHandler cHandler = new ConsoleHandler();
+        logger.addHandler(cHandler);
+
+        if (args[0].equals("console")) {
+            cHandler.setLevel(Level.OFF);
+            startConsole();
+        }
+        else{
+            cHandler.setLevel(Level.FINE);
             launch(args);
+        }
     }
 
     /**
@@ -32,7 +45,7 @@ public class Main extends Application{
     @Override
     public void start(Stage primaryStage) {
         // create the main logger, and enable all logs
-        Logger logger = Logger.getLogger(this.getClass().getPackage().getName());
+/*        Logger logger = Logger.getLogger(this.getClass().getPackage().getName());
         logger.setLevel(Level.ALL);
 
         //assign a Console handler to the logger, and handle FINE level logs
@@ -40,7 +53,7 @@ public class Main extends Application{
         cHandler.setLevel(Level.FINE);
         logger.addHandler(cHandler);
         logger.setUseParentHandlers(false);
-
+*/
         //game setup
         GameController game = new GameController();
         GameJFXView gameView = new GameJFXView(game);
@@ -79,6 +92,16 @@ public class Main extends Application{
      * Start the game with a console UI
      */
     public static void startConsole() {
+        // create the main logger, and enable all logs
+/*        Logger logger = Logger.getLogger(Main.class.getName());
+        logger.setLevel(Level.OFF);
+
+        //assign a Console handler to the logger, and handle FINE level logs
+        ConsoleHandler cHandler = new ConsoleHandler();
+        cHandler.setLevel(Level.OFF);
+        logger.addHandler(cHandler);
+        logger.setUseParentHandlers(false);
+*/
         //game setup
         GameController game = new GameController();
         GameConsoleView gameConsoleView = new GameConsoleView(game);
@@ -90,6 +113,9 @@ public class Main extends Application{
         //players setup
         game.setPlayer(new Player(1, "Gilles", new KeyboardSelect()));
         game.setPlayer(new Player(2, "AI", new MinimaxSelect(game.getBoardController(), 2)));
+
+        //display the board
+        game.updateObservers();
 
         //launch the game loop
         gameLoop(game);
