@@ -481,8 +481,8 @@ class BoardTest {
         b.setSlotSeeds(new Point(5, 0), 4);
         ArrayList<Integer> array = b.getNonEmpty(1);
         Assertions.assertEquals(3, array.size());
-        Assertions.assertEquals(2, array.get(0));
-        Assertions.assertEquals(4, array.get(1));
-        Assertions.assertEquals(5, array.get(2));
+        Assertions.assertEquals(2, (int)array.get(0));
+        Assertions.assertEquals(4, (int)array.get(1));
+        Assertions.assertEquals(5, (int)array.get(2));
     }
 }
