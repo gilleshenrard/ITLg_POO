@@ -7,8 +7,10 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 
 <BorderPane maxHeight="998.0" maxWidth="1744.0" minHeight="998.0" minWidth="1744.0" prefHeight="998.0" prefWidth="1744.0" styleClass="main" stylesheets="@../Styles/neon.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <top>
@@ -34,19 +36,67 @@
             <RowConstraints percentHeight="45.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="6" fx:id="l_message" text="Message" styleClass="message" />
-            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+            <Label fx:id="l_message" prefHeight="Infinity" prefWidth="Infinity" styleClass="message" text="Message" GridPane.columnIndex="0" GridPane.columnSpan="6" GridPane.rowIndex="0" />
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1">
+                <children>
+                    <Circle radius="120.0" />
+                    <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" />
+                </children></StackPane>
+             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                 <children>
+                     <Circle radius="120.0" />
+                     <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" />
+                 </children></StackPane>
+             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                 <children>
+                     <Circle radius="120.0" />
+                     <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" />
+                 </children></StackPane>
+             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                 <children>
+                     <Circle radius="120.0" />
+                     <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" />
+                 </children></StackPane>
+             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                 <children>
+                     <Circle radius="120.0" />
+                     <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" />
+                 </children></StackPane>
+             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                 <children>
+                     <Circle radius="120.0" />
+                     <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" />
+                 </children></StackPane>
+             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="2">
+                 <children>
+                     <Circle radius="120.0" />
+                     <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" />
+                 </children></StackPane>
+             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                 <children>
+                     <Circle radius="120.0" />
+                     <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" />
+                 </children></StackPane>
+             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                 <children>
+                     <Circle radius="120.0" />
+                     <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" />
+                 </children></StackPane>
+             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                 <children>
+                     <Circle radius="120.0" />
+                     <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" />
+                 </children></StackPane>
+             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                 <children>
+                     <Circle radius="120.0" />
+                     <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" />
+                 </children></StackPane>
+             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="2">
+                 <children>
+                     <Circle radius="120.0" />
+                     <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" />
+                 </children></StackPane>
          </children>
       </GridPane>
    </center>

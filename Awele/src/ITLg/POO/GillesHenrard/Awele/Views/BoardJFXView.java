@@ -22,6 +22,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
 
 import java.io.IOException;
@@ -90,11 +91,12 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
             for (int c = 0; c < 6; c++) {
                 //get the grid pane child corresponding to the proper element in the array
                 int index = (l == 0 ? 7+c : 6-c);
-                Label tmp = (Label) this.m_grid.getChildren().get(index);
+                StackPane tmp = (StackPane) this.m_grid.getChildren().get(index);
+                Label tmplabel = (Label) tmp.getChildren().get(1);
 
                 //make sure to instantiate the Property buffer and bind it to the grid pane child
                 this.m_slots[l][c] = new SimpleIntegerProperty();
-                tmp.textProperty().bind(this.m_slots[l][c].asString());
+                tmplabel.textProperty().bind(this.m_slots[l][c].asString());
             }
         }
 
