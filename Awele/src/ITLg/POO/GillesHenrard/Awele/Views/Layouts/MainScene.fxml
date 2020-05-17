@@ -14,7 +14,6 @@
     <top>
         <TitledPane animated="false" expanded="false" text="AWELE" BorderPane.alignment="CENTER">
             <content>
-                <Label fx:id="l_message" text="Message" BorderPane.alignment="CENTER" styleClass="message" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2" />
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
             </content>
         </TitledPane>
@@ -30,22 +29,24 @@
             <ColumnConstraints hgrow="SOMETIMES" percentWidth="16.666" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints percentHeight="50.0" vgrow="SOMETIMES" />
-            <RowConstraints percentHeight="50.0" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="45.0" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="45.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="0" />
-            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="0" />
-            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="0" />
-            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="0" />
-            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="5" GridPane.rowIndex="0" />
+            <Label prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="6" fx:id="l_message" text="Message" styleClass="message" />
             <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="0" GridPane.rowIndex="1" />
             <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="1" />
             <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.columnIndex="5" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </center>

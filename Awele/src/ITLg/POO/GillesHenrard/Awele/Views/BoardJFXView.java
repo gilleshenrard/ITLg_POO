@@ -89,7 +89,7 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
         for (int l = 0; l < 2; l++) {
             for (int c = 0; c < 6; c++) {
                 //get the grid pane child corresponding to the proper element in the array
-                int index = (l == 0 ? 6+c : 5-c);
+                int index = (l == 0 ? 7+c : 6-c);
                 Label tmp = (Label) this.m_grid.getChildren().get(index);
 
                 //make sure to instantiate the Property buffer and bind it to the grid pane child
