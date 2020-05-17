@@ -21,7 +21,7 @@
                 <RowConstraints percentHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label fx:id="l_title" text="Awele" BorderPane.alignment="CENTER" styleClass="title" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <Label fx:id="l_title" text="AWELE" BorderPane.alignment="CENTER" styleClass="title" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                 <Button fx:id="b_menuButton" mnemonicParsing="false" text="Button"  GridPane.columnIndex="1" GridPane.rowIndex="0" />
                 <Label fx:id="l_message" text="Message" BorderPane.alignment="CENTER" styleClass="message" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.columnSpan="2" />
             </children>
