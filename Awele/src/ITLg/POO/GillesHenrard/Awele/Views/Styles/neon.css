@@ -15,6 +15,7 @@
 .title{
     -fx-text-fill: #DA4FDE; /*medium orchid*/
     -fx-font-size: 100;
+    -fx-alignment: center;
 }
 
 /*Slots*/
