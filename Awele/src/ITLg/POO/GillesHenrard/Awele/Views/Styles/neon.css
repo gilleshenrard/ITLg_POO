@@ -6,7 +6,7 @@
     -fx-background-position: center center;
     -fx-text-alignment : center;
     -fx-text-fill: #DA4FDE; /*medium orchid*/
-    -fx-font-size: 30;
+    -fx-font-size: 70;
     -fx-font-weight: bold;
     -fx-font-family: 'FTY DELIRIUM NEON NCV';
 }
@@ -16,6 +16,7 @@
     -fx-text-fill: #DA4FDE; /*medium orchid*/
     -fx-font-size: 100;
     -fx-alignment: center;
+    -fx-effect: dropshadow(one-pass-box, #DA4FDE, 80, 0, 0, 0)
 }
 
 /*Slots*/
@@ -23,12 +24,6 @@
     -fx-background-color : rgba(0,0,0,0);
     -fx-text-fill: #DA4FDE; /*medium orchid*/
     -fx-alignment : center;
-}
-
-/*vbox inside the scoreboard*/
-.scores .scorepanel{
-    -fx-border-color : #DA4FDE; /*medium orchid*/
-    -fx-border-width : 10px;
 }
 
 /*Boards indicating player name and score*/
