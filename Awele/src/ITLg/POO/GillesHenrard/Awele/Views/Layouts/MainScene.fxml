@@ -53,13 +53,13 @@
    <bottom>
       <TilePane maxHeight="274.0" maxWidth="1744.0" minHeight="274.0" minWidth="1744.0" prefHeight="274.0" prefWidth="1744.0" styleClass="scores" BorderPane.alignment="CENTER">
          <children>
-            <VBox maxHeight="274.0" maxWidth="872.0" minHeight="274.0" minWidth="872.0" prefHeight="274.0" prefWidth="872.0" styleClass="scorepanel">
+            <VBox maxHeight="274.0" maxWidth="872.0" minHeight="274.0" minWidth="872.0" prefHeight="274.0" prefWidth="872.0" styleClass="scorepanel1">
                <children>
                    <Label fx:id="l_namePl1" maxHeight="92.0" maxWidth="872.0" minHeight="92.0" minWidth="872.0" prefHeight="92.0" prefWidth="872.0" text="Label" />
                    <Label fx:id="l_scorePl1" maxHeight="182.0" maxWidth="872.0" minHeight="182.0" minWidth="872.0" prefHeight="182.0" prefWidth="872.0" text="Label" />
                </children>
             </VBox>
-             <VBox maxHeight="274.0" maxWidth="872.0" minHeight="274.0" minWidth="872.0" prefHeight="274.0" prefWidth="872.0" styleClass="scorepanel">
+             <VBox maxHeight="274.0" maxWidth="872.0" minHeight="274.0" minWidth="872.0" prefHeight="274.0" prefWidth="872.0" styleClass="scorepanel2">
                  <children>
                      <Label fx:id="l_namePl2" maxHeight="92.0" maxWidth="872.0" minHeight="92.0" minWidth="872.0" prefHeight="92.0" prefWidth="872.0" text="Label" />
                      <Label fx:id="l_scorePl2" maxHeight="182.0" maxWidth="872.0" minHeight="182.0" minWidth="872.0" prefHeight="182.0" prefWidth="872.0" text="Label" />
