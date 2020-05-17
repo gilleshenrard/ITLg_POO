@@ -66,7 +66,7 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
             BorderPane graph = loader.load();
 
             //load custom fonts
-            Font.loadFont(this.getClass().getResource("Styles/AirstreamNF.ttf").toExternalForm(), 12);          //-fx-font-family: 'Airstream NF'
+            Font.loadFont(this.getClass().getResource("Styles/FTY_DELIRIUM_NEON_NCV.otf").toExternalForm(), 12);          //-fx-font-family: 'FTY DELIRIUM NEON NCV'
 
             //create a new scene from the graph
             this.m_scene = new Scene(graph);
