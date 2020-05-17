@@ -28,6 +28,7 @@ hs_err_pid*
 out/
 
 #Awele style elements
+*.otf
 *.ttf
 *.jpg
 *.png
