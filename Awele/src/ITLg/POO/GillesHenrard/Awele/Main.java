@@ -7,6 +7,7 @@ import ITLg.POO.GillesHenrard.Awele.Models.Player;
 import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
@@ -64,6 +65,11 @@ public class Main extends Application{
         primaryStage.setWidth(1920);
         primaryStage.setHeight(1080);
         primaryStage.show();
+
+        //make closing the primary stage exit the game
+        primaryStage.setOnCloseRequest((WindowEvent event) -> {
+            System.exit(0);
+        });
 
         //Parallel Task holding the game loop
         Task<Void> mainLoop = new Task<Void>() {
