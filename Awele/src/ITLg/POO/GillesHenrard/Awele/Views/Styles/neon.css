@@ -11,6 +11,10 @@
     -fx-font-family: 'FTY DELIRIUM NEON NCV';
 }
 
+/*
+//  TITLE AND MENU
+*/
+
 /*title section*/
 .titled-pane {
     -fx-text-fill: #DA4FDE; /*medium orchid*/
@@ -19,9 +23,18 @@
     -fx-effect: dropshadow(one-pass-box, #DA4FDE, 80, 0, 0, 0);
 }
 
+/*title itself*/
 .titled-pane > .title {
     -fx-background-color : null;
 }
+
+/*
+//  MESSAGE
+*/
+
+/*
+//  SLOTS
+*/
 
 /*Slots*/
 .slots .label{
@@ -29,6 +42,10 @@
     -fx-text-fill: #DA4FDE; /*medium orchid*/
     -fx-alignment : center;
 }
+
+/*
+//  SCORE PANELS
+*/
 
 /*Boards indicating player name and score*/
 .scores .label{
