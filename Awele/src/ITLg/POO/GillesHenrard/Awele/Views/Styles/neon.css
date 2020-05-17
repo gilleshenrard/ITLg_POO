@@ -12,12 +12,15 @@
 }
 
 /*title section*/
-.title{
-    -fx-background-color : rgba(0,0,0,0);
+.titled-pane {
     -fx-text-fill: #DA4FDE; /*medium orchid*/
     -fx-font-size: 100;
     -fx-alignment: center;
-    -fx-effect: dropshadow(one-pass-box, #DA4FDE, 80, 0, 0, 0)
+    -fx-effect: dropshadow(one-pass-box, #DA4FDE, 80, 0, 0, 0);
+}
+
+.titled-pane > .title {
+    -fx-background-color : null;
 }
 
 /*Slots*/
