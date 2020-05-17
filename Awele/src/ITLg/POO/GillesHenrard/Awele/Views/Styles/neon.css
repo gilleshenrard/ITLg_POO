@@ -32,6 +32,7 @@
 //  MESSAGE
 */
 .message{
+    -fx-text-fill: #DA4FDE; /*medium orchid*/
     -fx-font-size: 50;
     -fx-effect: dropshadow(one-pass-box, #DA4FDE, 80, 0, 0, 0);
 }
@@ -42,9 +43,42 @@
 
 /*Slots*/
 .slots .label{
-    -fx-background-color : rgba(0,0,0,0);
-    -fx-text-fill: #DA4FDE; /*medium orchid*/
+    -fx-background-color : null;
     -fx-alignment : center;
+}
+
+/*Slots player 2*/
+.slotpl2 {
+    -fx-effect: dropshadow(one-pass-box, yellow, 80, 0, 0, 0);
+}
+
+/*score in player 2's slot*/
+.slotpl2 .label{
+    -fx-text-fill: yellow;
+}
+
+/*circle of player 2's slot*/
+.slotpl2 Circle{
+    -fx-fill: null;
+    -fx-stroke: yellow;
+    -fx-stroke-width: 3px;
+}
+
+/*Slots player 1*/
+.slotpl1 {
+    -fx-effect: dropshadow(one-pass-box, red, 80, 0, 0, 0);
+}
+
+/*score in player 1's slot*/
+.slotpl1 .label{
+    -fx-text-fill: red;
+}
+
+/*circle of player 1's slot*/
+.slotpl1 Circle{
+    -fx-fill: null;
+    -fx-stroke: red;
+    -fx-stroke-width: 3px;
 }
 
 /*
