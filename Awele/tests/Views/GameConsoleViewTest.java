@@ -13,24 +13,6 @@ class GameConsoleViewTest {
     GameConsoleView g = new GameConsoleView(gc);
 
     /**
-     * Check if displayMessage() fails displaying the winning message
-     */
-    @DisplayName("displayMessage() - should not fail")
-    @Test
-    void displayMessage_shouldnot_fail() {
-        g.displayMessage("Test");
-    }
-
-    /**
-     * Check if displayMessage() throws an exception when given a null instance (should not)
-     */
-    @DisplayName("displayMessage() with a NULL message - should not fail")
-    @Test
-    void displayMessage_nullName_shouldnot_fail() {
-        g.displayMessage(null);
-    }
-
-    /**
      * Check if displayWarning() fails displaying the winning message
      */
     @DisplayName("displayWarning() - should not fail")

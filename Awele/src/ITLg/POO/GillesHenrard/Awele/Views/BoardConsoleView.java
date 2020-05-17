@@ -76,4 +76,9 @@ public class BoardConsoleView implements iObserver {
     public void setController(BoardController controller) {
         this.m_board = controller;
     }
+
+    @Override
+    public void sendMessage(String msg) {
+        System.out.println(msg);
+    }
 }

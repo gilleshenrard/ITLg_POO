@@ -36,6 +36,7 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
     private SimpleIntegerProperty[][] m_slots;
     private SimpleIntegerProperty m_storedPlayer1;
     private SimpleIntegerProperty m_storedPlayer2;
+    private SimpleStringProperty m_message;
     private SimpleStringProperty m_namePlayer1;
     private SimpleStringProperty m_namePlayer2;
     @FXML Button b_menuButton;
@@ -52,6 +53,7 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
     public BoardJFXView() {
         //intantiate all the non-FXML properties
         this.m_slots = new SimpleIntegerProperty[2][6];
+        this.m_message = new SimpleStringProperty();
         this.m_storedPlayer1 = new SimpleIntegerProperty();
         this.m_storedPlayer2 = new SimpleIntegerProperty();
         this.m_namePlayer1 = new SimpleStringProperty();
@@ -98,6 +100,10 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
                 tmp.textProperty().bind(this.m_slots[l][c].asString());
             }
         }
+
+        //bind label holding messages and give it a default value
+        l_message.textProperty().bind(this.m_message);
+        this.m_message.setValue("");
 
         //bind labels holding players' names and give them a default value
         l_namePl1.textProperty().bind(this.m_namePlayer1);
@@ -176,5 +182,16 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
                 this.m_controller.notify();
             }
         }
+    }
+
+    /**
+     * Display a message on the message label
+     * @param msg Message to display
+     */
+    @Override
+    public void sendMessage(String msg){
+        Platform.runLater(() -> {
+            this.m_message.setValue(msg);
+        });
     }
 }

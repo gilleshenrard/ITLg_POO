@@ -342,4 +342,15 @@ public class BoardController {
     public void setLastSelected(Point last) {
         this.m_lastSelected = last;
     }
+
+    /**
+     * Display a message in the out channel
+     * @param msg Message to display
+     * @throws NullPointerException
+     */
+    public void displayMessage(String msg) throws NullPointerException{
+        for (iObserver o:this.m_observers) {
+            o.sendMessage(msg);
+        }
+    }
 }

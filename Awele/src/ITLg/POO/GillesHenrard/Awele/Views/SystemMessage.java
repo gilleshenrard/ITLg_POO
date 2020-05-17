@@ -22,7 +22,6 @@ public abstract class SystemMessage {
         controller.setView(this);
     }
 
-    public abstract void displayMessage(String msg);
     public abstract void displayWarning(String msg);
     public abstract void displayError(String msg);
 }

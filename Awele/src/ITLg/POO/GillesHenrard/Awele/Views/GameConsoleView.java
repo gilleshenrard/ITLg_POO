@@ -20,21 +20,12 @@ public class GameConsoleView extends SystemMessage{
     }
 
     /**
-     * Display a message in the out channel
-     * @param msg Message to display
-     */
-    @Override
-    public void displayMessage(String msg){
-        System.out.println(msg);
-    }
-
-    /**
      * Display a warning message in the out channel
      * @param msg Message to display
      */
     @Override
     public void displayWarning(String msg){
-        this.displayMessage(msg);
+        System.out.println(msg);
     }
 
     /**

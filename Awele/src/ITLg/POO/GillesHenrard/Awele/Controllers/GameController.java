@@ -192,10 +192,10 @@ public class GameController {
      * @throws NullPointerException
      */
     public void displayMessage(String msg) throws NullPointerException{
-        if (this.m_view == null)
-            throw new NullPointerException("GameController.displayMessage() : GameView not instantiated");
+        if (this.m_board == null)
+            throw new NullPointerException("GameController.sendMessage() : BoardController not instantiated");
 
-        this.m_view.displayMessage(msg);
+        this.m_board.displayMessage(msg);
     }
 
     /**

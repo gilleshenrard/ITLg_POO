@@ -11,4 +11,5 @@ public interface iObserver {
     void update();
     Object getContent();
     void setController(BoardController controller);
+    void sendMessage(String msg);
 }
