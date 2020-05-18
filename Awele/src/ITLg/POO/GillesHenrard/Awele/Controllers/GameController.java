@@ -187,7 +187,7 @@ public class GameController {
         this.getBoardController().resetBoard();
     }
     /**
-     * Display a message in the out channel
+     * Display a message
      * @param msg Message to display
      * @throws NullPointerException
      */
@@ -199,15 +199,15 @@ public class GameController {
     }
 
     /**
-     * Display a warning message in the out channel
+     * Display a warning message
      * @param msg Message to display
      * @throws NullPointerException
      */
     public void displayWarning(String msg) throws NullPointerException{
-        if (this.m_view == null)
-            throw new NullPointerException("GameController.displayWarning() : GameView not instantiated");
+        if (this.m_board == null)
+            throw new NullPointerException("GameController.sendWarning() : BoardController not instantiated");
 
-        this.m_view.displayWarning(msg);
+        this.m_board.displayMessage(msg);
     }
 
     /**
