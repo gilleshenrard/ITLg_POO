@@ -34,7 +34,6 @@ import java.util.logging.Logger;
 public class BoardJFXView extends BorderPane implements iObserver, Initializable {
     private Scene m_scene = null;
     private BoardController m_controller;
-    private SimpleStringProperty m_message;
     @FXML Button b_menuButton;
     @FXML GridPane m_grid;
     @FXML Label l_message;
@@ -47,9 +46,6 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
      * Create a new Board Java FX view
      */
     public BoardJFXView() {
-        //intantiate all the non-FXML properties
-        this.m_message = new SimpleStringProperty();
-
         try {
             //load the FXML document
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Layouts/MainScene.fxml"));
@@ -74,10 +70,6 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //set the click handler to the grid panel
         this.m_grid.setOnMouseClicked(this::onSlotClicked);
-
-        //bind label holding messages and give it a default value
-        l_message.textProperty().bind(this.m_message);
-        this.m_message.setValue("");
     }
 
     /**
@@ -171,7 +163,7 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
     @Override
     public void sendMessage(String msg){
         Platform.runLater(() -> {
-            this.m_message.setValue(msg);
+            this.l_message.setText(msg);
         });
     }
 }
