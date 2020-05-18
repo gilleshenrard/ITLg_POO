@@ -41,85 +41,76 @@
                        GridPane.columnIndex="0" GridPane.columnSpan="6" GridPane.rowIndex="0"/>
 
                 <!-- Slots grid (6X2 stackPanel grid) -->
-                <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1"
-                           styleClass="slotpl2">
+                <!-- Player 2's row -->
+                <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="slotpl2">
                     <children>
                         <Circle radius="110.0"/>
                         <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
                     </children>
                 </StackPane>
-                <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1"
-                           styleClass="slotpl2">
+                <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" styleClass="slotpl2">
                     <children>
                         <Circle radius="110.0"/>
                         <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
                     </children>
                 </StackPane>
-                <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1"
-                           styleClass="slotpl2">
+                <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" styleClass="slotpl2">
                     <children>
                         <Circle radius="110.0"/>
                         <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
                     </children>
                 </StackPane>
-                <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1"
-                           styleClass="slotpl2">
+                <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" styleClass="slotpl2">
                     <children>
                         <Circle radius="110.0"/>
                         <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
                     </children>
                 </StackPane>
-                <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1"
-                           styleClass="slotpl2">
+                <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" styleClass="slotpl2">
                     <children>
                         <Circle radius="110.0"/>
                         <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
                     </children>
                 </StackPane>
-                <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1"
-                           styleClass="slotpl2">
+                <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="1" styleClass="slotpl2">
                     <children>
                         <Circle radius="110.0"/>
                         <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
                     </children>
                 </StackPane>
-                <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="2"
-                           styleClass="slotpl1">
+
+                <!-- Player 1's row -->
+                <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="slotpl1">
                     <children>
                         <Circle radius="110.0"/>
                         <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
                     </children>
                 </StackPane>
-                <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2"
-                           styleClass="slotpl1">
+                <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" styleClass="slotpl1">
                     <children>
                         <Circle radius="110.0"/>
                         <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
                     </children>
                 </StackPane>
-                <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2"
-                           styleClass="slotpl1">
+                <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" styleClass="slotpl1">
                     <children>
                         <Circle radius="110.0"/>
                         <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
                     </children>
                 </StackPane>
-                <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2"
-                           styleClass="slotpl1">
+                <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" styleClass="slotpl1">
                     <children>
                         <Circle radius="110.0"/>
                         <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
                     </children>
                 </StackPane>
-                <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2"
-                           styleClass="slotpl1">
+                <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" styleClass="slotpl1">
                     <children>
                         <Circle radius="110.0"/>
                         <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
                     </children>
                 </StackPane>
-                <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="2"
-                           styleClass="slotpl1">
+                <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="2" styleClass="slotpl1">
                     <children>
                         <Circle radius="110.0"/>
                         <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
