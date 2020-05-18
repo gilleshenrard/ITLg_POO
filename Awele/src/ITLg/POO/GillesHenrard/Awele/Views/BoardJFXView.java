@@ -134,11 +134,11 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
                     int index = (l == 0 ? 7+c : 6-c);
                     StackPane tmp = (StackPane) this.m_grid.getChildren().get(index);
                     if (this.m_controller.isOwner(this.m_controller.getCurrentPlayer(), p) && this.m_controller.isLegal(p)){
-                        tmp.getStyleClass().remove(1);
+                        tmp.getStyleClass().remove("illegal");
                         tmp.getStyleClass().add("legal");
                     }
                     else {
-                        tmp.getStyleClass().remove(1);
+                        tmp.getStyleClass().remove("legal");
                         tmp.getStyleClass().add("illegal");
                     }
                 }
