@@ -82,6 +82,21 @@
     -fx-stroke: #9CFF9C;
 }
 
+/*Slots player 1*/
+.legal {
+    -fx-effect: dropshadow(one-pass-box, #F09F1D, 80, 0, 0, 0);
+}
+
+/*score in player 1's slot*/
+.legal .label{
+    -fx-text-fill: #F09F1D;
+}
+
+/*circle of player 1's slot*/
+.legal Circle{
+    -fx-stroke: #F09F1D;
+}
+
 /*
 //  SCORE PANELS
 */
