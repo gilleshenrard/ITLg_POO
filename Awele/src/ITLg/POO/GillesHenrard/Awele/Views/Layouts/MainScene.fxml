@@ -12,14 +12,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
+<!-- Main scene -->
 <BorderPane maxHeight="998.0" maxWidth="1744.0" minHeight="998.0" minWidth="1744.0" prefHeight="998.0" prefWidth="1744.0" styleClass="main" stylesheets="@../Styles/neon.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+
+    <!-- Title pane -->
     <top>
         <TitledPane animated="false" expanded="false" text="AWELE" BorderPane.alignment="CENTER">
             <content>
+
+                <!-- Options pane -->
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
             </content>
         </TitledPane>
     </top>
+
+    <!-- Body -->
    <center>
       <GridPane fx:id="m_grid" maxHeight="560.0" maxWidth="1744.0" minHeight="560.0" minWidth="1744.0" prefHeight="560.0" prefWidth="1744.0" styleClass="slots" BorderPane.alignment="CENTER">
         <columnConstraints>
@@ -36,8 +43,11 @@
             <RowConstraints percentHeight="45.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
+             <!-- Messages label -->
             <Label fx:id="l_message" prefHeight="Infinity" prefWidth="Infinity" styleClass="message" text="Message" GridPane.columnIndex="0" GridPane.columnSpan="6" GridPane.rowIndex="0" />
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="slotpl2">
+
+             <!-- Slots grid (6X2 stackPanel grid) -->
+             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="slotpl2">
                 <children>
                     <Circle radius="110.0" />
                     <Label prefHeight="Infinity" prefWidth="Infinity" text="Label" />
@@ -100,7 +110,9 @@
          </children>
       </GridPane>
    </center>
-   <bottom>
+
+    <!-- Score boards -->
+    <bottom>
       <TilePane maxHeight="274.0" maxWidth="1744.0" minHeight="274.0" minWidth="1744.0" prefHeight="274.0" prefWidth="1744.0" styleClass="scores" BorderPane.alignment="CENTER">
          <children>
             <VBox maxHeight="274.0" maxWidth="872.0" minHeight="274.0" minWidth="872.0" prefHeight="274.0" prefWidth="872.0" styleClass="scorepanel1">
