@@ -34,7 +34,6 @@ import java.util.logging.Logger;
 public class BoardJFXView extends BorderPane implements iObserver, Initializable {
     private Scene m_scene = null;
     private BoardController m_controller;
-    @FXML Button b_menuButton;
     @FXML GridPane m_grid;
     @FXML Label l_message;
     @FXML Label l_namePl1;
