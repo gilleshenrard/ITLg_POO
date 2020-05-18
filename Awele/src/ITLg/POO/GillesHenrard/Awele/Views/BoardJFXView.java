@@ -34,11 +34,7 @@ import java.util.logging.Logger;
 public class BoardJFXView extends BorderPane implements iObserver, Initializable {
     private Scene m_scene = null;
     private BoardController m_controller;
-    private SimpleIntegerProperty m_storedPlayer1;
-    private SimpleIntegerProperty m_storedPlayer2;
     private SimpleStringProperty m_message;
-    private SimpleStringProperty m_namePlayer1;
-    private SimpleStringProperty m_namePlayer2;
     @FXML Button b_menuButton;
     @FXML GridPane m_grid;
     @FXML Label l_message;
@@ -53,10 +49,6 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
     public BoardJFXView() {
         //intantiate all the non-FXML properties
         this.m_message = new SimpleStringProperty();
-        this.m_storedPlayer1 = new SimpleIntegerProperty();
-        this.m_storedPlayer2 = new SimpleIntegerProperty();
-        this.m_namePlayer1 = new SimpleStringProperty();
-        this.m_namePlayer2 = new SimpleStringProperty();
 
         try {
             //load the FXML document
@@ -86,16 +78,6 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
         //bind label holding messages and give it a default value
         l_message.textProperty().bind(this.m_message);
         this.m_message.setValue("");
-
-        //bind labels holding players' names and give them a default value
-        l_namePl1.textProperty().bind(this.m_namePlayer1);
-        this.m_namePlayer1.setValue("Player 1");
-        l_namePl2.textProperty().bind(this.m_namePlayer2);
-        this.m_namePlayer2.setValue("Player 2");
-
-        //bind labels holding players' scores
-        l_scorePl1.textProperty().bind(this.m_storedPlayer1.asString());
-        l_scorePl2.textProperty().bind(this.m_storedPlayer2.asString());
     }
 
     /**
@@ -132,12 +114,12 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
             }
 
             //update the stored seeds count for both players
-            this.m_storedPlayer1.set(this.m_controller.getStoredSeeds(1));
-            this.m_storedPlayer2.set(this.m_controller.getStoredSeeds(2));
+            this.l_scorePl1.setText(Integer.toString(this.m_controller.getStoredSeeds(1)));
+            this.l_scorePl2.setText(Integer.toString(this.m_controller.getStoredSeeds(2)));
 
             //update the name of both players
-            this.m_namePlayer1.setValue(this.m_controller.getName(1));
-            this.m_namePlayer2.setValue(this.m_controller.getName(2));
+            this.l_namePl1.setText(this.m_controller.getName(1));
+            this.l_namePl1.setText(this.m_controller.getName(2));
         });
     }
 
