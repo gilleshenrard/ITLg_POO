@@ -66,6 +66,9 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //set the click handler to the grid panel
         this.m_grid.setOnMouseClicked(this::onSlotClicked);
+
+        //set a default value for the message
+        this.l_message.setText("");
     }
 
     /**
