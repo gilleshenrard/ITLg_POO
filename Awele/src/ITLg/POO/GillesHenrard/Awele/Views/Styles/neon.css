@@ -47,6 +47,11 @@
     -fx-alignment : center;
 }
 
+.slots Circle{
+    -fx-fill: null;
+    -fx-stroke-width: 6px;
+}
+
 /*Slots player 2*/
 .slotpl2 {
     -fx-effect: dropshadow(one-pass-box, yellow, 80, 0, 0, 0);
@@ -59,9 +64,7 @@
 
 /*circle of player 2's slot*/
 .slotpl2 Circle{
-    -fx-fill: null;
     -fx-stroke: yellow;
-    -fx-stroke-width: 3px;
 }
 
 /*Slots player 1*/
@@ -76,9 +79,7 @@
 
 /*circle of player 1's slot*/
 .slotpl1 Circle{
-    -fx-fill: null;
     -fx-stroke: red;
-    -fx-stroke-width: 3px;
 }
 
 /*
