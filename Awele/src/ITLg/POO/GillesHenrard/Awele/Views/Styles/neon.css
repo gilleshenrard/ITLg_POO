@@ -54,32 +54,32 @@
 
 /*Slots player 2*/
 .slotpl2 {
-    -fx-effect: dropshadow(one-pass-box, yellow, 80, 0, 0, 0);
+    -fx-effect: dropshadow(one-pass-box, #5AF2ED, 80, 0, 0, 0);
 }
 
 /*score in player 2's slot*/
 .slotpl2 .label{
-    -fx-text-fill: yellow;
+    -fx-text-fill: #5AF2ED;
 }
 
 /*circle of player 2's slot*/
 .slotpl2 Circle{
-    -fx-stroke: yellow;
+    -fx-stroke: #5AF2ED;
 }
 
 /*Slots player 1*/
 .slotpl1 {
-    -fx-effect: dropshadow(one-pass-box, red, 80, 0, 0, 0);
+    -fx-effect: dropshadow(one-pass-box, #9CFF9C, 80, 0, 0, 0);
 }
 
 /*score in player 1's slot*/
 .slotpl1 .label{
-    -fx-text-fill: red;
+    -fx-text-fill: #9CFF9C;
 }
 
 /*circle of player 1's slot*/
 .slotpl1 Circle{
-    -fx-stroke: red;
+    -fx-stroke: #9CFF9C;
 }
 
 /*
