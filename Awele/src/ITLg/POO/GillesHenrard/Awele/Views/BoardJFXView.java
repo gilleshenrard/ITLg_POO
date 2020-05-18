@@ -107,7 +107,7 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
 
             //update the name of both players
             this.l_namePl1.setText(this.m_controller.getName(1));
-            this.l_namePl1.setText(this.m_controller.getName(2));
+            this.l_namePl2.setText(this.m_controller.getName(2));
         });
     }
 
