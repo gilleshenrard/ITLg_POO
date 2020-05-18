@@ -34,7 +34,6 @@ import java.util.logging.Logger;
 public class BoardJFXView extends BorderPane implements iObserver, Initializable {
     private Scene m_scene = null;
     private BoardController m_controller;
-    private SimpleIntegerProperty[][] m_slots;
     private SimpleIntegerProperty m_storedPlayer1;
     private SimpleIntegerProperty m_storedPlayer2;
     private SimpleStringProperty m_message;
@@ -53,7 +52,6 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
      */
     public BoardJFXView() {
         //intantiate all the non-FXML properties
-        this.m_slots = new SimpleIntegerProperty[2][6];
         this.m_message = new SimpleStringProperty();
         this.m_storedPlayer1 = new SimpleIntegerProperty();
         this.m_storedPlayer2 = new SimpleIntegerProperty();
@@ -85,21 +83,6 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
         //set the click handler to the grid panel
         this.m_grid.setOnMouseClicked(this::onSlotClicked);
 
-        //initialize the elements in the central gridpane
-        //  + bind them and add them to said gridpane
-        for (int l = 0; l < 2; l++) {
-            for (int c = 0; c < 6; c++) {
-                //get the grid pane child corresponding to the proper element in the array
-                int index = (l == 0 ? 7+c : 6-c);
-                StackPane tmp = (StackPane) this.m_grid.getChildren().get(index);
-                Label tmplabel = (Label) tmp.getChildren().get(1);
-
-                //make sure to instantiate the Property buffer and bind it to the grid pane child
-                this.m_slots[l][c] = new SimpleIntegerProperty();
-                tmplabel.textProperty().bind(this.m_slots[l][c].asString());
-            }
-        }
-
         //bind label holding messages and give it a default value
         l_message.textProperty().bind(this.m_message);
         this.m_message.setValue("");
@@ -127,12 +110,16 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
             Point p = new Point(0, 0);
             for (int l=0 ; l<2 ; l++){
                 for (int c=0 ; c<6 ; c++) {
-                    p.setCoordinates(c, l);
-                    this.m_slots[l][c].set(this.m_controller.getSlotSeeds(p));
-
-                    //change the CSS class accordingly, if the slot is legal
+                    //retrieve the proper GridView element and its label child
                     int index = (l == 0 ? 7+c : 6-c);
                     StackPane tmp = (StackPane) this.m_grid.getChildren().get(index);
+                    Label tmplabel = (Label) tmp.getChildren().get(1);
+
+                    //update the label's text
+                    p.setCoordinates(c, l);
+                    tmplabel.setText(Integer.toString(this.m_controller.getSlotSeeds(p)));
+
+                    //update the CSS class of the whole Stackpane element
                     if (this.m_controller.isOwner(this.m_controller.getCurrentPlayer(), p) && this.m_controller.isLegal(p)){
                         tmp.getStyleClass().remove("illegal");
                         tmp.getStyleClass().add("legal");
