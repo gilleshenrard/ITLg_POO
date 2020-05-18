@@ -18,7 +18,7 @@
 /*title section*/
 .titled-pane {
     -fx-text-fill: #DA4FDE; /*medium orchid*/
-    -fx-font-size: 100;
+    -fx-font-size: 120;
     -fx-alignment: center;
     -fx-effect: dropshadow(one-pass-box, #DA4FDE, 80, 0, 0, 0);
 }
