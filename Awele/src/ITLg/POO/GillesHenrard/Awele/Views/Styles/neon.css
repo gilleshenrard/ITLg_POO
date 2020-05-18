@@ -59,6 +59,7 @@
 
 /*score in player 2's slot*/
 .slotpl2 .label{
+    -fx-font-size: 100;
     -fx-text-fill: #5AF2ED;
 }
 
@@ -74,6 +75,7 @@
 
 /*score in player 1's slot*/
 .slotpl1 .label{
+    -fx-font-size: 100;
     -fx-text-fill: #9CFF9C;
 }
 
