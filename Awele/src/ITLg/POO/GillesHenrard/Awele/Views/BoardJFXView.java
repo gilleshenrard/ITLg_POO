@@ -158,6 +158,7 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
      */
     @Override
     public void sendMessage(String msg){
+        //launch as a runlater task to avoid concurrency issues
         Platform.runLater(() -> {
             this.l_message.setText(msg);
         });
