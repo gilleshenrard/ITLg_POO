@@ -8,7 +8,7 @@
 
     /*general text rules*/
     -fx-text-alignment : center;
-    -fx-text-fill: #DA4FDE; /*medium orchid*/
+    -fx-text-fill: #DA4FDE;
     -fx-font-size: 70;
     -fx-font-weight: bold;
     -fx-font-family: 'FTY DELIRIUM NEON NCV';
@@ -20,7 +20,7 @@
 
 /*title section*/
 .titled-pane {
-    -fx-text-fill: #DA4FDE; /*medium orchid*/
+    -fx-text-fill: #DA4FDE;
     -fx-font-size: 120;
     -fx-alignment: center;
     -fx-effect: dropshadow(one-pass-box, #DA4FDE, 80, 0, 0, 0);
@@ -36,9 +36,8 @@
 */
 .message{
     -fx-alignment: center;
-    -fx-text-fill: #DA4FDE; /*medium orchid*/
+    -fx-text-fill: #DA4FDE;
     -fx-font-size: 50;
-    -fx-effect: dropshadow(one-pass-box, #DA4FDE, 80, 0, 0, 0);
 }
 
 /*
@@ -126,13 +125,13 @@
 
 /*Player 1's whole scorepanel*/
 .scorepanel1{
-    -fx-text-fill: yellow; /*medium orchid*/
+    -fx-text-fill: yellow;
     -fx-effect: dropshadow(one-pass-box, yellow, 80, 0, 0, 0);
 }
 
 /*Player 2's whole scorepanel*/
 .scorepanel2{
-    -fx-text-fill: #7F24E0; /*medium orchid*/
+    -fx-text-fill: #7F24E0;
     -fx-effect: dropshadow(one-pass-box, #7F24E0, 80, 0, 0, 0);
 }
 
