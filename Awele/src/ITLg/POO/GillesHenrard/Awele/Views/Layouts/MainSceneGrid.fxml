@@ -22,12 +22,12 @@
 
     <!-- Row constraints (5 rows) -->
     <rowConstraints>
-        <RowConstraints vgrow="SOMETIMES" percentHeight="10.0"/>
+        <RowConstraints vgrow="SOMETIMES" percentHeight="15.0"/>
         <RowConstraints vgrow="SOMETIMES" percentHeight="5.0"/>
         <RowConstraints vgrow="SOMETIMES" percentHeight="30.0"/>
         <RowConstraints vgrow="SOMETIMES" percentHeight="30.0"/>
         <RowConstraints vgrow="SOMETIMES" percentHeight="5.0"/>
-        <RowConstraints vgrow="SOMETIMES" percentHeight="10.0"/>
+        <RowConstraints vgrow="SOMETIMES" percentHeight="15.0"/>
     </rowConstraints>
 
     <!-- Actual body of the pane -->

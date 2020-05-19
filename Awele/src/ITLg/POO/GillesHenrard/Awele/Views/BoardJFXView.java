@@ -139,13 +139,13 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
      */
     public void onSlotClicked(MouseEvent mouseEvent) {
         //click is higher than top 15% height line (title bar and message label)
-        if (mouseEvent.getY() < this.m_grid.getHeight()*0.15) {
+        if (mouseEvent.getY() < this.m_grid.getHeight()*0.2) {
             Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + this.m_controller.getCurrentPlayer() + " : click too high in the scene");
             return;
         }
 
         //click is lower than bottom 15% height line (scoreboards)
-        if (mouseEvent.getY() >= this.m_grid.getHeight()*0.85) {
+        if (mouseEvent.getY() >= this.m_grid.getHeight()*0.8) {
             Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + this.m_controller.getCurrentPlayer() + " : click too low in the scene");
             return;
         }
