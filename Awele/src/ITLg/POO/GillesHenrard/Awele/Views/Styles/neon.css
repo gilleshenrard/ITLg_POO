@@ -112,7 +112,6 @@
 .scores{
     -fx-background-color : rgba(0,0,0,0);
     -fx-alignment : center;
-    -fx-text-fill: #DA4FDE; /*medium orchid*/
 }
 
 /*Player 1's whole scorepanel*/
@@ -121,28 +120,18 @@
     -fx-effect: dropshadow(one-pass-box, yellow, 80, 0, 0, 0);
 }
 
-/*Player 1's name label*/
-#l_namePl1{
-    -fx-font-size: 50;
-}
-
-/*Player 1's name label*/
-#l_scorePl1{
-    -fx-font-size: 150;
-}
-
 /*Player 2's whole scorepanel*/
 .scorepanel2{
     -fx-text-fill: #7F24E0; /*medium orchid*/
     -fx-effect: dropshadow(one-pass-box, #7F24E0, 80, 0, 0, 0);
 }
 
-/*Player 2's name label*/
-#l_namePl2{
+/*Scoreboard name tags*/
+.nametag{
     -fx-font-size: 50;
 }
 
-/*Player 2's name label*/
-#l_scorePl2{
+/*Scoreboard score tags*/
+.scoretag{
     -fx-font-size: 150;
 }

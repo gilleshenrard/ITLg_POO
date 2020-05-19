@@ -140,24 +140,24 @@
         <!-- Name tag Player 1 -->
         <Label fx:id="l_namePl1"
                prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.rowIndex="4" GridPane.columnIndex="0"
-               GridPane.columnSpan="3" styleClass="scores,scorepanel1"/>
+               GridPane.columnSpan="3" styleClass="scores,scorepanel1,nametag"/>
 
 
         <!-- Name tag Player 2 -->
         <Label fx:id="l_namePl2"
                prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.rowIndex="4" GridPane.columnIndex="3"
-               GridPane.columnSpan="3" styleClass="scores,scorepanel2"/>
+               GridPane.columnSpan="3" styleClass="scores,scorepanel2,nametag"/>
 
 
         <!-- Score tag Player 1 -->
         <Label fx:id="l_scorePl1"
                prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.rowIndex="5" GridPane.columnIndex="0"
-               GridPane.columnSpan="3" styleClass="scores,scorepanel1"/>
+               GridPane.columnSpan="3" styleClass="scores,scorepanel1,scoretag"/>
 
 
         <!-- Score tag Player 2 -->
         <Label fx:id="l_scorePl2"
                prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.rowIndex="5" GridPane.columnIndex="3"
-               GridPane.columnSpan="3" styleClass="scores,scorepanel2"/>
+               GridPane.columnSpan="3" styleClass="scores,scorepanel2,scoretag"/>
     </children>
 </GridPane>
