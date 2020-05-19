@@ -81,7 +81,7 @@ class PlayerTest {
     @DisplayName("setBehaviour() - should not fail")
     @Test
     void setBehaviour_shouldnot_fail() {
-            p.setBehaviour(new KeyboardSelect());
+            p.setBehaviour(new KeyboardSelect(new BoardController(new Board()), 1));
     }
 
     /**
@@ -120,7 +120,7 @@ class PlayerTest {
     @DisplayName("equals() with different behaviours - should not fail")
     @Test
     void equals_differentBehaviour_should_fail(){
-        Player p4 = new Player(1, "Testname", new KeyboardSelect());
+        Player p4 = new Player(1, "Testname", new KeyboardSelect(new BoardController(new Board()), 1));
         Assertions.assertNotEquals(p, p4);
     }
 

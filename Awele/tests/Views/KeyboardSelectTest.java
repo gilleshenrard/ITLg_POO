@@ -1,11 +1,13 @@
 package Views;
 
+import Controllers.BoardController;
+import Models.Board;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class KeyboardSelectTest {
-    KeyboardSelect k = new KeyboardSelect();
+    KeyboardSelect k = new KeyboardSelect(new BoardController(new Board()), 1);
 
     /**
      * Check if selectSlot() properly returns the value set by the user on the keyboard

@@ -16,7 +16,7 @@ public class Main {
         BoardView boardView = new BoardView(game.getBoardController());
 
         //players setup
-        game.setPlayer(new Player(1, "Gilles", new KeyboardSelect()));
+        game.setPlayer(new Player(1, "Gilles", new KeyboardSelect(game.getBoardController(), 1)));
         game.setPlayer(new Player(2, "AI", new MinimaxSelect(game.getBoardController(), 2)));
 
         //state variables
