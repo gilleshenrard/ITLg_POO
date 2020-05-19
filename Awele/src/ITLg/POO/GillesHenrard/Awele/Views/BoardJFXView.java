@@ -138,8 +138,24 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
      * @param mouseEvent Slot click event
      */
     public void onSlotClicked(MouseEvent mouseEvent) {
+        //click is higher than top 15% height line (title bar and message label)
+        if (mouseEvent.getY() < this.m_grid.getHeight()*0.15) {
+            Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + this.m_controller.getCurrentPlayer() + " : click too high in the scene");
+            return;
+        }
+
+        //click is lower than bottom 15% height line (scoreboards)
+        if (mouseEvent.getY() >= this.m_grid.getHeight()*0.85) {
+            Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + this.m_controller.getCurrentPlayer() + " : click too low in the scene");
+            return;
+        }
+
+        //compute the coordinates of the click on the slots area
+        double coordY = (this.m_grid.getHeight() * 0.6) / 2.0;
+        coordY = (mouseEvent.getY() - this.m_grid.getHeight() * 0.15) / coordY;
+
         //retrieve the slot coordinates from the mouse click coordinates
-        Point p = new Point((int)(mouseEvent.getX()/(this.m_grid.getWidth()/6)), 1 - (int)(mouseEvent.getY()/(this.m_grid.getHeight()/2)));
+        Point p = new Point((int)(mouseEvent.getX()/(this.m_grid.getWidth()/6)), 1 - (int)coordY);
 
         //check if the current player is owner of the slot clicked
         Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Player " + this.m_controller.getCurrentPlayer() + " : clicked on " + p);
