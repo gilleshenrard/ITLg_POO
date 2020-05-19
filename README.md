@@ -128,6 +128,7 @@ The unit tests for each class can be found in the mirrored directory tests/ (tes
 - The game can now be launched either in console mode or in JFX mode via a program argument
 - Headers have been added to the newly implemented methods
 - The main game loop runs in a separate thread in the JFX version
+- JFX Slot selection now checks if there are any legal shots available before waiting for a click
 
 ---
 ### 5. Known issues
