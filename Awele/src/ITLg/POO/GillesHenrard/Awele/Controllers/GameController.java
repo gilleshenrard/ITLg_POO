@@ -5,40 +5,38 @@
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
-package Controllers;
 
-import Models.Game;
-import Models.Player;
-import Models.Point;
-import Views.GameView;
+package ITLg.POO.GillesHenrard.Awele.Controllers;
+
+import ITLg.POO.GillesHenrard.Awele.Models.Game;
+import ITLg.POO.GillesHenrard.Awele.Models.Player;
+import ITLg.POO.GillesHenrard.Awele.Models.Point;
+import ITLg.POO.GillesHenrard.Awele.Views.SystemMessage;
 
 import java.security.InvalidParameterException;
 
 public class GameController {
     private BoardController m_board;
-    private GameView m_gameView;
-    private iGameState m_currentState;
+    private SystemMessage m_view;
+    private State m_currentState;
     private int m_currentPlayer;
-    public static SwitchingPlayerState m_switching = new SwitchingPlayerState();
-    public static PromptingState m_prompting = new PromptingState();
-    public static PlayingState m_playing = new PlayingState();
-    public static StoringState m_storing = new StoringState();
 
     /**
      * Create a new Game Controller
      */
     public GameController(){
         this.m_board = new BoardController(Game.getInstance().getBoard());
-        this.m_gameView = null;
+        this.m_board.setGameController(this);
+        this.m_view = null;
         this.m_currentPlayer = 1;
-        this.m_currentState = GameController.m_prompting;
+        this.m_currentState = State.PROMPTING;
     }
 
     /**
      * Set which will be the next state to join
      * @param nextState Next state to join
      */
-    public void setNextState(iGameState nextState){
+    public void setNextState(State nextState){
         this.m_currentState = nextState;
     }
 
@@ -46,7 +44,7 @@ public class GameController {
      * Get the next game state
      * @return Next game state to reach
      */
-    public iGameState getNextState(){
+    public State getNextState(){
         return this.m_currentState;
     }
 
@@ -69,6 +67,24 @@ public class GameController {
     }
 
     /**
+     * Get the ID of the opponent of the current player
+     * @return ID of the opponent
+     */
+    public int getOpponent(){
+        return (this.getCurrentPlayer() == 1 ? 2 : 1);
+    }
+
+    /**
+     * Indicate whether the player is owner of the Point or not
+     * @param ID ID of the player to test
+     * @param p Point of which to test the ownership
+     * @return true if the player owns the Point, false otherwise
+     */
+    public boolean isOwner(int ID, Point p){
+        return ID == p.getY() + 1;
+    }
+
+    /**
      * Set an instance of Player
      * @param player Player to set
      * @throws InvalidParameterException
@@ -80,11 +96,10 @@ public class GameController {
 
     /**
      * Handle the current game state
-     * @param input Input for the current state
      * @return Output of the current state
      */
-    public int handleState(int input){
-        return this.m_currentState.handleState(this, input);
+    public int handleState(){
+        return this.m_currentState.handleState(this);
     };
 
     /**
@@ -114,10 +129,10 @@ public class GameController {
      * @param gameView Game view to use
      * @throws NullPointerException
      */
-    public void setView(GameView gameView) throws NullPointerException{
+    public void setView(SystemMessage gameView) throws NullPointerException{
         if(gameView == null)
-            throw new NullPointerException("GameController.setView() : NULL instance of GameView");
-        this.m_gameView = gameView;
+            throw new NullPointerException("GameController.setView() : NULL instance of SystemMessage");
+        this.m_view = gameView;
     }
 
     /**
@@ -173,27 +188,27 @@ public class GameController {
         this.getBoardController().resetBoard();
     }
     /**
-     * Display a message in the out channel
+     * Display a message
      * @param msg Message to display
      * @throws NullPointerException
      */
     public void displayMessage(String msg) throws NullPointerException{
-        if (this.m_gameView == null)
-            throw new NullPointerException("GameController.displayMessage() : GameView not instantiated");
+        if (this.m_board == null)
+            throw new NullPointerException("GameController.sendMessage() : BoardController not instantiated");
 
-        this.m_gameView.displayMessage(msg);
+        this.m_board.displayMessage(msg);
     }
 
     /**
-     * Display a warning message in the out channel
+     * Display a warning message
      * @param msg Message to display
      * @throws NullPointerException
      */
     public void displayWarning(String msg) throws NullPointerException{
-        if (this.m_gameView == null)
-            throw new NullPointerException("GameController.displayWarning() : GameView not instantiated");
+        if (this.m_board == null)
+            throw new NullPointerException("GameController.sendWarning() : BoardController not instantiated");
 
-        this.m_gameView.displayWarning(msg);
+        this.m_board.displayMessage(msg);
     }
 
     /**
@@ -202,10 +217,10 @@ public class GameController {
      * @throws NullPointerException
      */
     public void displayError(String msg) throws NullPointerException{
-        if (this.m_gameView == null)
+        if (this.m_view == null)
             throw new NullPointerException("GameController.displayError() : GameView not instantiated");
 
-        this.m_gameView.displayError(msg);
+        this.m_view.displayError(msg);
     }
 
     /**
@@ -213,28 +228,7 @@ public class GameController {
      * @throws InvalidParameterException
      * @throws NullPointerException
      */
-    public void displayGame() throws InvalidParameterException, NullPointerException {
-        if (this.m_gameView == null)
-            throw new NullPointerException("GameController.displayGame() : GameView not instantiated");
-
-        this.m_gameView.displayGame();
-    }
-
-    /**
-     * Display all the slots of the board
-     * @throws NullPointerException
-     */
-    public void displayBoard() throws NullPointerException{
-        this.getBoardController().displayBoard(this.m_currentPlayer);
-    }
-
-    /**
-     * Display a separator in the console
-     */
-    public void displaySeparator(){
-        if (this.m_gameView == null)
-            throw new NullPointerException("GameController.displayGame() : GameView not instantiated");
-
-        this.m_gameView.displaySeparator();
+    public void updateObservers() throws InvalidParameterException, NullPointerException {
+        this.getBoardController().updateObservers();
     }
 }

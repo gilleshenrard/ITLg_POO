@@ -1,13 +1,15 @@
 package Controllers;
 
-import Views.BoardView;
-import Views.GameView;
+import ITLg.POO.GillesHenrard.Awele.Controllers.GameController;
+import ITLg.POO.GillesHenrard.Awele.Controllers.State;
+import ITLg.POO.GillesHenrard.Awele.Views.BoardConsoleView;
+import ITLg.POO.GillesHenrard.Awele.Views.GameConsoleView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class StoringStateTest {
     GameController g = new GameController();
-    GameView gv = new GameView(g);
+    GameConsoleView gv = new GameConsoleView(g);
 
     /**
      * Check if handleState() fails storing seeds
@@ -15,10 +17,10 @@ public class StoringStateTest {
     @DisplayName("handleState() - should not fail")
     @Test
     void handleState_shouldnot_fail() {
-        BoardView bv = new BoardView(g.getBoardController());
-        g.setNextState(GameController.m_storing);
+        g.getBoardController().attach(new BoardConsoleView());
+        g.setNextState(State.STORING);
         g.setCurrentPlayer(1);
         g.getBoardController().getBoard().setStoredSeeds(1, 23);
-        g.handleState(25);
+        g.handleState();
     }
 }

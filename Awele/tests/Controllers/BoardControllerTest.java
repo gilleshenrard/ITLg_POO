@@ -1,8 +1,8 @@
 package Controllers;
 
-import Models.Board;
-import Models.Point;
-import Views.BoardView;
+import ITLg.POO.GillesHenrard.Awele.Controllers.BoardController;
+import ITLg.POO.GillesHenrard.Awele.Models.Board;
+import ITLg.POO.GillesHenrard.Awele.Models.Point;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,26 +42,6 @@ public class BoardControllerTest {
     @Test
     void setBoard_shouldnot_fail() {
         b.setBoard(new Board());
-    }
-
-    /**
-     * Check if setBoardView() throws an exception with a null instance
-     */
-    @DisplayName("setBoardView() with a NULL instance - should fail")
-    @Test
-    void setBoardView_nullBoard_should_fail() {
-        Assertions.assertThrows(NullPointerException.class, () -> {
-            b.setBoardView(null);
-        });
-    }
-
-    /**
-     * Check if setBoardView() fails setting an instance of Board
-     */
-    @DisplayName("setBoardView() - should not fail")
-    @Test
-    void setBoardView_shouldnot_fail() {
-        b.setBoardView(new BoardView(b));
     }
 
     /**

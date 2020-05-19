@@ -1,5 +1,5 @@
 # ITLg_POO
-## Project Awele - Part 1 - v3.4
+## Project Awele - Part 1 - v4.0
 
 ---
 ### 1. Introduction
@@ -66,12 +66,15 @@ Views classes can be found in src/Views/. They hold all the methods to interact 
 
 They are as following :
 
-- GameView : Contains methods to display messages game-wide
-- BoardView : Contains methods to display the game board (stored seeds, slots, players name)
+- GameConsoleView : Contains methods to display system messages on the console
+- GameJFXView : Contains methods to display system messages on JavaFX Alert stages
+- BoardConsoleView : Contains methods to display the game board (stored seeds, slots, players name) on the console
+- BoardJFXView : Contains methods to display the game board (stored seeds, slots, players name) on a JavaFX stage
 - iSelectable : base interface of a Strategy Pattern allowing to set the player selection behaviour on-the-fly
 - KeyboardSelect : Allows a player to be prompted to select a slot with the keyboard
 - RandomSelect : Allows a player to randomly select a slot (including a collision avoidance mechanic)
 - MinimaxSelect : Allows a player to select a slot using the minimax algorithm (with alpha and beta pruning)
+- JFXSelect : Allows a player to select a slot by clicking on the JavaFX game board stage
 
 #### 3. Controllers
 Controllers classes can be found in src/Controllers/. They hold the game mechanics, are the loop entry point
@@ -83,10 +86,14 @@ They are as following :
 It also handles the state machine pattern management.
 - BoardController : Contains the harvest and capture mechanics (extensively unit tested)
 
-#### 4. Machine State Pattern based main loop
-To implement and manage the main loop, a State Machine pattern has been implemented.
+#### 4. Players' slot selection mechanism behind a Strategy design pattern
+To allow the game to change each player's slot selection mechanism on the fly, each selection behaviour has been based on the
+strategy pattern and is decoupled from the player itself.
 
-It consists of four classes (plus the base class) :
+#### 5. Seasons' mechanism as a State Machine design pattern
+To implement and manage the seasons' mechanism, a State Machine pattern (or Finite State Machine) has been implemented.
+
+It consists of four classes (plus the base class and an enumeration to hold them) :
 
 - SwitchingPlayerState : Sets the ID of the player which will play the current season
 - PromptingState : Deals with prompting the user for a slot selection
@@ -95,13 +102,32 @@ It consists of four classes (plus the base class) :
 
 As per the pattern rules, a state is always active and present as a member of the game controller.
 
-#### 5. Unit tests
+#### 6. UI update as an Observer design pattern
+In order to decouple the game mechanics and the UI technology as much as possible, the BoardController and the views implement
+the Observer design pattern.
+
+Each time the UI needs to be refreshed, the controller will call updateObservers() on each of its observers (the views),
+instead of just updating the UI directly.
+
+#### 7. Unit tests
 The unit tests for each class can be found in the mirrored directory tests/ (tests/Models, tests/Views, tests/Controllers).
 
 ---
-### 4. Change list (since v3.3)
+### 4. Change list (since v3.4)
 
-- Keyboard slot selection now tests if there are any slots left for the player to play
+- States in the Machine State pattern are now enclosed in an emuneration to ease up their use
+- The Board Controller now uses the Observer design pattern to update a UI independently of the technology used
+- Console views now implement the Observer design pattern
+- BoardController is now a member of GameController, to ease up Constructors manipulations
+- Game views now implement a base class. They only provide system messages
+- UI update has been moved from the Prompting State to the player switching state
+- Previously implemented views have been renamed to indicate those are console views
+- BoardJFXView has been implemented as a JavaFX-based board view
+- GameJFXView has been implemented as a JavaFX-based system messages view
+- JFXSelect has been implemented to deal with player slot selection via JavaFX click events
+- The game can now be launched either in console mode or in JFX mode via a program argument
+- Headers have been added to the newly implemented methods
+- The main game loop runs in a separate thread in the JFX version
 
 ---
 ### 5. Known issues

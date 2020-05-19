@@ -1,5 +1,7 @@
 package Models;
 
+import ITLg.POO.GillesHenrard.Awele.Models.Game;
+import ITLg.POO.GillesHenrard.Awele.Models.Player;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;

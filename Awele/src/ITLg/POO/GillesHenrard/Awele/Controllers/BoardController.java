@@ -3,21 +3,25 @@
 /*  Deals with game board indirect manipulations (playing a slot, saving the current board, ...),   */
 /*      and acts as a buffer between the Board and the Board view. Must not be used directly in     */
 /*      the main method.                                                                            */
+/*  The controller implements the Observer pattern, which allows to refresh the UI                  */
+/*      independently of the UI technology used                                                     */
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
-package Controllers;
+package ITLg.POO.GillesHenrard.Awele.Controllers;
 
-import Models.Board;
-import Models.Point;
-import Views.BoardView;
+import ITLg.POO.GillesHenrard.Awele.Models.Board;
+import ITLg.POO.GillesHenrard.Awele.Models.Point;
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import java.util.Stack;
 
 public class BoardController {
-    Board m_board;
-    BoardView m_boardView;
-    Stack<Board> m_stack;
+    private GameController m_game;
+    private Board m_board;
+    private Stack<Board> m_stack;
+    private ArrayList<iObserver> m_observers;
+    private Point m_lastSelected;
 
     /**
      * Create a new Board controller
@@ -26,8 +30,21 @@ public class BoardController {
      */
     public BoardController(Board b) throws NullPointerException{
         this.setBoard(b);
-        this.m_boardView = null;
         this.m_stack = new Stack<>();
+        this.m_observers = new ArrayList<>();
+        this.m_lastSelected = null;
+    }
+
+    /**
+     * Set the Game controller linked to this board controller
+     * @param controller Game controller to use
+     * @throws NullPointerException
+     */
+    public void setGameController(GameController controller) throws NullPointerException {
+        if (controller == null)
+            throw new NullPointerException("BoardController.setGameController() : NULL instance of GameController");
+
+        this.m_game = controller;
     }
 
     /**
@@ -79,17 +96,6 @@ public class BoardController {
     }
 
     /**
-     * Set the board view on which to play the current game
-     * @param board Board view to set
-     * @throws NullPointerException
-     */
-    public void setBoardView(BoardView board) throws NullPointerException{
-        if(board == null)
-            throw new NullPointerException("BoardController.setBoardView() : NULL instance of Board");
-        this.m_boardView = board;
-    }
-
-    /**
      * Push a copy of the current board in a stack
      * @throws NullPointerException
      */
@@ -125,6 +131,43 @@ public class BoardController {
      */
     public int getSlotSeeds(Point point) throws InvalidParameterException{
         return this.m_board.getSlotSeeds(point);
+    }
+
+    /**
+     * Fetch the name of a player via its ID
+     * @param ID ID of the player
+     * @return Name of the player
+     * @throws InvalidParameterException
+     * @throws NullPointerException
+     */
+    public String getName(int ID) throws InvalidParameterException, NullPointerException{
+        return this.m_game.getName(ID);
+    }
+
+    /**
+     * Get the ID of the current player
+     * @return ID of the current player
+     */
+    public int getCurrentPlayer(){
+        return this.m_game.getCurrentPlayer();
+    }
+
+    /**
+     * Handle the current game state
+     * @return Output of the current state
+     */
+    public int handleState(){
+        return this.m_game.handleState();
+    }
+
+    /**
+     * Indicate whether the player is owner of the Point or not
+     * @param ID ID of the player to test
+     * @param p Point of which to test the ownership
+     * @return true if the player owns the Point, false otherwise
+     */
+    public boolean isOwner(int ID, Point p){
+        return this.m_game.isOwner(ID, p);
     }
 
     /**
@@ -262,14 +305,52 @@ public class BoardController {
     }
 
     /**
-     * Display all the slots of the board
-     * @param ID ID of the current player
+     * Attach a new observer to the board controller
+     * @param observer Observer to attach
      * @throws NullPointerException
      */
-    public void displayBoard(int ID) throws NullPointerException{
-        if (this.m_boardView == null)
-            throw new NullPointerException("BoardController.displayRow() : NULL instance of BoardView");
+    public void attach(iObserver observer) throws NullPointerException{
+        if (observer == null)
+            throw new NullPointerException("BoardController.attach() : NULL instance of iObserver");
 
-        this.m_boardView.displayBoard(ID);
+        this.m_observers.add(observer);
+        observer.setController(this);
+    }
+
+    /**
+     * Update all the attached observers
+     * @param ID ID of the current player
+     */
+    public void updateObservers(){
+        for (iObserver o:this.m_observers) {
+            o.update();
+        }
+    }
+
+    /**
+     * Get the last slot selected by a player
+     * @return Last Slot selected
+     */
+    public Point getLastSelected() {
+        return this.m_lastSelected;
+    }
+
+    /**
+     * Set the last slot selected by a player
+     * @param last Last slot selected
+     */
+    public void setLastSelected(Point last) {
+        this.m_lastSelected = last;
+    }
+
+    /**
+     * Display a message in the out channel
+     * @param msg Message to display
+     * @throws NullPointerException
+     */
+    public void displayMessage(String msg) throws NullPointerException{
+        for (iObserver o:this.m_observers) {
+            o.sendMessage(msg);
+        }
     }
 }

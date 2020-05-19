@@ -27,6 +27,8 @@ hs_err_pid*
 *.iml
 out/
 
-#CSS style files
-*.jpg
+#Awele style elements
 *.otf
+*.ttf
+*.jpg
+*.png

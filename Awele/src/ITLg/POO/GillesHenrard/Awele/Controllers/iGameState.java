@@ -4,7 +4,7 @@
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
-package Controllers;
+package ITLg.POO.GillesHenrard.Awele.Controllers;
 
 public interface iGameState {
     /**
@@ -13,5 +13,5 @@ public interface iGameState {
      * @param input Input of a state
      * @return Output of the state
      */
-    int handleState(GameController controller, int input);
+    int handleState(GameController controller);
 }

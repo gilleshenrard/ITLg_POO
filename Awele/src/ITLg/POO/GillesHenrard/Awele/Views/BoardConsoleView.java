@@ -1,14 +1,16 @@
 /****************************************************************************************************/
-/*  Class BoardView                                                                                 */
-/*  Provides game board display methods, and thus communicates with the board controller            */
+/*  Class BoardConsoleView                                                                          */
+/*  Implements the Observer design pattern                                                          */
+/*  Provides game board console display methods, and thus communicates with the board controller    */
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
-package Views;
-import Controllers.BoardController;
-import Models.Point;
+package ITLg.POO.GillesHenrard.Awele.Views;
+import ITLg.POO.GillesHenrard.Awele.Controllers.BoardController;
+import ITLg.POO.GillesHenrard.Awele.Controllers.iObserver;
+import ITLg.POO.GillesHenrard.Awele.Models.Point;
 
-public class BoardView {
+public class BoardConsoleView implements iObserver {
     private BoardController m_board;
 
     /**
@@ -16,12 +18,8 @@ public class BoardView {
      * @param board Board to view
      * @throws NullPointerException
      */
-    public BoardView(BoardController board) throws NullPointerException{
-        if(board == null)
-            throw new NullPointerException("BoardView() : NULL instance of Board");
-
-        this.m_board = board;
-        this.m_board.setBoardView(this);
+    public BoardConsoleView() throws NullPointerException{
+        this.m_board = null;
     }
 
     /**
@@ -37,13 +35,16 @@ public class BoardView {
      * Display all the slots of the board
      * @param ID ID of the current player
      */
-    public void displayBoard(int ID){
+    public void displayBoard(){
         //display the board
+        //OPPONENT
         //|  0 |
         //|  6 ||  5 ||  4 ||  3 ||  2 ||  1 |
         //|  1 ||  2 ||  3 ||  4 ||  5 ||  6 |
         //|  0 |
+        //PLAYER
 
+        System.out.println(this.m_board.getName(2));
         this.displaySlot(this.m_board.getStoredSeeds(2), false);
         System.out.println();
 
@@ -51,13 +52,33 @@ public class BoardView {
         for(int l=1 ; l>=0 ; l--) {
             for (int c = 0; c < 6; c++) {
                 p.setCoordinates((l > 0 ? 5 - c : c), l);
-                this.displaySlot(this.m_board.getSlotSeeds(p),  l == ID-1 && this.m_board.isLegal(p));
+                this.displaySlot(this.m_board.getSlotSeeds(p),  l == this.m_board.getCurrentPlayer()-1 && this.m_board.isLegal(p));
             }
             System.out.println();
         }
 
         this.displaySlot(this.m_board.getStoredSeeds(1), false);
         System.out.println();
+        System.out.println(this.m_board.getName(1));
 
+    }
+    @Override
+    public void update() {
+        this.displayBoard();
+    }
+
+    @Override
+    public Object getContent() {
+        return null;
+    }
+
+    @Override
+    public void setController(BoardController controller) {
+        this.m_board = controller;
+    }
+
+    @Override
+    public void sendMessage(String msg) {
+        System.out.println(msg);
     }
 }

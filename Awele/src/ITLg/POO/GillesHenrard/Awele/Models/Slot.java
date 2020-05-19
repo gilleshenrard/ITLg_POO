@@ -5,14 +5,12 @@
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
-
-package Models;
+package ITLg.POO.GillesHenrard.Awele.Models;
 
 import java.security.InvalidParameterException;
 import java.util.Objects;
 
-//Slot is private-package : only accessible by classes in the Models package
-class Slot {
+public class Slot {
     private Point m_coordinates;
     private int nb_seeds;
 

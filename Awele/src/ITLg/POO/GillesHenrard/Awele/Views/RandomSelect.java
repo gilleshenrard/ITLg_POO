@@ -5,10 +5,10 @@
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
-package Views;
+package ITLg.POO.GillesHenrard.Awele.Views;
 
-import Controllers.BoardController;
-import Models.Point;
+import ITLg.POO.GillesHenrard.Awele.Controllers.BoardController;
+import ITLg.POO.GillesHenrard.Awele.Models.Point;
 
 import java.util.ArrayList;
 import java.util.Random;

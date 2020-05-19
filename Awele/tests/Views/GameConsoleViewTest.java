@@ -1,32 +1,16 @@
 package Views;
 
-import Controllers.GameController;
-import Models.Game;
-import Models.Player;
+import ITLg.POO.GillesHenrard.Awele.Controllers.GameController;
+import ITLg.POO.GillesHenrard.Awele.Models.Game;
+import ITLg.POO.GillesHenrard.Awele.Models.Player;
+import ITLg.POO.GillesHenrard.Awele.Views.BoardConsoleView;
+import ITLg.POO.GillesHenrard.Awele.Views.GameConsoleView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class GameConsoleViewTest {
     GameController gc = new GameController();
-    GameView g = new GameView(gc);
-
-    /**
-     * Check if displayMessage() fails displaying the winning message
-     */
-    @DisplayName("displayMessage() - should not fail")
-    @Test
-    void displayMessage_shouldnot_fail() {
-        g.displayMessage("Test");
-    }
-
-    /**
-     * Check if displayMessage() throws an exception when given a null instance (should not)
-     */
-    @DisplayName("displayMessage() with a NULL message - should not fail")
-    @Test
-    void displayMessage_nullName_shouldnot_fail() {
-        g.displayMessage(null);
-    }
+    GameConsoleView g = new GameConsoleView(gc);
 
     /**
      * Check if displayWarning() fails displaying the winning message
@@ -70,9 +54,9 @@ class GameConsoleViewTest {
     @DisplayName("displayGame() - should not fail")
     @Test
     void displayGame_shouldnot_fail() {
-        BoardView bv = new BoardView(gc.getBoardController());
+        gc.getBoardController().attach(new BoardConsoleView());
         Game.getInstance().setPlayer(new Player(1, "Test1"));
         Game.getInstance().setPlayer(new Player(2, "Test2"));
-        g.displayGame();
+        gc.updateObservers();
     }
 }

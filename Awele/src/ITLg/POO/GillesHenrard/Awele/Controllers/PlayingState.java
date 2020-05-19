@@ -6,30 +6,44 @@
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
-package Controllers;
+package ITLg.POO.GillesHenrard.Awele.Controllers;
 
-import Models.Point;
+import ITLg.POO.GillesHenrard.Awele.Models.Point;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class PlayingState implements iGameState {
+    private int m_slot = 0;
+
+    /**
+     * Set the slot to play
+     * @param input Slot index to play
+     */
+    public void setInput(int input) {
+        this.m_slot = input;
+    }
 
     /**
      * Make the player play a slot
      * @param controller Game controller to use
-     * @param input Slot selected by the user
      * @return 0 if starvation or empty, amount captured otherwise
      */
     @Override
-    public int handleState(GameController controller, int input){
+    public int handleState(GameController controller){
         //play the slot selected
-        int outcome = controller.playSlot(new Point(input - 1, controller.getCurrentPlayer() - 1));
+        int outcome = controller.playSlot(new Point(this.m_slot - 1, controller.getCurrentPlayer() - 1));
+        Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Player " + controller.getCurrentPlayer() + " : playSlot() returned " + outcome);
 
         if (outcome < 0) {  //player starved or empty slot, get back to prompting state and display forfeit
-            controller.setNextState(controller.m_prompting);
+            Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : next state -> Prompting");
+            controller.setNextState(State.PROMPTING);
             handleOutcome(controller, outcome);
             return 0;
         }
         else {  //Go to the Storing state
-            controller.setNextState(controller.m_storing);
+            Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : next state -> Storing");
+            controller.setNextState(State.STORING);
             return outcome;
         }
     }
@@ -41,11 +55,15 @@ public class PlayingState implements iGameState {
      */
     private void handleOutcome(GameController controller, int outcome){
         //player starved
-        if (outcome == -1)
+        if (outcome == -1) {
             controller.displayWarning("A player can't be starved. Its amount of seeds can't get to 0");
+            Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : message displayed");
+        }
 
         //empty slot played
-        if (outcome == -2)
+        if (outcome == -2) {
             controller.displayWarning("An empty slot can not be harvested");
+            Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : message displayed");
+        }
     }
 }

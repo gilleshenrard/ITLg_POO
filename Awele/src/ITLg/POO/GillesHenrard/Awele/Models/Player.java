@@ -5,9 +5,10 @@
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
-package Models;
+package ITLg.POO.GillesHenrard.Awele.Models;
 
-import Views.iSelectable;
+import ITLg.POO.GillesHenrard.Awele.Views.iSelectable;
+
 import java.security.InvalidParameterException;
 import java.util.Objects;
 

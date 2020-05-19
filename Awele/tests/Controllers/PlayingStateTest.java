@@ -1,17 +1,18 @@
 package Controllers;
 
-import Models.Game;
-import Models.Player;
-import Models.Point;
-import Views.GameView;
-import Views.RandomSelect;
+import ITLg.POO.GillesHenrard.Awele.Controllers.*;
+import ITLg.POO.GillesHenrard.Awele.Models.Game;
+import ITLg.POO.GillesHenrard.Awele.Models.Player;
+import ITLg.POO.GillesHenrard.Awele.Models.Point;
+import ITLg.POO.GillesHenrard.Awele.Views.GameConsoleView;
+import ITLg.POO.GillesHenrard.Awele.Views.RandomSelect;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class PlayingStateTest {
     GameController g = new GameController();
-    GameView gv = new GameView(g);
+    GameConsoleView gv = new GameConsoleView(g);
 
     /**
      * Check if handleState() processes a simple scattering properly (no capture, no starvation)
@@ -23,11 +24,12 @@ public class PlayingStateTest {
         g.getBoardController().getBoard().setStoredSeeds(2, 0);
         g.getBoardController().getBoard().setSlotSeeds(new Point(5, 0), 4);
         g.getBoardController().getBoard().setRemainingSeeds(1, 4);
-        g.setNextState(GameController.m_playing);
+        g.setNextState(State.PLAYING);
         g.setCurrentPlayer(1);
-        int ret = g.handleState(6);
+        ((PlayingState)State.PLAYING.getState()).setInput(6);
+        int ret = g.handleState();
         Assertions.assertEquals(0, ret);
-        Assertions.assertTrue(g.getNextState() instanceof StoringState);
+        Assertions.assertTrue(g.getNextState().getState() instanceof StoringState);
     }
 
     /**
@@ -42,11 +44,12 @@ public class PlayingStateTest {
         g.getBoardController().getBoard().setSlotSeeds(new Point(1, 1), 2);
         g.getBoardController().getBoard().setSlotSeeds(new Point(3, 1), 1);
         g.getBoardController().getBoard().setSlotSeeds(new Point(4, 1), 9);
-        g.setNextState(GameController.m_playing);
+        g.setNextState(State.PLAYING);
         g.setCurrentPlayer(1);
-        int ret = g.handleState(6);
+        ((PlayingState)State.PLAYING.getState()).setInput(6);
+        int ret = g.handleState();
         Assertions.assertEquals(5, ret);
-        Assertions.assertTrue(g.getNextState() instanceof StoringState);
+        Assertions.assertTrue(g.getNextState().getState() instanceof StoringState);
     }
 
     /**
@@ -68,11 +71,12 @@ public class PlayingStateTest {
         g.getBoardController().getBoard().setSlotSeeds(new Point(5, 0), 2);
         g.getBoardController().getBoard().setRemainingSeeds(2, 3);
         g.getBoardController().getBoard().setRemainingSeeds(1, 22);
-        g.setNextState(GameController.m_playing);
+        g.setNextState(State.PLAYING);
         g.setCurrentPlayer(1);
-        int ret = g.handleState(6);
+        ((PlayingState)State.PLAYING.getState()).setInput(6);
+        int ret = g.handleState();
         Assertions.assertEquals(0, ret);
-        Assertions.assertTrue(g.getNextState() instanceof PromptingState);
+        Assertions.assertTrue(g.getNextState().getState() instanceof PromptingState);
     }
 
     /**
@@ -92,11 +96,12 @@ public class PlayingStateTest {
         g.getBoardController().getBoard().emptySlotSeeds(new Point(4, 0));
         g.getBoardController().getBoard().setSlotSeeds(new Point(5, 0), 1);
         g.getBoardController().getBoard().setRemainingSeeds(1, 1);
-        g.setNextState(GameController.m_playing);
+        g.setNextState(State.PLAYING);
         g.setCurrentPlayer(1);
-        int ret = g.handleState(6);
+        ((PlayingState)State.PLAYING.getState()).setInput(6);
+        int ret = g.handleState();
         Assertions.assertEquals(0, ret);
-        Assertions.assertTrue(g.getNextState() instanceof StoringState);
+        Assertions.assertTrue(g.getNextState().getState() instanceof StoringState);
     }
 
     /**
@@ -118,9 +123,10 @@ public class PlayingStateTest {
         g.getBoardController().getBoard().setSlotSeeds(new Point(5, 0), 1);
         g.getBoardController().getBoard().setRemainingSeeds(1, 2);
         g.setCurrentPlayer(1);
-        g.setNextState(GameController.m_playing);
-        int ret = g.handleState(5);
+        g.setNextState(State.PLAYING);
+        ((PlayingState)State.PLAYING.getState()).setInput(5);
+        int ret = g.handleState();
         Assertions.assertEquals(2, ret);
-        Assertions.assertTrue(g.getNextState() instanceof StoringState);
+        Assertions.assertTrue(g.getNextState().getState() instanceof StoringState);
     }
 }

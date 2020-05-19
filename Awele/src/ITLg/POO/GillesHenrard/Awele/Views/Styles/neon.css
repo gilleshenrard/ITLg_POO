@@ -1,0 +1,141 @@
+/*main frame*/
+.main{
+    -fx-background-image: url("background.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 1920 1080;
+    -fx-background-position: center center;
+    -fx-text-alignment : center;
+    -fx-text-fill: #DA4FDE; /*medium orchid*/
+    -fx-font-size: 70;
+    -fx-font-weight: bold;
+    -fx-font-family: 'FTY DELIRIUM NEON NCV';
+}
+
+/*
+//  TITLE AND MENU
+*/
+
+/*title section*/
+.titled-pane {
+    -fx-text-fill: #DA4FDE; /*medium orchid*/
+    -fx-font-size: 120;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(one-pass-box, #DA4FDE, 80, 0, 0, 0);
+}
+
+/*title itself*/
+.titled-pane > .title {
+    -fx-background-color : null;
+}
+
+/*
+//  MESSAGE
+*/
+.message{
+    -fx-text-fill: #DA4FDE; /*medium orchid*/
+    -fx-font-size: 50;
+    -fx-effect: dropshadow(one-pass-box, #DA4FDE, 80, 0, 0, 0);
+}
+
+/*
+//  SLOTS
+*/
+
+/*Slots*/
+.slots .label{
+    -fx-background-color : null;
+    -fx-alignment : center;
+}
+
+.slots Circle{
+    -fx-fill: null;
+    -fx-stroke-width: 6px;
+}
+
+/*Slots player 2*/
+.slotpl2 {
+    -fx-effect: dropshadow(one-pass-box, #5AF2ED, 80, 0, 0, 0);
+}
+
+/*score in player 2's slot*/
+.slotpl2 .label{
+    -fx-font-size: 100;
+    -fx-text-fill: #5AF2ED;
+}
+
+/*circle of player 2's slot*/
+.slotpl2 Circle{
+    -fx-stroke: #5AF2ED;
+}
+
+/*Slots player 1*/
+.slotpl1 {
+    -fx-effect: dropshadow(one-pass-box, #9CFF9C, 80, 0, 0, 0);
+}
+
+/*score in player 1's slot*/
+.slotpl1 .label{
+    -fx-font-size: 100;
+    -fx-text-fill: #9CFF9C;
+}
+
+/*circle of player 1's slot*/
+.slotpl1 Circle{
+    -fx-stroke: #9CFF9C;
+}
+
+/*Slots player 1*/
+.legal {
+    -fx-effect: dropshadow(one-pass-box, #F09F1D, 80, 0, 0, 0);
+}
+
+/*score in player 1's slot*/
+.legal .label{
+    -fx-text-fill: #F09F1D;
+}
+
+/*circle of player 1's slot*/
+.legal Circle{
+    -fx-stroke: #F09F1D;
+}
+
+/*
+//  SCORE PANELS
+*/
+
+/*Boards indicating player name and score*/
+.scores .label{
+    -fx-background-color : rgba(0,0,0,0);
+    -fx-alignment : center;
+    -fx-text-fill: #DA4FDE; /*medium orchid*/
+}
+
+.scorepanel1 .label{
+    -fx-text-fill: yellow; /*medium orchid*/
+    -fx-effect: dropshadow(one-pass-box, yellow, 80, 0, 0, 0);
+}
+
+/*Player 1's name label*/
+.scorepanel1 #l_namePl1{
+    -fx-font-size: 50;
+}
+
+/*Player 1's name label*/
+.scorepanel1 #l_scorePl1{
+    -fx-font-size: 150;
+}
+
+.scorepanel2 .label{
+    -fx-text-fill: #7F24E0; /*medium orchid*/
+    -fx-effect: dropshadow(one-pass-box, #7F24E0, 80, 0, 0, 0);
+}
+
+/*Player 2's name label*/
+.scorepanel2 #l_namePl2{
+    -fx-font-size: 50;
+}
+
+/*Player 2's name label*/
+.scorepanel2 #l_scorePl2{
+    -fx-font-size: 150;
+}
