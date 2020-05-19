@@ -8,6 +8,7 @@ import ITLg.POO.GillesHenrard.Awele.Models.Player;
 import ITLg.POO.GillesHenrard.Awele.Models.Point;
 import ITLg.POO.GillesHenrard.Awele.Views.BoardConsoleView;
 import ITLg.POO.GillesHenrard.Awele.Views.GameConsoleView;
+import ITLg.POO.GillesHenrard.Awele.Views.KeyboardSelect;
 import ITLg.POO.GillesHenrard.Awele.Views.RandomSelect;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -30,6 +31,29 @@ public class PromptingStateTest {
         int output = g.handleState();
         Assertions.assertTrue(output > 0 && output < 7);
         Assertions.assertTrue(g.getNextState().getState() instanceof PlayingState);
+    }
+
+    /**
+     * Check if handleState() forfeits for a keyboardSelect without any slots available
+     */
+    @DisplayName("handleState() with KeyboardSelect and no slots available, no forfeit - should not fail")
+    @Test
+    void handleState_Forfeit_shouldnot_fail() {
+        g.getBoardController().getBoard().setStoredSeeds(1, 0);
+        g.getBoardController().getBoard().setStoredSeeds(2, 0);
+        Game.getInstance().setPlayer(new Player(1, "Test", new KeyboardSelect(g.getBoardController(), 1)));
+        Game.getInstance().setPlayer(new Player(2, "Test", new RandomSelect(g.getBoardController(), 2)));
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(0, 0));
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(1, 0));
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(2, 0));
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(3, 0));
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(4, 0));
+        g.getBoardController().getBoard().emptySlotSeeds(new Point(5, 0));
+        g.getBoardController().getBoard().setRemainingSeeds(1, 0);
+        g.setNextState(State.PROMPTING);
+        g.setCurrentPlayer(1);
+        int ret = g.handleState();
+        Assertions.assertEquals(-2, ret);
     }
 
     /**
