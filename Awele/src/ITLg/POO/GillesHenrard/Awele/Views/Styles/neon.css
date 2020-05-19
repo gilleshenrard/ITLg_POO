@@ -32,6 +32,7 @@
 //  MESSAGE
 */
 .message{
+    -fx-alignment: center;
     -fx-text-fill: #DA4FDE; /*medium orchid*/
     -fx-font-size: 50;
     -fx-effect: dropshadow(one-pass-box, #DA4FDE, 80, 0, 0, 0);
