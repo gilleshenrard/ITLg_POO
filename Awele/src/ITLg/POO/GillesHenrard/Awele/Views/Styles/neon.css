@@ -104,38 +104,38 @@
 */
 
 /*Boards indicating player name and score*/
-.scores .label{
+.scores{
     -fx-background-color : rgba(0,0,0,0);
     -fx-alignment : center;
     -fx-text-fill: #DA4FDE; /*medium orchid*/
 }
 
-.scorepanel1 .label{
+.scorepanel1{
     -fx-text-fill: yellow; /*medium orchid*/
     -fx-effect: dropshadow(one-pass-box, yellow, 80, 0, 0, 0);
 }
 
 /*Player 1's name label*/
-.scorepanel1 #l_namePl1{
+#l_namePl1{
     -fx-font-size: 50;
 }
 
 /*Player 1's name label*/
-.scorepanel1 #l_scorePl1{
+#l_scorePl1{
     -fx-font-size: 150;
 }
 
-.scorepanel2 .label{
+.scorepanel2{
     -fx-text-fill: #7F24E0; /*medium orchid*/
     -fx-effect: dropshadow(one-pass-box, #7F24E0, 80, 0, 0, 0);
 }
 
 /*Player 2's name label*/
-.scorepanel2 #l_namePl2{
+#l_namePl2{
     -fx-font-size: 50;
 }
 
 /*Player 2's name label*/
-.scorepanel2 #l_scorePl2{
+#l_scorePl2{
     -fx-font-size: 150;
 }
