@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<!-- Main scene (6X6 gridPane) -->
+<GridPane xmlns:fx="http://javafx.com/fxml/1" fx:id="m_grid" maxHeight="998.0" maxWidth="1744.0" minHeight="998.0"
+          minWidth="1744.0"
+          prefHeight="998.0" prefWidth="1744.0" styleClass="main"
+          stylesheets="@../Styles/neon.css" xmlns="http://javafx.com/javafx/11.0.1">
+
+    <!-- Column constraints (6 equal columns) -->
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="16.666"/>
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="16.667"/>
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="16.667"/>
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="16.667"/>
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="16.667"/>
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="16.666"/>
+    </columnConstraints>
+
+    <!-- Row constraints (5 rows) -->
+    <rowConstraints>
+        <RowConstraints vgrow="SOMETIMES" percentHeight="10.0"/>
+        <RowConstraints vgrow="SOMETIMES" percentHeight="5.0"/>
+        <RowConstraints vgrow="SOMETIMES" percentHeight="30.0"/>
+        <RowConstraints vgrow="SOMETIMES" percentHeight="30.0"/>
+        <RowConstraints vgrow="SOMETIMES" percentHeight="5.0"/>
+        <RowConstraints vgrow="SOMETIMES" percentHeight="10.0"/>
+    </rowConstraints>
+
+    <!-- Actual body of the pane -->
+    <children>
+        <!-- Title pane (TitledPane contains options overlay) -->
+        <TitledPane animated="false" expanded="false" text="AWELE" BorderPane.alignment="CENTER" GridPane.rowIndex="0"
+                    GridPane.columnIndex="0" GridPane.columnSpan="6">
+            <content>
+                <!-- Options pane -->
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="Infinity"/>
+            </content>
+        </TitledPane>
+
+
+        <!-- Messages label -->
+        <Label fx:id="l_message" prefHeight="Infinity" prefWidth="Infinity" styleClass="message" text="Message"
+               GridPane.rowIndex="1" GridPane.columnIndex="0" GridPane.columnSpan="6"/>
+
+
+        <!-- Slots grid (6X2 stackPanel grid) -->
+        <!-- Player 2's row -->
+        <StackPane prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                   styleClass="slots,slotpl2,illegal">
+            <children>
+                <Circle radius="110.0"/>
+                <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
+            </children>
+        </StackPane>
+        <StackPane prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="2"
+                   styleClass="slots,slotpl2,illegal">
+            <children>
+                <Circle radius="110.0"/>
+                <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
+            </children>
+        </StackPane>
+        <StackPane prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="2" GridPane.rowIndex="2"
+                   styleClass="slots,slotpl2,illegal">
+            <children>
+                <Circle radius="110.0"/>
+                <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
+            </children>
+        </StackPane>
+        <StackPane prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="3" GridPane.rowIndex="2"
+                   styleClass="slots,slotpl2,illegal">
+            <children>
+                <Circle radius="110.0"/>
+                <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
+            </children>
+        </StackPane>
+        <StackPane prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="4" GridPane.rowIndex="2"
+                   styleClass="slots,slotpl2,illegal">
+            <children>
+                <Circle radius="110.0"/>
+                <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
+            </children>
+        </StackPane>
+        <StackPane prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="5" GridPane.rowIndex="2"
+                   styleClass="slots,slotpl2,illegal">
+            <children>
+                <Circle radius="110.0"/>
+                <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
+            </children>
+        </StackPane>
+
+        <!-- Player 1's row -->
+        <StackPane prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="0" GridPane.rowIndex="3"
+                   styleClass="slots,slotpl1,illegal">
+            <children>
+                <Circle radius="110.0"/>
+                <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
+            </children>
+        </StackPane>
+        <StackPane prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="3"
+                   styleClass="slots,slotpl1,illegal">
+            <children>
+                <Circle radius="110.0"/>
+                <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
+            </children>
+        </StackPane>
+        <StackPane prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="2" GridPane.rowIndex="3"
+                   styleClass="slots,slotpl1,illegal">
+            <children>
+                <Circle radius="110.0"/>
+                <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
+            </children>
+        </StackPane>
+        <StackPane prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="3" GridPane.rowIndex="3"
+                   styleClass="slots,slotpl1,illegal">
+            <children>
+                <Circle radius="110.0"/>
+                <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
+            </children>
+        </StackPane>
+        <StackPane prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="4" GridPane.rowIndex="3"
+                   styleClass="slots,slotpl1,illegal">
+            <children>
+                <Circle radius="110.0"/>
+                <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
+            </children>
+        </StackPane>
+        <StackPane prefHeight="Infinity" prefWidth="Infinity" GridPane.columnIndex="5" GridPane.rowIndex="3"
+                   styleClass="slots,slotpl1,illegal">
+            <children>
+                <Circle radius="110.0"/>
+                <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
+            </children>
+        </StackPane>
+
+
+        <!-- Name tag Player 1 -->
+        <Label fx:id="l_namePl1"
+               prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.rowIndex="4" GridPane.columnIndex="0"
+               GridPane.columnSpan="3" styleClass="scores,scorepanel1"/>
+
+
+        <!-- Name tag Player 2 -->
+        <Label fx:id="l_namePl2"
+               prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.rowIndex="4" GridPane.columnIndex="3"
+               GridPane.columnSpan="3" styleClass="scores,scorepanel1"/>
+
+
+        <!-- Score tag Player 1 -->
+        <Label fx:id="l_scorePl1"
+               prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.rowIndex="5" GridPane.columnIndex="0"
+               GridPane.columnSpan="3" styleClass="scores,scorepanel2"/>
+
+
+        <!-- Score tag Player 2 -->
+        <Label fx:id="l_scorePl2"
+               prefHeight="Infinity" prefWidth="Infinity" text="Label" GridPane.rowIndex="5" GridPane.columnIndex="3"
+               GridPane.columnSpan="3" styleClass="scores,scorepanel2"/>
+    </children>
+</GridPane>

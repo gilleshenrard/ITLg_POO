@@ -44,9 +44,9 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
     public BoardJFXView() {
         try {
             //load the FXML document
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Layouts/MainScene.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Layouts/MainSceneGrid.fxml"));
             loader.setController(this);
-            BorderPane graph = loader.load();
+            GridPane graph = loader.load();
 
             //load custom fonts
             Font.loadFont(this.getClass().getResource("Styles/FTY_DELIRIUM_NEON_NCV.otf").toExternalForm(), 12);          //-fx-font-family: 'FTY DELIRIUM NEON NCV'
@@ -84,7 +84,7 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
             for (int l=0 ; l<2 ; l++){
                 for (int c=0 ; c<6 ; c++) {
                     //retrieve the proper GridView element and its label child
-                    int index = (l == 0 ? 7+c : 6-c);
+                    int index = (l == 0 ? 8+c : 7-c);
                     StackPane tmp = (StackPane) this.m_grid.getChildren().get(index);
                     Label tmplabel = (Label) tmp.getChildren().get(1);
 
