@@ -2,6 +2,8 @@ package Models;
 
 import ITLg.POO.GillesHenrard.Awele.Models.Player;
 import ITLg.POO.GillesHenrard.Awele.Views.KeyboardSelect;
+import ITLg.POO.GillesHenrard.Awele.Controllers.BoardController;
+import ITLg.POO.GillesHenrard.Awele.Models.Board;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -80,7 +82,7 @@ class PlayerTest {
     @DisplayName("setBehaviour() - should not fail")
     @Test
     void setBehaviour_shouldnot_fail() {
-            p.setBehaviour(new KeyboardSelect());
+            p.setBehaviour(new KeyboardSelect(new BoardController(new Board()), 1));
     }
 
     /**
@@ -119,7 +121,7 @@ class PlayerTest {
     @DisplayName("equals() with different behaviours - should not fail")
     @Test
     void equals_differentBehaviour_should_fail(){
-        Player p4 = new Player(1, "Testname", new KeyboardSelect());
+        Player p4 = new Player(1, "Testname", new KeyboardSelect(new BoardController(new Board()), 1));
         Assertions.assertNotEquals(p, p4);
     }
 

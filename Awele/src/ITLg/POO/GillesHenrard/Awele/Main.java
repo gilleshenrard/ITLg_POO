@@ -97,7 +97,7 @@ public class Main extends Application{
         game.getBoardController().attach(bv);
 
         //players setup
-        game.setPlayer(new Player(1, "Gilles", new KeyboardSelect()));
+        game.setPlayer(new Player(1, "Gilles", new KeyboardSelect(game.getBoardController(), 1)));
         game.setPlayer(new Player(2, "AI", new MinimaxSelect(game.getBoardController(), 2)));
 
         //display the board
