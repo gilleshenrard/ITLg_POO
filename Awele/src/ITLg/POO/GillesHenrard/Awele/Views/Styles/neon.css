@@ -57,6 +57,16 @@
     -fx-stroke-width: 6px;
 }
 
+/*Slots label when hovered*/
+.slots:hover .label{
+    -fx-font-size: 104;
+}
+
+/*slots circles when hovered*/
+.slots:hover Circle{
+    -fx-stroke-width: 10px;
+}
+
 /*Slots player 2*/
 .slotpl2 {
     -fx-effect: dropshadow(one-pass-box, #5AF2ED, 80, 0, 0, 0);
