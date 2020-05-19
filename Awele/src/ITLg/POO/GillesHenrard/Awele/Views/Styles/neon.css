@@ -1,9 +1,12 @@
 /*main frame*/
 .main{
+    /*background image*/
     -fx-background-image: url("background.jpg");
     -fx-background-repeat: stretch;
     -fx-background-size: 1920 1080;
     -fx-background-position: center center;
+
+    /*general text rules*/
     -fx-text-alignment : center;
     -fx-text-fill: #DA4FDE; /*medium orchid*/
     -fx-font-size: 70;
@@ -48,6 +51,7 @@
     -fx-alignment : center;
 }
 
+/*slots circles*/
 .slots Circle{
     -fx-fill: null;
     -fx-stroke-width: 6px;
@@ -111,6 +115,7 @@
     -fx-text-fill: #DA4FDE; /*medium orchid*/
 }
 
+/*Player 1's whole scorepanel*/
 .scorepanel1{
     -fx-text-fill: yellow; /*medium orchid*/
     -fx-effect: dropshadow(one-pass-box, yellow, 80, 0, 0, 0);
@@ -126,6 +131,7 @@
     -fx-font-size: 150;
 }
 
+/*Player 2's whole scorepanel*/
 .scorepanel2{
     -fx-text-fill: #7F24E0; /*medium orchid*/
     -fx-effect: dropshadow(one-pass-box, #7F24E0, 80, 0, 0, 0);
