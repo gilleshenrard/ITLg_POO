@@ -20,15 +20,6 @@ public class GameConsoleView extends SystemMessage{
     }
 
     /**
-     * Display a warning message in the out channel
-     * @param msg Message to display
-     */
-    @Override
-    public void displayWarning(String msg){
-        System.out.println(msg);
-    }
-
-    /**
      * Display an error message in the err channel
      * @param msg Message to display
      */

@@ -22,17 +22,6 @@ public class GameJFXView extends SystemMessage {
     }
 
     @Override
-    public void displayWarning(String msg) {
-        Platform.runLater(() -> {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning");
-            alert.setHeaderText(null);
-            alert.setContentText(msg);
-            alert.showAndWait();
-        });
-    }
-
-    @Override
     public void displayError(String msg) {
         Platform.runLater(() -> {
             Alert alert = new Alert(Alert.AlertType.ERROR);
