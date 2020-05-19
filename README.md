@@ -129,6 +129,7 @@ The unit tests for each class can be found in the mirrored directory tests/ (tes
 - Headers have been added to the newly implemented methods
 - The main game loop runs in a separate thread in the JFX version
 - JFX Slot selection now checks if there are any legal shots available before waiting for a click
+- Warning are now displayed as messages
 
 ---
 ### 5. Known issues
