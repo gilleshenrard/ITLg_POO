@@ -1,24 +1,12 @@
 package Views;
 
-import Controllers.BoardController;
-import Models.Board;
-import org.junit.jupiter.api.Assertions;
+import ITLg.POO.GillesHenrard.Awele.Controllers.GameController;
+import ITLg.POO.GillesHenrard.Awele.Views.BoardConsoleView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class BoardConsoleViewTest {
-    BoardView bv = new BoardView(new BoardController(new Board()));
-
-    /**
-     * Check if boardView() throws an exception when given a null instance
-     */
-    @DisplayName("boardView() with a NULL Board instance - should fail")
-    @Test
-    void boardView_nullBoard_should_fail() {
-        Assertions.assertThrows(NullPointerException.class, () -> {
-            BoardView b2 = new BoardView(null);
-        });
-    }
+    BoardConsoleView bv = new BoardConsoleView();
 
     /**
      * Check if displaySlot() fails displaying a slot
@@ -35,6 +23,8 @@ class BoardConsoleViewTest {
     @DisplayName("displayBoard() - should not fail")
     @Test
     void displayBoard_shouldnot_fail() {
-        bv.displayBoard(1);
+        GameController gc = new GameController();
+        gc.getBoardController().attach(bv);
+        bv.displayBoard();
     }
 }

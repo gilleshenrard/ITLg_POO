@@ -2,6 +2,7 @@ package Controllers;
 
 import ITLg.POO.GillesHenrard.Awele.Controllers.GameController;
 import ITLg.POO.GillesHenrard.Awele.Controllers.PlayingState;
+import ITLg.POO.GillesHenrard.Awele.Controllers.PromptingState;
 import ITLg.POO.GillesHenrard.Awele.Controllers.State;
 import ITLg.POO.GillesHenrard.Awele.Models.Game;
 import ITLg.POO.GillesHenrard.Awele.Models.Player;
@@ -75,7 +76,7 @@ public class PromptingStateTest {
         g.getBoardController().getBoard().setRemainingSeeds(1, 1);
         g.setNextState(State.PROMPTING);
         g.setCurrentPlayer(1);
-        int ret = g.handleState(6);
+        int ret = g.handleState();
         Assertions.assertEquals(6, ret);
     }
 
@@ -96,12 +97,10 @@ public class PromptingStateTest {
         g.getBoardController().getBoard().emptySlotSeeds(new Point(4, 0));
         g.getBoardController().getBoard().emptySlotSeeds(new Point(5, 0));
         g.getBoardController().getBoard().setRemainingSeeds(1, 0);
-        g.setNextState(GameController.m_prompting);
+        g.setNextState(State.PROMPTING);
         g.setCurrentPlayer(1);
-        int ret = g.handleState(6);
-        Assertions.assertEquals(-2, ret);
         int ret = g.handleState();
-        Assertions.assertEquals(6, ret);
-        Assertions.assertTrue(g.getNextState().getState() instanceof PlayingState);
+        Assertions.assertEquals(-2, ret);
+        Assertions.assertTrue(g.getNextState().getState() instanceof PromptingState);
     }
 }
