@@ -1,5 +1,5 @@
 # ITLg_POO
-## Project Awele - Part 1 - v3.3
+## Project Awele - Part 1 - v3.4
 
 ---
 ### 1. Introduction
@@ -99,10 +99,9 @@ As per the pattern rules, a state is always active and present as a member of th
 The unit tests for each class can be found in the mirrored directory tests/ (tests/Models, tests/Views, tests/Controllers).
 
 ---
-### 4. Change list (since v3.2)
+### 4. Change list (since v3.3)
 
-- The game now allows players to self-starve. Only the opponent cannot be starved during a season
-- All java files (except for unit tests) have a header with a description
+- Keyboard slot selection now tests if there are any slots left for the player to play
 
 ---
 ### 5. Known issues
