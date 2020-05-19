@@ -54,9 +54,9 @@ public class PromptingStateTest {
     }
 
     /**
-     * Check if handleState() processes a self-starvation by scattering to another row
+     * Check if handleState() forfeits for a keyboardSelect without any slots available
      */
-    @DisplayName("handleState() with self-starvation to other row, no forfeit - should not fail")
+    @DisplayName("handleState() with KeyboardSelect and no slots available, no forfeit - should not fail")
     @Test
     void handleState_Forfeit_otherRow_shouldnot_fail() {
         g.getBoardController().getBoard().setStoredSeeds(1, 0);

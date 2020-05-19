@@ -25,11 +25,9 @@ class KeyboardSelectTest {
     }
 
     /**
-     * Check if selectSlot() properly returns the value set by the user on the keyboard
-     * This test is disabled until a solution to test keyboard strokes is found
+     * Check if selectSlot() properly returns an error if no slots available
      */
-    @DisplayName("selectSlot() - should not fail")
-    @Disabled("Need to find a way to emulate user keyboard inputs")
+    @DisplayName("selectSlot() with no slots left - should not fail")
     @Test
     void selectSlot_Forfeit_shouldnot_fail() {
         b.getBoard().setStoredSeeds(1, 0);
