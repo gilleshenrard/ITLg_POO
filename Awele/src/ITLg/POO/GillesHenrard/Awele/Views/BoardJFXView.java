@@ -64,6 +64,9 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
      */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //log the main scene initialisation
+        Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Main scene initialisation");
+
         //set the click handler to the grid panel
         this.m_grid.setOnMouseClicked(this::onSlotClicked);
 
@@ -111,6 +114,8 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
             //update the name of both players
             this.l_namePl1.setText(this.m_controller.getName(1));
             this.l_namePl2.setText(this.m_controller.getName(2));
+
+            Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + this.m_controller.getCurrentPlayer() + " finished updating the scene");
         });
     }
 
