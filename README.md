@@ -140,5 +140,9 @@ n/a
 ---
 ### 6. To do
 
+- Make the JavaFX interface responsive
+- Implement an Options panel
 - Optimise the unit tests
+- Check if every method throws an exception if supposed to
+- Improve logging (+ disable it in console mode)
 - Add UML diagram links to README.md
