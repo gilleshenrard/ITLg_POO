@@ -237,15 +237,13 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
     }
 
     /**
-     * Animate a pane by fading it for 800 ms from 1.0 to 0.2 once, then return to normal
+     * Animate a pane by fading it for 1s from 1.0 to 0.2 once, then return to normal
      * @param pane Pane to animate
      */
     private void animate(StackPane pane) {
-        Logger.getLogger(this.getClass().getName()).log(Level.FINE, "A pane is animated");
-
         //fade out transition
         FadeTransition fade = new FadeTransition();
-        fade.setDuration(Duration.millis(700));
+        fade.setDuration(Duration.millis(900));
         fade.setFromValue(1.0);
         fade.setToValue(0.2);
         fade.setCycleCount(1);
@@ -253,11 +251,11 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
 
         //fade in transition
         FadeTransition unfade = new FadeTransition();
-        fade.setDuration(Duration.millis(100));
-        fade.setFromValue(0.2);
-        fade.setToValue(1.0);
-        fade.setCycleCount(1);
-        fade.setAutoReverse(false);
+        unfade.setDuration(Duration.millis(100));
+        unfade.setFromValue(0.2);
+        unfade.setToValue(1.0);
+        unfade.setCycleCount(1);
+        unfade.setAutoReverse(false);
 
         //set a sequence of both transition on the pane
         SequentialTransition sequence = new SequentialTransition(pane, fade, unfade);
