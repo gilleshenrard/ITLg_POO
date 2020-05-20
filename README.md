@@ -130,6 +130,8 @@ The unit tests for each class can be found in the mirrored directory tests/ (tes
 - The main game loop runs in a separate thread in the JFX version
 - JFX Slot selection now checks if there are any legal shots available before waiting for a click
 - Warning are now displayed as messages
+- The logger utility java.util.logging.Logger is now used for debug messages
+- AI players now wait for 1 second before playing
 
 ---
 ### 5. Known issues
