@@ -233,6 +233,16 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
         //launch as a runlater task to avoid concurrency issues
         Platform.runLater(() -> {
             this.l_message.setText(msg);
+
+            //animate the message (fade out during 5s)
+            FadeTransition fade = new FadeTransition();
+            fade.setDuration(Duration.millis(5000));
+            fade.setFromValue(1.0);
+            fade.setToValue(0.0);
+            fade.setCycleCount(1);
+            fade.setAutoReverse(false);
+            fade.setNode(this.l_message);
+            fade.play();
         });
     }
 
