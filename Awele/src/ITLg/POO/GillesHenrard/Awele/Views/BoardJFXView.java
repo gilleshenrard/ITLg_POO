@@ -139,7 +139,7 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
                     //update the label's text
                     if (this.m_slots[l][c] != Integer.parseInt(tmplabel.getText())) {
                         tmplabel.setText(Integer.toString(this.m_slots[l][c]));
-                        animate(tmp);
+                        animateSlot(tmp);
                     }
 
                     //update the CSS class of the whole Stackpane element
@@ -240,7 +240,7 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
      * Animate a pane by fading it for 1s from 1.0 to 0.2 once, then return to normal
      * @param pane Pane to animate
      */
-    private void animate(StackPane pane) {
+    private void animateSlot(StackPane pane) {
         //fade out transition
         FadeTransition fade = new FadeTransition();
         fade.setDuration(Duration.millis(900));
