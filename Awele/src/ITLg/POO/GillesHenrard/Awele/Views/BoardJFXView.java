@@ -31,6 +31,8 @@ import java.util.logging.Logger;
 public class BoardJFXView extends BorderPane implements iObserver, Initializable {
     private Scene m_scene = null;
     private BoardController m_controller;
+    private int[][] m_slots;
+    private int[] m_scores;
     @FXML GridPane m_grid;
     @FXML Label l_message;
     @FXML Label l_namePl1;
@@ -43,6 +45,9 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
      */
     public BoardJFXView() {
         try {
+            this.m_slots = new int[2][6];
+            this.m_scores = new int[2];
+
             //load the FXML document
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Layouts/MainSceneGrid.fxml"));
             loader.setController(this);
@@ -79,11 +84,31 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
      */
     @Override
     public void update() {
-        //launch as a runlater task to avoid concurrency issues
-        Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + this.m_controller.getCurrentPlayer() + " updates the main scene");
+        Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + this.m_controller.getCurrentPlayer() + " updates the buffers");
+
+        //update the slots seeds and stored seeds count buffers
+        Point p = new Point(0, 0);
+        for (int l=0 ; l<2 ; l++) {
+            for (int c = 0; c < 6; c++) {
+                p.setCoordinates(c, l);
+                this.m_slots[l][c] = this.m_controller.getSlotSeeds(p);
+            }
+            this.m_scores[l] = this.m_controller.getStoredSeeds(l + 1);
+        }
+
+        //update the JavaFX scene
+        updateScene();
+    }
+
+    /**
+     * Update the main scene's labels in a runLater procedure
+     */
+    private void updateScene(){
+        //launch scene update as a runlater task to avoid concurrency issues
         Platform.runLater(() -> {
+            Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + this.m_controller.getCurrentPlayer() + " updates the main scene");
+
             //update all the slots with the values from the Board
-            Point p = new Point(0, 0);
             for (int l=0 ; l<2 ; l++){
                 for (int c=0 ; c<6 ; c++) {
                     //retrieve the proper GridView element and its label child
@@ -93,7 +118,7 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
 
                     //update the label's text
                     p.setCoordinates(c, l);
-                    tmplabel.setText(Integer.toString(this.m_controller.getSlotSeeds(p)));
+                    tmplabel.setText(Integer.toString(this.m_slots[l][c]));
 
                     //update the CSS class of the whole Stackpane element
                     if (this.m_controller.isOwner(this.m_controller.getCurrentPlayer(), p) && this.m_controller.isLegal(p)){
@@ -108,8 +133,8 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
             }
 
             //update the stored seeds count for both players
-            this.l_scorePl1.setText(Integer.toString(this.m_controller.getStoredSeeds(1)));
-            this.l_scorePl2.setText(Integer.toString(this.m_controller.getStoredSeeds(2)));
+            this.l_scorePl1.setText(Integer.toString(this.m_scores[0]));
+            this.l_scorePl2.setText(Integer.toString(this.m_scores[1]));
 
             //update the name of both players
             this.l_namePl1.setText(this.m_controller.getName(1));
