@@ -21,7 +21,7 @@ public class Main extends Application{
      */
     public static void main(String[] args) {
         // create the main logger, and enable all logs
-        Logger logger = Logger.getLogger(Main.class.getName());
+        Logger logger = Logger.getLogger(Main.class.getPackageName());
         logger.setLevel(Level.ALL);
         logger.setUseParentHandlers(false);
 
