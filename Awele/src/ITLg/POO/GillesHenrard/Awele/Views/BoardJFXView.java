@@ -10,8 +10,7 @@ package ITLg.POO.GillesHenrard.Awele.Views;
 import ITLg.POO.GillesHenrard.Awele.Controllers.BoardController;
 import ITLg.POO.GillesHenrard.Awele.Controllers.iObserver;
 import ITLg.POO.GillesHenrard.Awele.Models.Point;
-import javafx.animation.FadeTransition;
-import javafx.animation.SequentialTransition;
+import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,9 +18,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.util.Duration;
 
@@ -247,30 +246,33 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
     }
 
     /**
-     * Animate a pane by fading it for 1s from 1.0 to 0.2 once, then return to normal
+     * Animate a pane by fading the background as the stroke colour from 1.0 to 0 in 1 second
      * @param pane Pane to animate
      */
     private void animateSlot(StackPane pane) {
-        //fade out transition
-        FadeTransition fade = new FadeTransition();
-        fade.setDuration(Duration.millis(900));
-        fade.setFromValue(1.0);
-        fade.setToValue(0.2);
-        fade.setCycleCount(1);
-        fade.setAutoReverse(false);
+        //define an inline class
+        final Animation animation = new Transition() {
+            {
+                setCycleDuration(Duration.millis(1000));
+                setInterpolator(Interpolator.EASE_OUT);
+            }
 
-        //fade in transition
-        FadeTransition unfade = new FadeTransition();
-        unfade.setDuration(Duration.millis(100));
-        unfade.setFromValue(0.2);
-        unfade.setToValue(1.0);
-        unfade.setCycleCount(1);
-        unfade.setAutoReverse(false);
+            @Override
+            protected void interpolate(double frac) {
+                //get the colour of the label used (same as the circle stroke)
+                Label label = (Label) pane.getChildren().get(1);
+                String fill = label.getTextFill().toString();
 
-        //set a sequence of both transition on the pane
-        SequentialTransition sequence = new SequentialTransition(pane, fade, unfade);
+                //fade it accordingly depending of the time (lower the alpha)
+                Color vColor = Color.web(fill, 1.0 - frac);
 
-        //play the sequence
-        sequence.play();
+                //set it as the background colour for the circle
+                Circle circle = (Circle) pane.getChildren().get(0);
+                circle.setFill(vColor);
+            }
+        };
+
+        //play the animation
+        animation.play();
     }
 }
