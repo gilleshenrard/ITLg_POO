@@ -39,6 +39,6 @@ class GameConsoleViewTest {
         gc.getBoardController().attach(new BoardConsoleView());
         Game.getInstance().setPlayer(new Player(1, "Test1"));
         Game.getInstance().setPlayer(new Player(2, "Test2"));
-        gc.updateObservers();
+        gc.displayGame();
     }
 }

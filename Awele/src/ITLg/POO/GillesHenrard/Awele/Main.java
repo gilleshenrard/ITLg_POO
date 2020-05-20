@@ -60,7 +60,7 @@ public class Main extends Application{
         //primary Stage setup
         primaryStage.setTitle("POO - Awele");
         primaryStage.setScene((Scene)bv.getContent());
-        game.updateObservers();
+        game.displayGame();
         primaryStage.setResizable(false);
         primaryStage.setWidth(1920);
         primaryStage.setHeight(1080);
@@ -101,7 +101,7 @@ public class Main extends Application{
         game.setPlayer(new Player(2, "AI", new MinimaxSelect(game.getBoardController(), 2)));
 
         //display the board
-        game.updateObservers();
+        game.displayGame();
 
         //launch the game loop
         gameLoop(game);

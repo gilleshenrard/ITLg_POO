@@ -228,7 +228,7 @@ public class GameController {
      * @throws InvalidParameterException
      * @throws NullPointerException
      */
-    public void updateObservers() throws InvalidParameterException, NullPointerException {
+    public void displayGame() throws InvalidParameterException, NullPointerException {
         this.getBoardController().updateObservers();
     }
 }
