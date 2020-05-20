@@ -109,6 +109,7 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
             Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + this.m_controller.getCurrentPlayer() + " updates the main scene");
 
             //update all the slots with the values from the Board
+            Point p = new Point(0, 0);
             for (int l=0 ; l<2 ; l++){
                 for (int c=0 ; c<6 ; c++) {
                     //retrieve the proper GridView element and its label child
