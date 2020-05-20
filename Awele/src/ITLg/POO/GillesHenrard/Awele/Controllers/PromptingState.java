@@ -20,11 +20,11 @@ public class PromptingState implements iGameState {
     @Override
     public int handleState(GameController controller){
 
-        //make any AI player wait for 500 ms before choosing
+        //make any AI player wait for 1s before choosing
         if (controller.isPlayerAI(controller.getCurrentPlayer())) {
-            Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : waits for 700 ms");
+            Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : waits for 1s");
             try {
-                Thread.sleep(700);
+                Thread.sleep(1000);
             }catch (InterruptedException e){}
         }
 
