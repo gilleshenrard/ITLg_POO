@@ -10,6 +10,8 @@ package ITLg.POO.GillesHenrard.Awele.Views;
 import ITLg.POO.GillesHenrard.Awele.Controllers.BoardController;
 import ITLg.POO.GillesHenrard.Awele.Controllers.iObserver;
 import ITLg.POO.GillesHenrard.Awele.Models.Point;
+import javafx.animation.FadeTransition;
+import javafx.animation.SequentialTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,6 +23,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -77,6 +80,22 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
 
         //set a default value for the message
         this.l_message.setText("");
+
+        //set a default value to score labels
+        this.l_scorePl1.setText("0");
+        this.l_scorePl2.setText("0");
+
+        //set the default value for labels as "0"
+        for (int l=0 ; l<2 ; l++) {
+            for (int c = 0; c < 6; c++) {
+                //retrieve the proper GridView element and its label child
+                int index = (l == 0 ? 8 + c : 7 - c);
+                StackPane tmp = (StackPane) this.m_grid.getChildren().get(index);
+                Label tmplabel = (Label) tmp.getChildren().get(1);
+
+                tmplabel.setText("4");
+            }
+        }
     }
 
     /**
@@ -118,10 +137,13 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
                     Label tmplabel = (Label) tmp.getChildren().get(1);
 
                     //update the label's text
-                    p.setCoordinates(c, l);
-                    tmplabel.setText(Integer.toString(this.m_slots[l][c]));
+                    if (this.m_slots[l][c] != Integer.parseInt(tmplabel.getText())) {
+                        tmplabel.setText(Integer.toString(this.m_slots[l][c]));
+                        animate(tmp);
+                    }
 
                     //update the CSS class of the whole Stackpane element
+                    p.setCoordinates(c, l);
                     if (this.m_controller.isOwner(this.m_controller.getCurrentPlayer(), p) && this.m_controller.isLegal(p)){
                         tmp.getStyleClass().remove("illegal");
                         tmp.getStyleClass().add("legal");
@@ -212,5 +234,35 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
         Platform.runLater(() -> {
             this.l_message.setText(msg);
         });
+    }
+
+    /**
+     * Animate a pane by fading it for 800 ms from 1.0 to 0.2 once, then return to normal
+     * @param pane Pane to animate
+     */
+    private void animate(StackPane pane) {
+        Logger.getLogger(this.getClass().getName()).log(Level.FINE, "A pane is animated");
+
+        //fade out transition
+        FadeTransition fade = new FadeTransition();
+        fade.setDuration(Duration.millis(700));
+        fade.setFromValue(1.0);
+        fade.setToValue(0.2);
+        fade.setCycleCount(1);
+        fade.setAutoReverse(false);
+
+        //fade in transition
+        FadeTransition unfade = new FadeTransition();
+        fade.setDuration(Duration.millis(100));
+        fade.setFromValue(0.2);
+        fade.setToValue(1.0);
+        fade.setCycleCount(1);
+        fade.setAutoReverse(false);
+
+        //set a sequence of both transition on the pane
+        SequentialTransition sequence = new SequentialTransition(pane, fade, unfade);
+
+        //play the sequence
+        sequence.play();
     }
 }
