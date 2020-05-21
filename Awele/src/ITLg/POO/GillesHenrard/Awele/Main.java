@@ -62,8 +62,8 @@ public class Main extends Application{
         primaryStage.setScene((Scene)bv.getContent());
         game.displayGame();
         primaryStage.setResizable(false);
-        primaryStage.setWidth(1920);
-        primaryStage.setHeight(1080);
+        primaryStage.setWidth(1024);
+        primaryStage.setHeight(576);
         primaryStage.show();
 
         //make closing the primary stage exit the game
