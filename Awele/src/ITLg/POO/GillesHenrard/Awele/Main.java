@@ -61,7 +61,6 @@ public class Main extends Application{
         primaryStage.setTitle("POO - Awele");
         primaryStage.setScene((Scene)bv.getContent());
         game.displayGame();
-        primaryStage.setResizable(false);
         primaryStage.setWidth(1024);
         primaryStage.setHeight(576);
         primaryStage.show();
