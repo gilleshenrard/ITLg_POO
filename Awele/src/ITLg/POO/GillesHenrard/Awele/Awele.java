@@ -13,7 +13,7 @@ import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Main extends Application{
+public class Awele extends Application{
 
     /**
      * Main method
@@ -21,7 +21,7 @@ public class Main extends Application{
      */
     public static void main(String[] args) {
         // create the main logger, and enable all logs
-        Logger logger = Logger.getLogger(Main.class.getPackageName());
+        Logger logger = Logger.getLogger(Awele.class.getPackageName());
         logger.setLevel(Level.ALL);
         logger.setUseParentHandlers(false);
 
@@ -118,7 +118,7 @@ public class Main extends Application{
         try {
             //main game loop, while no victory
             while (outcome != -2 && outcome != -1) {
-                Logger.getLogger(Main.class.getName()).log(Level.FINE, "Player " + game.getCurrentPlayer() + " : entering {0} state", game.getNextState().toString());
+                Logger.getLogger(Awele.class.getName()).log(Level.FINE, "Player " + game.getCurrentPlayer() + " : entering {0} state", game.getNextState().toString());
                 outcome = game.handleState();
             }
         }
