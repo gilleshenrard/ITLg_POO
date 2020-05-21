@@ -8,7 +8,7 @@
 <GridPane xmlns:fx="http://javafx.com/fxml/1" fx:id="m_grid" maxHeight="998.0" maxWidth="1744.0" minHeight="998.0"
           minWidth="1744.0"
           prefHeight="998.0" prefWidth="1744.0" styleClass="main"
-          stylesheets="@../Styles/neon.css" xmlns="http://javafx.com/javafx/11.0.1">
+          stylesheets="@../Styles/neon_lg.css" xmlns="http://javafx.com/javafx/11.0.1">
 
     <!-- Column constraints (6 equal columns) -->
     <columnConstraints>
