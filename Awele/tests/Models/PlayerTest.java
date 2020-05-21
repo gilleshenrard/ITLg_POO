@@ -1,7 +1,7 @@
 package Models;
 
 import ITLg.POO.GillesHenrard.Awele.Models.Player;
-import ITLg.POO.GillesHenrard.Awele.Views.KeyboardSelect;
+import ITLg.POO.GillesHenrard.Awele.Views.Console.KeyboardSelect;
 import ITLg.POO.GillesHenrard.Awele.Controllers.BoardController;
 import ITLg.POO.GillesHenrard.Awele.Models.Board;
 import org.junit.jupiter.api.Assertions;

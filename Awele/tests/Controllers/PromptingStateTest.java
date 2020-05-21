@@ -1,16 +1,16 @@
 package Controllers;
 
 import ITLg.POO.GillesHenrard.Awele.Controllers.GameController;
-import ITLg.POO.GillesHenrard.Awele.Controllers.PlayingState;
-import ITLg.POO.GillesHenrard.Awele.Controllers.PromptingState;
-import ITLg.POO.GillesHenrard.Awele.Controllers.State;
+import ITLg.POO.GillesHenrard.Awele.FSM.PlayingState;
+import ITLg.POO.GillesHenrard.Awele.FSM.PromptingState;
+import ITLg.POO.GillesHenrard.Awele.FSM.State;
 import ITLg.POO.GillesHenrard.Awele.Models.Game;
 import ITLg.POO.GillesHenrard.Awele.Models.Player;
 import ITLg.POO.GillesHenrard.Awele.Models.Point;
-import ITLg.POO.GillesHenrard.Awele.Views.BoardConsoleView;
-import ITLg.POO.GillesHenrard.Awele.Views.GameConsoleView;
-import ITLg.POO.GillesHenrard.Awele.Views.KeyboardSelect;
-import ITLg.POO.GillesHenrard.Awele.Views.RandomSelect;
+import ITLg.POO.GillesHenrard.Awele.Views.Console.BoardConsoleView;
+import ITLg.POO.GillesHenrard.Awele.Views.Console.GameConsoleView;
+import ITLg.POO.GillesHenrard.Awele.Views.Console.KeyboardSelect;
+import ITLg.POO.GillesHenrard.Awele.Views.AI.RandomSelect;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

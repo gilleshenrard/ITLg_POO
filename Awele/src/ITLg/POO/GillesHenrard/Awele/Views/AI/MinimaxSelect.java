@@ -5,12 +5,13 @@
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
-package ITLg.POO.GillesHenrard.Awele.Views;
+package ITLg.POO.GillesHenrard.Awele.Views.AI;
 
 import ITLg.POO.GillesHenrard.Awele.Controllers.BoardController;
 import ITLg.POO.GillesHenrard.Awele.Models.Point;
+import ITLg.POO.GillesHenrard.Awele.Views.iSelectable;
 
-public class MinimaxSelect implements iSelectable{
+public class MinimaxSelect implements iSelectable {
     private BoardController m_controller;
     private int m_id;
     private int m_maxDepth;

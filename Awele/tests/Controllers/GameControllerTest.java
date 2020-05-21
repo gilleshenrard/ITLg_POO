@@ -4,7 +4,7 @@ import ITLg.POO.GillesHenrard.Awele.Controllers.GameController;
 import ITLg.POO.GillesHenrard.Awele.Models.Game;
 import ITLg.POO.GillesHenrard.Awele.Models.Player;
 import ITLg.POO.GillesHenrard.Awele.Models.Point;
-import ITLg.POO.GillesHenrard.Awele.Views.RandomSelect;
+import ITLg.POO.GillesHenrard.Awele.Views.AI.RandomSelect;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;

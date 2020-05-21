@@ -5,9 +5,10 @@
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
-package ITLg.POO.GillesHenrard.Awele.Views;
+package ITLg.POO.GillesHenrard.Awele.Views.JFX;
 
 import ITLg.POO.GillesHenrard.Awele.Controllers.GameController;
+import ITLg.POO.GillesHenrard.Awele.Views.SystemMessage;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 

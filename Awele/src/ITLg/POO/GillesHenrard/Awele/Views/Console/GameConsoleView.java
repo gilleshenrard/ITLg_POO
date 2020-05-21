@@ -5,11 +5,12 @@
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
-package ITLg.POO.GillesHenrard.Awele.Views;
+package ITLg.POO.GillesHenrard.Awele.Views.Console;
 
 import ITLg.POO.GillesHenrard.Awele.Controllers.GameController;
+import ITLg.POO.GillesHenrard.Awele.Views.SystemMessage;
 
-public class GameConsoleView extends SystemMessage{
+public class GameConsoleView extends SystemMessage {
 
     /**
      * Create a new GameView

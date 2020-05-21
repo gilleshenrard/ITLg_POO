@@ -5,7 +5,9 @@
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 11/05/2020                                                                        */
 /****************************************************************************************************/
-package ITLg.POO.GillesHenrard.Awele.Controllers;
+package ITLg.POO.GillesHenrard.Awele.Views;
+
+import ITLg.POO.GillesHenrard.Awele.Controllers.BoardController;
 
 public interface iObserver {
     void update();

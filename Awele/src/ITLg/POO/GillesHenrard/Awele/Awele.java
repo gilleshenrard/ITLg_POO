@@ -1,6 +1,12 @@
 package ITLg.POO.GillesHenrard.Awele;
 
-import ITLg.POO.GillesHenrard.Awele.Views.*;
+import ITLg.POO.GillesHenrard.Awele.Views.AI.MinimaxSelect;
+import ITLg.POO.GillesHenrard.Awele.Views.Console.BoardConsoleView;
+import ITLg.POO.GillesHenrard.Awele.Views.Console.GameConsoleView;
+import ITLg.POO.GillesHenrard.Awele.Views.Console.KeyboardSelect;
+import ITLg.POO.GillesHenrard.Awele.Views.JFX.BoardJFXView;
+import ITLg.POO.GillesHenrard.Awele.Views.JFX.GameJFXView;
+import ITLg.POO.GillesHenrard.Awele.Views.JFX.JFXSelect;
 import javafx.application.Application;
 import ITLg.POO.GillesHenrard.Awele.Controllers.GameController;
 import ITLg.POO.GillesHenrard.Awele.Models.Player;

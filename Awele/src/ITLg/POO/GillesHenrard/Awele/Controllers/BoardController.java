@@ -12,6 +12,8 @@ package ITLg.POO.GillesHenrard.Awele.Controllers;
 
 import ITLg.POO.GillesHenrard.Awele.Models.Board;
 import ITLg.POO.GillesHenrard.Awele.Models.Point;
+import ITLg.POO.GillesHenrard.Awele.Views.iObserver;
+
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Stack;
