@@ -19,7 +19,7 @@ import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class Awele extends Application{
+public class App extends Application{
 
     /**
      * Main method
@@ -27,7 +27,7 @@ public class Awele extends Application{
      */
     public static void main(String[] args) {
         // create the main logger, and enable all logs
-        Logger logger = Logger.getLogger(Awele.class.getPackageName());
+        Logger logger = Logger.getLogger(App.class.getPackageName());
         logger.setLevel(Level.ALL);
         logger.setUseParentHandlers(false);
 
@@ -64,7 +64,7 @@ public class Awele extends Application{
         game.setPlayer(new Player(2, "AI", new MinimaxSelect(game.getBoardController(), 2)));
 
         //primary Stage setup
-        primaryStage.setTitle("POO - Awele");
+        primaryStage.setTitle("POO - App");
         primaryStage.setScene((Scene)bv.getContent());
         game.displayGame();
         primaryStage.setResizable(false);
@@ -124,12 +124,12 @@ public class Awele extends Application{
         try {
             //main game loop, while no victory
             while (outcome != -2 && outcome != -1) {
-                Logger.getLogger(Awele.class.getName()).log(Level.FINE, "Player " + game.getCurrentPlayer() + " : entering {0} state", game.getNextState().toString());
+                Logger.getLogger(App.class.getName()).log(Level.FINE, "Player " + game.getCurrentPlayer() + " : entering {0} state", game.getNextState().toString());
                 outcome = game.handleState();
             }
         }
         catch (Exception e){
-            Logger.getLogger("Awele").log(Level.SEVERE, e.getMessage());
+            Logger.getLogger("App").log(Level.SEVERE, e.getMessage());
             game.displayError(e.getMessage());
             System.exit(-1);
         }
