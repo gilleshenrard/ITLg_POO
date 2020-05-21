@@ -140,6 +140,7 @@ n/a
 ---
 ### 6. To do
 
+- Add seasons history
 - Make the JavaFX interface responsive
 - Implement an Options panel
 - Optimise the unit tests
