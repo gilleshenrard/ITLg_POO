@@ -1,7 +1,7 @@
 package Models;
 
-import ITLg.POO.GillesHenrard.Awele.Models.Point;
-import ITLg.POO.GillesHenrard.Awele.Models.Slot;
+import com.gilleshenrard.Awele.Models.Point;
+import com.gilleshenrard.Awele.Models.Slot;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,9 +1,9 @@
 package Controllers;
 
-import ITLg.POO.GillesHenrard.Awele.Controllers.GameController;
-import ITLg.POO.GillesHenrard.Awele.FSM.State;
-import ITLg.POO.GillesHenrard.Awele.Views.Console.BoardConsoleView;
-import ITLg.POO.GillesHenrard.Awele.Views.Console.GameConsoleView;
+import com.gilleshenrard.Awele.Controllers.GameController;
+import com.gilleshenrard.Awele.FSM.State;
+import com.gilleshenrard.Awele.Views.Console.BoardConsoleView;
+import com.gilleshenrard.Awele.Views.Console.GameConsoleView;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

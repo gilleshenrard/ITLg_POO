@@ -1,15 +1,15 @@
 package Controllers;
 
-import ITLg.POO.GillesHenrard.Awele.Controllers.*;
-import ITLg.POO.GillesHenrard.Awele.FSM.PlayingState;
-import ITLg.POO.GillesHenrard.Awele.FSM.PromptingState;
-import ITLg.POO.GillesHenrard.Awele.FSM.State;
-import ITLg.POO.GillesHenrard.Awele.FSM.StoringState;
-import ITLg.POO.GillesHenrard.Awele.Models.Game;
-import ITLg.POO.GillesHenrard.Awele.Models.Player;
-import ITLg.POO.GillesHenrard.Awele.Models.Point;
-import ITLg.POO.GillesHenrard.Awele.Views.Console.GameConsoleView;
-import ITLg.POO.GillesHenrard.Awele.Views.AI.RandomSelect;
+import com.gilleshenrard.Awele.Controllers.GameController;
+import com.gilleshenrard.Awele.FSM.PlayingState;
+import com.gilleshenrard.Awele.FSM.PromptingState;
+import com.gilleshenrard.Awele.FSM.State;
+import com.gilleshenrard.Awele.FSM.StoringState;
+import com.gilleshenrard.Awele.Models.Game;
+import com.gilleshenrard.Awele.Models.Player;
+import com.gilleshenrard.Awele.Models.Point;
+import com.gilleshenrard.Awele.Views.Console.GameConsoleView;
+import com.gilleshenrard.Awele.Views.AI.RandomSelect;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
