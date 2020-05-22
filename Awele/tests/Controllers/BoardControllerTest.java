@@ -200,9 +200,9 @@ public class BoardControllerTest {
     /**
      * Check if checkOutcome() processes a starvation properly
      */
-    @DisplayName("checkOutcome() with a starvation case - should not fail")
+    @DisplayName("checkOutcome() with a starvation case on player 2 - should not fail")
     @Test
-    void checkOutcome_noCaptureStarve_shouldnot_fail() {
+    void checkOutcome_noCaptureStarvePlayer2_shouldnot_fail() {
         b.getBoard().setSlotSeeds(new Point(0, 1), 1);
         b.getBoard().setSlotSeeds(new Point(1, 1), 2);
         b.getBoard().emptySlotSeeds(new Point(2, 1));
@@ -213,6 +213,25 @@ public class BoardControllerTest {
         b.getBoard().setRemainingSeeds(2, 3);
         b.getBoard().setRemainingSeeds(1, 22);
         int ret = b.checkOutcome(new Point(5, 0));
+        Assertions.assertEquals(-1, ret);
+    }
+
+    /**
+     * Check if checkOutcome() processes a starvation properly
+     */
+    @DisplayName("checkOutcome() with a starvation case on player 1 - should not fail")
+    @Test
+    void checkOutcome_noCaptureStarvePlayer1_shouldnot_fail() {
+        b.getBoard().setSlotSeeds(new Point(0, 0), 1);
+        b.getBoard().setSlotSeeds(new Point(1, 0), 2);
+        b.getBoard().emptySlotSeeds(new Point(2, 0));
+        b.getBoard().emptySlotSeeds(new Point(3, 0));
+        b.getBoard().emptySlotSeeds(new Point(4, 0));
+        b.getBoard().emptySlotSeeds(new Point(5, 0));
+        b.getBoard().setSlotSeeds(new Point(5, 1), 2);
+        b.getBoard().setRemainingSeeds(1, 3);
+        b.getBoard().setRemainingSeeds(2, 22);
+        int ret = b.checkOutcome(new Point(5, 1));
         Assertions.assertEquals(-1, ret);
     }
 
