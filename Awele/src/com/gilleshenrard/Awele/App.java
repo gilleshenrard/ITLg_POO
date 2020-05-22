@@ -35,7 +35,7 @@ public class App extends Application{
         ConsoleHandler cHandler = new ConsoleHandler();
         logger.addHandler(cHandler);
 
-        if (args[0].equals("console")) {
+        if (args.length > 0 && args[0].equals("console")) {
             cHandler.setLevel(Level.OFF);
             startConsole();
         }
