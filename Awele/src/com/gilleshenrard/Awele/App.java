@@ -81,7 +81,7 @@ public class App extends Application{
         Task<Void> mainLoop = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
-                gameLoop(game);
+                game.gameLoop();
                 return null;
             }
         };
@@ -110,31 +110,6 @@ public class App extends Application{
         game.displayGame();
 
         //launch the game loop
-        gameLoop(game);
-    }
-
-    /**
-     * Process the game loop using the Game Finite State Machine
-     * @param game Game controller to use
-     */
-    public static void gameLoop(GameController game){
-        //state variables
-        int outcome = 0;
-
-        try {
-            //main game loop, while no victory
-            while (outcome != -2 && outcome != -1) {
-                Logger.getLogger(App.class.getName()).log(Level.FINE, "Player " + game.getCurrentPlayer() + " : entering {0} state", game.getNextState().toString());
-                outcome = game.handleState();
-            }
-        }
-        catch (Exception e){
-            Logger.getLogger("App").log(Level.SEVERE, e.getMessage());
-            game.displayError(e.getMessage());
-            System.exit(-1);
-        }
-        //system error, exit with an error
-        if (outcome == -1)
-            System.exit(outcome);
+        game.gameLoop();
     }
 }

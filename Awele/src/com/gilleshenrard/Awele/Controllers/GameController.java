@@ -8,6 +8,7 @@
 
 package com.gilleshenrard.Awele.Controllers;
 
+import com.gilleshenrard.Awele.App;
 import com.gilleshenrard.Awele.FSM.State;
 import com.gilleshenrard.Awele.Models.Game;
 import com.gilleshenrard.Awele.Models.Player;
@@ -15,6 +16,8 @@ import com.gilleshenrard.Awele.Models.Point;
 import com.gilleshenrard.Awele.Views.SystemMessage;
 
 import java.security.InvalidParameterException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GameController {
     private BoardController m_board;
@@ -102,6 +105,30 @@ public class GameController {
     public int handleState(){
         return this.m_currentState.handleState(this);
     };
+
+    /**
+     * Process the game loop using the Game Finite State Machine
+     */
+    public void gameLoop(){
+        //state variables
+        int outcome = 0;
+
+        try {
+            //main game loop, while no victory
+            while (outcome != -2 && outcome != -1) {
+                Logger.getLogger(App.class.getName()).log(Level.FINE, "Player " + this.getCurrentPlayer() + " : entering {0} state", this.getNextState().toString());
+                outcome = this.handleState();
+            }
+        }
+        catch (Exception e){
+            Logger.getLogger("App").log(Level.SEVERE, e.getMessage());
+            this.displayError(e.getMessage());
+            System.exit(-1);
+        }
+        //system error, exit with an error
+        if (outcome == -1)
+            System.exit(outcome);
+    }
 
     /**
      * Return the board set in the current game
