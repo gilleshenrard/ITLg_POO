@@ -115,6 +115,7 @@ The unit tests for each class can be found in the mirrored directory tests/ (tes
 ---
 ### 4. Change list (since v3.4)
 
+- Application package structure has been revamped
 - States in the Machine State pattern are now enclosed in an emuneration to ease up their use
 - The Board Controller now uses the Observer design pattern to update a UI independently of the technology used
 - Console views now implement the Observer design pattern
@@ -132,6 +133,7 @@ The unit tests for each class can be found in the mirrored directory tests/ (tes
 - Warning are now displayed as messages
 - The logger utility java.util.logging.Logger is now used for debug messages
 - AI players now wait for 1 second before playing
+- Game loop is now hosted in the game controller
 
 ---
 ### 5. Known issues
