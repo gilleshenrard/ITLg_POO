@@ -155,14 +155,6 @@ public class BoardController {
     }
 
     /**
-     * Handle the current game state
-     * @return Output of the current state
-     */
-    public void handleState(){
-        this.m_game.handleState();
-    }
-
-    /**
      * Indicate whether the player is owner of the Point or not
      * @param ID ID of the player to test
      * @param p Point of which to test the ownership
