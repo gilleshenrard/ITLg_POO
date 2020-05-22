@@ -9,21 +9,19 @@ package com.gilleshenrard.Awele.FSM;
 import com.gilleshenrard.Awele.Controllers.GameController;
 
 public enum State{
-    PROMPTING((iGameState) new PromptingState(), "Prompting"),
-    PLAYING((iGameState) new PlayingState(), "Playing"),
-    STORING((iGameState) new StoringState(), "Storing"),
-    SWITCHING((iGameState) new SwitchingPlayerState(), "Switching");
+    PROMPTING(new PromptingState()),
+    PLAYING(new PlayingState()),
+    STORING(new StoringState()),
+    SWITCHING(new SwitchingPlayerState());
 
     private iGameState m_state;
-    private String m_name;
 
     /**
      * Initialise the State assigned to an enumeration
      * @param state State to assign
      */
-    State(iGameState state, String name) {
+    State(iGameState state) {
         this.m_state = state;
-        this.m_name = name;
     }
 
     /**
@@ -41,13 +39,5 @@ public enum State{
      */
     public void handleState(GameController game){
         this.m_state.handleState(game);
-    }
-
-    /**
-     * Return the current state name as a string
-     * @return State name
-     */
-    public String toString(){
-        return this.m_name;
     }
 }

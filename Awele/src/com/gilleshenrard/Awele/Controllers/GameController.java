@@ -133,7 +133,7 @@ public class GameController {
 
             //main game loop, while no victory
             while (this.isRunning()) {
-                Logger.getLogger(App.class.getName()).log(Level.FINE, "Player " + this.getCurrentPlayer() + " : entering {0} state", this.getNextState().toString());
+                Logger.getLogger(App.class.getName()).log(Level.FINE, "Player " + this.getCurrentPlayer() + " : entering {0} state", this.getNextState());
                 this.handleState();
             }
         }
