@@ -15,5 +15,5 @@ public interface iGameState {
      * @param input Input of a state
      * @return Output of the state
      */
-    int handleState(GameController controller);
+    void handleState(GameController controller);
 }

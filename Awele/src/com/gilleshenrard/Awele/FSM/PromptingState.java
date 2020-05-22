@@ -20,7 +20,7 @@ public class PromptingState implements iGameState {
      * @return Value to return to the main loop (-2 if forfeit, Player's choice otherwise)
      */
     @Override
-    public int handleState(GameController controller){
+    public void handleState(GameController controller){
 
         //make any AI player wait for 1s before choosing
         if (controller.isPlayerAI(controller.getCurrentPlayer())) {
@@ -44,8 +44,6 @@ public class PromptingState implements iGameState {
             Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : next state -> Playing");
             controller.setNextState(State.PLAYING);
             ((PlayingState)State.PLAYING.getState()).setInput(choice);
-
-            return choice;
         }
         else{
             Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Player " + controller.getCurrentPlayer() + " chose the slot " + choice);
@@ -56,8 +54,10 @@ public class PromptingState implements iGameState {
                 controller.displayMessage("\n" + controller.getName(controller.getCurrentPlayer()) + " : 'A strange game... The only winning move is not to play...'");
                 controller.displayMessage(controller.getName(controller.getCurrentPlayer()) + " : '......................... How about a nice game of chess?'");
             }
-            Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Player " + controller.getCurrentPlayer() + " : Prompting returns -2");
-            return -2;
+
+            //stop the main loop
+            Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Main loop stops");
+            controller.setRunning(false);
         }
     }
 }

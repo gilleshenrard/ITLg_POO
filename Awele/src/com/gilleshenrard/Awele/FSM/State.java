@@ -39,8 +39,8 @@ public enum State{
      * @param game Game controller to use
      * @return State output
      */
-    public int handleState(GameController game){
-        return this.m_state.handleState(game);
+    public void handleState(GameController game){
+        this.m_state.handleState(game);
     }
 
     /**

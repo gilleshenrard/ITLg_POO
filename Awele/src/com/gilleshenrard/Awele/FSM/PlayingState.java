@@ -31,7 +31,7 @@ public class PlayingState implements iGameState {
      * @return 0 if starvation or empty, amount captured otherwise
      */
     @Override
-    public int handleState(GameController controller){
+    public void handleState(GameController controller){
         //play the slot selected
         int outcome = controller.playSlot(new Point(this.m_slot - 1, controller.getCurrentPlayer() - 1));
         Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Player " + controller.getCurrentPlayer() + " : playSlot() returned " + outcome);
@@ -40,12 +40,10 @@ public class PlayingState implements iGameState {
             Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : next state -> Prompting");
             controller.setNextState(State.PROMPTING);
             handleOutcome(controller, outcome);
-            return 0;
         }
         else {  //Go to the Storing state
             Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : next state -> Storing");
             controller.setNextState(State.STORING);
-            return outcome;
         }
     }
 

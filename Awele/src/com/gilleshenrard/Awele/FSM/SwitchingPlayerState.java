@@ -19,7 +19,7 @@ public class SwitchingPlayerState implements iGameState {
      * @return /
      */
     @Override
-    public int handleState(GameController controller){
+    public void handleState(GameController controller){
         //update the game board
         controller.displayGame();
 
@@ -30,7 +30,5 @@ public class SwitchingPlayerState implements iGameState {
         //plug in the Prompting state
         Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : next state -> Prompting");
         controller.setNextState(State.PROMPTING);
-
-        return 0;
     }
 }

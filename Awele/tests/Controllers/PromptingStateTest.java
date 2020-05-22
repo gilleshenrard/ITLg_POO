@@ -29,8 +29,9 @@ public class PromptingStateTest {
         Game.getInstance().setPlayer(new Player(1, "Test", new RandomSelect(g.getBoardController(), 1)));
         Game.getInstance().setPlayer(new Player(2, "Test", new RandomSelect(g.getBoardController(), 2)));
         g.setNextState(State.PROMPTING);
-        int output = g.handleState();
-        Assertions.assertTrue(output > 0 && output < 7);
+        g.setRunning(true);
+        g.handleState();
+        Assertions.assertEquals(true, g.isRunning());
         Assertions.assertTrue(g.getNextState().getState() instanceof PlayingState);
     }
 
@@ -53,8 +54,9 @@ public class PromptingStateTest {
         g.getBoardController().getBoard().setRemainingSeeds(1, 0);
         g.setNextState(State.PROMPTING);
         g.setCurrentPlayer(1);
-        int ret = g.handleState();
-        Assertions.assertEquals(-2, ret);
+        g.setRunning(true);
+        g.handleState();
+        Assertions.assertEquals(false, g.isRunning());
     }
 
     /**
@@ -76,8 +78,9 @@ public class PromptingStateTest {
         g.getBoardController().getBoard().setRemainingSeeds(1, 1);
         g.setNextState(State.PROMPTING);
         g.setCurrentPlayer(1);
-        int ret = g.handleState();
-        Assertions.assertEquals(6, ret);
+        g.setRunning(true);
+        g.handleState();
+        Assertions.assertEquals(true, g.isRunning());
     }
 
     /**
@@ -99,8 +102,9 @@ public class PromptingStateTest {
         g.getBoardController().getBoard().setRemainingSeeds(1, 0);
         g.setNextState(State.PROMPTING);
         g.setCurrentPlayer(1);
-        int ret = g.handleState();
-        Assertions.assertEquals(-2, ret);
+        g.setRunning(true);
+        g.handleState();
+        Assertions.assertEquals(false, g.isRunning());
         Assertions.assertTrue(g.getNextState().getState() instanceof PromptingState);
     }
 }

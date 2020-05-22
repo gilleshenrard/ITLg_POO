@@ -24,6 +24,7 @@ public class GameController {
     private SystemMessage m_view;
     private State m_currentState;
     private int m_currentPlayer;
+    private boolean m_running;
 
     /**
      * Create a new Game Controller
@@ -34,6 +35,22 @@ public class GameController {
         this.m_view = null;
         this.m_currentPlayer = 1;
         this.m_currentState = State.PROMPTING;
+    }
+
+    /**
+     * Set the game loop as running or not
+     * @param running flag to tell if the main loop is running
+     */
+    public void setRunning(boolean running) {
+        this.m_running = running;
+    }
+
+    /**
+     * Tell if the main loop is running
+     * @return main loop running or not
+     */
+    public boolean isRunning() {
+        return this.m_running;
     }
 
     /**
@@ -102,22 +119,22 @@ public class GameController {
      * Handle the current game state
      * @return Output of the current state
      */
-    public int handleState(){
-        return this.m_currentState.handleState(this);
+    public void handleState(){
+        this.m_currentState.handleState(this);
     };
 
     /**
      * Process the game loop using the Game Finite State Machine
      */
     public void gameLoop(){
-        //state variables
-        int outcome = 0;
-
         try {
+            //flag the main loop as running
+            this.setRunning(true);
+
             //main game loop, while no victory
-            while (outcome != -2 && outcome != -1) {
+            while (this.isRunning()) {
                 Logger.getLogger(App.class.getName()).log(Level.FINE, "Player " + this.getCurrentPlayer() + " : entering {0} state", this.getNextState().toString());
-                outcome = this.handleState();
+                this.handleState();
             }
         }
         catch (Exception e){
@@ -125,9 +142,6 @@ public class GameController {
             this.displayError(e.getMessage());
             System.exit(-1);
         }
-        //system error, exit with an error
-        if (outcome == -1)
-            System.exit(outcome);
     }
 
     /**

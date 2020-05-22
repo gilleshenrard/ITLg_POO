@@ -31,8 +31,9 @@ public class PlayingStateTest {
         g.setNextState(State.PLAYING);
         g.setCurrentPlayer(1);
         ((PlayingState)State.PLAYING.getState()).setInput(6);
-        int ret = g.handleState();
-        Assertions.assertEquals(0, ret);
+        g.setRunning(true);
+        g.handleState();
+        Assertions.assertEquals(true, g.isRunning());
         Assertions.assertTrue(g.getNextState().getState() instanceof StoringState);
     }
 
@@ -51,8 +52,9 @@ public class PlayingStateTest {
         g.setNextState(State.PLAYING);
         g.setCurrentPlayer(1);
         ((PlayingState)State.PLAYING.getState()).setInput(6);
-        int ret = g.handleState();
-        Assertions.assertEquals(5, ret);
+        g.setRunning(true);
+        g.handleState();
+        Assertions.assertEquals(true, g.isRunning());
         Assertions.assertTrue(g.getNextState().getState() instanceof StoringState);
     }
 
@@ -78,8 +80,9 @@ public class PlayingStateTest {
         g.setNextState(State.PLAYING);
         g.setCurrentPlayer(1);
         ((PlayingState)State.PLAYING.getState()).setInput(6);
-        int ret = g.handleState();
-        Assertions.assertEquals(0, ret);
+        g.setRunning(true);
+        g.handleState();
+        Assertions.assertEquals(true, g.isRunning());
         Assertions.assertTrue(g.getNextState().getState() instanceof PromptingState);
     }
 
@@ -103,8 +106,9 @@ public class PlayingStateTest {
         g.setNextState(State.PLAYING);
         g.setCurrentPlayer(1);
         ((PlayingState)State.PLAYING.getState()).setInput(6);
-        int ret = g.handleState();
-        Assertions.assertEquals(0, ret);
+        g.setRunning(true);
+        g.handleState();
+        Assertions.assertEquals(true, g.isRunning());
         Assertions.assertTrue(g.getNextState().getState() instanceof StoringState);
     }
 
@@ -129,8 +133,9 @@ public class PlayingStateTest {
         g.setCurrentPlayer(1);
         g.setNextState(State.PLAYING);
         ((PlayingState)State.PLAYING.getState()).setInput(5);
-        int ret = g.handleState();
-        Assertions.assertEquals(2, ret);
+        g.setRunning(true);
+        g.handleState();
+        Assertions.assertEquals(true, g.isRunning());
         Assertions.assertTrue(g.getNextState().getState() instanceof StoringState);
     }
 }

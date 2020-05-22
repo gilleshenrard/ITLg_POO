@@ -20,21 +20,21 @@ public class StoringState implements iGameState {
      * @return 0 if ok, -2 if victory
      */
     @Override
-    public int handleState(GameController controller){
+    public void handleState(GameController controller){
         //Game is won by the current player.
         if (controller.getStoredSeeds(controller.getCurrentPlayer()) > 24) {
             controller.displayGame();
             controller.displayMessage(controller.getName(controller.getCurrentPlayer()) + " won the game !");
             Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : message displayed");
 
-            return -2;
+            //stop the main loop
+            Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Main loop stops");
+            controller.setRunning(false);
         }
         else {
             //Go to the player switching state
             Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : next state -> Switching");
             controller.setNextState(State.SWITCHING);
         }
-
-        return 0;
     }
 }

@@ -158,8 +158,8 @@ public class BoardController {
      * Handle the current game state
      * @return Output of the current state
      */
-    public int handleState(){
-        return this.m_game.handleState();
+    public void handleState(){
+        this.m_game.handleState();
     }
 
     /**
