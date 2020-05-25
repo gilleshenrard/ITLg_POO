@@ -214,24 +214,36 @@ public class Board {
      * @param point Point of which find the next
      * @return Next slot to point
      * @throws NullPointerException
+     * @throws InvalidParameterException
      */
-    public Point getNext(Point point) throws NullPointerException{
+    public Point getNext(Point point) throws NullPointerException, InvalidParameterException{
+        return this.getNext(point, 1);
+    }
+
+    /**
+     * Get the next slot coordinates (increment x, and roll y when reached the end)
+     * @param point Point of which find the next
+     * @param subsequent Which one of the subsequent seeds to get
+     * @return Next slot to point
+     * @throws NullPointerException
+     * @throws InvalidParameterException
+     */
+    public Point getNext(Point point, int subsequent) throws NullPointerException, InvalidParameterException{
         validateCoordinates(point, "Board.getNext()");
         if (point == null)
             throw new NullPointerException("Board.getNext() : NULL instance of Point");
+        if (subsequent < 0)
+            throw new InvalidParameterException("Board.getNext() : negative subsequent number");
 
-        //retrieve current coordinates
-        int x = point.getX();
-        int y = point.getY();
+        //compute new x (start X + amount of seeds + amount of times the starting point is reached, then get the remainder of / 6)
+        int x = (point.getX() + subsequent + (subsequent/12)) % 6;
 
-        //increment X
-        //if end of row (X rolled back to 0), increment Y
-        // if end of column, roll Y back to 0
-        x++;
-        if((x %= 6) == 0){
-            y++;
-            y %= 2;
-        }
+        //compute new y (amount of back and forth the scattering would take + take start slot into account, then divide by 2)
+        int y = ((point.getX() + subsequent + (subsequent/12)) / 6) % 2;
+
+        //rectify the new Y if point is on opponent's side
+        if (point.getY() == 1)
+            y = 1 - y;
 
         return new Point(x, y);
     }
