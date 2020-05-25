@@ -209,35 +209,36 @@ public class BoardController {
         }
 
         //prepare buffer variables
-        Point tmp = new Point(p);
-        int[] backup = new int[2];
-        int[] capturable = new int[2];
-        int[] scattered = new int[2];
-
-        //backup the amount of seeds in the slot harvested by the player
-        backup[0] = (p.getY() == 0 ? nbseeds : 0);
-        backup[1] = (p.getY() == 1 ? nbseeds : 0);
+        tmp = new Point(p);
+        int backup = nbseeds;
+        int capturable = 0;
+        int scattered = 0;
 
         //compute the amount of seeds which would be captured in each player row
         //  (1 or 2 in each slot in which the tested slot would be scattered)
-        java.util.Arrays.fill(scattered, 0);
-        java.util.Arrays.fill(capturable, 0);
         do {
             tmp = this.m_board.getNext(tmp);
             if (!tmp.equals(p)) {
-                if (this.getSlotSeeds(tmp) == 1 || this.getSlotSeeds(tmp) == 2)
-                    capturable[tmp.getY()] += getSlotSeeds(tmp) + 1;
-                scattered[tmp.getY()]++;
+                if (tmp.getY() != p.getY()) {
+                    finalSeeds = this.getFinalSeeds(p, tmp, backup);
+                    if (finalSeeds == 2 || finalSeeds == 3)
+                        capturable += finalSeeds;
+                    else
+                        capturable = 0;
+                    scattered++;
+                }
+                else
+                    capturable = 0;
                 nbseeds--;
             }
         }while (nbseeds > 0);
 
         //starvation occurring during a capture
         if(this.getSlotSeeds(tmp) == 1 || this.getSlotSeeds(tmp) == 2){
-            if(capturable[1 - p.getY()] - scattered[1 - p.getY()] == this.m_board.getRemainingSeeds(2 - p.getY()))
+            if(capturable - scattered == this.m_board.getRemainingSeeds(2 - p.getY()))
                 return -1;
             else
-                return capturable[0] + capturable[1];
+                return capturable;
         }
         //simple scattering
         else {
@@ -271,7 +272,6 @@ public class BoardController {
         this.m_board.emptySlotSeeds(p);
 
         //until all the seeds have been scattered
-        int total = 0;
         Point pNext = new Point(p);
         do {
             //get the next slot to treat, except for the one played by the player
@@ -281,7 +281,6 @@ public class BoardController {
 
                 //if capture case, store the seeds, empty the slot and update remaining
                 if (ret > 0 && (tmp == 1 || tmp == 2)) {
-                    total += tmp + 1;
                     this.storeSeeds(p.getY() + 1, tmp + 1);
                     this.m_board.emptySlotSeeds(pNext);
                     this.m_board.removeRemainingSeeds(pNext.getY()+1, tmp);
@@ -296,7 +295,7 @@ public class BoardController {
         }while (nbseeds > 0);
 
         //return the total captured (0 if no capture occurrence)
-        return total;
+        return ret;
     }
 
     /**
