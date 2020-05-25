@@ -270,23 +270,28 @@ public class BoardController {
         int nbseeds = this.getSlotSeeds(p);
         int backup = nbseeds;
         Point last = this.m_board.getNext(p, backup);
+        boolean capturing = true;
 
         Point pPrev = new Point(last);
         do {
-            pPrev = this.m_board.getPrevious(pPrev);
-            if (ret > 0 && pPrev.getY() == last.getY() && pPrev.getX() <= last.getX()
+            int finalSeeds = this.getFinalSeeds(p, pPrev, backup);
+            if ((ret > 0 && capturing
+                && (finalSeeds == 2 || finalSeeds == 3)
+                && pPrev.getY() == last.getY() && pPrev.getX() <= last.getX())
                 || pPrev.equals(p)){
                 this.m_board.removeRemainingSeeds(pPrev.getY() + 1, this.getSlotSeeds(pPrev));
                 this.m_board.emptySlotSeeds(pPrev);
             }
             else {
-                int finalSeeds = this.getFinalSeeds(p, pPrev, backup);
                 this.m_board.addRemainingSeeds(pPrev.getY() + 1, finalSeeds - this.getSlotSeeds(pPrev));
                 this.m_board.setSlotSeeds(pPrev, finalSeeds);
+                if (!pPrev.equals(p))
+                    capturing = false;
             }
             nbseeds--;
+            pPrev = this.m_board.getPrevious(pPrev);
         }while (backup - nbseeds < 12);
-        
+
         //return the total captured (0 if no capture occurrence)
         return ret;
     }

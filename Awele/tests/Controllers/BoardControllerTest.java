@@ -342,29 +342,32 @@ public class BoardControllerTest {
     @Test
     void capture_otherRow_noStarvation() {
         //prepare the board (capturable slots non-consecutive)
+        b.getBoard().setSlotSeeds(new Point(5, 0), 4);
+        b.getBoard().setSlotSeeds(new Point(0, 1), 4);
         b.getBoard().setSlotSeeds(new Point(1, 1), 2);
+        b.getBoard().setSlotSeeds(new Point(2, 1), 4);
         b.getBoard().setSlotSeeds(new Point(3, 1), 1);
         b.getBoard().setSlotSeeds(new Point(4, 1), 9);
 
         //check the outcome
         int ret = b.checkOutcome(new Point(5, 0));
-        Assertions.assertEquals(5, ret);
+        Assertions.assertEquals(2, ret);
 
         //play the slot
         ret = b.playSlot(new Point(5, 0));
-        Assertions.assertEquals(5, ret);
+        Assertions.assertEquals(2, ret);
 
         //check the board state afterwards
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(5, 0)));
         Assertions.assertEquals(5, b.getSlotSeeds(new Point(0, 1)));
-        Assertions.assertEquals(0, b.getSlotSeeds(new Point(1, 1)));
+        Assertions.assertEquals(3, b.getSlotSeeds(new Point(1, 1)));
         Assertions.assertEquals(5, b.getSlotSeeds(new Point(2, 1)));
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(3, 1)));
         Assertions.assertEquals(9, b.getSlotSeeds(new Point(4, 1)));
         Assertions.assertEquals(4, b.getSlotSeeds(new Point(5, 1)));
-        Assertions.assertEquals(23, b.getBoard().getRemainingSeeds(2));
+        Assertions.assertEquals(26, b.getBoard().getRemainingSeeds(2));
         Assertions.assertEquals(20, b.getBoard().getRemainingSeeds(1));
-        Assertions.assertEquals(5, b.getStoredSeeds(1));
+        Assertions.assertEquals(0, b.getStoredSeeds(1));
         Assertions.assertEquals(0, b.getStoredSeeds(2));
     }
 
