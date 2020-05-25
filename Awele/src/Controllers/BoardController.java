@@ -285,11 +285,12 @@ public class BoardController {
             //get the final amount of seeds in the slot
             int finalSeeds = this.getFinalSeeds(p, pPrev, backup);
 
-            //if slot is to be captured (stop at 1st not capturable or end of row) or slot is equal to slot played, empty
-            if ((ret > 0 && capturing
-                && (finalSeeds == 2 || finalSeeds == 3)
-                && pPrev.getY() == last.getY() && pPrev.getX() <= last.getX())
-                || pPrev.equals(p)){
+            //if slot is capturable, empty it
+            if ((ret > 0 && capturing                       //flag is true (slots are still capturable)
+                && (finalSeeds == 2 || finalSeeds == 3)     //pPrev is capturable
+                && pPrev.getY() == last.getY())             //pPrev is still on opponent's side
+                || pPrev.equals(p))                         //  or pPrev is the slot played
+            {
                 this.m_board.removeRemainingSeeds(pPrev.getY() + 1, this.getSlotSeeds(pPrev));
                 this.m_board.emptySlotSeeds(pPrev);
             }
@@ -297,6 +298,8 @@ public class BoardController {
             else {
                 this.m_board.addRemainingSeeds(pPrev.getY() + 1, finalSeeds - this.getSlotSeeds(pPrev));
                 this.m_board.setSlotSeeds(pPrev, finalSeeds);
+
+                //make the loop stop capturing future slots
                 if (!pPrev.equals(p))
                     capturing = false;
             }
