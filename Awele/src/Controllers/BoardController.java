@@ -305,7 +305,7 @@ public class BoardController {
             }
             nbseeds--;
             pPrev = this.m_board.getPrevious(pPrev);
-        }while (backup - nbseeds < 12);
+        }while (nbseeds >= 0 && backup - nbseeds < 12);
 
         //return the total captured
         return ret;
