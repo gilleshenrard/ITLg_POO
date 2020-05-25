@@ -128,6 +128,40 @@ public class BoardController {
     }
 
     /**
+     * Get how many seeds will be in a slot after scattering
+     * @param start Slot from which the scattering starts
+     * @param p Slot for which to compute the final seed count
+     * @param nbseeds Amount of seeds in the start slot
+     * @return Total amount of seeds in the slot after scattering
+     */
+    public int getFinalSeeds(Point start, Point p, int nbseeds){
+        //if p is the starting slot, amount of seeds should be 0
+        if (p.equals(start))
+            return 0;
+
+        //get how many seeds in total will be scattered in p, starting from start
+        int addedSeeds = ((start.getX() + 1 + nbseeds) / 6);
+        addedSeeds /= 2;
+
+        //get the final slot to be scattered to
+        Point finalSlot = this.m_board.getNext(start, nbseeds);
+
+        //rectify amount of seeds in p (before or after last slot scattered)
+        if (finalSlot.getY() != start.getY()){
+            if ((p.getY() == finalSlot.getY() && p.getX() <= finalSlot.getX())
+                    || p.getY() == start.getY() && p.getX() > start.getX())
+                addedSeeds++;
+        }
+        else {
+            //is p between start and last slot?
+            if (p.getY() == start.getY() && p.getX() <= finalSlot.getX() && p.getX() > start.getX())
+                addedSeeds++;
+        }
+
+        return this.getSlotSeeds(p) + addedSeeds;
+    }
+
+    /**
      * Check if playing p is legal
      * @param p The slot to test
      * @return true = legal, false otherwise
