@@ -249,6 +249,33 @@ public class Board {
     }
 
     /**
+     * Get the previous slot coordinates (decrement x, and roll y when reached the beginning)
+     * @param point Point of which find the next
+     * @return Previous slot from point
+     * @throws NullPointerException
+     * @throws InvalidParameterException
+     */
+    public Point getPrevious(Point point) throws NullPointerException, InvalidParameterException{
+        validateCoordinates(point, "Board.getNext()");
+        if (point == null)
+            throw new NullPointerException("Board.getNext() : NULL instance of Point");
+
+        int x = point.getX();
+        int y = point.getY();
+
+        x--;
+        if (x < 0){
+            x = 5;
+            y--;
+        }
+
+        if (y < 0)
+            y = 1;
+
+        return new Point(x, y);
+    }
+
+    /**
      * Reset the board to an inial value
      */
     public void reset(){

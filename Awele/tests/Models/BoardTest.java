@@ -564,6 +564,39 @@ class BoardTest {
     }
 
     /**
+     * Check if getPrevious() returns the proper coordinates for previous slot (within a row)
+     */
+    @DisplayName("getPrevious() within a row - should not fail")
+    @Test
+    void getPrevious_withinARow_shouldnot_fail() {
+        Point p = new Point(2, 0);
+        Assertions.assertEquals(1, b.getPrevious(p).getX());
+        Assertions.assertEquals(0, b.getPrevious(p).getY());
+    }
+
+    /**
+     * Check if getPrevious() returns the proper coordinates for previous slot (beginning of the first row)
+     */
+    @DisplayName("getPrevious() at the beginning of 1st row - should not fail")
+    @Test
+    void getPrevious_endOfFirstRow_shouldnot_fail() {
+        Point p = new Point(0, 0);
+        Assertions.assertEquals(5, b.getPrevious(p).getX());
+        Assertions.assertEquals(1, b.getPrevious(p).getY());
+    }
+
+    /**
+     * Check if getPrevious() returns the proper coordinates for previous slot (beginning of the 2nd row)
+     */
+    @DisplayName("getPrevious() at the beginning of 2nd row - should not fail")
+    @Test
+    void getPrevious_endOfSecondRow_shouldnot_fail() {
+        Point p = new Point(0, 1);
+        Assertions.assertEquals(5, b.getPrevious(p).getX());
+        Assertions.assertEquals(0, b.getPrevious(p).getY());
+    }
+
+    /**
      * Check if getNonEmpty() sets the proper inial values
      */
     @DisplayName("getNonEmpty() - should not fail")
