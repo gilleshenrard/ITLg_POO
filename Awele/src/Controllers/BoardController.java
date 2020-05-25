@@ -272,9 +272,13 @@ public class BoardController {
         Point last = this.m_board.getNext(p, backup);
         boolean capturing = true;
 
+        //get the last slot scattered
         Point pPrev = new Point(last);
         do {
+            //get the final amount of seeds in the slot
             int finalSeeds = this.getFinalSeeds(p, pPrev, backup);
+
+            //if slot is to be captured (stop at 1st not capturable or end of row) or slot is equal to slot played, empty
             if ((ret > 0 && capturing
                 && (finalSeeds == 2 || finalSeeds == 3)
                 && pPrev.getY() == last.getY() && pPrev.getX() <= last.getX())
@@ -282,6 +286,7 @@ public class BoardController {
                 this.m_board.removeRemainingSeeds(pPrev.getY() + 1, this.getSlotSeeds(pPrev));
                 this.m_board.emptySlotSeeds(pPrev);
             }
+            //if slot is to be simply scattered, update seed amount
             else {
                 this.m_board.addRemainingSeeds(pPrev.getY() + 1, finalSeeds - this.getSlotSeeds(pPrev));
                 this.m_board.setSlotSeeds(pPrev, finalSeeds);
@@ -292,7 +297,7 @@ public class BoardController {
             pPrev = this.m_board.getPrevious(pPrev);
         }while (backup - nbseeds < 12);
 
-        //return the total captured (0 if no capture occurrence)
+        //return the total captured
         return ret;
     }
 

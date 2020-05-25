@@ -221,7 +221,7 @@ public class Board {
     }
 
     /**
-     * Get the next slot coordinates (increment x, and roll y when reached the end)
+     * Get the Xth slot after a point (skip said point each turn)
      * @param point Point of which find the next
      * @param subsequent Which one of the subsequent seeds to get
      * @return Next slot to point
@@ -263,12 +263,16 @@ public class Board {
         int x = point.getX();
         int y = point.getY();
 
+        //decrement X
         x--;
+
+        //if beginning of row, roll X and decrement Y
         if (x < 0){
             x = 5;
             y--;
         }
 
+        //rectify Y
         if (y < 0)
             y = 1;
 
