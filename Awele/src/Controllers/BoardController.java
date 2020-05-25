@@ -201,6 +201,7 @@ public class BoardController {
         Point tmp = this.m_board.getNext(p, nbseeds);
         int finalSeeds = this.getFinalSeeds(p, tmp, nbseeds);
         if (tmp.getY() == p.getY() || (finalSeeds != 2 && finalSeeds != 3)) {
+
             //if the opponent has no seed left and player doesn't scatter on the opponent's side, starvation
             if (this.m_board.getRemainingSeeds(2 - p.getY()) == 0 && (p.getX() + nbseeds / 6) <= 0)
                 return -1;
@@ -218,32 +219,38 @@ public class BoardController {
         //  (1 or 2 in each slot in which the tested slot would be scattered)
         do {
             tmp = this.m_board.getNext(tmp);
+
+            //if tmp is not the slot to scatter
             if (!tmp.equals(p)) {
+
+                //if tmp is on the opponent's side
                 if (tmp.getY() != p.getY()) {
                     finalSeeds = this.getFinalSeeds(p, tmp, backup);
                     if (finalSeeds == 2 || finalSeeds == 3)
                         capturable += finalSeeds;
                     else
-                        capturable = 0;
+                        capturable = 0;     //not capturable, reset count
+
                     scattered++;
                 }
                 else
-                    capturable = 0;
+                    capturable = 0;         //not on the opponent's side, reset count
+
                 nbseeds--;
             }
         }while (nbseeds > 0);
 
-        //starvation occurring during a capture
+        //last slot capturable
         if(this.getSlotSeeds(tmp) == 1 || this.getSlotSeeds(tmp) == 2){
+            //check if opponent starved
             if(capturable - scattered == this.m_board.getRemainingSeeds(2 - p.getY()))
                 return -1;
             else
                 return capturable;
         }
+
         //simple scattering
-        else {
-            return 0;
-        }
+        return 0;
     }
 
     /**
