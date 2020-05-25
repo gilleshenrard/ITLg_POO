@@ -268,32 +268,25 @@ public class BoardController {
 
         //get the number of seeds in the slot to harvest and empty it + update remaining seeds
         int nbseeds = this.getSlotSeeds(p);
-        this.m_board.removeRemainingSeeds(p.getY()+1, nbseeds);
-        this.m_board.emptySlotSeeds(p);
+        int backup = nbseeds;
+        Point last = this.m_board.getNext(p, backup);
 
-        //until all the seeds have been scattered
-        Point pNext = new Point(p);
+        Point pPrev = new Point(last);
         do {
-            //get the next slot to treat, except for the one played by the player
-            pNext = this.m_board.getNext(pNext);
-            if (!pNext.equals(p)){
-                int tmp = this.getSlotSeeds(pNext);
-
-                //if capture case, store the seeds, empty the slot and update remaining
-                if (ret > 0 && (tmp == 1 || tmp == 2)) {
-                    this.storeSeeds(p.getY() + 1, tmp + 1);
-                    this.m_board.emptySlotSeeds(pNext);
-                    this.m_board.removeRemainingSeeds(pNext.getY()+1, tmp);
-                }
-                //otherwise just increment the amount of seeds in each slot
-                else {
-                    this.m_board.incrementSlotSeeds(pNext);
-                    this.m_board.addRemainingSeeds(pNext.getY()+1, 1);
-                }
-                nbseeds--;
+            pPrev = this.m_board.getPrevious(pPrev);
+            if (ret > 0 && pPrev.getY() == last.getY() && pPrev.getX() <= last.getX()
+                || pPrev.equals(p)){
+                this.m_board.removeRemainingSeeds(pPrev.getY() + 1, this.getSlotSeeds(pPrev));
+                this.m_board.emptySlotSeeds(pPrev);
             }
-        }while (nbseeds > 0);
-
+            else {
+                int finalSeeds = this.getFinalSeeds(p, pPrev, backup);
+                this.m_board.addRemainingSeeds(pPrev.getY() + 1, finalSeeds - this.getSlotSeeds(pPrev));
+                this.m_board.setSlotSeeds(pPrev, finalSeeds);
+            }
+            nbseeds--;
+        }while (backup - nbseeds < 12);
+        
         //return the total captured (0 if no capture occurrence)
         return ret;
     }
