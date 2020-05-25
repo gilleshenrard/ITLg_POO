@@ -151,6 +151,39 @@ public class BoardControllerTest {
     }
 
     /**
+     * Check if getFinalSeeds() returns the proper value
+     */
+    @DisplayName("getFinalSeeds() from {2,0} with 20 seeds - should not fail")
+    @Test
+    void getFinalSeeds_02plus20_shouldnot_fail() {
+        b.getBoard().setSlotSeeds(new Point(4, 1), 1);
+        int ret = b.getFinalSeeds(new Point(2, 0), new Point(4, 1), 20);
+        Assertions.assertEquals(3, ret);
+    }
+
+    /**
+     * Check if getFinalSeeds() returns the proper value
+     */
+    @DisplayName("getFinalSeeds() from {5,0} with 40 seeds - should not fail")
+    @Test
+    void getFinalSeeds_05plus40_shouldnot_fail() {
+        b.getBoard().setSlotSeeds(new Point(3, 1), 1);
+        int ret = b.getFinalSeeds(new Point(5, 0), new Point(3, 1), 40);
+        Assertions.assertEquals(4, ret);
+    }
+
+    /**
+     * Check if getFinalSeeds() returns the proper value
+     */
+    @DisplayName("getFinalSeeds() from {0,0} with 5 seeds - should not fail")
+    @Test
+    void getFinalSeeds_00plus5_shouldnot_fail() {
+        b.getBoard().setSlotSeeds(new Point(5, 0), 1);
+        int ret = b.getFinalSeeds(new Point(0, 0), new Point(5, 0), 5);
+        Assertions.assertEquals(2, ret);
+    }
+
+    /**
      * Check if checkOutcome() returns a cancellation code when selecting a slot with no seed
      */
     @DisplayName("checkOutcome() with an empty slot - should not fail")
