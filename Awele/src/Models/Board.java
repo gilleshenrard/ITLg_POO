@@ -280,6 +280,23 @@ public class Board {
     }
 
     /**
+     * Get the distance on the board (slot count) between two points
+     * @param a Lowest point to check
+     * @param b Hignest point
+     * @return Distance (amount of slots) between the two points
+     */
+    public int getDistance(Point a, Point b) {
+        if (a.getY() == b.getY()) {
+            if (b.getX() < a.getX())
+                return b.getX() + (5 - a.getX()) + 6;
+            else
+                return b.getX() - a.getX();
+        }
+        else
+            return b.getX() + (5 - a.getX());
+    }
+
+    /**
      * Reset the board to an inial value
      */
     public void reset(){

@@ -139,26 +139,19 @@ public class BoardController {
         if (p.equals(start))
             return 0;
 
-        //get how many seeds in total will be scattered in p, starting from start
-        int addedSeeds = ((start.getX() + nbseeds) / 6);
-        addedSeeds /= 2;
+        //get how many times the scattering makes a whole board turn (translated from {0, x})
+        int addedSeeds = ((nbseeds) / 12);
 
         //get the final slot to be scattered to
         Point finalSlot = this.m_board.getSubsequent(start, nbseeds);
 
-        //rectify amount of seeds in p (before or after last slot scattered)
-        if (finalSlot.getY() != start.getY()){
-            if ((p.getY() == finalSlot.getY() && p.getX() <= finalSlot.getX())
-                    || p.getY() == start.getY() && p.getX() > start.getX())
-                addedSeeds++;
-        }
-        else {
-            //is p between start and last slot?
-            if (p.getY() == start.getY() && p.getX() <= finalSlot.getX() && p.getX() > start.getX())
-                addedSeeds++;
-        }
+        //compare slot count between start, final and p to know if an additional seed is to be added
+        if (this.m_board.getDistance(start, p) <= this.m_board.getDistance(start, finalSlot))
+            addedSeeds++;
 
+        //return the final amount of seeds
         return this.getSlotSeeds(p) + addedSeeds;
+
     }
 
     /**
