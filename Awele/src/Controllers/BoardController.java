@@ -188,61 +188,50 @@ public class BoardController {
         if (nbseeds == 0)
             return -2;
 
-        //if last slot scattered not the opponent's or doesn't get to be captured, stop there
+        //prepare buffer variables
         Point tmp = this.m_board.getSubsequent(p, nbseeds);
         Point finalSlot = new Point(tmp);
         int finalSeeds = this.getFinalSeeds(p, finalSlot, tmp, nbseeds);
-        if (tmp.getY() == p.getY() || (finalSeeds != 2 && finalSeeds != 3)) {
-
-            //if the opponent has no seed left and player doesn't scatter on the opponent's side, starvation
-            if (this.m_board.getRemainingSeeds(2 - p.getY()) == 0 && ((p.getX() + nbseeds) / 6) <= 0)
-                return -1;
-            else
-                return 0;
-        }
-
-        //prepare buffer variables
-        tmp.setCoordinates(p);
-        int backup = nbseeds;
         int capturable = 0;
-        int scattered = 0;
+        boolean capturing = true;
 
-        //compute the amount of seeds which would be captured in each player row
-        //  (1 or 2 in each slot in which the tested slot would be scattered)
+        //get the total amount of seeds the opponent will have after scattering
+        int i = 5;
+        int total = 0;
         do {
-            tmp = this.m_board.getNext(tmp);
+            tmp.setCoordinates(i, 1 - p.getY());
+            total += this.getFinalSeeds(p, finalSlot, tmp, nbseeds);
+            i--;
+        }while (i >= 0);
 
-            //if tmp is not the slot to scatter
-            if (!tmp.equals(p)) {
+        //if the final slot scattered is not on opponent's side or the slot is not capturable
+        if (finalSlot.getY() == p.getY() || (finalSeeds != 2 && finalSeeds != 3)) {
+            return (total == 0 ? -1 : 0);
+        }
+        //if the slot is capturable
+        else {
+            i = finalSlot.getX();
 
-                //if tmp is on the opponent's side
-                if (tmp.getY() != p.getY()) {
-                    finalSeeds = this.getFinalSeeds(p, finalSlot, tmp, backup);
-                    if (finalSeeds == 2 || finalSeeds == 3)
-                        capturable += finalSeeds;
-                    else
-                        capturable = 0;     //not capturable, reset count
-
-                    scattered++;
+            //scroll through all the capturable slots (until end of row or not capturable)
+            //      and substract their seeds from the total and set them as capturable
+            while (i >= 0 && capturing){
+                tmp.setCoordinates(i, 1 - p.getY());
+                finalSeeds = this.getFinalSeeds(p, finalSlot, tmp, nbseeds);
+                if ((finalSeeds == 2 || finalSeeds == 3)){
+                    total -= finalSeeds;
+                    capturable += finalSeeds;
                 }
                 else
-                    capturable = 0;         //not on the opponent's side, reset count
-
-                nbseeds--;
+                    capturing = false;
+                i--;
             }
-        }while (nbseeds > 0);
-
-        //last slot capturable (on opponent's side)
-        if(tmp.getY() != p.getY()){
-            //check if opponent starved
-            if(capturable - scattered == this.m_board.getRemainingSeeds(2 - p.getY()))
-                return -1;
-            else
-                return capturable;
         }
 
-        //simple scattering
-        return 0;
+        //if seeds left at the opponent's, return the capturable seeds count. Otherwise, return an error
+        if (total == 0)
+            return -1;
+        else
+            return capturable;
     }
 
     /**
