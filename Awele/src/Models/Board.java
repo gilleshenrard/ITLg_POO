@@ -210,7 +210,7 @@ public class Board {
     }
 
     /**
-     * Get the next slot in which a seed can be scattered
+     * Get the next slot in which a seed can be scattered (does not skip the start seed)
      * @param point Point of which find the next
      * @return Next slot to point
      * @throws NullPointerException
