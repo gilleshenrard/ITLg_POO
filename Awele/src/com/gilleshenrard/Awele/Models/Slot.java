@@ -72,14 +72,6 @@ public class Slot {
     }
 
     /**
-     * Set the X and Y coordinates of the Slot
-     * @param p Point of which copy the coordinates
-     */
-    public void setCoordinates(Point p){
-        this.m_coordinates.setCoordinates(p);
-    }
-
-    /**
      * Return the Coordinates of the slot
      * @return Coordinates of the slot
      */
@@ -92,24 +84,6 @@ public class Slot {
      */
     public void emptySeeds(){
         this.nb_seeds = 0;
-    }
-
-    /**
-     * Add one seed in the slot
-     * @throws InvalidParameterException
-     */
-    public void incrementSeeds() throws InvalidParameterException{
-        Slot.validateNbSeeds(this.nb_seeds + 1, "Slot.incrementSeeds()");
-        this.nb_seeds += 1;
-    }
-
-    /**
-     * Remove one seed from the slot
-     * @throws InvalidParameterException
-     */
-    public void decrementSeeds() throws InvalidParameterException{
-        Slot.validateNbSeeds(this.nb_seeds - 1, "Slot.decrementSeeds()");
-        this.nb_seeds -= 1;
     }
 
     /**

@@ -142,6 +142,17 @@ public class BoardControllerTest {
     }
 
     /**
+     * Check if playSlot() returns a cancellation code when selecting a slot with no seed
+     */
+    @DisplayName("playSlot() with an empty slot - should not fail")
+    @Test
+    void playSlot_0seeds_shouldnot_fail() {
+        b.getBoard().setSlotSeeds(new Point(0, 0), 0);
+        int ret = b.playSlot(new Point(0, 0));
+        Assertions.assertEquals(-2, ret);
+    }
+
+    /**
      * Check if checkOutcome() throws an exception with an invalid ID
      */
     @DisplayName("checkOutcome() with an invalid ID - should fail")
@@ -149,6 +160,17 @@ public class BoardControllerTest {
     void checkOutcome_invalidID_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
             b.checkOutcome(new Point(3, 3));
+        });
+    }
+
+    /**
+     * Check if playSlot() throws an exception with an invalid ID
+     */
+    @DisplayName("playSlot() with an invalid ID - should fail")
+    @Test
+    void playSlot_invalidID_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.playSlot(new Point(3, 3));
         });
     }
 
@@ -164,163 +186,6 @@ public class BoardControllerTest {
     }
 
     /**
-     * Check if checkOutcome() throws an exception with a slot above 5
-     */
-    @DisplayName("checkOutcome() with an slot above 5 - should fail")
-    @Test
-    void checkOutcome_above5_should_fail() {
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            b.checkOutcome(new Point(1, 6));
-        });
-    }
-
-    /**
-     * Check if checkOutcome() processes a simple scattering properly (no capture, no starvation)
-     */
-    @DisplayName("checkOutcome() with neither capture nor starvation - should not fail")
-    @Test
-    void checkOutcome_noCaptureNoStarve_shouldnot_fail() {
-        int ret = b.checkOutcome(new Point(5, 0));
-        Assertions.assertEquals(0, ret);
-    }
-
-    /**
-     * Check if checkOutcome() processes a simple scattering properly (2 captures, no starvation)
-     */
-    @DisplayName("checkOutcome() with a capture case - should not fail")
-    @Test
-    void checkOutcome_CaptureNoStarve_shouldnot_fail() {
-        b.getBoard().setSlotSeeds(new Point(1, 1), 2);
-        b.getBoard().setSlotSeeds(new Point(3, 1), 1);
-        b.getBoard().setSlotSeeds(new Point(4, 1), 9);
-        int ret = b.checkOutcome(new Point(5, 0));
-        Assertions.assertEquals(5, ret);
-    }
-
-    /**
-     * Check if checkOutcome() processes a starvation properly
-     */
-    @DisplayName("checkOutcome() with a starvation case on player 2 - should not fail")
-    @Test
-    void checkOutcome_noCaptureStarvePlayer2_shouldnot_fail() {
-        b.getBoard().setSlotSeeds(new Point(0, 1), 1);
-        b.getBoard().setSlotSeeds(new Point(1, 1), 2);
-        b.getBoard().emptySlotSeeds(new Point(2, 1));
-        b.getBoard().emptySlotSeeds(new Point(3, 1));
-        b.getBoard().emptySlotSeeds(new Point(4, 1));
-        b.getBoard().emptySlotSeeds(new Point(5, 1));
-        b.getBoard().setSlotSeeds(new Point(5, 0), 2);
-        b.getBoard().setRemainingSeeds(2, 3);
-        b.getBoard().setRemainingSeeds(1, 22);
-        int ret = b.checkOutcome(new Point(5, 0));
-        Assertions.assertEquals(-1, ret);
-    }
-
-    /**
-     * Check if checkOutcome() processes a starvation properly
-     */
-    @DisplayName("checkOutcome() with a starvation case on player 1 - should not fail")
-    @Test
-    void checkOutcome_noCaptureStarvePlayer1_shouldnot_fail() {
-        b.getBoard().setSlotSeeds(new Point(0, 0), 1);
-        b.getBoard().setSlotSeeds(new Point(1, 0), 2);
-        b.getBoard().emptySlotSeeds(new Point(2, 0));
-        b.getBoard().emptySlotSeeds(new Point(3, 0));
-        b.getBoard().emptySlotSeeds(new Point(4, 0));
-        b.getBoard().emptySlotSeeds(new Point(5, 0));
-        b.getBoard().setSlotSeeds(new Point(5, 1), 2);
-        b.getBoard().setRemainingSeeds(1, 3);
-        b.getBoard().setRemainingSeeds(2, 22);
-        int ret = b.checkOutcome(new Point(5, 1));
-        Assertions.assertEquals(-1, ret);
-    }
-
-    /**
-     * Check if checkOutcome() processes a victory season
-     */
-    @DisplayName("checkOutcome() with a victory case - should not fail")
-    @Test
-    void checkOutcome_victory_shouldnot_fail() {
-        b.getBoard().setSlotSeeds(new Point(3, 1), 1);
-        b.getBoard().setSlotSeeds(new Point(1, 1), 2);
-        int ret = b.checkOutcome(new Point(5, 0));
-        Assertions.assertEquals(5, ret);
-    }
-
-    /**
-     * Check if checkOutcome() processes a self-starvation by scattering to another row
-     */
-    @DisplayName("checkOutcome() with self-starvation to other row - should not fail")
-    @Test
-    void checkOutcome_selfStarvation_otherRow_shouldnot_fail() {
-        b.getBoard().emptySlotSeeds(new Point(0, 0));
-        b.getBoard().emptySlotSeeds(new Point(1, 0));
-        b.getBoard().emptySlotSeeds(new Point(2, 0));
-        b.getBoard().emptySlotSeeds(new Point(3, 0));
-        b.getBoard().emptySlotSeeds(new Point(4, 0));
-        b.getBoard().setSlotSeeds(new Point(5, 0), 1);
-        b.getBoard().setRemainingSeeds(1, 1);
-        int ret = b.checkOutcome(new Point(5, 0));
-        Assertions.assertEquals(0, ret);
-    }
-
-    /**
-     * Check if checkOutcome() processes a self-starvation by scattering within a row
-     */
-    @DisplayName("checkOutcome() with self-starvation within a row - should not fail")
-    @Test
-    void checkOutcome_selfStarvation_sameRow_shouldnot_fail() {
-        b.getBoard().emptySlotSeeds(new Point(0, 0));
-        b.getBoard().emptySlotSeeds(new Point(1, 0));
-        b.getBoard().emptySlotSeeds(new Point(2, 0));
-        b.getBoard().emptySlotSeeds(new Point(3, 0));
-        b.getBoard().setSlotSeeds(new Point(4, 0), 1);
-        b.getBoard().setSlotSeeds(new Point(5, 0), 1);
-        b.getBoard().setRemainingSeeds(1, 2);
-        int ret = b.checkOutcome(new Point(4, 0));
-        Assertions.assertEquals(2, ret);
-    }
-
-    /**
-     * Check if checkOutcome()  without capture in the same row
-     */
-    @DisplayName("checkOutcome() w/o capture within a row - should not fail")
-    @Test
-    void checkOutcome_noCaptureNoStarveSameRow_shouldnot_fail() {
-        b.getBoard().setSlotSeeds(new Point(0, 0), 1);
-        b.getBoard().emptySlotSeeds(new Point(1, 0));
-        b.getBoard().emptySlotSeeds(new Point(2, 0));
-        b.getBoard().emptySlotSeeds(new Point(3, 0));
-        b.getBoard().emptySlotSeeds(new Point(4, 0));
-        b.getBoard().emptySlotSeeds(new Point(5, 0));
-        b.getBoard().setRemainingSeeds(1, 1);
-        int ret = b.checkOutcome(new Point(0, 0));
-        Assertions.assertEquals(0, ret);
-    }
-
-    /**
-     * Check if playSlot() returns a cancellation code when selecting a slot with no seed
-     */
-    @DisplayName("playSlot() with an empty slot - should not fail")
-    @Test
-    void playSlot_0seeds_shouldnot_fail() {
-        b.getBoard().setSlotSeeds(new Point(0, 0), 0);
-        int ret = b.playSlot(new Point(0, 0));
-        Assertions.assertEquals(-2, ret);
-    }
-
-    /**
-     * Check if playSlot() throws an exception with an invalid ID
-     */
-    @DisplayName("playSlot() with an invalid ID - should fail")
-    @Test
-    void playSlot_invalidID_should_fail() {
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            b.playSlot(new Point(3, 3));
-        });
-    }
-
-    /**
      * Check if playSlot() throws an exception with a slot below 0
      */
     @DisplayName("playSlot() with an slot below 0 - should fail")
@@ -328,6 +193,17 @@ public class BoardControllerTest {
     void playSlot_below0_should_fail() {
         Assertions.assertThrows(InvalidParameterException.class, () -> {
             b.playSlot(new Point(-1, 0));
+        });
+    }
+
+    /**
+     * Check if checkOutcome() throws an exception with a slot above 5
+     */
+    @DisplayName("checkOutcome() with an slot above 5 - should fail")
+    @Test
+    void checkOutcome_above5_should_fail() {
+        Assertions.assertThrows(InvalidParameterException.class, () -> {
+            b.checkOutcome(new Point(1, 6));
         });
     }
 
@@ -343,21 +219,320 @@ public class BoardControllerTest {
     }
 
     /**
-     * Check if playSlot() processes a simple scattering properly (no capture, no starvation)
+     * Check if scattering without capture occurs properly
      */
-    @DisplayName("playSlot() with neither capture nor starvation - should not fail")
+    @DisplayName("Scattering without capture")
     @Test
-    void playSlot_noCaptureNoStarve_shouldnot_fail() {
-        int ret = b.playSlot(new Point(5, 0));
+    void scattering_noCapture_otherRow() {
+        //check the outcome
+        int ret = b.checkOutcome(new Point(5, 0));
         Assertions.assertEquals(0, ret);
+
+        //play the slot
+        ret = b.playSlot(new Point(5, 0));
+        Assertions.assertEquals(0, ret);
+
+        //check the board state afterwards
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(5, 0)));
         Assertions.assertEquals(5, b.getSlotSeeds(new Point(0, 1)));
         Assertions.assertEquals(5, b.getSlotSeeds(new Point(1, 1)));
         Assertions.assertEquals(5, b.getSlotSeeds(new Point(2, 1)));
         Assertions.assertEquals(5, b.getSlotSeeds(new Point(3, 1)));
         Assertions.assertEquals(4, b.getSlotSeeds(new Point(4, 1)));
-        Assertions.assertEquals(20, b.getBoard().getRemainingSeeds(1));
-        Assertions.assertEquals(28, b.getBoard().getRemainingSeeds(2));
+        Assertions.assertEquals(0, b.getStoredSeeds(1));
+        Assertions.assertEquals(0, b.getStoredSeeds(2));
+    }
+
+    /**
+     * Check if scattering without capture across empty opponent occurs properly
+     */
+    @DisplayName("Scattering without capture across empty opponent")
+    @Test
+    void scattering_noCapture_opponentEmpty() {
+        //prepare the board (empty opponent's side)
+        b.getBoard().emptySlotSeeds(new Point(0, 1));
+        b.getBoard().emptySlotSeeds(new Point(1, 1));
+        b.getBoard().emptySlotSeeds(new Point(2, 1));
+        b.getBoard().emptySlotSeeds(new Point(3, 1));
+        b.getBoard().emptySlotSeeds(new Point(4, 1));
+        b.getBoard().emptySlotSeeds(new Point(5, 1));
+        b.getBoard().setSlotSeeds(new Point(0, 0), 4);
+        b.getBoard().setSlotSeeds(new Point(1, 0), 4);
+        b.getBoard().setSlotSeeds(new Point(5, 0), 8);
+
+        //check the outcome
+        int ret = b.checkOutcome(new Point(5, 0));
+        Assertions.assertEquals(0, ret);
+
+        //play the slot
+        ret = b.playSlot(new Point(5, 0));
+        Assertions.assertEquals(0, ret);
+
+        //check the board state afterwards
+        Assertions.assertEquals(1, b.getSlotSeeds(new Point(0, 1)));
+        Assertions.assertEquals(1, b.getSlotSeeds(new Point(1, 1)));
+        Assertions.assertEquals(1, b.getSlotSeeds(new Point(2, 1)));
+        Assertions.assertEquals(1, b.getSlotSeeds(new Point(3, 1)));
+        Assertions.assertEquals(1, b.getSlotSeeds(new Point(4, 1)));
+        Assertions.assertEquals(1, b.getSlotSeeds(new Point(5, 1)));
+        Assertions.assertEquals(5, b.getSlotSeeds(new Point(0, 0)));
+        Assertions.assertEquals(5, b.getSlotSeeds(new Point(1, 0)));
+    }
+
+    /**
+     * Check if capture on other row occurs properly (2 captures, no starvation)
+     */
+    @DisplayName("Capture on other row, no starvation")
+    @Test
+    void capture_otherRow_noStarvation() {
+        //prepare the board (capturable slots non-consecutive)
+        b.getBoard().setSlotSeeds(new Point(5, 0), 4);
+        b.getBoard().setSlotSeeds(new Point(0, 1), 4);
+        b.getBoard().setSlotSeeds(new Point(1, 1), 2);
+        b.getBoard().setSlotSeeds(new Point(2, 1), 4);
+        b.getBoard().setSlotSeeds(new Point(3, 1), 1);
+        b.getBoard().setSlotSeeds(new Point(4, 1), 9);
+
+        //check the outcome
+        int ret = b.checkOutcome(new Point(5, 0));
+        Assertions.assertEquals(2, ret);
+
+        //play the slot
+        ret = b.playSlot(new Point(5, 0));
+        Assertions.assertEquals(2, ret);
+
+        //check the board state afterwards
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(5, 0)));
+        Assertions.assertEquals(5, b.getSlotSeeds(new Point(0, 1)));
+        Assertions.assertEquals(3, b.getSlotSeeds(new Point(1, 1)));
+        Assertions.assertEquals(5, b.getSlotSeeds(new Point(2, 1)));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(3, 1)));
+        Assertions.assertEquals(9, b.getSlotSeeds(new Point(4, 1)));
+        Assertions.assertEquals(4, b.getSlotSeeds(new Point(5, 1)));
+        Assertions.assertEquals(2, b.getStoredSeeds(1));
+        Assertions.assertEquals(0, b.getStoredSeeds(2));
+    }
+
+    /**
+     * Check if capture on other row doesn't capture on player's row
+     */
+    @DisplayName("Capture on other row, no capture on player's side")
+    @Test
+    void capture_otherRow_noPlayerRow() {
+        //prepare the board (capturable slots non-consecutive, only one to be captured)
+        b.getBoard().setSlotSeeds(new Point(0, 0), 4);
+        b.getBoard().setSlotSeeds(new Point(1, 0), 4);
+        b.getBoard().setSlotSeeds(new Point(2, 0), 4);
+        b.getBoard().setSlotSeeds(new Point(3, 0), 6);
+        b.getBoard().setSlotSeeds(new Point(4, 0), 1);
+        b.getBoard().setSlotSeeds(new Point(5, 0), 1);
+        b.getBoard().setSlotSeeds(new Point(0, 1), 4);
+        b.getBoard().setSlotSeeds(new Point(1, 1), 2);
+        b.getBoard().setSlotSeeds(new Point(2, 1), 4);
+        b.getBoard().setSlotSeeds(new Point(3, 1), 1);
+        b.getBoard().setSlotSeeds(new Point(4, 1), 9);
+        b.getBoard().setSlotSeeds(new Point(5, 1), 4);
+
+        //check the outcome
+        int ret = b.checkOutcome(new Point(3, 0));
+        Assertions.assertEquals(2, ret);
+
+        //play the slot
+        ret = b.playSlot(new Point(3, 0));
+        Assertions.assertEquals(2, ret);
+
+        //check the board state afterwards
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(3, 0)));
+        Assertions.assertEquals(2, b.getSlotSeeds(new Point(4, 0)));
+        Assertions.assertEquals(2, b.getSlotSeeds(new Point(5, 0)));
+        Assertions.assertEquals(5, b.getSlotSeeds(new Point(0, 1)));
+        Assertions.assertEquals(3, b.getSlotSeeds(new Point(1, 1)));
+        Assertions.assertEquals(5, b.getSlotSeeds(new Point(2, 1)));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(3, 1)));
+        Assertions.assertEquals(9, b.getSlotSeeds(new Point(4, 1)));
+        Assertions.assertEquals(4, b.getSlotSeeds(new Point(5, 1)));
+    }
+
+    /**
+     * Check if capture with starvation is properly forbidden
+     */
+    @DisplayName("Capture with starvation of opponent")
+    @Test
+    void capture_otherRow_starvation() {
+        //prepare the board (only capturable slots on opponent's side)
+        b.getBoard().setSlotSeeds(new Point(0, 0), 1);
+        b.getBoard().setSlotSeeds(new Point(1, 0), 2);
+        b.getBoard().emptySlotSeeds(new Point(2, 0));
+        b.getBoard().emptySlotSeeds(new Point(3, 0));
+        b.getBoard().emptySlotSeeds(new Point(4, 0));
+        b.getBoard().emptySlotSeeds(new Point(5, 0));
+        b.getBoard().setSlotSeeds(new Point(5, 1), 2);
+
+        //check the outcome
+        int ret = b.checkOutcome(new Point(5, 1));
+        Assertions.assertEquals(-1, ret);
+
+        //play the slot
+        ret = b.playSlot(new Point(5, 1));
+        Assertions.assertEquals(-1, ret);
+
+        //check the board state afterwards
+        Assertions.assertEquals(1, b.getSlotSeeds(new Point(0, 0)));
+        Assertions.assertEquals(2, b.getSlotSeeds(new Point(1, 0)));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(2, 0)));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(3, 0)));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(4, 0)));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(5, 0)));
+        Assertions.assertEquals(0, b.getStoredSeeds(2));
+        Assertions.assertEquals(0, b.getStoredSeeds(1));
+    }
+
+    /**
+     * Check if checkOutcome() processes a self-starvation by scattering to another row
+     */
+    @DisplayName("checkOutcome() with self-starvation to other row - should not fail")
+    @Test
+    void checkOutcome_selfStarvation_otherRow_shouldnot_fail() {
+        b.getBoard().emptySlotSeeds(new Point(0, 0));
+        b.getBoard().emptySlotSeeds(new Point(1, 0));
+        b.getBoard().emptySlotSeeds(new Point(2, 0));
+        b.getBoard().emptySlotSeeds(new Point(3, 0));
+        b.getBoard().emptySlotSeeds(new Point(4, 0));
+        b.getBoard().setSlotSeeds(new Point(5, 0), 1);
+    }
+
+    /**
+     * Check if playSlot() processes a self-starvation by scattering to another row
+     */
+    @DisplayName("Self-starvation to other row")
+    @Test
+    void playSlot_selfStarvation_otherRow_shouldnot_fail() {
+        //prepare the board (1 seed left at end of row)
+        b.getBoard().emptySlotSeeds(new Point(0, 0));
+        b.getBoard().emptySlotSeeds(new Point(1, 0));
+        b.getBoard().emptySlotSeeds(new Point(2, 0));
+        b.getBoard().emptySlotSeeds(new Point(3, 0));
+        b.getBoard().emptySlotSeeds(new Point(4, 0));
+        b.getBoard().setSlotSeeds(new Point(5, 0), 1);
+
+        //check the outcome
+        int ret = b.checkOutcome(new Point(5, 0));
+        Assertions.assertEquals(0, ret);
+
+        //play the slot
+        ret = b.playSlot(new Point(5, 0));
+        Assertions.assertEquals(0, ret);
+
+        //check the board state afterwards
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(0, 0)));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(1, 0)));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(2, 0)));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(3, 0)));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(4, 0)));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(5, 0)));
+        Assertions.assertEquals(0, b.getStoredSeeds(1));
+        Assertions.assertEquals(0, b.getStoredSeeds(2));
+    }
+
+    /**
+     * Make sure a capture doesn't occur on player's side (same row)
+     */
+    @DisplayName("No capture on player's side (same row)")
+    @Test
+    void noCapture_Player1_sameRow() {
+        //prepare the board
+        b.getBoard().emptySlotSeeds(new Point(0, 0));
+        b.getBoard().emptySlotSeeds(new Point(1, 0));
+        b.getBoard().emptySlotSeeds(new Point(2, 0));
+        b.getBoard().emptySlotSeeds(new Point(3, 0));
+        b.getBoard().setSlotSeeds(new Point(4, 0), 1);
+        b.getBoard().setSlotSeeds(new Point(5, 0), 1);
+
+        //check the outcome
+        int ret = b.checkOutcome(new Point(4, 0));
+        Assertions.assertEquals(0, ret);
+
+        //play the slot
+        ret = b.playSlot(new Point(4, 0));
+        Assertions.assertEquals(0, ret);
+
+        //check the board state afterwards
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(0, 0)));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(1, 0)));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(2, 0)));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(3, 0)));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(4, 0)));
+        Assertions.assertEquals(2, b.getSlotSeeds(new Point(5, 0)));
+        Assertions.assertEquals(0, b.getStoredSeeds(1));
+        Assertions.assertEquals(0, b.getStoredSeeds(2));
+    }
+
+    /**
+     * Make sure a capture doesn't occur on player's side (across other row)
+     */
+    @DisplayName("No capture on player's side (across other row)")
+    @Test
+    void noCapture_Player1_acrossOtherRow() {
+        //prepare the board
+        b.getBoard().setSlotSeeds(new Point(0, 1), 1);
+        b.getBoard().setSlotSeeds(new Point(1, 1), 1);
+        b.getBoard().setSlotSeeds(new Point(2, 1), 1);
+        b.getBoard().setSlotSeeds(new Point(3, 1), 1);
+        b.getBoard().setSlotSeeds(new Point(4, 1), 1);
+        b.getBoard().setSlotSeeds(new Point(5, 1), 1);
+        b.getBoard().setSlotSeeds(new Point(5, 0), 7);
+        b.getBoard().setSlotSeeds(new Point(0, 0), 1);
+
+        //check the outcome
+        int ret = b.checkOutcome(new Point(5, 0));
+        Assertions.assertEquals(0, ret);
+
+        //play the slot
+        ret = b.playSlot(new Point(5, 0));
+        Assertions.assertEquals(0, ret);
+
+        //check the board state afterwards
+        Assertions.assertEquals(2, b.getSlotSeeds(new Point(0, 1)));
+        Assertions.assertEquals(2, b.getSlotSeeds(new Point(1, 1)));
+        Assertions.assertEquals(2, b.getSlotSeeds(new Point(2, 1)));
+        Assertions.assertEquals(2, b.getSlotSeeds(new Point(3, 1)));
+        Assertions.assertEquals(2, b.getSlotSeeds(new Point(4, 1)));
+        Assertions.assertEquals(2, b.getSlotSeeds(new Point(5, 1)));
+        Assertions.assertEquals(2, b.getSlotSeeds(new Point(0, 0)));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(5, 0)));
+        Assertions.assertEquals(0, b.getStoredSeeds(1));
+        Assertions.assertEquals(0, b.getStoredSeeds(2));
+    }
+
+    /**
+     * Check if moving a seed to another slot within a nearly empty row is allowed
+     */
+    @DisplayName("Moving seed within an empty row")
+    @Test
+    void seedMovement_emptyRow() {
+        //prepare the board (only 1 seed in first slot)
+        b.getBoard().setSlotSeeds(new Point(0, 0), 1);
+        b.getBoard().emptySlotSeeds(new Point(1, 0));
+        b.getBoard().emptySlotSeeds(new Point(2, 0));
+        b.getBoard().emptySlotSeeds(new Point(3, 0));
+        b.getBoard().emptySlotSeeds(new Point(4, 0));
+        b.getBoard().emptySlotSeeds(new Point(5, 0));
+
+        //check outcome
+        int ret = b.checkOutcome(new Point(0, 0));
+        Assertions.assertEquals(0, ret);
+
+        //play the slot
+        ret = b.playSlot(new Point(0, 0));
+        Assertions.assertEquals(0, ret);
+
+        //check the board state afterwards
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(0, 0)));
+        Assertions.assertEquals(1, b.getSlotSeeds(new Point(1, 0)));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(2, 0)));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(3, 0)));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(4, 0)));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(5, 0)));
         Assertions.assertEquals(0, b.getStoredSeeds(1));
         Assertions.assertEquals(0, b.getStoredSeeds(2));
     }
@@ -365,14 +540,19 @@ public class BoardControllerTest {
     /**
      * Check if playSlot() properly skips the selected slot when scattering
      */
-    @DisplayName("playSlot() with a slot skipped at scattering - should not fail")
+    @DisplayName("playSlot() with a slot skipped at scattering")
     @Test
     void playSlot_skipSelected_shouldnot_fail() {
+        //prepare the board
         b.getBoard().setSlotSeeds(new Point(3, 0), 12);
         b.getBoard().emptySlotSeeds(new Point(1, 0));
         b.getBoard().emptySlotSeeds(new Point(2, 0));
+
+        //play the slot
         int ret = b.playSlot(new Point(3, 0));
         Assertions.assertEquals(0, ret);
+
+        //check the board state afterwards
         Assertions.assertEquals(5, b.getSlotSeeds(new Point(0, 1)));
         Assertions.assertEquals(5, b.getSlotSeeds(new Point(1, 1)));
         Assertions.assertEquals(5, b.getSlotSeeds(new Point(2, 1)));
@@ -385,159 +565,89 @@ public class BoardControllerTest {
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(3, 0)));
         Assertions.assertEquals(6, b.getSlotSeeds(new Point(4, 0)));
         Assertions.assertEquals(5, b.getSlotSeeds(new Point(5, 0)));
-        Assertions.assertEquals(30, b.getBoard().getRemainingSeeds(2));
-        Assertions.assertEquals(18, b.getBoard().getRemainingSeeds(1));
         Assertions.assertEquals(0, b.getStoredSeeds(1));
         Assertions.assertEquals(0, b.getStoredSeeds(2));
     }
 
     /**
-     * Check if playSlot() processes a simple scattering properly (2 captures, no starvation)
+     * Check if playSlot() properly skips the selected slot when scattering
      */
-    @DisplayName("playSlot() with a capture case - should not fail")
+    @DisplayName("playSlot() with a slot skipped at scattering")
     @Test
-    void playSlot_CaptureNoStarve_shouldnot_fail() {
-        b.getBoard().setSlotSeeds(new Point(1, 1), 2);
-        b.getBoard().setSlotSeeds(new Point(3, 1), 1);
-        b.getBoard().setSlotSeeds(new Point(4, 1), 9);
-        int ret = b.playSlot(new Point(5, 0));
-        Assertions.assertEquals(5, ret);
-        Assertions.assertEquals(0, b.getSlotSeeds(new Point(5, 0)));
-        Assertions.assertEquals(5, b.getSlotSeeds(new Point(0, 1)));
-        Assertions.assertEquals(0, b.getSlotSeeds(new Point(1, 1)));
-        Assertions.assertEquals(5, b.getSlotSeeds(new Point(2, 1)));
-        Assertions.assertEquals(0, b.getSlotSeeds(new Point(3, 1)));
-        Assertions.assertEquals(9, b.getSlotSeeds(new Point(4, 1)));
-        Assertions.assertEquals(4, b.getSlotSeeds(new Point(5, 1)));
-        Assertions.assertEquals(23, b.getBoard().getRemainingSeeds(2));
-        Assertions.assertEquals(20, b.getBoard().getRemainingSeeds(1));
-        Assertions.assertEquals(5, b.getStoredSeeds(1));
-        Assertions.assertEquals(0, b.getStoredSeeds(2));
-    }
-
-    /**
-     * Check if playSlot() processes a starvation properly
-     */
-    @DisplayName("playSlot() with a starvation case - should not fail")
-    @Test
-    void playSlot_noCaptureStarve_shouldnot_fail() {
-        b.getBoard().setSlotSeeds(new Point(0, 1), 1);
-        b.getBoard().setSlotSeeds(new Point(1, 1), 2);
-        b.getBoard().emptySlotSeeds(new Point(2, 1));
-        b.getBoard().emptySlotSeeds(new Point(3, 1));
-        b.getBoard().emptySlotSeeds(new Point(4, 1));
-        b.getBoard().emptySlotSeeds(new Point(5, 1));
-        b.getBoard().setSlotSeeds(new Point(5, 0), 2);
-        b.getBoard().setRemainingSeeds(2, 3);
-        b.getBoard().setRemainingSeeds(1, 22);
-        int ret = b.playSlot(new Point(5, 0));
-        Assertions.assertEquals(-1, ret);
-        Assertions.assertEquals(1, b.getSlotSeeds(new Point(0, 1)));
-        Assertions.assertEquals(2, b.getSlotSeeds(new Point(1, 1)));
-        Assertions.assertEquals(0, b.getSlotSeeds(new Point(2, 1)));
-        Assertions.assertEquals(0, b.getSlotSeeds(new Point(3, 1)));
-        Assertions.assertEquals(0, b.getSlotSeeds(new Point(4, 1)));
-        Assertions.assertEquals(0, b.getSlotSeeds(new Point(5, 1)));
-        Assertions.assertEquals(22, b.getBoard().getRemainingSeeds(1));
-        Assertions.assertEquals(3, b.getBoard().getRemainingSeeds(2));
-        Assertions.assertEquals(0, b.getStoredSeeds(1));
-        Assertions.assertEquals(0, b.getStoredSeeds(2));
-    }
-
-    /**
-     * Check if playSlot() processes a victory season
-     */
-    @DisplayName("playSlot() with a victory case - should not fail")
-    @Test
-    void playSlot_victory_shouldnot_fail() {
-        b.getBoard().setSlotSeeds(new Point(3, 1), 1);
-        b.getBoard().setSlotSeeds(new Point(1, 1), 2);
-        b.storeSeeds(1, 22);
-        int ret = b.playSlot(new Point(5, 0));
-        Assertions.assertEquals(5, ret);
-        Assertions.assertEquals(5, b.getSlotSeeds(new Point(0, 1)));
-        Assertions.assertEquals(0, b.getSlotSeeds(new Point(1, 1)));
-        Assertions.assertEquals(5, b.getSlotSeeds(new Point(2, 1)));
-        Assertions.assertEquals(0, b.getSlotSeeds(new Point(3, 1)));
-        Assertions.assertEquals(4, b.getSlotSeeds(new Point(4, 1)));
-        Assertions.assertEquals(27, b.getStoredSeeds(1));
-        Assertions.assertEquals(0, b.getStoredSeeds(2));
-    }
-
-    /**
-     * Check if playSlot() processes a self-starvation by scattering to another row
-     */
-    @DisplayName("playSlot() with self-starvation to other row - should not fail")
-    @Test
-    void playSlot_selfStarvation_otherRow_shouldnot_fail() {
-        b.getBoard().emptySlotSeeds(new Point(0, 0));
-        b.getBoard().emptySlotSeeds(new Point(1, 0));
-        b.getBoard().emptySlotSeeds(new Point(2, 0));
-        b.getBoard().emptySlotSeeds(new Point(3, 0));
-        b.getBoard().emptySlotSeeds(new Point(4, 0));
-        b.getBoard().setSlotSeeds(new Point(5, 0), 1);
-        b.getBoard().setRemainingSeeds(1, 1);
-        int ret = b.playSlot(new Point(5, 0));
-        Assertions.assertEquals(0, ret);
-        Assertions.assertEquals(0, b.getSlotSeeds(new Point(0, 0)));
-        Assertions.assertEquals(0, b.getSlotSeeds(new Point(1, 0)));
-        Assertions.assertEquals(0, b.getSlotSeeds(new Point(2, 0)));
-        Assertions.assertEquals(0, b.getSlotSeeds(new Point(3, 0)));
-        Assertions.assertEquals(0, b.getSlotSeeds(new Point(4, 0)));
-        Assertions.assertEquals(0, b.getSlotSeeds(new Point(5, 0)));
-        Assertions.assertEquals(0, b.getBoard().getRemainingSeeds(1));
-        Assertions.assertEquals(0, b.getStoredSeeds(1));
-        Assertions.assertEquals(0, b.getStoredSeeds(2));
-    }
-
-    /**
-     * Check if playSlot() processes a self-starvation by scattering within a row
-     */
-    @DisplayName("playSlot() with self-starvation within a row - should not fail")
-    @Test
-    void playSlot_selfStarvation_sameRow_shouldnot_fail() {
-        b.getBoard().emptySlotSeeds(new Point(0, 0));
-        b.getBoard().emptySlotSeeds(new Point(1, 0));
-        b.getBoard().emptySlotSeeds(new Point(2, 0));
-        b.getBoard().emptySlotSeeds(new Point(3, 0));
-        b.getBoard().setSlotSeeds(new Point(4, 0), 1);
-        b.getBoard().setSlotSeeds(new Point(5, 0), 1);
-        b.getBoard().setRemainingSeeds(1, 2);
-        int ret = b.playSlot(new Point(4, 0));
-        Assertions.assertEquals(2, ret);
-        Assertions.assertEquals(0, b.getSlotSeeds(new Point(0, 0)));
-        Assertions.assertEquals(0, b.getSlotSeeds(new Point(1, 0)));
-        Assertions.assertEquals(0, b.getSlotSeeds(new Point(2, 0)));
-        Assertions.assertEquals(0, b.getSlotSeeds(new Point(3, 0)));
-        Assertions.assertEquals(0, b.getSlotSeeds(new Point(4, 0)));
-        Assertions.assertEquals(0, b.getSlotSeeds(new Point(5, 0)));
-        Assertions.assertEquals(0, b.getBoard().getRemainingSeeds(1));
-        Assertions.assertEquals(2, b.getStoredSeeds(1));
-        Assertions.assertEquals(0, b.getStoredSeeds(2));
-    }
-
-    /**
-     * Check if playSlot() processes a shot without capture in the same row
-     */
-    @DisplayName("playSlot() w/o capture within a row - should not fail")
-    @Test
-    void playSlot_noCaptureNoStarveSameRow_shouldnot_fail() {
+    void playSlot_capture_skipSelected_shouldnot_fail() {
+        //prepare the board
         b.getBoard().setSlotSeeds(new Point(0, 0), 1);
+        b.getBoard().setSlotSeeds(new Point(1, 0), 1);
+        b.getBoard().setSlotSeeds(new Point(2, 0), 1);
+        b.getBoard().setSlotSeeds(new Point(3, 0), 1);
+        b.getBoard().setSlotSeeds(new Point(4, 0), 15);
+        b.getBoard().setSlotSeeds(new Point(5, 0), 1);
+        b.getBoard().setSlotSeeds(new Point(0, 1), 1);
+        b.getBoard().setSlotSeeds(new Point(1, 1), 1);
+        b.getBoard().setSlotSeeds(new Point(2, 1), 1);
+        b.getBoard().setSlotSeeds(new Point(3, 1), 1);
+        b.getBoard().setSlotSeeds(new Point(4, 1), 1);
+        b.getBoard().setSlotSeeds(new Point(5, 1), 1);
+
+        //check the outcome
+        int ret = b.checkOutcome(new Point(4, 0));
+        Assertions.assertEquals(9, ret);
+
+        //play the slot
+        ret = b.playSlot(new Point(4, 0));
+        Assertions.assertEquals(9, ret);
+
+        //check the board state afterwards
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(0, 1)));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(1, 1)));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(2, 1)));
+        Assertions.assertEquals(2, b.getSlotSeeds(new Point(3, 1)));
+        Assertions.assertEquals(2, b.getSlotSeeds(new Point(4, 1)));
+        Assertions.assertEquals(2, b.getSlotSeeds(new Point(5, 1)));
+        Assertions.assertEquals(2, b.getSlotSeeds(new Point(0, 0)));
+        Assertions.assertEquals(2, b.getSlotSeeds(new Point(1, 0)));
+        Assertions.assertEquals(2, b.getSlotSeeds(new Point(2, 0)));
+        Assertions.assertEquals(2, b.getSlotSeeds(new Point(3, 0)));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(4, 0)));
+        Assertions.assertEquals(3, b.getSlotSeeds(new Point(5, 0)));
+    }
+
+    /**
+     * Check if playSlot() forbids a player to let the other starve
+     */
+    @DisplayName("playSlot() with other player starved - should not fail")
+    @Test
+    void playSlot_starvation_otherRow_shouldnot_fail() {
+        //prepare the board (empty opponent)
+        b.getBoard().setSlotSeeds(new Point(0, 1), 1);
+        b.getBoard().setSlotSeeds(new Point(1, 1), 1);
+        b.getBoard().setSlotSeeds(new Point(2, 1), 1);
+        b.getBoard().setSlotSeeds(new Point(3, 1), 5);
+        b.getBoard().setSlotSeeds(new Point(4, 1), 5);
+        b.getBoard().setSlotSeeds(new Point(5, 1), 6);
+        b.getBoard().emptySlotSeeds(new Point(0, 0));
         b.getBoard().emptySlotSeeds(new Point(1, 0));
         b.getBoard().emptySlotSeeds(new Point(2, 0));
         b.getBoard().emptySlotSeeds(new Point(3, 0));
         b.getBoard().emptySlotSeeds(new Point(4, 0));
         b.getBoard().emptySlotSeeds(new Point(5, 0));
-        b.getBoard().setRemainingSeeds(1, 1);
-        int ret = b.playSlot(new Point(0, 0));
-        Assertions.assertEquals(0, ret);
+
+        //check the outcome
+        int ret = b.checkOutcome(new Point(0, 1));
+        Assertions.assertEquals(-1, ret);
+
+        //play the slot
+        ret = b.playSlot(new Point(0, 1));
+        Assertions.assertEquals(-1, ret);
+
+        //check the board state afterwards
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(0, 0)));
-        Assertions.assertEquals(1, b.getSlotSeeds(new Point(1, 0)));
+        Assertions.assertEquals(0, b.getSlotSeeds(new Point(1, 0)));
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(2, 0)));
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(3, 0)));
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(4, 0)));
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(5, 0)));
-        Assertions.assertEquals(1, b.getBoard().getRemainingSeeds(1));
+        Assertions.assertEquals(1, b.getSlotSeeds(new Point(0, 1)));
         Assertions.assertEquals(0, b.getStoredSeeds(1));
         Assertions.assertEquals(0, b.getStoredSeeds(2));
     }
@@ -550,8 +660,6 @@ public class BoardControllerTest {
     void resetBoard_shouldnot_fail() {
         b.resetBoard();
         Point p = new Point(0, 0);
-        Assertions.assertEquals(24, b.getBoard().getRemainingSeeds(1));
-        Assertions.assertEquals(24, b.getBoard().getRemainingSeeds(2));
         for (int l = 0 ; l < 2 ; l++){
             for (int c = 0 ; c < 6 ; c++){
                 p.setCoordinates(c, l);

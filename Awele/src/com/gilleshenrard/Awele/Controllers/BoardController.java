@@ -201,40 +201,49 @@ public class BoardController {
             return -2;
 
         //prepare buffer variables
-        Point tmp = new Point(p);
-        int[] backup = new int[2];
-        int[] capturable = new int[2];
-        int[] scattered = new int[2];
+        Point tmp = this.m_board.getSubsequent(p, nbseeds);
+        Point finalSlot = new Point(tmp);
+        int finalSeeds = this.m_board.getFinalSeeds(p, finalSlot, tmp, nbseeds);
+        int capturable = 0;
+        boolean capturing = true;
 
-        //backup the amount of seeds in the slot harvested by the player
-        backup[0] = (p.getY() == 0 ? nbseeds : 0);
-        backup[1] = (p.getY() == 1 ? nbseeds : 0);
-
-        //compute the amount of seeds which would be captured in each player row
-        //  (1 or 2 in each slot in which the tested slot would be scattered)
-        java.util.Arrays.fill(scattered, 0);
-        java.util.Arrays.fill(capturable, 0);
+        //get the total amount of seeds the opponent will have after scattering
+        int i = 5;
+        int total = 0;
         do {
-            tmp = this.m_board.getNext(tmp);
-            if (!tmp.equals(p)) {
-                if (this.getSlotSeeds(tmp) == 1 || this.getSlotSeeds(tmp) == 2)
-                    capturable[tmp.getY()] += getSlotSeeds(tmp) + 1;
-                scattered[tmp.getY()]++;
-                nbseeds--;
-            }
-        }while (nbseeds > 0);
+            tmp.setCoordinates(i, 1 - p.getY());
+            total += this.m_board.getFinalSeeds(p, finalSlot, tmp, nbseeds);
+            i--;
+        }while (i >= 0);
 
-        //starvation occurring during a capture
-        if(this.getSlotSeeds(tmp) == 1 || this.getSlotSeeds(tmp) == 2){
-            if(capturable[1 - p.getY()] - scattered[1 - p.getY()] == this.m_board.getRemainingSeeds(2 - p.getY()))
-                return -1;
-            else
-                return capturable[0] + capturable[1];
+        //if the final slot scattered is not on opponent's side or the slot is not capturable
+        if (finalSlot.getY() == p.getY() || (finalSeeds != 2 && finalSeeds != 3)) {
+            return (total == 0 ? -1 : 0);
         }
-        //simple scattering
+        //if the slot is capturable
         else {
-            return 0;
+            i = finalSlot.getX();
+
+            //scroll through all the capturable slots (until end of row or not capturable)
+            //      and substract their seeds from the total and set them as capturable
+            while (i >= 0 && capturing){
+                tmp.setCoordinates(i, 1 - p.getY());
+                finalSeeds = this.m_board.getFinalSeeds(p, finalSlot, tmp, nbseeds);
+                if ((finalSeeds == 2 || finalSeeds == 3)){
+                    total -= finalSeeds;
+                    capturable += finalSeeds;
+                }
+                else
+                    capturing = false;
+                i--;
+            }
         }
+
+        //if seeds left at the opponent's, return the capturable seeds count. Otherwise, return an error
+        if (total == 0)
+            return -1;
+        else
+            return capturable;
     }
 
     /**
@@ -259,36 +268,55 @@ public class BoardController {
 
         //get the number of seeds in the slot to harvest and empty it + update remaining seeds
         int nbseeds = this.getSlotSeeds(p);
-        this.m_board.removeRemainingSeeds(p.getY()+1, nbseeds);
+        int backup = nbseeds;
+        int finalSeeds = 0;
+        Point pPrev = this.m_board.getSubsequent(p, backup);
+        Point finalSlot = new Point(pPrev);
+        boolean capturing = true;
+
+
+        //empty the start slot and update the remaining seeds count
         this.m_board.emptySlotSeeds(p);
 
-        //until all the seeds have been scattered
-        int total = 0;
-        Point pNext = new Point(p);
-        do {
-            //get the next slot to treat, except for the one played by the player
-            pNext = this.m_board.getNext(pNext);
-            if (!pNext.equals(p)){
-                int tmp = this.getSlotSeeds(pNext);
+        //
+        //  CAPTURING PHASE
+        //
 
-                //if capture case, store the seeds, empty the slot and update remaining
-                if (ret > 0 && (tmp == 1 || tmp == 2)) {
-                    total += tmp + 1;
-                    this.storeSeeds(p.getY() + 1, tmp + 1);
-                    this.m_board.emptySlotSeeds(pNext);
-                    this.m_board.removeRemainingSeeds(pNext.getY()+1, tmp);
-                }
-                //otherwise just increment the amount of seeds in each slot
-                else {
-                    this.m_board.incrementSlotSeeds(pNext);
-                    this.m_board.addRemainingSeeds(pNext.getY()+1, 1);
-                }
+        //capturing cycle (while only capturable slots encountered and on the opponent's side)
+        while (ret > 0 && capturing && nbseeds >= 0){
+            finalSeeds = this.m_board.getFinalSeeds(p, finalSlot, pPrev, backup);
+
+            //if still capturable, empty the slot and update remaining seeds, otherwise stop capture
+            if(pPrev.getY() == 1 - p.getY() && (finalSeeds == 2 || finalSeeds == 3)){
+                this.storeSeeds(p.getY() + 1, finalSeeds);
+                this.m_board.emptySlotSeeds(pPrev);
+
+                //get next slot
+                nbseeds--;
+                pPrev = this.m_board.getPrevious(pPrev);
+            }
+            else
+                capturing = false;
+        }
+
+        //
+        //  SCATTERING PHASE
+        //
+
+        //scattering cycle (while seeds left or scattering made a whole turn)
+        while (nbseeds >= 0 && backup - nbseeds < 11){
+            //if current slot is not the one played, update the total amount of seeds
+            if (!pPrev.equals(p)){
+                finalSeeds = this.m_board.getFinalSeeds(p, finalSlot, pPrev, backup);
+                this.m_board.setSlotSeeds(pPrev, finalSeeds);
                 nbseeds--;
             }
-        }while (nbseeds > 0);
 
-        //return the total captured (0 if no capture occurrence)
-        return total;
+            pPrev = this.m_board.getPrevious(pPrev);
+        }
+
+        //return the total captured
+        return ret;
     }
 
     /**

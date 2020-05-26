@@ -1,5 +1,5 @@
 # ITLg_POO
-## Project Awele - Part 1 - v4.0
+## Project Awele - Part 2 - v4.1
 
 ---
 ### 1. Introduction
@@ -34,15 +34,30 @@ At each turn (named seasons), a player chooses a slot on his side to harvest.
 Said slot is then emptied of all its seeds, and each of the latter is scattered one at a time in the next slots in an anti-clockwise manner.
 The slot the player chose is to remain empty and to be skipped on the scattering phase.
 
-Once the scattering is done and there are no seeds left to scatter : if the last slot populated contains 2 or 3 seeds, the capture phase is engaged.
+Once the scattering is done and there are no seeds left to scatter : if the last slot populated contains 2 or 3 seeds
+and is on the opponent side, the capture phase is engaged.
 
 #### 3. Capture phase
 Once a capture occurs, all the slots following the one selected by the player up to the one which triggered the captured are checked.
 
-All those containing 2 or 3 seeds (including the last slot) are emptied and the seeds are stored by the player, thus rising its score.
+Starting from the last slot in which a seed has been scattered up to the initial slot played by the player,
+all those containing 2 or 3 seeds are emptied and the seeds are stored by the player, thus rising its score.
+
+The capture phase continues until the player's row or a non-capturable slot is reached.
+Example :
+
+PLAYER 2
+
+| 2 || 1 || 6 || 6 || 0 || 1 |
+
+| 3 || 4 || 2 || 2 || 7 || 1 |
+
+PLAYER 1
+
+In this case, player 1 selects the slot 5, and captures the slots 5 and 6 of its opponent, thus storing 5 seeds (2 + 1 + 2 scattered).
 
 It is to be mentioned that a player can not starve its opponent (no seeds left on its side of the board). Should a starvation occur,
-the season is cancelled and the player can play again.
+the season is cancelled and the player can play again. A player can however starve himself.
 
 #### 4. Victory
 A player wins the game when he manages to store more than 24 seeds.
@@ -115,25 +130,8 @@ The unit tests for each class can be found in the mirrored directory tests/ (tes
 ---
 ### 4. Change list (since v3.4)
 
-- Application package structure has been revamped
-- States in the Machine State pattern are now enclosed in an emuneration to ease up their use
-- The Board Controller now uses the Observer design pattern to update a UI independently of the technology used
-- Console views now implement the Observer design pattern
-- BoardController is now a member of GameController, to ease up Constructors manipulations
-- Game views now implement a base class. They only provide system messages
-- UI update has been moved from the Prompting State to the player switching state
-- Previously implemented views have been renamed to indicate those are console views
-- BoardJFXView has been implemented as a JavaFX-based board view
-- GameJFXView has been implemented as a JavaFX-based system messages view
-- JFXSelect has been implemented to deal with player slot selection via JavaFX click events
-- The game can now be launched either in console mode or in JFX mode via a program argument
-- Headers have been added to the newly implemented methods
-- The main game loop runs in a separate thread in the JFX version
-- JFX Slot selection now checks if there are any legal shots available before waiting for a click
-- Warning are now displayed as messages
-- The logger utility java.util.logging.Logger is now used for debug messages
-- AI players now wait for 1 second before playing
-- Game loop is now hosted in the game controller
+- Remaining Seeds counter is now longer used
+- checkOutcome() and playSlot() have been changed to match the rules changes
 
 ---
 ### 5. Known issues

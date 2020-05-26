@@ -75,139 +75,6 @@ class BoardTest {
     }
 
     /**
-     * Check if getRemainingSeeds() throws an exception with an invalid ID
-     */
-    @DisplayName("getRemainingSeeds() with invalid ID - should fail")
-    @Test
-    void getRemainingSeeds_invalidID_should_fail() {
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            b.getRemainingSeeds(0);
-        });
-    }
-
-    /**
-     * Check if setRemainingSeeds() throws an exception with an invalid ID
-     */
-    @DisplayName("setRemainingSeeds() with invalid ID - should fail")
-    @Test
-    void setRemainingSeeds_invalidID_should_fail() {
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            b.setRemainingSeeds(0, 0);
-        });
-    }
-
-    /**
-     * Check if setRemainingSeeds() throws an exception with a negative value
-     */
-    @DisplayName("setRemainingSeeds() with negative value - should fail")
-    @Test
-    void setRemainingSeeds_negativeValue_should_fail() {
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            b.setRemainingSeeds(1, -1);
-        });
-    }
-
-    /**
-     * Check if setRemainingSeeds() throws an exception with a value above 48
-     */
-    @DisplayName("setRemainingSeeds() with value above 48 - should fail")
-    @Test
-    void setRemainingSeeds_above48_should_fail() {
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            b.setRemainingSeeds(1, 49);
-        });
-    }
-
-    /**
-     * Check if setRemainingSeeds() sets the proper value
-     */
-    @DisplayName("setRemainingSeeds() - should not fail")
-    @Test
-    void setRemainingSeeds_shouldnot_fail() {
-        b.setRemainingSeeds(1, 6);
-        Assertions.assertEquals(6, b.getRemainingSeeds(1));
-    }
-
-    /**
-     * Check if addRemainingSeeds() throws an exception while adding above 48
-     */
-    @DisplayName("addRemainingSeeds() adding above 48 - should fail")
-    @Test
-    void addRemainingSeeds_above48_should_fail() {
-        b.setRemainingSeeds(1, 40);
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            b.addRemainingSeeds(1, 10);
-        });
-    }
-
-    /**
-     * Check if addRemainingSeeds() while substracting below 0
-     */
-    @DisplayName("addRemainingSeeds() adding below 0 - should fail")
-    @Test
-    void addRemainingSeeds_below0_should_fail() {
-        b.setRemainingSeeds(1, 5);
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            b.addRemainingSeeds(1, -7);
-        });
-    }
-
-    /**
-     * Check if addRemainingSeeds() sets the proper value
-     */
-    @DisplayName("addRemainingSeeds() - should not fail")
-    @Test
-    void addRemainingSeeds_shouldnot_fail() {
-        b.setRemainingSeeds(1, 5);
-        b.addRemainingSeeds(1, 6);
-        Assertions.assertEquals(11, b.getRemainingSeeds(1));
-    }
-
-    /**
-     * Check if removeRemainingSeeds() throws an exception while adding above 48
-     */
-    @DisplayName("removeRemainingSeeds() adding above 48 - should fail")
-    @Test
-    void removeRemainingSeeds_above48_should_fail() {
-        b.setRemainingSeeds(1, 40);
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            b.removeRemainingSeeds(1, -10);
-        });
-    }
-
-    /**
-     * Check if removeRemainingSeeds() while substracting below 0
-     */
-    @DisplayName("removeRemainingSeeds() adding below 0 - should fail")
-    @Test
-    void removeRemainingSeeds_below0_should_fail() {
-        b.setRemainingSeeds(1, 5);
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            b.removeRemainingSeeds(1, 7);
-        });
-    }
-
-    /**
-     * Check if removeRemainingSeeds() sets the proper value
-     */
-    @DisplayName("removeRemainingSeeds() - should not fail")
-    @Test
-    void removeRemainingSeeds_shouldnot_fail() {
-        b.setRemainingSeeds(1, 6);
-        b.removeRemainingSeeds(1, 5);
-        Assertions.assertEquals(1, b.getRemainingSeeds(1));
-    }
-
-    /**
-     * Check if getRemainingSeeds() returns the proper amount
-     */
-    @DisplayName("getRemainingSeeds() - should not fail")
-    @Test
-    void getRemainingSeeds_shouldnot_fail() {
-        Assertions.assertEquals(b.getRemainingSeeds(1), 24);
-    }
-
-    /**
      * Check if setSlotSeeds() throws an exception with an X value over 5
      */
     @DisplayName("setSlotSeeds() with X over 5 - should fail")
@@ -325,52 +192,6 @@ class BoardTest {
     }
 
     /**
-     * Check if incrementSlotSeeds() properly increments m_nbseeds
-     */
-    @DisplayName("incrementSlotSeeds() - should not fail")
-    @Test
-    void incrementSlotSeeds_shouldnot_fail() {
-        b.incrementSlotSeeds(new Point(0, 0));
-        Assertions.assertEquals(5, b.getSlotSeeds(new Point(0, 0)));
-    }
-
-    /**
-     * Check if incrementSlotSeeds() throws an exception when rising m_nbseeds above 48 (max seeds on the board)
-     */
-    @DisplayName("incrementSlotSeeds() when incrementing above 48 - should fail")
-    @Test
-    void incrementSlotSeeds_above48_should_fail() {
-        b.setSlotSeeds(new Point(0, 0), 48);
-
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            b.incrementSlotSeeds(new Point(0, 0));
-        });
-    }
-
-    /**
-     * Check if decrementSlotSeeds() properly decrements m_nbseeds
-     */
-    @DisplayName("decrementSlotSeeds() - should not fail")
-    @Test
-    void decrementSlotSeeds_shouldnot_fail() {
-        b.decrementSlotSeeds(new Point(0, 0));
-        Assertions.assertEquals(3, b.getSlotSeeds(new Point(0, 0)));
-    }
-
-    /**
-     * Check if decrementSlotSeeds() throws an exception when lowering m_nbseeds below 0
-     */
-    @DisplayName("decrementSlotSeeds() when decrementing below 0 - should fail")
-    @Test
-    void decrementSlotSeeds_negativeamount_should_fail() {
-        b.emptySlotSeeds(new Point(0, 0));
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            b.decrementSlotSeeds(new Point(0, 0));
-        });
-    }
-
-
-    /**
      * Check if setStoredSeeds() sets the proper value to stored seeds
      */
     @DisplayName("setStoredSeeds() - should not fail")
@@ -466,6 +287,137 @@ class BoardTest {
         Assertions.assertEquals(0, b.getNext(p).getX());
         Assertions.assertEquals(0, b.getNext(p).getY());
     }
+    /**
+     * Check if getNext() returns the proper coordinates for next slot (within a row)
+     */
+    @DisplayName("getNext() within a row - should not fail")
+    @Test
+    void getNext_once_withinARow_shouldnot_fail() {
+        Point p = new Point(2, 0);
+        Assertions.assertEquals(3, b.getNext(p).getX());
+        Assertions.assertEquals(0, b.getNext(p).getY());
+    }
+
+    /**
+     * Check if getNext() returns the proper coordinates for next slot (end of the first row)
+     */
+    @DisplayName("getNext() at the end of 1st row - should not fail")
+    @Test
+    void getNext_once_endOfFirstRow_shouldnot_fail() {
+        Point p = new Point(5, 0);
+        Assertions.assertEquals(0, b.getNext(p).getX());
+        Assertions.assertEquals(1, b.getNext(p).getY());
+    }
+
+    /**
+     * Check if getNext() returns the proper coordinates for next slot (end of the 2nd row)
+     */
+    @DisplayName("getNext() at the end of 2nd row - should not fail")
+    @Test
+    void getNext_once_endOfSecondRow_shouldnot_fail() {
+        Point p = new Point(5, 1);
+        Assertions.assertEquals(0, b.getNext(p).getX());
+        Assertions.assertEquals(0, b.getNext(p).getY());
+    }
+
+    /**
+     * Check if getSubsequent() returns the proper coordinates for 14th subsequent slot
+     */
+    @DisplayName("getSubsequent() {0,0} plus 14 - should not fail")
+    @Test
+    void getSubsequent_00plus14_shouldnot_fail() {
+        Point p = new Point(0, 0);
+        Assertions.assertEquals(3, b.getSubsequent(p, 14).getX());
+        Assertions.assertEquals(0, b.getSubsequent(p, 14).getY());
+    }
+
+    /**
+     * Check if getSubsequent() returns the proper coordinates for 10th subsequent slot
+     */
+    @DisplayName("getSubsequent() {3,0} plus 10 - should not fail")
+    @Test
+    void getSubsequent_30plus14_shouldnot_fail() {
+        Point p = new Point(3, 0);
+        Assertions.assertEquals(1, b.getSubsequent(p, 10).getX());
+        Assertions.assertEquals(0, b.getSubsequent(p, 10).getY());
+    }
+
+    /**
+     * Check if getSubsequent() returns the proper coordinates for 14th subsequent slot
+     */
+    @DisplayName("getSubsequent() {5,0} plus 14 - should not fail")
+    @Test
+    void getSubsequent_50plus14_shouldnot_fail() {
+        Point p = new Point(5, 0);
+        Assertions.assertEquals(2, b.getSubsequent(p, 14).getX());
+        Assertions.assertEquals(1, b.getSubsequent(p, 14).getY());
+    }
+
+    /**
+     * Check if getSubsequent() returns the proper coordinates for 40th subsequent slot
+     */
+    @DisplayName("getSubsequent() {5,0} plus 40 - should not fail")
+    @Test
+    void getSubsequent_50plus40_shouldnot_fail() {
+        Point p = new Point(5, 0);
+        Assertions.assertEquals(0, b.getSubsequent(p, 40).getX());
+        Assertions.assertEquals(0, b.getSubsequent(p, 40).getY());
+    }
+
+    /**
+     * Check if getSubsequent() returns the proper coordinates for 12th subsequent slot
+     */
+    @DisplayName("getSubsequent() {3,0} plus 12 - should not fail")
+    @Test
+    void getSubsequent_30plus12_shouldnot_fail() {
+        Point p = new Point(3, 0);
+        Assertions.assertEquals(4, b.getSubsequent(p, 12).getX());
+        Assertions.assertEquals(0, b.getSubsequent(p, 12).getY());
+    }
+
+    /**
+     * Check if getSubsequent() returns the proper coordinates for 23th subsequent slot
+     */
+    @DisplayName("getSubsequent() {3,0} plus 23 - should not fail")
+    @Test
+    void getSubsequent_30plus23_shouldnot_fail() {
+        Point p = new Point(3, 0);
+        Assertions.assertEquals(4, b.getSubsequent(p, 12).getX());
+        Assertions.assertEquals(0, b.getSubsequent(p, 12).getY());
+    }
+
+    /**
+     * Check if getPrevious() returns the proper coordinates for previous slot (within a row)
+     */
+    @DisplayName("getPrevious() within a row - should not fail")
+    @Test
+    void getPrevious_withinARow_shouldnot_fail() {
+        Point p = new Point(2, 0);
+        Assertions.assertEquals(1, b.getPrevious(p).getX());
+        Assertions.assertEquals(0, b.getPrevious(p).getY());
+    }
+
+    /**
+     * Check if getPrevious() returns the proper coordinates for previous slot (beginning of the first row)
+     */
+    @DisplayName("getPrevious() at the beginning of 1st row - should not fail")
+    @Test
+    void getPrevious_endOfFirstRow_shouldnot_fail() {
+        Point p = new Point(0, 0);
+        Assertions.assertEquals(5, b.getPrevious(p).getX());
+        Assertions.assertEquals(1, b.getPrevious(p).getY());
+    }
+
+    /**
+     * Check if getPrevious() returns the proper coordinates for previous slot (beginning of the 2nd row)
+     */
+    @DisplayName("getPrevious() at the beginning of 2nd row - should not fail")
+    @Test
+    void getPrevious_endOfSecondRow_shouldnot_fail() {
+        Point p = new Point(0, 1);
+        Assertions.assertEquals(5, b.getPrevious(p).getX());
+        Assertions.assertEquals(0, b.getPrevious(p).getY());
+    }
 
     /**
      * Check if getNonEmpty() sets the proper inial values
@@ -484,5 +436,137 @@ class BoardTest {
         Assertions.assertEquals(2, (int)array.get(0));
         Assertions.assertEquals(4, (int)array.get(1));
         Assertions.assertEquals(5, (int)array.get(2));
+    }
+
+    /**
+     * Check if getFinalSeeds() returns the proper value
+     */
+    @DisplayName("getFinalSeeds() from {2,0} with 20 seeds - should not fail")
+    @Test
+    void getFinalSeeds_02plus20_shouldnot_fail() {
+        Point p = new Point(2, 0);
+        b.setSlotSeeds(new Point(4, 1), 1);
+        int ret = b.getFinalSeeds(p, b.getSubsequent(p, 20), new Point(4, 1), 20);
+        Assertions.assertEquals(3, ret);
+    }
+
+    /**
+     * Check if getFinalSeeds() returns the proper value
+     */
+    @DisplayName("getFinalSeeds() from {5,0} with 40 seeds - should not fail")
+    @Test
+    void getFinalSeeds_05plus40_shouldnot_fail() {
+        Point p = new Point(5, 0);
+        b.setSlotSeeds(new Point(3, 1), 1);
+        int ret = b.getFinalSeeds(p, b.getSubsequent(p, 40), new Point(3, 1), 40);
+        Assertions.assertEquals(5, ret);
+    }
+
+    /**
+     * Check if getFinalSeeds() returns the proper value
+     */
+    @DisplayName("getFinalSeeds() from {0,0} with 5 seeds - should not fail")
+    @Test
+    void getFinalSeeds_00plus5_shouldnot_fail() {
+        Point p = new Point(0, 0);
+        b.setSlotSeeds(new Point(5, 0), 1);
+        int ret = b.getFinalSeeds(p, b.getSubsequent(p, 5), new Point(5, 0), 5);
+        Assertions.assertEquals(2, ret);
+    }
+
+    /**
+     * Check if getFinalSeeds() returns the proper value
+     */
+    @DisplayName("getFinalSeeds() from {3,0} with 15 seeds - should not fail")
+    @Test
+    void getFinalSeeds_30plus15_shouldnot_fail() {
+        b.setSlotSeeds(new Point(0, 0), 0);
+        b.setSlotSeeds(new Point(1, 0), 3);
+        b.setSlotSeeds(new Point(2, 0), 2);
+        b.setSlotSeeds(new Point(3, 0), 15);
+        b.setSlotSeeds(new Point(4, 0), 1);
+        b.setSlotSeeds(new Point(5, 0), 0);
+        b.setSlotSeeds(new Point(0, 1), 0);
+        b.setSlotSeeds(new Point(1, 1), 5);
+        b.setSlotSeeds(new Point(2, 1), 1);
+        b.setSlotSeeds(new Point(3, 1), 4);
+        b.setSlotSeeds(new Point(4, 1), 3);
+        b.setSlotSeeds(new Point(5, 1), 1);
+        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 15), new Point(0, 0), 15));
+        Assertions.assertEquals(4, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 15), new Point(1, 0), 15));
+        Assertions.assertEquals(3, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 15), new Point(2, 0), 15));
+        Assertions.assertEquals(0, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 15), new Point(3, 0), 15));
+        Assertions.assertEquals(3, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 15), new Point(4, 0), 15));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 15), new Point(5, 0), 15));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 15), new Point(0, 1), 15));
+        Assertions.assertEquals(7, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 15), new Point(1, 1), 15));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 15), new Point(2, 1), 15));
+        Assertions.assertEquals(5, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 15), new Point(3, 1), 15));
+        Assertions.assertEquals(4, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 15), new Point(4, 1), 15));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 15), new Point(5, 1), 15));
+    }
+
+    /**
+     * Check if getFinalSeeds() returns the proper value
+     */
+    @DisplayName("getFinalSeeds() from {3,0} with 9 seeds - should not fail")
+    @Test
+    void getFinalSeeds_30plus9_shouldnot_fail() {
+        b.setSlotSeeds(new Point(0, 0), 0);
+        b.setSlotSeeds(new Point(1, 0), 3);
+        b.setSlotSeeds(new Point(2, 0), 2);
+        b.setSlotSeeds(new Point(3, 0), 9);
+        b.setSlotSeeds(new Point(4, 0), 1);
+        b.setSlotSeeds(new Point(5, 0), 0);
+        b.setSlotSeeds(new Point(0, 1), 0);
+        b.setSlotSeeds(new Point(1, 1), 5);
+        b.setSlotSeeds(new Point(2, 1), 1);
+        b.setSlotSeeds(new Point(3, 1), 4);
+        b.setSlotSeeds(new Point(4, 1), 3);
+        b.setSlotSeeds(new Point(5, 1), 1);
+        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 9), new Point(0, 0), 9));
+        Assertions.assertEquals(3, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 9), new Point(1, 0), 9));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 9), new Point(2, 0), 9));
+        Assertions.assertEquals(0, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 9), new Point(3, 0), 9));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 9), new Point(4, 0), 9));
+        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 9), new Point(5, 0), 9));
+        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 9), new Point(0, 1), 9));
+        Assertions.assertEquals(6, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 9), new Point(1, 1), 9));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 9), new Point(2, 1), 9));
+        Assertions.assertEquals(5, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 9), new Point(3, 1), 9));
+        Assertions.assertEquals(4, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 9), new Point(4, 1), 9));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 9), new Point(5, 1), 9));
+    }
+
+    /**
+     * Check if getFinalSeeds() returns the proper value
+     */
+    @DisplayName("getFinalSeeds() from {3,0} with 6 seeds - should not fail")
+    @Test
+    void getFinalSeeds_30plus6_shouldnot_fail() {
+        b.setSlotSeeds(new Point(0, 0), 0);
+        b.setSlotSeeds(new Point(1, 0), 3);
+        b.setSlotSeeds(new Point(2, 0), 2);
+        b.setSlotSeeds(new Point(3, 0), 6);
+        b.setSlotSeeds(new Point(4, 0), 1);
+        b.setSlotSeeds(new Point(5, 0), 0);
+        b.setSlotSeeds(new Point(0, 1), 0);
+        b.setSlotSeeds(new Point(1, 1), 5);
+        b.setSlotSeeds(new Point(2, 1), 1);
+        b.setSlotSeeds(new Point(3, 1), 4);
+        b.setSlotSeeds(new Point(4, 1), 3);
+        b.setSlotSeeds(new Point(5, 1), 1);
+        Assertions.assertEquals(0, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 6), new Point(0, 0), 6));
+        Assertions.assertEquals(3, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 6), new Point(1, 0), 6));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 6), new Point(2, 0), 6));
+        Assertions.assertEquals(0, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 6), new Point(3, 0), 6));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 6), new Point(4, 0), 6));
+        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 6), new Point(5, 0), 6));
+        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 6), new Point(0, 1), 6));
+        Assertions.assertEquals(6, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 6), new Point(1, 1), 6));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 6), new Point(2, 1), 6));
+        Assertions.assertEquals(5, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 6), new Point(3, 1), 6));
+        Assertions.assertEquals(3, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 6), new Point(4, 1), 6));
+        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 6), new Point(5, 1), 6));
     }
 }

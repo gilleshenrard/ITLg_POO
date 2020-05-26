@@ -116,51 +116,6 @@ class SlotTest {
     }
 
     /**
-     * Check if incrementSeeds() properly increments m_nbseeds
-     */
-    @DisplayName("incrementSeeds() - should not fail")
-    @Test
-    void incrementSeeds_shouldnot_fail() {
-        s.incrementSeeds();
-        Assertions.assertEquals(5, s.getNbSeeds());
-    }
-
-    /**
-     * Check if incrementSeeds() throws an exception when rising m_nbseeds above 48 (max seeds on the board)
-     */
-    @DisplayName("incrementSeeds() when incrementing above 48 - should fail")
-    @Test
-    void incrementSeeds_above48_should_fail() {
-        s.setNbSeeds(48);
-
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            s.incrementSeeds();
-        });
-    }
-
-    /**
-     * Check if decrementSeeds() properly decrements m_nbseeds
-     */
-    @DisplayName("decrementSeeds() - should not fail")
-    @Test
-    void decrementSeeds_shouldnot_fail() {
-        s.decrementSeeds();
-        Assertions.assertEquals(3, s.getNbSeeds());
-    }
-
-    /**
-     * Check if decrementSeeds() throws an exception when lowering m_nbseeds below 0
-     */
-    @DisplayName("decrementSeeds() when decrementing below 0 - should fail")
-    @Test
-    void decrementSeeds_negativeamount_should_fail() {
-        s.emptySeeds();
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            s.decrementSeeds();
-        });
-    }
-
-    /**
      * Check if equals() recognises instances with equal values
      */
     @DisplayName("equals() - should not fail")
@@ -187,17 +142,6 @@ class SlotTest {
     @Test
     void equals_differentY_should_fail() {
         Slot s1 = new Slot(0, 1);
-        Assertions.assertNotEquals(s, s1);
-    }
-
-    /**
-     * Check if equals() returns the proper value when instances have different m_nbseeds values
-     */
-    @DisplayName("equals() with different amount of seeds - should not fail")
-    @Test
-    void equals_differentNbSeeds_should_fail() {
-        Slot s1 = new Slot(0, 0);
-        s1.incrementSeeds();
         Assertions.assertNotEquals(s, s1);
     }
 }

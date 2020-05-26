@@ -13,15 +13,12 @@ import java.util.ArrayList;
 
 public class Board {
     private Slot[][] m_slots;
-    private int[] m_remSeedsPlayer;
     private int[] m_storedSeeds;
 
     /**
      * Create new Board
      */
     public Board(){
-        this.m_remSeedsPlayer = new int[2];
-        java.util.Arrays.fill(m_remSeedsPlayer, 24);
         this.m_storedSeeds = new int[2];
         java.util.Arrays.fill(m_storedSeeds, 0);
         
@@ -38,10 +35,6 @@ public class Board {
      * @param board Board to copy
      */
     public Board(Board board){
-        this.m_remSeedsPlayer = new int[2];
-        this.setRemainingSeeds(1, board.getRemainingSeeds(1));
-        this.setRemainingSeeds(2, board.getRemainingSeeds(2));
-
         this.m_storedSeeds = new int[2];
         this.setStoredSeeds(1, board.getStoredSeeds(1));
         this.setStoredSeeds(2, board.getStoredSeeds(2));
@@ -77,51 +70,6 @@ public class Board {
     public static void validateCoordinates(Point point, String msg) throws InvalidParameterException{
         if(point.getX() < 0 || point.getX() > 5 || (point.getY() != 0 && point.getY() != 1))
             throw new InvalidParameterException(msg + " : incorrect coordinates (values : " + point.getX() + "," + point.getY() + ")");
-    }
-
-    /**
-     * Return the remaining amount of seeds for a player
-     * @param ID ID of the player
-     * @return Amount of seeds remaining
-     * @throws InvalidParameterException
-     */
-    public int getRemainingSeeds(int ID) throws InvalidParameterException{
-        Board.validateID(ID,"Board.getRemainingSeeds()");
-
-        return this.m_remSeedsPlayer[ID - 1];
-    }
-
-    /**
-     * Assigns a new value to m_remainingseeds regarding the player ID
-     * @param ID ID of the player for which assign the new value
-     * @param value New amount of remaining seeds for the player
-     * @throws InvalidParameterException
-     */
-    public void setRemainingSeeds(int ID, int value) throws InvalidParameterException{
-        Board.validateID(ID, "Board.setRemainingSeeds()");
-        Slot.validateNbSeeds(value, "Board.setRemainingSeeds()");
-
-        this.m_remSeedsPlayer[ID - 1] = value;
-    }
-
-    /**
-     * Add remaining seeds to a player
-     * @param ID ID of the player
-     * @param value Amount to add
-     * @throws InvalidParameterException
-     */
-    public void addRemainingSeeds(int ID, int value) throws InvalidParameterException {
-        this.setRemainingSeeds(ID, this.getRemainingSeeds(ID) + value);
-    }
-
-    /**
-     * Remove remaining seeds from a player
-     * @param ID ID of the player
-     * @param value Amount to remove
-     * @throws InvalidParameterException
-     */
-    public void removeRemainingSeeds(int ID, int value) throws InvalidParameterException {
-        this.setRemainingSeeds(ID, this.getRemainingSeeds(ID) - value);
     }
 
     /**
@@ -192,57 +140,121 @@ public class Board {
     }
 
     /**
-     * Increment the amount of seeds in a Slot located at point
-     * @param point Coordinates of the Slot of which increment the seeds
-     * @throws InvalidParameterException
-     */
-    public void incrementSlotSeeds(Point point) throws InvalidParameterException{
-        this.getSlot(point).incrementSeeds();
-    }
-
-    /**
-     * Decrement the amount of seeds in a Slot located at point
-     * @param point Coordinates of the Slot of which decrement the seeds
-     * @throws InvalidParameterException
-     */
-    public void decrementSlotSeeds(Point point) throws InvalidParameterException{
-        this.getSlot(point).decrementSeeds();
-    }
-
-    /**
-     * Get the next slot coordinates (increment x, and roll y when reached the end)
+     * Get the next slot in which a seed can be scattered (does not skip the start seed)
      * @param point Point of which find the next
      * @return Next slot to point
      * @throws NullPointerException
+     * @throws InvalidParameterException
      */
-    public Point getNext(Point point) throws NullPointerException{
-        validateCoordinates(point, "Board.getNext()");
-        if (point == null)
-            throw new NullPointerException("Board.getNext() : NULL instance of Point");
+    public Point getNext(Point point) throws NullPointerException, InvalidParameterException{
+        return this.getSubsequent(point, 1);
+    }
 
-        //retrieve current coordinates
+    /**
+     * Get the Xth slot after a point in which a seed can be scattered (skip said point each turn)
+     * @param point Point of which find the next
+     * @param subsequent Which one of the subsequent seeds to get
+     * @return Next slot to point
+     * @throws NullPointerException
+     * @throws InvalidParameterException
+     */
+    public Point getSubsequent(Point point, int subsequent) throws NullPointerException, InvalidParameterException{
+        validateCoordinates(point, "Board.getSubsequent()");
+        if (point == null)
+            throw new NullPointerException("Board.getSubsequent() : NULL instance of Point");
+        if (subsequent < 0)
+            throw new InvalidParameterException("Board.getSubsequent() : negative subsequent number");
+
+        //compute new x (start X + amount of seeds + amount of times the starting point is reached, then get the remainder of / 6)
+        int x = (point.getX() + subsequent + (subsequent/12)) % 6;
+
+        //compute new y (amount of back and forth the scattering would take + take start slot into account, then divide by 2)
+        int y = ((point.getX() + subsequent + (subsequent/12)) / 6) % 2;
+
+        //rectify the new Y if point is on opponent's side
+        if (point.getY() == 1)
+            y = 1 - y;
+
+        return new Point(x, y);
+    }
+
+    /**
+     * Get the previous slot coordinates (decrement x, and roll y when reached the beginning)
+     * @param point Point of which find the next
+     * @return Previous slot from point
+     * @throws NullPointerException
+     * @throws InvalidParameterException
+     */
+    public Point getPrevious(Point point) throws NullPointerException, InvalidParameterException{
+        validateCoordinates(point, "Board.getSubsequent()");
+        if (point == null)
+            throw new NullPointerException("Board.getSubsequent() : NULL instance of Point");
+
         int x = point.getX();
         int y = point.getY();
 
-        //increment X
-        //if end of row (X rolled back to 0), increment Y
-        // if end of column, roll Y back to 0
-        x++;
-        if((x %= 6) == 0){
-            y++;
-            y %= 2;
+        //decrement X
+        x--;
+
+        //if beginning of row, roll X and decrement Y
+        if (x < 0){
+            x = 5;
+            y--;
         }
 
+        //rectify Y
+        if (y < 0)
+            y = 1;
+
         return new Point(x, y);
+    }
+
+    /**
+     * Get the distance on the board (slot count) between two points
+     * @param a Lowest point to check
+     * @param b Hignest point
+     * @return Distance (amount of slots) between the two points
+     */
+    public int getDistance(Point a, Point b) {
+        if (a.getY() == b.getY()) {
+            if (b.getX() < a.getX())
+                return b.getX() + (5 - a.getX()) + 6;
+            else
+                return b.getX() - a.getX();
+        }
+        else
+            return b.getX() + (5 - a.getX());
+    }
+
+    /**
+     * Get how many seeds will be in a slot after scattering
+     * @param start Slot from which the scattering starts
+     * @param end Final slot in which the scattering ends
+     * @param p Slot for which to compute the final seed count
+     * @param nbseeds Amount of seeds in the start slot
+     * @return Total amount of seeds in the slot after scattering
+     */
+    public int getFinalSeeds(Point start, Point end, Point p, int nbseeds){
+        //if p is the starting slot, amount of seeds should be 0
+        if (p.equals(start))
+            return 0;
+
+        //get how many times the scattering makes a whole board turn (translated from {0, x})
+        int addedSeeds = ((nbseeds) / 12);
+
+        //compare slot count between start, final and p to know if an additional seed is to be added
+        if (this.getDistance(start, p) <= this.getDistance(start, end))
+            addedSeeds++;
+
+        //return the final amount of seeds
+        return this.getSlotSeeds(p) + addedSeeds;
+
     }
 
     /**
      * Reset the board to an inial value
      */
     public void reset(){
-        this.setRemainingSeeds(1, 24);
-        this.setRemainingSeeds(2, 24);
-
         this.setStoredSeeds(1, 0);
         this.setStoredSeeds(2, 0);
 

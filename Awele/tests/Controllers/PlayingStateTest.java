@@ -27,7 +27,6 @@ public class PlayingStateTest {
         g.getBoardController().getBoard().setStoredSeeds(1, 0);
         g.getBoardController().getBoard().setStoredSeeds(2, 0);
         g.getBoardController().getBoard().setSlotSeeds(new Point(5, 0), 4);
-        g.getBoardController().getBoard().setRemainingSeeds(1, 4);
         g.setNextState(State.PLAYING);
         g.setCurrentPlayer(1);
         ((PlayingState)State.PLAYING.getState()).setInput(6);
@@ -75,9 +74,8 @@ public class PlayingStateTest {
         g.getBoardController().getBoard().emptySlotSeeds(new Point(4, 1));
         g.getBoardController().getBoard().emptySlotSeeds(new Point(5, 1));
         g.getBoardController().getBoard().setSlotSeeds(new Point(5, 0), 2);
-        g.getBoardController().getBoard().setRemainingSeeds(2, 3);
-        g.getBoardController().getBoard().setRemainingSeeds(1, 22);
         g.setNextState(State.PLAYING);
+
         g.setCurrentPlayer(1);
         ((PlayingState)State.PLAYING.getState()).setInput(6);
         g.setRunning(true);
@@ -129,7 +127,6 @@ public class PlayingStateTest {
         g.getBoardController().getBoard().emptySlotSeeds(new Point(3, 0));
         g.getBoardController().getBoard().setSlotSeeds(new Point(4, 0), 1);
         g.getBoardController().getBoard().setSlotSeeds(new Point(5, 0), 1);
-        g.getBoardController().getBoard().setRemainingSeeds(1, 2);
         g.setCurrentPlayer(1);
         g.setNextState(State.PLAYING);
         ((PlayingState)State.PLAYING.getState()).setInput(5);

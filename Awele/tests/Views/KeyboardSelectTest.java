@@ -39,7 +39,6 @@ class KeyboardSelectTest {
         b.getBoard().emptySlotSeeds(new Point(3, 0));
         b.getBoard().emptySlotSeeds(new Point(4, 0));
         b.getBoard().emptySlotSeeds(new Point(5, 0));
-        b.getBoard().setRemainingSeeds(1, 0);
         Player p = new Player(1, "test", k);
         int ret = p.selectSlot();
         Assertions.assertEquals(-2, ret);
