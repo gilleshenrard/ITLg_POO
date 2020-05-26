@@ -240,8 +240,8 @@ public class BoardController {
             }
         }while (nbseeds > 0);
 
-        //last slot capturable
-        if(this.getSlotSeeds(tmp) == 1 || this.getSlotSeeds(tmp) == 2){
+        //last slot capturable (on opponent's side)
+        if(tmp.getY() != p.getY()){
             //check if opponent starved
             if(capturable - scattered == this.m_board.getRemainingSeeds(2 - p.getY()))
                 return -1;
