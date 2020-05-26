@@ -51,7 +51,6 @@ public class PromptingStateTest {
         g.getBoardController().getBoard().emptySlotSeeds(new Point(3, 0));
         g.getBoardController().getBoard().emptySlotSeeds(new Point(4, 0));
         g.getBoardController().getBoard().emptySlotSeeds(new Point(5, 0));
-        g.getBoardController().getBoard().setRemainingSeeds(1, 0);
         g.setNextState(State.PROMPTING);
         g.setCurrentPlayer(1);
         g.setRunning(true);

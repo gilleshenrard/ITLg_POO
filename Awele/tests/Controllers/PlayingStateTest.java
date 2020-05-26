@@ -100,7 +100,6 @@ public class PlayingStateTest {
         g.getBoardController().getBoard().emptySlotSeeds(new Point(3, 0));
         g.getBoardController().getBoard().emptySlotSeeds(new Point(4, 0));
         g.getBoardController().getBoard().setSlotSeeds(new Point(5, 0), 1);
-        g.getBoardController().getBoard().setRemainingSeeds(1, 1);
         g.setNextState(State.PLAYING);
         g.setCurrentPlayer(1);
         ((PlayingState)State.PLAYING.getState()).setInput(6);

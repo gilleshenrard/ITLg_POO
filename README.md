@@ -128,7 +128,7 @@ instead of just updating the UI directly.
 The unit tests for each class can be found in the mirrored directory tests/ (tests/Models, tests/Views, tests/Controllers).
 
 ---
-### 4. Change list (since v3.4)
+### 4. Change list (since v4.0)
 
 - Remaining Seeds counter is now longer used
 - checkOutcome() and playSlot() have been changed to match the rules changes
