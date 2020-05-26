@@ -210,7 +210,7 @@ public class BoardController {
         }
 
         //prepare buffer variables
-        tmp = new Point(p);
+        tmp.setCoordinates(p);
         int backup = nbseeds;
         int capturable = 0;
         int scattered = 0;
