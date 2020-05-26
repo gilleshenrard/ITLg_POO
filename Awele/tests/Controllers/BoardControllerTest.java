@@ -156,8 +156,9 @@ public class BoardControllerTest {
     @DisplayName("getFinalSeeds() from {2,0} with 20 seeds - should not fail")
     @Test
     void getFinalSeeds_02plus20_shouldnot_fail() {
+        Point p = new Point(2, 0);
         b.getBoard().setSlotSeeds(new Point(4, 1), 1);
-        int ret = b.getFinalSeeds(new Point(2, 0), new Point(4, 1), 20);
+        int ret = b.getFinalSeeds(p, b.getBoard().getSubsequent(p, 20), new Point(4, 1), 20);
         Assertions.assertEquals(3, ret);
     }
 
@@ -167,8 +168,9 @@ public class BoardControllerTest {
     @DisplayName("getFinalSeeds() from {5,0} with 40 seeds - should not fail")
     @Test
     void getFinalSeeds_05plus40_shouldnot_fail() {
+        Point p = new Point(5, 0);
         b.getBoard().setSlotSeeds(new Point(3, 1), 1);
-        int ret = b.getFinalSeeds(new Point(5, 0), new Point(3, 1), 40);
+        int ret = b.getFinalSeeds(p, b.getBoard().getSubsequent(p, 40), new Point(3, 1), 40);
         Assertions.assertEquals(5, ret);
     }
 
@@ -178,8 +180,9 @@ public class BoardControllerTest {
     @DisplayName("getFinalSeeds() from {0,0} with 5 seeds - should not fail")
     @Test
     void getFinalSeeds_00plus5_shouldnot_fail() {
+        Point p = new Point(0, 0);
         b.getBoard().setSlotSeeds(new Point(5, 0), 1);
-        int ret = b.getFinalSeeds(new Point(0, 0), new Point(5, 0), 5);
+        int ret = b.getFinalSeeds(p, b.getBoard().getSubsequent(p, 5), new Point(5, 0), 5);
         Assertions.assertEquals(2, ret);
     }
 
@@ -201,18 +204,18 @@ public class BoardControllerTest {
         b.getBoard().setSlotSeeds(new Point(3, 1), 4);
         b.getBoard().setSlotSeeds(new Point(4, 1), 3);
         b.getBoard().setSlotSeeds(new Point(5, 1), 1);
-        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), new Point(0, 0), 15));
-        Assertions.assertEquals(4, b.getFinalSeeds(new Point(3, 0), new Point(1, 0), 15));
-        Assertions.assertEquals(3, b.getFinalSeeds(new Point(3, 0), new Point(2, 0), 15));
-        Assertions.assertEquals(0, b.getFinalSeeds(new Point(3, 0), new Point(3, 0), 15));
-        Assertions.assertEquals(3, b.getFinalSeeds(new Point(3, 0), new Point(4, 0), 15));
-        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), new Point(5, 0), 15));
-        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), new Point(0, 1), 15));
-        Assertions.assertEquals(7, b.getFinalSeeds(new Point(3, 0), new Point(1, 1), 15));
-        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), new Point(2, 1), 15));
-        Assertions.assertEquals(5, b.getFinalSeeds(new Point(3, 0), new Point(3, 1), 15));
-        Assertions.assertEquals(4, b.getFinalSeeds(new Point(3, 0), new Point(4, 1), 15));
-        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), new Point(5, 1), 15));
+        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 15), new Point(0, 0), 15));
+        Assertions.assertEquals(4, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 15), new Point(1, 0), 15));
+        Assertions.assertEquals(3, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 15), new Point(2, 0), 15));
+        Assertions.assertEquals(0, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 15), new Point(3, 0), 15));
+        Assertions.assertEquals(3, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 15), new Point(4, 0), 15));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 15), new Point(5, 0), 15));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 15), new Point(0, 1), 15));
+        Assertions.assertEquals(7, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 15), new Point(1, 1), 15));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 15), new Point(2, 1), 15));
+        Assertions.assertEquals(5, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 15), new Point(3, 1), 15));
+        Assertions.assertEquals(4, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 15), new Point(4, 1), 15));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 15), new Point(5, 1), 15));
     }
 
     /**
@@ -233,18 +236,18 @@ public class BoardControllerTest {
         b.getBoard().setSlotSeeds(new Point(3, 1), 4);
         b.getBoard().setSlotSeeds(new Point(4, 1), 3);
         b.getBoard().setSlotSeeds(new Point(5, 1), 1);
-        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), new Point(0, 0), 9));
-        Assertions.assertEquals(3, b.getFinalSeeds(new Point(3, 0), new Point(1, 0), 9));
-        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), new Point(2, 0), 9));
-        Assertions.assertEquals(0, b.getFinalSeeds(new Point(3, 0), new Point(3, 0), 9));
-        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), new Point(4, 0), 9));
-        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), new Point(5, 0), 9));
-        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), new Point(0, 1), 9));
-        Assertions.assertEquals(6, b.getFinalSeeds(new Point(3, 0), new Point(1, 1), 9));
-        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), new Point(2, 1), 9));
-        Assertions.assertEquals(5, b.getFinalSeeds(new Point(3, 0), new Point(3, 1), 9));
-        Assertions.assertEquals(4, b.getFinalSeeds(new Point(3, 0), new Point(4, 1), 9));
-        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), new Point(5, 1), 9));
+        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 9), new Point(0, 0), 9));
+        Assertions.assertEquals(3, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 9), new Point(1, 0), 9));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 9), new Point(2, 0), 9));
+        Assertions.assertEquals(0, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 9), new Point(3, 0), 9));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 9), new Point(4, 0), 9));
+        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 9), new Point(5, 0), 9));
+        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 9), new Point(0, 1), 9));
+        Assertions.assertEquals(6, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 9), new Point(1, 1), 9));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 9), new Point(2, 1), 9));
+        Assertions.assertEquals(5, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 9), new Point(3, 1), 9));
+        Assertions.assertEquals(4, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 9), new Point(4, 1), 9));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 9), new Point(5, 1), 9));
     }
 
     /**
@@ -265,18 +268,18 @@ public class BoardControllerTest {
         b.getBoard().setSlotSeeds(new Point(3, 1), 4);
         b.getBoard().setSlotSeeds(new Point(4, 1), 3);
         b.getBoard().setSlotSeeds(new Point(5, 1), 1);
-        Assertions.assertEquals(0, b.getFinalSeeds(new Point(3, 0), new Point(0, 0), 6));
-        Assertions.assertEquals(3, b.getFinalSeeds(new Point(3, 0), new Point(1, 0), 6));
-        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), new Point(2, 0), 6));
-        Assertions.assertEquals(0, b.getFinalSeeds(new Point(3, 0), new Point(3, 0), 6));
-        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), new Point(4, 0), 6));
-        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), new Point(5, 0), 6));
-        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), new Point(0, 1), 6));
-        Assertions.assertEquals(6, b.getFinalSeeds(new Point(3, 0), new Point(1, 1), 6));
-        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), new Point(2, 1), 6));
-        Assertions.assertEquals(5, b.getFinalSeeds(new Point(3, 0), new Point(3, 1), 6));
-        Assertions.assertEquals(3, b.getFinalSeeds(new Point(3, 0), new Point(4, 1), 6));
-        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), new Point(5, 1), 6));
+        Assertions.assertEquals(0, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 6), new Point(0, 0), 6));
+        Assertions.assertEquals(3, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 6), new Point(1, 0), 6));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 6), new Point(2, 0), 6));
+        Assertions.assertEquals(0, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 6), new Point(3, 0), 6));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 6), new Point(4, 0), 6));
+        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 6), new Point(5, 0), 6));
+        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 6), new Point(0, 1), 6));
+        Assertions.assertEquals(6, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 6), new Point(1, 1), 6));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 6), new Point(2, 1), 6));
+        Assertions.assertEquals(5, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 6), new Point(3, 1), 6));
+        Assertions.assertEquals(3, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 6), new Point(4, 1), 6));
+        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), b.getBoard().getSubsequent(new Point(3, 0), 6), new Point(5, 1), 6));
     }
 
     /**

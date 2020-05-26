@@ -130,11 +130,12 @@ public class BoardController {
     /**
      * Get how many seeds will be in a slot after scattering
      * @param start Slot from which the scattering starts
+     * @param end Final slot in which the scattering ends
      * @param p Slot for which to compute the final seed count
      * @param nbseeds Amount of seeds in the start slot
      * @return Total amount of seeds in the slot after scattering
      */
-    public int getFinalSeeds(Point start, Point p, int nbseeds){
+    public int getFinalSeeds(Point start, Point end, Point p, int nbseeds){
         //if p is the starting slot, amount of seeds should be 0
         if (p.equals(start))
             return 0;
@@ -142,11 +143,8 @@ public class BoardController {
         //get how many times the scattering makes a whole board turn (translated from {0, x})
         int addedSeeds = ((nbseeds) / 12);
 
-        //get the final slot to be scattered to
-        Point finalSlot = this.m_board.getSubsequent(start, nbseeds);
-
         //compare slot count between start, final and p to know if an additional seed is to be added
-        if (this.m_board.getDistance(start, p) <= this.m_board.getDistance(start, finalSlot))
+        if (this.m_board.getDistance(start, p) <= this.m_board.getDistance(start, end))
             addedSeeds++;
 
         //return the final amount of seeds
@@ -192,7 +190,8 @@ public class BoardController {
 
         //if last slot scattered not the opponent's or doesn't get to be captured, stop there
         Point tmp = this.m_board.getSubsequent(p, nbseeds);
-        int finalSeeds = this.getFinalSeeds(p, tmp, nbseeds);
+        Point finalSlot = new Point(tmp);
+        int finalSeeds = this.getFinalSeeds(p, finalSlot, tmp, nbseeds);
         if (tmp.getY() == p.getY() || (finalSeeds != 2 && finalSeeds != 3)) {
 
             //if the opponent has no seed left and player doesn't scatter on the opponent's side, starvation
@@ -218,7 +217,7 @@ public class BoardController {
 
                 //if tmp is on the opponent's side
                 if (tmp.getY() != p.getY()) {
-                    finalSeeds = this.getFinalSeeds(p, tmp, backup);
+                    finalSeeds = this.getFinalSeeds(p, finalSlot, tmp, backup);
                     if (finalSeeds == 2 || finalSeeds == 3)
                         capturable += finalSeeds;
                     else
@@ -271,6 +270,7 @@ public class BoardController {
         int backup = nbseeds;
         int finalSeeds = 0;
         Point pPrev = this.m_board.getSubsequent(p, backup);
+        Point finalSlot = new Point(pPrev);
         boolean capturing = true;
 
 
@@ -284,7 +284,7 @@ public class BoardController {
 
         //capturing cycle (while only capturable slots encountered and on the opponent's side)
         while (ret > 0 && capturing && nbseeds >= 0){
-            finalSeeds = this.getFinalSeeds(p, pPrev, backup);
+            finalSeeds = this.getFinalSeeds(p, finalSlot, pPrev, backup);
 
             //if still capturable, empty the slot and update remaining seeds, otherwise stop capture
             if(pPrev.getY() == 1 - p.getY() && (finalSeeds == 2 || finalSeeds == 3)){
@@ -308,7 +308,7 @@ public class BoardController {
         while (nbseeds >= 0 && backup - nbseeds < 11){
             //if current slot is not the one played, update the total amount of seeds
             if (!pPrev.equals(p)){
-                finalSeeds = this.getFinalSeeds(p, pPrev, backup);
+                finalSeeds = this.getFinalSeeds(p, finalSlot, pPrev, backup);
                 this.m_board.addRemainingSeeds(pPrev.getY() + 1, finalSeeds - this.getSlotSeeds(pPrev));
                 this.m_board.setSlotSeeds(pPrev, finalSeeds);
                 nbseeds--;
