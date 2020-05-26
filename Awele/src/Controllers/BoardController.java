@@ -144,7 +144,7 @@ public class BoardController {
         addedSeeds /= 2;
 
         //get the final slot to be scattered to
-        Point finalSlot = this.m_board.getNext(start, nbseeds);
+        Point finalSlot = this.m_board.getSubsequent(start, nbseeds);
 
         //rectify amount of seeds in p (before or after last slot scattered)
         if (finalSlot.getY() != start.getY()){
@@ -198,7 +198,7 @@ public class BoardController {
             return -2;
 
         //if last slot scattered not the opponent's or doesn't get to be captured, stop there
-        Point tmp = this.m_board.getNext(p, nbseeds);
+        Point tmp = this.m_board.getSubsequent(p, nbseeds);
         int finalSeeds = this.getFinalSeeds(p, tmp, nbseeds);
         if (tmp.getY() == p.getY() || (finalSeeds != 2 && finalSeeds != 3)) {
 
@@ -276,7 +276,7 @@ public class BoardController {
         //get the number of seeds in the slot to harvest and empty it + update remaining seeds
         int nbseeds = this.getSlotSeeds(p);
         int backup = nbseeds;
-        Point last = this.m_board.getNext(p, backup);
+        Point last = this.m_board.getSubsequent(p, backup);
         boolean capturing = true;
 
         //get the last slot scattered

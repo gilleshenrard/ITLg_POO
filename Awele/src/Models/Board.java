@@ -210,30 +210,30 @@ public class Board {
     }
 
     /**
-     * Get the next slot coordinates (increment x, and roll y when reached the end)
+     * Get the next slot in which a seed can be scattered
      * @param point Point of which find the next
      * @return Next slot to point
      * @throws NullPointerException
      * @throws InvalidParameterException
      */
     public Point getNext(Point point) throws NullPointerException, InvalidParameterException{
-        return this.getNext(point, 1);
+        return this.getSubsequent(point, 1);
     }
 
     /**
-     * Get the Xth slot after a point (skip said point each turn)
+     * Get the Xth slot after a point in which a seed can be scattered (skip said point each turn)
      * @param point Point of which find the next
      * @param subsequent Which one of the subsequent seeds to get
      * @return Next slot to point
      * @throws NullPointerException
      * @throws InvalidParameterException
      */
-    public Point getNext(Point point, int subsequent) throws NullPointerException, InvalidParameterException{
-        validateCoordinates(point, "Board.getNext()");
+    public Point getSubsequent(Point point, int subsequent) throws NullPointerException, InvalidParameterException{
+        validateCoordinates(point, "Board.getSubsequent()");
         if (point == null)
-            throw new NullPointerException("Board.getNext() : NULL instance of Point");
+            throw new NullPointerException("Board.getSubsequent() : NULL instance of Point");
         if (subsequent < 0)
-            throw new InvalidParameterException("Board.getNext() : negative subsequent number");
+            throw new InvalidParameterException("Board.getSubsequent() : negative subsequent number");
 
         //compute new x (start X + amount of seeds + amount of times the starting point is reached, then get the remainder of / 6)
         int x = (point.getX() + subsequent + (subsequent/12)) % 6;
@@ -256,9 +256,9 @@ public class Board {
      * @throws InvalidParameterException
      */
     public Point getPrevious(Point point) throws NullPointerException, InvalidParameterException{
-        validateCoordinates(point, "Board.getNext()");
+        validateCoordinates(point, "Board.getSubsequent()");
         if (point == null)
-            throw new NullPointerException("Board.getNext() : NULL instance of Point");
+            throw new NullPointerException("Board.getSubsequent() : NULL instance of Point");
 
         int x = point.getX();
         int y = point.getY();

@@ -498,69 +498,69 @@ class BoardTest {
     }
 
     /**
-     * Check if getNext() returns the proper coordinates for 14th subsequent slot
+     * Check if getSubsequent() returns the proper coordinates for 14th subsequent slot
      */
-    @DisplayName("getNext() {0,0} plus 14 - should not fail")
+    @DisplayName("getSubsequent() {0,0} plus 14 - should not fail")
     @Test
-    void getNext_00plus14_shouldnot_fail() {
+    void getSubsequent_00plus14_shouldnot_fail() {
         Point p = new Point(0, 0);
-        Assertions.assertEquals(3, b.getNext(p, 14).getX());
-        Assertions.assertEquals(0, b.getNext(p, 14).getY());
+        Assertions.assertEquals(3, b.getSubsequent(p, 14).getX());
+        Assertions.assertEquals(0, b.getSubsequent(p, 14).getY());
     }
 
     /**
-     * Check if getNext() returns the proper coordinates for 10th subsequent slot
+     * Check if getSubsequent() returns the proper coordinates for 10th subsequent slot
      */
-    @DisplayName("getNext() {3,0} plus 10 - should not fail")
+    @DisplayName("getSubsequent() {3,0} plus 10 - should not fail")
     @Test
-    void getNext_30plus14_shouldnot_fail() {
+    void getSubsequent_30plus14_shouldnot_fail() {
         Point p = new Point(3, 0);
-        Assertions.assertEquals(1, b.getNext(p, 10).getX());
-        Assertions.assertEquals(0, b.getNext(p, 10).getY());
+        Assertions.assertEquals(1, b.getSubsequent(p, 10).getX());
+        Assertions.assertEquals(0, b.getSubsequent(p, 10).getY());
     }
 
     /**
-     * Check if getNext() returns the proper coordinates for 14th subsequent slot
+     * Check if getSubsequent() returns the proper coordinates for 14th subsequent slot
      */
-    @DisplayName("getNext() {5,0} plus 14 - should not fail")
+    @DisplayName("getSubsequent() {5,0} plus 14 - should not fail")
     @Test
-    void getNext_50plus14_shouldnot_fail() {
+    void getSubsequent_50plus14_shouldnot_fail() {
         Point p = new Point(5, 0);
-        Assertions.assertEquals(2, b.getNext(p, 14).getX());
-        Assertions.assertEquals(1, b.getNext(p, 14).getY());
+        Assertions.assertEquals(2, b.getSubsequent(p, 14).getX());
+        Assertions.assertEquals(1, b.getSubsequent(p, 14).getY());
     }
 
     /**
-     * Check if getNext() returns the proper coordinates for 40th subsequent slot
+     * Check if getSubsequent() returns the proper coordinates for 40th subsequent slot
      */
-    @DisplayName("getNext() {5,0} plus 40 - should not fail")
+    @DisplayName("getSubsequent() {5,0} plus 40 - should not fail")
     @Test
-    void getNext_50plus40_shouldnot_fail() {
+    void getSubsequent_50plus40_shouldnot_fail() {
         Point p = new Point(5, 0);
-        Assertions.assertEquals(0, b.getNext(p, 40).getX());
-        Assertions.assertEquals(0, b.getNext(p, 40).getY());
+        Assertions.assertEquals(0, b.getSubsequent(p, 40).getX());
+        Assertions.assertEquals(0, b.getSubsequent(p, 40).getY());
     }
 
     /**
-     * Check if getNext() returns the proper coordinates for 12th subsequent slot
+     * Check if getSubsequent() returns the proper coordinates for 12th subsequent slot
      */
-    @DisplayName("getNext() {3,0} plus 12 - should not fail")
+    @DisplayName("getSubsequent() {3,0} plus 12 - should not fail")
     @Test
-    void getNext_30plus12_shouldnot_fail() {
+    void getSubsequent_30plus12_shouldnot_fail() {
         Point p = new Point(3, 0);
-        Assertions.assertEquals(4, b.getNext(p, 12).getX());
-        Assertions.assertEquals(0, b.getNext(p, 12).getY());
+        Assertions.assertEquals(4, b.getSubsequent(p, 12).getX());
+        Assertions.assertEquals(0, b.getSubsequent(p, 12).getY());
     }
 
     /**
-     * Check if getNext() returns the proper coordinates for 23th subsequent slot
+     * Check if getSubsequent() returns the proper coordinates for 23th subsequent slot
      */
-    @DisplayName("getNext() {3,0} plus 23 - should not fail")
+    @DisplayName("getSubsequent() {3,0} plus 23 - should not fail")
     @Test
-    void getNext_30plus23_shouldnot_fail() {
+    void getSubsequent_30plus23_shouldnot_fail() {
         Point p = new Point(3, 0);
-        Assertions.assertEquals(4, b.getNext(p, 12).getX());
-        Assertions.assertEquals(0, b.getNext(p, 12).getY());
+        Assertions.assertEquals(4, b.getSubsequent(p, 12).getX());
+        Assertions.assertEquals(0, b.getSubsequent(p, 12).getY());
     }
 
     /**
