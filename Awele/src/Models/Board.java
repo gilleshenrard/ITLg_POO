@@ -245,6 +245,31 @@ public class Board {
     }
 
     /**
+     * Get how many seeds will be in a slot after scattering
+     * @param start Slot from which the scattering starts
+     * @param end Final slot in which the scattering ends
+     * @param p Slot for which to compute the final seed count
+     * @param nbseeds Amount of seeds in the start slot
+     * @return Total amount of seeds in the slot after scattering
+     */
+    public int getFinalSeeds(Point start, Point end, Point p, int nbseeds){
+        //if p is the starting slot, amount of seeds should be 0
+        if (p.equals(start))
+            return 0;
+
+        //get how many times the scattering makes a whole board turn (translated from {0, x})
+        int addedSeeds = ((nbseeds) / 12);
+
+        //compare slot count between start, final and p to know if an additional seed is to be added
+        if (this.getDistance(start, p) <= this.getDistance(start, end))
+            addedSeeds++;
+
+        //return the final amount of seeds
+        return this.getSlotSeeds(p) + addedSeeds;
+
+    }
+
+    /**
      * Reset the board to an inial value
      */
     public void reset(){

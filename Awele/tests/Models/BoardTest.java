@@ -481,4 +481,136 @@ class BoardTest {
         Assertions.assertEquals(4, array.get(1));
         Assertions.assertEquals(5, array.get(2));
     }
+
+    /**
+     * Check if getFinalSeeds() returns the proper value
+     */
+    @DisplayName("getFinalSeeds() from {2,0} with 20 seeds - should not fail")
+    @Test
+    void getFinalSeeds_02plus20_shouldnot_fail() {
+        Point p = new Point(2, 0);
+        b.setSlotSeeds(new Point(4, 1), 1);
+        int ret = b.getFinalSeeds(p, b.getSubsequent(p, 20), new Point(4, 1), 20);
+        Assertions.assertEquals(3, ret);
+    }
+
+    /**
+     * Check if getFinalSeeds() returns the proper value
+     */
+    @DisplayName("getFinalSeeds() from {5,0} with 40 seeds - should not fail")
+    @Test
+    void getFinalSeeds_05plus40_shouldnot_fail() {
+        Point p = new Point(5, 0);
+        b.setSlotSeeds(new Point(3, 1), 1);
+        int ret = b.getFinalSeeds(p, b.getSubsequent(p, 40), new Point(3, 1), 40);
+        Assertions.assertEquals(5, ret);
+    }
+
+    /**
+     * Check if getFinalSeeds() returns the proper value
+     */
+    @DisplayName("getFinalSeeds() from {0,0} with 5 seeds - should not fail")
+    @Test
+    void getFinalSeeds_00plus5_shouldnot_fail() {
+        Point p = new Point(0, 0);
+        b.setSlotSeeds(new Point(5, 0), 1);
+        int ret = b.getFinalSeeds(p, b.getSubsequent(p, 5), new Point(5, 0), 5);
+        Assertions.assertEquals(2, ret);
+    }
+
+    /**
+     * Check if getFinalSeeds() returns the proper value
+     */
+    @DisplayName("getFinalSeeds() from {3,0} with 15 seeds - should not fail")
+    @Test
+    void getFinalSeeds_30plus15_shouldnot_fail() {
+        b.setSlotSeeds(new Point(0, 0), 0);
+        b.setSlotSeeds(new Point(1, 0), 3);
+        b.setSlotSeeds(new Point(2, 0), 2);
+        b.setSlotSeeds(new Point(3, 0), 15);
+        b.setSlotSeeds(new Point(4, 0), 1);
+        b.setSlotSeeds(new Point(5, 0), 0);
+        b.setSlotSeeds(new Point(0, 1), 0);
+        b.setSlotSeeds(new Point(1, 1), 5);
+        b.setSlotSeeds(new Point(2, 1), 1);
+        b.setSlotSeeds(new Point(3, 1), 4);
+        b.setSlotSeeds(new Point(4, 1), 3);
+        b.setSlotSeeds(new Point(5, 1), 1);
+        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 15), new Point(0, 0), 15));
+        Assertions.assertEquals(4, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 15), new Point(1, 0), 15));
+        Assertions.assertEquals(3, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 15), new Point(2, 0), 15));
+        Assertions.assertEquals(0, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 15), new Point(3, 0), 15));
+        Assertions.assertEquals(3, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 15), new Point(4, 0), 15));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 15), new Point(5, 0), 15));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 15), new Point(0, 1), 15));
+        Assertions.assertEquals(7, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 15), new Point(1, 1), 15));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 15), new Point(2, 1), 15));
+        Assertions.assertEquals(5, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 15), new Point(3, 1), 15));
+        Assertions.assertEquals(4, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 15), new Point(4, 1), 15));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 15), new Point(5, 1), 15));
+    }
+
+    /**
+     * Check if getFinalSeeds() returns the proper value
+     */
+    @DisplayName("getFinalSeeds() from {3,0} with 9 seeds - should not fail")
+    @Test
+    void getFinalSeeds_30plus9_shouldnot_fail() {
+        b.setSlotSeeds(new Point(0, 0), 0);
+        b.setSlotSeeds(new Point(1, 0), 3);
+        b.setSlotSeeds(new Point(2, 0), 2);
+        b.setSlotSeeds(new Point(3, 0), 9);
+        b.setSlotSeeds(new Point(4, 0), 1);
+        b.setSlotSeeds(new Point(5, 0), 0);
+        b.setSlotSeeds(new Point(0, 1), 0);
+        b.setSlotSeeds(new Point(1, 1), 5);
+        b.setSlotSeeds(new Point(2, 1), 1);
+        b.setSlotSeeds(new Point(3, 1), 4);
+        b.setSlotSeeds(new Point(4, 1), 3);
+        b.setSlotSeeds(new Point(5, 1), 1);
+        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 9), new Point(0, 0), 9));
+        Assertions.assertEquals(3, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 9), new Point(1, 0), 9));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 9), new Point(2, 0), 9));
+        Assertions.assertEquals(0, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 9), new Point(3, 0), 9));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 9), new Point(4, 0), 9));
+        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 9), new Point(5, 0), 9));
+        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 9), new Point(0, 1), 9));
+        Assertions.assertEquals(6, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 9), new Point(1, 1), 9));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 9), new Point(2, 1), 9));
+        Assertions.assertEquals(5, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 9), new Point(3, 1), 9));
+        Assertions.assertEquals(4, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 9), new Point(4, 1), 9));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 9), new Point(5, 1), 9));
+    }
+
+    /**
+     * Check if getFinalSeeds() returns the proper value
+     */
+    @DisplayName("getFinalSeeds() from {3,0} with 6 seeds - should not fail")
+    @Test
+    void getFinalSeeds_30plus6_shouldnot_fail() {
+        b.setSlotSeeds(new Point(0, 0), 0);
+        b.setSlotSeeds(new Point(1, 0), 3);
+        b.setSlotSeeds(new Point(2, 0), 2);
+        b.setSlotSeeds(new Point(3, 0), 6);
+        b.setSlotSeeds(new Point(4, 0), 1);
+        b.setSlotSeeds(new Point(5, 0), 0);
+        b.setSlotSeeds(new Point(0, 1), 0);
+        b.setSlotSeeds(new Point(1, 1), 5);
+        b.setSlotSeeds(new Point(2, 1), 1);
+        b.setSlotSeeds(new Point(3, 1), 4);
+        b.setSlotSeeds(new Point(4, 1), 3);
+        b.setSlotSeeds(new Point(5, 1), 1);
+        Assertions.assertEquals(0, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 6), new Point(0, 0), 6));
+        Assertions.assertEquals(3, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 6), new Point(1, 0), 6));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 6), new Point(2, 0), 6));
+        Assertions.assertEquals(0, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 6), new Point(3, 0), 6));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 6), new Point(4, 0), 6));
+        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 6), new Point(5, 0), 6));
+        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 6), new Point(0, 1), 6));
+        Assertions.assertEquals(6, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 6), new Point(1, 1), 6));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 6), new Point(2, 1), 6));
+        Assertions.assertEquals(5, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 6), new Point(3, 1), 6));
+        Assertions.assertEquals(3, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 6), new Point(4, 1), 6));
+        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), b.getSubsequent(new Point(3, 0), 6), new Point(5, 1), 6));
+    }
 }
