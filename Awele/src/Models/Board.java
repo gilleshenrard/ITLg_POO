@@ -140,24 +140,6 @@ public class Board {
     }
 
     /**
-     * Increment the amount of seeds in a Slot located at point
-     * @param point Coordinates of the Slot of which increment the seeds
-     * @throws InvalidParameterException
-     */
-    public void incrementSlotSeeds(Point point) throws InvalidParameterException{
-        this.getSlot(point).incrementSeeds();
-    }
-
-    /**
-     * Decrement the amount of seeds in a Slot located at point
-     * @param point Coordinates of the Slot of which decrement the seeds
-     * @throws InvalidParameterException
-     */
-    public void decrementSlotSeeds(Point point) throws InvalidParameterException{
-        this.getSlot(point).decrementSeeds();
-    }
-
-    /**
      * Get the next slot in which a seed can be scattered (does not skip the start seed)
      * @param point Point of which find the next
      * @return Next slot to point

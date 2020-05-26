@@ -190,52 +190,6 @@ class BoardTest {
     }
 
     /**
-     * Check if incrementSlotSeeds() properly increments m_nbseeds
-     */
-    @DisplayName("incrementSlotSeeds() - should not fail")
-    @Test
-    void incrementSlotSeeds_shouldnot_fail() {
-        b.incrementSlotSeeds(new Point(0, 0));
-        Assertions.assertEquals(5, b.getSlotSeeds(new Point(0, 0)));
-    }
-
-    /**
-     * Check if incrementSlotSeeds() throws an exception when rising m_nbseeds above 48 (max seeds on the board)
-     */
-    @DisplayName("incrementSlotSeeds() when incrementing above 48 - should fail")
-    @Test
-    void incrementSlotSeeds_above48_should_fail() {
-        b.setSlotSeeds(new Point(0, 0), 48);
-
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            b.incrementSlotSeeds(new Point(0, 0));
-        });
-    }
-
-    /**
-     * Check if decrementSlotSeeds() properly decrements m_nbseeds
-     */
-    @DisplayName("decrementSlotSeeds() - should not fail")
-    @Test
-    void decrementSlotSeeds_shouldnot_fail() {
-        b.decrementSlotSeeds(new Point(0, 0));
-        Assertions.assertEquals(3, b.getSlotSeeds(new Point(0, 0)));
-    }
-
-    /**
-     * Check if decrementSlotSeeds() throws an exception when lowering m_nbseeds below 0
-     */
-    @DisplayName("decrementSlotSeeds() when decrementing below 0 - should fail")
-    @Test
-    void decrementSlotSeeds_negativeamount_should_fail() {
-        b.emptySlotSeeds(new Point(0, 0));
-        Assertions.assertThrows(InvalidParameterException.class, () -> {
-            b.decrementSlotSeeds(new Point(0, 0));
-        });
-    }
-
-
-    /**
      * Check if setStoredSeeds() sets the proper value to stored seeds
      */
     @DisplayName("setStoredSeeds() - should not fail")
