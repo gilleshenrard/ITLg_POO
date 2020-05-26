@@ -169,7 +169,7 @@ public class BoardControllerTest {
     void getFinalSeeds_05plus40_shouldnot_fail() {
         b.getBoard().setSlotSeeds(new Point(3, 1), 1);
         int ret = b.getFinalSeeds(new Point(5, 0), new Point(3, 1), 40);
-        Assertions.assertEquals(4, ret);
+        Assertions.assertEquals(5, ret);
     }
 
     /**
