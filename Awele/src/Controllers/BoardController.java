@@ -288,6 +288,7 @@ public class BoardController {
 
             //if still capturable, empty the slot and update remaining seeds, otherwise stop capture
             if(pPrev.getY() == 1 - p.getY() && (finalSeeds == 2 || finalSeeds == 3)){
+                this.storeSeeds(p.getY() + 1, finalSeeds);
                 this.m_board.removeRemainingSeeds(pPrev.getY() + 1, this.getSlotSeeds(pPrev));
                 this.m_board.emptySlotSeeds(pPrev);
 
