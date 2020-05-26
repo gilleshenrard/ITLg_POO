@@ -184,6 +184,102 @@ public class BoardControllerTest {
     }
 
     /**
+     * Check if getFinalSeeds() returns the proper value
+     */
+    @DisplayName("getFinalSeeds() from {3,0} with 15 seeds - should not fail")
+    @Test
+    void getFinalSeeds_30plus15_shouldnot_fail() {
+        b.getBoard().setSlotSeeds(new Point(0, 0), 0);
+        b.getBoard().setSlotSeeds(new Point(1, 0), 3);
+        b.getBoard().setSlotSeeds(new Point(2, 0), 2);
+        b.getBoard().setSlotSeeds(new Point(3, 0), 15);
+        b.getBoard().setSlotSeeds(new Point(4, 0), 1);
+        b.getBoard().setSlotSeeds(new Point(5, 0), 0);
+        b.getBoard().setSlotSeeds(new Point(0, 1), 0);
+        b.getBoard().setSlotSeeds(new Point(1, 1), 5);
+        b.getBoard().setSlotSeeds(new Point(2, 1), 1);
+        b.getBoard().setSlotSeeds(new Point(3, 1), 4);
+        b.getBoard().setSlotSeeds(new Point(4, 1), 3);
+        b.getBoard().setSlotSeeds(new Point(5, 1), 1);
+        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), new Point(0, 0), 15));
+        Assertions.assertEquals(4, b.getFinalSeeds(new Point(3, 0), new Point(1, 0), 15));
+        Assertions.assertEquals(3, b.getFinalSeeds(new Point(3, 0), new Point(2, 0), 15));
+        Assertions.assertEquals(0, b.getFinalSeeds(new Point(3, 0), new Point(3, 0), 15));
+        Assertions.assertEquals(3, b.getFinalSeeds(new Point(3, 0), new Point(4, 0), 15));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), new Point(5, 0), 15));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), new Point(0, 1), 15));
+        Assertions.assertEquals(7, b.getFinalSeeds(new Point(3, 0), new Point(1, 1), 15));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), new Point(2, 1), 15));
+        Assertions.assertEquals(5, b.getFinalSeeds(new Point(3, 0), new Point(3, 1), 15));
+        Assertions.assertEquals(4, b.getFinalSeeds(new Point(3, 0), new Point(4, 1), 15));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), new Point(5, 1), 15));
+    }
+
+    /**
+     * Check if getFinalSeeds() returns the proper value
+     */
+    @DisplayName("getFinalSeeds() from {3,0} with 9 seeds - should not fail")
+    @Test
+    void getFinalSeeds_30plus9_shouldnot_fail() {
+        b.getBoard().setSlotSeeds(new Point(0, 0), 0);
+        b.getBoard().setSlotSeeds(new Point(1, 0), 3);
+        b.getBoard().setSlotSeeds(new Point(2, 0), 2);
+        b.getBoard().setSlotSeeds(new Point(3, 0), 9);
+        b.getBoard().setSlotSeeds(new Point(4, 0), 1);
+        b.getBoard().setSlotSeeds(new Point(5, 0), 0);
+        b.getBoard().setSlotSeeds(new Point(0, 1), 0);
+        b.getBoard().setSlotSeeds(new Point(1, 1), 5);
+        b.getBoard().setSlotSeeds(new Point(2, 1), 1);
+        b.getBoard().setSlotSeeds(new Point(3, 1), 4);
+        b.getBoard().setSlotSeeds(new Point(4, 1), 3);
+        b.getBoard().setSlotSeeds(new Point(5, 1), 1);
+        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), new Point(0, 0), 9));
+        Assertions.assertEquals(3, b.getFinalSeeds(new Point(3, 0), new Point(1, 0), 9));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), new Point(2, 0), 9));
+        Assertions.assertEquals(0, b.getFinalSeeds(new Point(3, 0), new Point(3, 0), 9));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), new Point(4, 0), 9));
+        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), new Point(5, 0), 9));
+        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), new Point(0, 1), 9));
+        Assertions.assertEquals(6, b.getFinalSeeds(new Point(3, 0), new Point(1, 1), 9));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), new Point(2, 1), 9));
+        Assertions.assertEquals(5, b.getFinalSeeds(new Point(3, 0), new Point(3, 1), 9));
+        Assertions.assertEquals(4, b.getFinalSeeds(new Point(3, 0), new Point(4, 1), 9));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), new Point(5, 1), 9));
+    }
+
+    /**
+     * Check if getFinalSeeds() returns the proper value
+     */
+    @DisplayName("getFinalSeeds() from {3,0} with 6 seeds - should not fail")
+    @Test
+    void getFinalSeeds_30plus6_shouldnot_fail() {
+        b.getBoard().setSlotSeeds(new Point(0, 0), 0);
+        b.getBoard().setSlotSeeds(new Point(1, 0), 3);
+        b.getBoard().setSlotSeeds(new Point(2, 0), 2);
+        b.getBoard().setSlotSeeds(new Point(3, 0), 6);
+        b.getBoard().setSlotSeeds(new Point(4, 0), 1);
+        b.getBoard().setSlotSeeds(new Point(5, 0), 0);
+        b.getBoard().setSlotSeeds(new Point(0, 1), 0);
+        b.getBoard().setSlotSeeds(new Point(1, 1), 5);
+        b.getBoard().setSlotSeeds(new Point(2, 1), 1);
+        b.getBoard().setSlotSeeds(new Point(3, 1), 4);
+        b.getBoard().setSlotSeeds(new Point(4, 1), 3);
+        b.getBoard().setSlotSeeds(new Point(5, 1), 1);
+        Assertions.assertEquals(0, b.getFinalSeeds(new Point(3, 0), new Point(0, 0), 6));
+        Assertions.assertEquals(3, b.getFinalSeeds(new Point(3, 0), new Point(1, 0), 6));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), new Point(2, 0), 6));
+        Assertions.assertEquals(0, b.getFinalSeeds(new Point(3, 0), new Point(3, 0), 6));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), new Point(4, 0), 6));
+        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), new Point(5, 0), 6));
+        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), new Point(0, 1), 6));
+        Assertions.assertEquals(6, b.getFinalSeeds(new Point(3, 0), new Point(1, 1), 6));
+        Assertions.assertEquals(2, b.getFinalSeeds(new Point(3, 0), new Point(2, 1), 6));
+        Assertions.assertEquals(5, b.getFinalSeeds(new Point(3, 0), new Point(3, 1), 6));
+        Assertions.assertEquals(3, b.getFinalSeeds(new Point(3, 0), new Point(4, 1), 6));
+        Assertions.assertEquals(1, b.getFinalSeeds(new Point(3, 0), new Point(5, 1), 6));
+    }
+
+    /**
      * Check if checkOutcome() returns a cancellation code when selecting a slot with no seed
      */
     @DisplayName("checkOutcome() with an empty slot - should not fail")

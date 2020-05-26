@@ -140,7 +140,7 @@ public class BoardController {
             return 0;
 
         //get how many seeds in total will be scattered in p, starting from start
-        int addedSeeds = ((start.getX() + 1 + nbseeds) / 6);
+        int addedSeeds = ((start.getX() + nbseeds) / 6);
         addedSeeds /= 2;
 
         //get the final slot to be scattered to
