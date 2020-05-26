@@ -463,7 +463,7 @@ public class BoardControllerTest {
         Assertions.assertEquals(4, b.getSlotSeeds(new Point(5, 1)));
         Assertions.assertEquals(26, b.getBoard().getRemainingSeeds(2));
         Assertions.assertEquals(20, b.getBoard().getRemainingSeeds(1));
-        Assertions.assertEquals(0, b.getStoredSeeds(1));
+        Assertions.assertEquals(2, b.getStoredSeeds(1));
         Assertions.assertEquals(0, b.getStoredSeeds(2));
     }
 
@@ -797,13 +797,18 @@ public class BoardControllerTest {
     @Test
     void playSlot_starvation_otherRow_shouldnot_fail() {
         //prepare the board (empty opponent)
+        b.getBoard().setSlotSeeds(new Point(0, 1), 1);
+        b.getBoard().setSlotSeeds(new Point(1, 1), 1);
+        b.getBoard().setSlotSeeds(new Point(2, 1), 1);
+        b.getBoard().setSlotSeeds(new Point(3, 1), 5);
+        b.getBoard().setSlotSeeds(new Point(4, 1), 5);
+        b.getBoard().setSlotSeeds(new Point(5, 1), 6);
         b.getBoard().emptySlotSeeds(new Point(0, 0));
         b.getBoard().emptySlotSeeds(new Point(1, 0));
         b.getBoard().emptySlotSeeds(new Point(2, 0));
         b.getBoard().emptySlotSeeds(new Point(3, 0));
         b.getBoard().emptySlotSeeds(new Point(4, 0));
         b.getBoard().emptySlotSeeds(new Point(5, 0));
-        b.getBoard().setSlotSeeds(new Point(0, 1), 2);
         b.getBoard().setRemainingSeeds(1, 0);
 
         //check the outcome
@@ -821,7 +826,7 @@ public class BoardControllerTest {
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(3, 0)));
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(4, 0)));
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(5, 0)));
-        Assertions.assertEquals(2, b.getSlotSeeds(new Point(0, 1)));
+        Assertions.assertEquals(1, b.getSlotSeeds(new Point(0, 1)));
         Assertions.assertEquals(0, b.getBoard().getRemainingSeeds(1));
         Assertions.assertEquals(0, b.getStoredSeeds(1));
         Assertions.assertEquals(0, b.getStoredSeeds(2));
