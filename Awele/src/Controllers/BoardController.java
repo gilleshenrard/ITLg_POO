@@ -196,7 +196,7 @@ public class BoardController {
         if (tmp.getY() == p.getY() || (finalSeeds != 2 && finalSeeds != 3)) {
 
             //if the opponent has no seed left and player doesn't scatter on the opponent's side, starvation
-            if (this.m_board.getRemainingSeeds(2 - p.getY()) == 0 && (p.getX() + nbseeds / 6) <= 0)
+            if (this.m_board.getRemainingSeeds(2 - p.getY()) == 0 && ((p.getX() + nbseeds) / 6) <= 0)
                 return -1;
             else
                 return 0;
