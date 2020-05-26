@@ -1,5 +1,5 @@
 # ITLg_POO
-## Project Awele - Part 1 - v3.4
+## Project Awele - Part 1 - v3.5
 
 ---
 ### 1. Introduction
@@ -34,15 +34,30 @@ At each turn (named seasons), a player chooses a slot on his side to harvest.
 Said slot is then emptied of all its seeds, and each of the latter is scattered one at a time in the next slots in an anti-clockwise manner.
 The slot the player chose is to remain empty and to be skipped on the scattering phase.
 
-Once the scattering is done and there are no seeds left to scatter : if the last slot populated contains 2 or 3 seeds, the capture phase is engaged.
+Once the scattering is done and there are no seeds left to scatter : if the last slot populated contains 2 or 3 seeds
+and is on the opponent side, the capture phase is engaged.
 
 #### 3. Capture phase
 Once a capture occurs, all the slots following the one selected by the player up to the one which triggered the captured are checked.
 
-All those containing 2 or 3 seeds (including the last slot) are emptied and the seeds are stored by the player, thus rising its score.
+Starting from the last slot in which a seed has been scattered up to the initial slot played by the player,
+all those containing 2 or 3 seeds are emptied and the seeds are stored by the player, thus rising its score.
+
+The capture phase continues until the player's row or a non-capturable slot is reached.
+Example :
+
+PLAYER 2
+
+| 2 || 1 || 6 || 6 || 0 || 1 |
+
+| 3 || 4 || 2 || 2 || 7 || 1 |
+
+PLAYER 1
+
+In this case, player 1 selects the slot 5, and captures the slots 5 and 6 of its opponent, thus storing 5 seeds (2 + 1 + 2 scattered).
 
 It is to be mentioned that a player can not starve its opponent (no seeds left on its side of the board). Should a starvation occur,
-the season is cancelled and the player can play again.
+the season is cancelled and the player can play again. A player can however starve himself.
 
 #### 4. Victory
 A player wins the game when he manages to store more than 24 seeds.
@@ -99,9 +114,10 @@ As per the pattern rules, a state is always active and present as a member of th
 The unit tests for each class can be found in the mirrored directory tests/ (tests/Models, tests/Views, tests/Controllers).
 
 ---
-### 4. Change list (since v3.3)
+### 4. Change list (since v3.4)
 
-- Keyboard slot selection now tests if there are any slots left for the player to play
+- Remaining Seeds counter is now longer used
+- checkOutcome() and playSlot() have been changed to match the rules changes
 
 ---
 ### 5. Known issues
