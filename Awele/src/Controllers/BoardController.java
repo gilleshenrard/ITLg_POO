@@ -276,36 +276,52 @@ public class BoardController {
         //get the number of seeds in the slot to harvest and empty it + update remaining seeds
         int nbseeds = this.getSlotSeeds(p);
         int backup = nbseeds;
-        Point last = this.m_board.getSubsequent(p, backup);
+        int finalSeeds = 0;
+        Point pPrev = this.m_board.getSubsequent(p, backup);
         boolean capturing = true;
 
-        //get the last slot scattered
-        Point pPrev = new Point(last);
-        do {
-            //get the final amount of seeds in the slot
-            int finalSeeds = this.getFinalSeeds(p, pPrev, backup);
 
-            //if slot is capturable, empty it
-            if ((ret > 0 && capturing                       //flag is true (slots are still capturable)
-                && (finalSeeds == 2 || finalSeeds == 3)     //pPrev is capturable
-                && pPrev.getY() == last.getY())             //pPrev is still on opponent's side
-                || pPrev.equals(p))                         //  or pPrev is the slot played
-            {
+        //empty the start slot and update the remaining seeds count
+        this.m_board.removeRemainingSeeds(p.getY() + 1, this.getSlotSeeds(p));
+        this.m_board.emptySlotSeeds(p);
+
+        //
+        //  CAPTURING PHASE
+        //
+
+        //capturing cycle (while only capturable slots encountered and on the opponent's side)
+        while (ret > 0 && capturing && nbseeds >= 0){
+            finalSeeds = this.getFinalSeeds(p, pPrev, backup);
+
+            //if still capturable, empty the slot and update remaining seeds, otherwise stop capture
+            if(pPrev.getY() == 1 - p.getY() && (finalSeeds == 2 || finalSeeds == 3)){
                 this.m_board.removeRemainingSeeds(pPrev.getY() + 1, this.getSlotSeeds(pPrev));
                 this.m_board.emptySlotSeeds(pPrev);
+
+                //get next slot
+                nbseeds--;
+                pPrev = this.m_board.getPrevious(pPrev);
             }
-            //if slot is to be simply scattered, update seed amount
-            else {
+            else
+                capturing = false;
+        }
+
+        //
+        //  SCATTERING PHASE
+        //
+
+        //scattering cycle (while seeds left or scattering made a whole turn)
+        while (nbseeds >= 0 && backup - nbseeds < 11){
+            //if current slot is not the one played, update the total amount of seeds
+            if (!pPrev.equals(p)){
+                finalSeeds = this.getFinalSeeds(p, pPrev, backup);
                 this.m_board.addRemainingSeeds(pPrev.getY() + 1, finalSeeds - this.getSlotSeeds(pPrev));
                 this.m_board.setSlotSeeds(pPrev, finalSeeds);
-
-                //make the loop stop capturing future slots
-                if (!pPrev.equals(p))
-                    capturing = false;
+                nbseeds--;
             }
-            nbseeds--;
+
             pPrev = this.m_board.getPrevious(pPrev);
-        }while (nbseeds >= 0 && backup - nbseeds < 12);
+        }
 
         //return the total captured
         return ret;
