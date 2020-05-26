@@ -13,15 +13,12 @@ import java.util.ArrayList;
 
 public class Board {
     private Slot[][] m_slots;
-    private int[] m_remSeedsPlayer;
     private int[] m_storedSeeds;
 
     /**
      * Create new Board
      */
     public Board(){
-        this.m_remSeedsPlayer = new int[2];
-        java.util.Arrays.fill(m_remSeedsPlayer, 24);
         this.m_storedSeeds = new int[2];
         java.util.Arrays.fill(m_storedSeeds, 0);
         
@@ -38,10 +35,6 @@ public class Board {
      * @param board Board to copy
      */
     public Board(Board board){
-        this.m_remSeedsPlayer = new int[2];
-        this.setRemainingSeeds(1, board.getRemainingSeeds(1));
-        this.setRemainingSeeds(2, board.getRemainingSeeds(2));
-
         this.m_storedSeeds = new int[2];
         this.setStoredSeeds(1, board.getStoredSeeds(1));
         this.setStoredSeeds(2, board.getStoredSeeds(2));
@@ -77,51 +70,6 @@ public class Board {
     public static void validateCoordinates(Point point, String msg) throws InvalidParameterException{
         if(point.getX() < 0 || point.getX() > 5 || (point.getY() != 0 && point.getY() != 1))
             throw new InvalidParameterException(msg + " : incorrect coordinates (values : " + point.getX() + "," + point.getY() + ")");
-    }
-
-    /**
-     * Return the remaining amount of seeds for a player
-     * @param ID ID of the player
-     * @return Amount of seeds remaining
-     * @throws InvalidParameterException
-     */
-    public int getRemainingSeeds(int ID) throws InvalidParameterException{
-        Board.validateID(ID,"Board.getRemainingSeeds()");
-
-        return this.m_remSeedsPlayer[ID - 1];
-    }
-
-    /**
-     * Assigns a new value to m_remainingseeds regarding the player ID
-     * @param ID ID of the player for which assign the new value
-     * @param value New amount of remaining seeds for the player
-     * @throws InvalidParameterException
-     */
-    public void setRemainingSeeds(int ID, int value) throws InvalidParameterException{
-        Board.validateID(ID, "Board.setRemainingSeeds()");
-        Slot.validateNbSeeds(value, "Board.setRemainingSeeds()");
-
-        this.m_remSeedsPlayer[ID - 1] = value;
-    }
-
-    /**
-     * Add remaining seeds to a player
-     * @param ID ID of the player
-     * @param value Amount to add
-     * @throws InvalidParameterException
-     */
-    public void addRemainingSeeds(int ID, int value) throws InvalidParameterException {
-        this.setRemainingSeeds(ID, this.getRemainingSeeds(ID) + value);
-    }
-
-    /**
-     * Remove remaining seeds from a player
-     * @param ID ID of the player
-     * @param value Amount to remove
-     * @throws InvalidParameterException
-     */
-    public void removeRemainingSeeds(int ID, int value) throws InvalidParameterException {
-        this.setRemainingSeeds(ID, this.getRemainingSeeds(ID) - value);
     }
 
     /**
@@ -300,9 +248,6 @@ public class Board {
      * Reset the board to an inial value
      */
     public void reset(){
-        this.setRemainingSeeds(1, 24);
-        this.setRemainingSeeds(2, 24);
-
         this.setStoredSeeds(1, 0);
         this.setStoredSeeds(2, 0);
 

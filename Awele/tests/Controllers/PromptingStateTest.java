@@ -46,7 +46,6 @@ public class PromptingStateTest {
         g.getBoardController().getBoard().emptySlotSeeds(new Point(3, 0));
         g.getBoardController().getBoard().emptySlotSeeds(new Point(4, 0));
         g.getBoardController().getBoard().setSlotSeeds(new Point(5, 0), 1);
-        g.getBoardController().getBoard().setRemainingSeeds(1, 1);
         g.setNextState(GameController.m_prompting);
         g.setCurrentPlayer(1);
         int ret = g.handleState(6);
@@ -69,7 +68,6 @@ public class PromptingStateTest {
         g.getBoardController().getBoard().emptySlotSeeds(new Point(3, 0));
         g.getBoardController().getBoard().emptySlotSeeds(new Point(4, 0));
         g.getBoardController().getBoard().emptySlotSeeds(new Point(5, 0));
-        g.getBoardController().getBoard().setRemainingSeeds(1, 0);
         g.setNextState(GameController.m_prompting);
         g.setCurrentPlayer(1);
         int ret = g.handleState(6);

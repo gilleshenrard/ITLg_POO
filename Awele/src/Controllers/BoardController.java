@@ -264,7 +264,6 @@ public class BoardController {
 
 
         //empty the start slot and update the remaining seeds count
-        this.m_board.removeRemainingSeeds(p.getY() + 1, this.getSlotSeeds(p));
         this.m_board.emptySlotSeeds(p);
 
         //
@@ -278,7 +277,6 @@ public class BoardController {
             //if still capturable, empty the slot and update remaining seeds, otherwise stop capture
             if(pPrev.getY() == 1 - p.getY() && (finalSeeds == 2 || finalSeeds == 3)){
                 this.storeSeeds(p.getY() + 1, finalSeeds);
-                this.m_board.removeRemainingSeeds(pPrev.getY() + 1, this.getSlotSeeds(pPrev));
                 this.m_board.emptySlotSeeds(pPrev);
 
                 //get next slot
@@ -298,7 +296,6 @@ public class BoardController {
             //if current slot is not the one played, update the total amount of seeds
             if (!pPrev.equals(p)){
                 finalSeeds = this.getFinalSeeds(p, finalSlot, pPrev, backup);
-                this.m_board.addRemainingSeeds(pPrev.getY() + 1, finalSeeds - this.getSlotSeeds(pPrev));
                 this.m_board.setSlotSeeds(pPrev, finalSeeds);
                 nbseeds--;
             }

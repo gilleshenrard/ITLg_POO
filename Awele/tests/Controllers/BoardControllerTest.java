@@ -391,8 +391,6 @@ public class BoardControllerTest {
         Assertions.assertEquals(5, b.getSlotSeeds(new Point(2, 1)));
         Assertions.assertEquals(5, b.getSlotSeeds(new Point(3, 1)));
         Assertions.assertEquals(4, b.getSlotSeeds(new Point(4, 1)));
-        Assertions.assertEquals(20, b.getBoard().getRemainingSeeds(1));
-        Assertions.assertEquals(28, b.getBoard().getRemainingSeeds(2));
         Assertions.assertEquals(0, b.getStoredSeeds(1));
         Assertions.assertEquals(0, b.getStoredSeeds(2));
     }
@@ -413,7 +411,6 @@ public class BoardControllerTest {
         b.getBoard().setSlotSeeds(new Point(0, 0), 4);
         b.getBoard().setSlotSeeds(new Point(1, 0), 4);
         b.getBoard().setSlotSeeds(new Point(5, 0), 8);
-        b.getBoard().setRemainingSeeds(2, 0);
 
         //check the outcome
         int ret = b.checkOutcome(new Point(5, 0));
@@ -464,8 +461,6 @@ public class BoardControllerTest {
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(3, 1)));
         Assertions.assertEquals(9, b.getSlotSeeds(new Point(4, 1)));
         Assertions.assertEquals(4, b.getSlotSeeds(new Point(5, 1)));
-        Assertions.assertEquals(26, b.getBoard().getRemainingSeeds(2));
-        Assertions.assertEquals(20, b.getBoard().getRemainingSeeds(1));
         Assertions.assertEquals(2, b.getStoredSeeds(1));
         Assertions.assertEquals(0, b.getStoredSeeds(2));
     }
@@ -489,8 +484,6 @@ public class BoardControllerTest {
         b.getBoard().setSlotSeeds(new Point(3, 1), 1);
         b.getBoard().setSlotSeeds(new Point(4, 1), 9);
         b.getBoard().setSlotSeeds(new Point(5, 1), 4);
-        b.getBoard().setRemainingSeeds(2, 24);
-        b.getBoard().setRemainingSeeds(1, 20);
 
         //check the outcome
         int ret = b.checkOutcome(new Point(3, 0));
@@ -510,8 +503,6 @@ public class BoardControllerTest {
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(3, 1)));
         Assertions.assertEquals(9, b.getSlotSeeds(new Point(4, 1)));
         Assertions.assertEquals(4, b.getSlotSeeds(new Point(5, 1)));
-        Assertions.assertEquals(26, b.getBoard().getRemainingSeeds(2));
-        Assertions.assertEquals(16, b.getBoard().getRemainingSeeds(1));
     }
 
     /**
@@ -528,8 +519,6 @@ public class BoardControllerTest {
         b.getBoard().emptySlotSeeds(new Point(4, 0));
         b.getBoard().emptySlotSeeds(new Point(5, 0));
         b.getBoard().setSlotSeeds(new Point(5, 1), 2);
-        b.getBoard().setRemainingSeeds(1, 3);
-        b.getBoard().setRemainingSeeds(2, 22);
 
         //check the outcome
         int ret = b.checkOutcome(new Point(5, 1));
@@ -546,8 +535,6 @@ public class BoardControllerTest {
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(3, 0)));
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(4, 0)));
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(5, 0)));
-        Assertions.assertEquals(22, b.getBoard().getRemainingSeeds(2));
-        Assertions.assertEquals(3, b.getBoard().getRemainingSeeds(1));
         Assertions.assertEquals(0, b.getStoredSeeds(2));
         Assertions.assertEquals(0, b.getStoredSeeds(1));
     }
@@ -564,7 +551,6 @@ public class BoardControllerTest {
         b.getBoard().emptySlotSeeds(new Point(3, 0));
         b.getBoard().emptySlotSeeds(new Point(4, 0));
         b.getBoard().setSlotSeeds(new Point(5, 0), 1);
-        b.getBoard().setRemainingSeeds(1, 1);
     }
 
     /**
@@ -580,7 +566,6 @@ public class BoardControllerTest {
         b.getBoard().emptySlotSeeds(new Point(3, 0));
         b.getBoard().emptySlotSeeds(new Point(4, 0));
         b.getBoard().setSlotSeeds(new Point(5, 0), 1);
-        b.getBoard().setRemainingSeeds(1, 1);
 
         //check the outcome
         int ret = b.checkOutcome(new Point(5, 0));
@@ -597,7 +582,6 @@ public class BoardControllerTest {
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(3, 0)));
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(4, 0)));
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(5, 0)));
-        Assertions.assertEquals(0, b.getBoard().getRemainingSeeds(1));
         Assertions.assertEquals(0, b.getStoredSeeds(1));
         Assertions.assertEquals(0, b.getStoredSeeds(2));
     }
@@ -615,7 +599,6 @@ public class BoardControllerTest {
         b.getBoard().emptySlotSeeds(new Point(3, 0));
         b.getBoard().setSlotSeeds(new Point(4, 0), 1);
         b.getBoard().setSlotSeeds(new Point(5, 0), 1);
-        b.getBoard().setRemainingSeeds(1, 2);
 
         //check the outcome
         int ret = b.checkOutcome(new Point(4, 0));
@@ -632,7 +615,6 @@ public class BoardControllerTest {
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(3, 0)));
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(4, 0)));
         Assertions.assertEquals(2, b.getSlotSeeds(new Point(5, 0)));
-        Assertions.assertEquals(2, b.getBoard().getRemainingSeeds(1));
         Assertions.assertEquals(0, b.getStoredSeeds(1));
         Assertions.assertEquals(0, b.getStoredSeeds(2));
     }
@@ -652,8 +634,6 @@ public class BoardControllerTest {
         b.getBoard().setSlotSeeds(new Point(5, 1), 1);
         b.getBoard().setSlotSeeds(new Point(5, 0), 7);
         b.getBoard().setSlotSeeds(new Point(0, 0), 1);
-        b.getBoard().setRemainingSeeds(2, 6);
-        b.getBoard().setRemainingSeeds(1, 24);
 
         //check the outcome
         int ret = b.checkOutcome(new Point(5, 0));
@@ -672,7 +652,6 @@ public class BoardControllerTest {
         Assertions.assertEquals(2, b.getSlotSeeds(new Point(5, 1)));
         Assertions.assertEquals(2, b.getSlotSeeds(new Point(0, 0)));
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(5, 0)));
-        Assertions.assertEquals(12, b.getBoard().getRemainingSeeds(2));
         Assertions.assertEquals(0, b.getStoredSeeds(1));
         Assertions.assertEquals(0, b.getStoredSeeds(2));
     }
@@ -690,7 +669,6 @@ public class BoardControllerTest {
         b.getBoard().emptySlotSeeds(new Point(3, 0));
         b.getBoard().emptySlotSeeds(new Point(4, 0));
         b.getBoard().emptySlotSeeds(new Point(5, 0));
-        b.getBoard().setRemainingSeeds(1, 1);
 
         //check outcome
         int ret = b.checkOutcome(new Point(0, 0));
@@ -707,7 +685,6 @@ public class BoardControllerTest {
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(3, 0)));
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(4, 0)));
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(5, 0)));
-        Assertions.assertEquals(1, b.getBoard().getRemainingSeeds(1));
         Assertions.assertEquals(0, b.getStoredSeeds(1));
         Assertions.assertEquals(0, b.getStoredSeeds(2));
     }
@@ -740,8 +717,6 @@ public class BoardControllerTest {
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(3, 0)));
         Assertions.assertEquals(6, b.getSlotSeeds(new Point(4, 0)));
         Assertions.assertEquals(5, b.getSlotSeeds(new Point(5, 0)));
-        Assertions.assertEquals(30, b.getBoard().getRemainingSeeds(2));
-        Assertions.assertEquals(18, b.getBoard().getRemainingSeeds(1));
         Assertions.assertEquals(0, b.getStoredSeeds(1));
         Assertions.assertEquals(0, b.getStoredSeeds(2));
     }
@@ -765,8 +740,6 @@ public class BoardControllerTest {
         b.getBoard().setSlotSeeds(new Point(3, 1), 1);
         b.getBoard().setSlotSeeds(new Point(4, 1), 1);
         b.getBoard().setSlotSeeds(new Point(5, 1), 1);
-        b.getBoard().setRemainingSeeds(1, 20);
-        b.getBoard().setRemainingSeeds(2, 6);
 
         //check the outcome
         int ret = b.checkOutcome(new Point(4, 0));
@@ -789,8 +762,6 @@ public class BoardControllerTest {
         Assertions.assertEquals(2, b.getSlotSeeds(new Point(3, 0)));
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(4, 0)));
         Assertions.assertEquals(3, b.getSlotSeeds(new Point(5, 0)));
-        Assertions.assertEquals(6, b.getBoard().getRemainingSeeds(2));
-        Assertions.assertEquals(11, b.getBoard().getRemainingSeeds(1));
     }
 
     /**
@@ -812,7 +783,6 @@ public class BoardControllerTest {
         b.getBoard().emptySlotSeeds(new Point(3, 0));
         b.getBoard().emptySlotSeeds(new Point(4, 0));
         b.getBoard().emptySlotSeeds(new Point(5, 0));
-        b.getBoard().setRemainingSeeds(1, 0);
 
         //check the outcome
         int ret = b.checkOutcome(new Point(0, 1));
@@ -830,7 +800,6 @@ public class BoardControllerTest {
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(4, 0)));
         Assertions.assertEquals(0, b.getSlotSeeds(new Point(5, 0)));
         Assertions.assertEquals(1, b.getSlotSeeds(new Point(0, 1)));
-        Assertions.assertEquals(0, b.getBoard().getRemainingSeeds(1));
         Assertions.assertEquals(0, b.getStoredSeeds(1));
         Assertions.assertEquals(0, b.getStoredSeeds(2));
     }
@@ -843,8 +812,6 @@ public class BoardControllerTest {
     void resetBoard_shouldnot_fail() {
         b.resetBoard();
         Point p = new Point(0, 0);
-        Assertions.assertEquals(24, b.getBoard().getRemainingSeeds(1));
-        Assertions.assertEquals(24, b.getBoard().getRemainingSeeds(2));
         for (int l = 0 ; l < 2 ; l++){
             for (int c = 0 ; c < 6 ; c++){
                 p.setCoordinates(c, l);
