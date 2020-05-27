@@ -132,6 +132,9 @@ The unit tests for each class can be found in the mirrored directory tests/ (tes
 
 - Remaining Seeds counter is now longer used
 - checkOutcome() and playSlot() have been changed to match the rules changes
+- The Strategy design pattern for slot selection classes is now based on an abstract classe instead of an interface
+- All slot selection classes now check if a legal slot is available before doing anything
+- slot selection classes constructors have been simplified
 
 ---
 ### 5. Known issues
