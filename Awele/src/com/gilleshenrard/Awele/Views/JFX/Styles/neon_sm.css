@@ -14,20 +14,19 @@
 }
 
 /*
-//  TITLE AND MENU
+//  TITLE AND MENU BUTTON
 */
 
 /*title section*/
-.titled-pane {
+.titlepane .label {
     -fx-text-fill: #DA4FDE;
     -fx-font-size: 90;
     -fx-alignment: center;
     -fx-effect: dropshadow(one-pass-box, #DA4FDE, 80, 0, 0, 0);
 }
 
-/*title itself*/
-.titled-pane > .title {
-    -fx-background-color : null;
+/*menu button*/
+.titlepane .button {
 }
 
 /*
