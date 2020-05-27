@@ -27,7 +27,19 @@ public class MinimaxSelect extends Selectable {
      */
     public MinimaxSelect(BoardController controller, int ID) throws NullPointerException{
         super(controller, ID);
-        this.m_maxDepth = 10;
+        this.setMaxDepth(10);
+    }
+
+    /**
+     * Set the max depth of the tree Minimax will look up
+     * @param max Max depth
+     * @throws InvalidParameterException
+     */
+    public void setMaxDepth(int max) throws InvalidParameterException {
+        if (max <= 0)
+            throw new InvalidParameterException("MinimaxSelect.setMaxDepth() : negative or null value for max depth (" + max + ")");
+
+        this.m_maxDepth = max;
     }
 
     /**
