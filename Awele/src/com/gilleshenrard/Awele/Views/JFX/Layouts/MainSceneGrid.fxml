@@ -5,6 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
+<?import javafx.geometry.Insets?>
 <GridPane xmlns:fx="http://javafx.com/fxml/1" fx:id="m_grid" maxHeight="998.0" maxWidth="1744.0" minHeight="998.0" minWidth="1744.0"
           prefHeight="998.0" prefWidth="1744.0" styleClass="main"
           stylesheets="@../Styles/neon_sm.css" xmlns="http://javafx.com/javafx/11.0.1">
@@ -36,7 +37,10 @@
                    GridPane.columnSpan="6" styleClass="titlepane">
             <children>
                 <Label prefHeight="Infinity" prefWidth="Infinity" styleClass="title" text="Awele"/>
-                <Button mnemonicParsing="false" text="Button"/>
+                <Button prefHeight="40" prefWidth="80" mnemonicParsing="false" text="MENU">
+                    <StackPane.margin>
+                        <Insets right="100.0" />
+                    </StackPane.margin></Button>
             </children>
         </StackPane>
 

@@ -27,6 +27,17 @@
 
 /*menu button*/
 .titlepane .button {
+    -fx-font-size: 20;
+    -fx-text-fill: #E8232D;
+    -fx-background-color: null;
+    -fx-border-color: #E8232D;
+    -fx-border-width: 3px;
+    -fx-effect: dropshadow(one-pass-box, #E8232D, 80, 0, 0, 0);
+}
+
+/*menu button when hovered*/
+.titlepane .button:hover {
+    -fx-border-width: 5px;
 }
 
 /*
