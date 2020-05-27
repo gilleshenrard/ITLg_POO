@@ -9,12 +9,12 @@ package com.gilleshenrard.Awele.FSM;
 
 import com.gilleshenrard.Awele.Controllers.GameController;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 public class MenuState implements iGameState {
     @Override
     public void handleState(GameController controller) {
+        //display the menu
+        controller.displayMenu();
+
         //plug in the Prompting state
         controller.setNextState(State.PROMPTING);
     }

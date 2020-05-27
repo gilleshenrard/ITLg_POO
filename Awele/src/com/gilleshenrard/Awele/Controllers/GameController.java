@@ -3,7 +3,7 @@
 /*  Deals with game indirect manipulations (getting the current state, ...), and acts as a buffer   */
 /*      between the Game and the Game view. Must be primarily used in the Main method               */
 /*  Author : Gilles Henrard                                                                         */
-/*  Last update : 11/05/2020                                                                        */
+/*  Last update : 27/05/2020                                                                        */
 /****************************************************************************************************/
 
 package com.gilleshenrard.Awele.Controllers;
@@ -264,6 +264,17 @@ public class GameController {
             throw new NullPointerException("GameController.displayError() : GameView not instantiated");
 
         this.m_view.displayError(msg);
+    }
+
+    /**
+     * Display the menu screen
+     * @throws NullPointerException
+     */
+    public void displayMenu() throws NullPointerException {
+        if (this.m_view == null)
+            throw new NullPointerException("GameController.displayMenu() : GameView not instantiated");
+
+        this.m_view.displayMenu();
     }
 
     /**

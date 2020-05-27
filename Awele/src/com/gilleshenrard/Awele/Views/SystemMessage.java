@@ -2,7 +2,7 @@
 /*  Class SystemMessage                                                                             */
 /*  Base Abstract class linked to the Game Controller, providing system messages methods            */
 /*  Author : Gilles Henrard                                                                         */
-/*  Last update : 11/05/2020                                                                        */
+/*  Last update : 27/05/2020                                                                        */
 /****************************************************************************************************/
 package com.gilleshenrard.Awele.Views;
 
@@ -23,4 +23,6 @@ public abstract class SystemMessage {
     }
 
     public abstract void displayError(String msg);
+
+    public abstract void displayMenu();
 }

@@ -3,14 +3,18 @@
 /*  Implements SystemMessage                                                                        */
 /*  Provides game JavaFX system messages methods, and thus communicates with the game controller    */
 /*  Author : Gilles Henrard                                                                         */
-/*  Last update : 11/05/2020                                                                        */
+/*  Last update : 27/05/2020                                                                        */
 /****************************************************************************************************/
 package com.gilleshenrard.Awele.Views.JFX;
 
+import com.gilleshenrard.Awele.App;
 import com.gilleshenrard.Awele.Controllers.GameController;
 import com.gilleshenrard.Awele.Views.SystemMessage;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class GameJFXView extends SystemMessage {
     /**
@@ -22,6 +26,10 @@ public class GameJFXView extends SystemMessage {
         super(controller);
     }
 
+    /**
+     * Display an Alert pane with an error message
+     * @param msg Message to display
+     */
     @Override
     public void displayError(String msg) {
         Platform.runLater(() -> {
@@ -31,5 +39,13 @@ public class GameJFXView extends SystemMessage {
             alert.setContentText(msg);
             alert.showAndWait();
         });
+    }
+
+    /**
+     * Display a menu JavaFX pane
+     */
+    @Override
+    public void displayMenu() {
+        Logger.getLogger(App.class.getName()).log(Level.FINE, "Displaying the menu pane");
     }
 }

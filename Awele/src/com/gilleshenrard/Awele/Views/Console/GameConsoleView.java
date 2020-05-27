@@ -3,7 +3,7 @@
 /*  Implements SystemMessage                                                                        */
 /*  Provides game console system messages methods, and thus communicates with the game controller   */
 /*  Author : Gilles Henrard                                                                         */
-/*  Last update : 11/05/2020                                                                        */
+/*  Last update : 27/05/2020                                                                        */
 /****************************************************************************************************/
 package com.gilleshenrard.Awele.Views.Console;
 
@@ -27,5 +27,13 @@ public class GameConsoleView extends SystemMessage {
     @Override
     public void displayError(String msg){
         System.err.println(msg);
+    }
+
+    /**
+     * Display a console menu
+     */
+    @Override
+    public void displayMenu() {
+
     }
 }
