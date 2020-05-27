@@ -3,7 +3,7 @@
 /*  Implementation of the FSM design pattern                                                        */
 /*  Updates the UI, switches between player 1 and player 2, then leads to the Prompting state       */
 /*  Author : Gilles Henrard                                                                         */
-/*  Last update : 11/05/2020                                                                        */
+/*  Last update : 27/05/2020                                                                        */
 /****************************************************************************************************/
 package com.gilleshenrard.Awele.FSM;
 

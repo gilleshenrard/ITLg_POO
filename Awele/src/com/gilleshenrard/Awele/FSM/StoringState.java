@@ -4,7 +4,7 @@
 /*  Makes the game store the seeds captured by the player, and either                               */
 /*      leads to the PlayerSwitching state, or returns a code (-2 for victory)                      */
 /*  Author : Gilles Henrard                                                                         */
-/*  Last update : 11/05/2020                                                                        */
+/*  Last update : 27/05/2020                                                                        */
 /****************************************************************************************************/
 package com.gilleshenrard.Awele.FSM;
 

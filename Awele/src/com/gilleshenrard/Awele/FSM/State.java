@@ -2,7 +2,7 @@
 /*  Enumeration State                                                                               */
 /*  Holds an implementation of each state available. It eases up the use of FSM in the game control.*/
 /*  Author : Gilles Henrard                                                                         */
-/*  Last update : 11/05/2020                                                                        */
+/*  Last update : 27/05/2020                                                                        */
 /****************************************************************************************************/
 package com.gilleshenrard.Awele.FSM;
 
