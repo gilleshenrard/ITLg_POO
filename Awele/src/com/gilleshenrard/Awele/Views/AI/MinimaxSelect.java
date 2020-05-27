@@ -11,6 +11,8 @@ import com.gilleshenrard.Awele.Controllers.BoardController;
 import com.gilleshenrard.Awele.Models.Point;
 import com.gilleshenrard.Awele.Views.Selectable;
 
+import java.security.InvalidParameterException;
+
 public class MinimaxSelect extends Selectable {
     private int m_maxDepth;
     private final static int INFINITE_POS = 200000;
@@ -54,18 +56,16 @@ public class MinimaxSelect extends Selectable {
 
             //test each legal slots for the best value
             Point slot = new Point(0, 0);
-            for (int x = 0; x < 6; x++) {
-                slot.setCoordinates(x, this.getID() - 1);
+            for (int x = 0; x < this.getLegal().size(); x++) {
+                slot.setCoordinates(this.getLegal().get(x), this.getID() - 1);
 
-                //if slot is legal, get its minimax value (AI is the maximiser, the opponent is the minimiser)
-                if (this.getController().isLegal(slot)) {
-                    int val = miniMax(slot, this.m_maxDepth, INFINITE_NEG, INFINITE_POS, true);
+                //get the slot minimax value (AI is the maximiser, the opponent is the minimiser)
+                int val = miniMax(slot, this.m_maxDepth, INFINITE_NEG, INFINITE_POS, true);
 
-                    //if no error, update the best value and the best slot
-                    if (val != ERROR && val > bestVal) {
-                        bestVal = val;
-                        bestShot = slot.getX();
-                    }
+                //if no error, update the best value and the best slot
+                if (val != ERROR && val > bestVal) {
+                    bestVal = val;
+                    bestShot = slot.getX();
                 }
             }
         }
