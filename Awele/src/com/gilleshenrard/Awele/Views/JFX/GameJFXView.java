@@ -1,6 +1,6 @@
 /****************************************************************************************************/
 /*  Class GameJFXView                                                                               */
-/*  Implements SystemMessage                                                                        */
+/*  Implements iNotifiable                                                                          */
 /*  Provides game JavaFX system messages methods, and thus communicates with the game controller    */
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 27/05/2020                                                                        */
@@ -9,21 +9,21 @@ package com.gilleshenrard.Awele.Views.JFX;
 
 import com.gilleshenrard.Awele.App;
 import com.gilleshenrard.Awele.Controllers.GameController;
-import com.gilleshenrard.Awele.Views.SystemMessage;
+import com.gilleshenrard.Awele.Views.iNotifiable;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class GameJFXView extends SystemMessage {
+public class GameJFXView implements iNotifiable {
     /**
      * Create a new Game Java FX view
      * @param controller Game controller to use
      * @throws NullPointerException
      */
     public GameJFXView(GameController controller) throws NullPointerException {
-        super(controller);
+        controller.setView(this);
     }
 
     /**

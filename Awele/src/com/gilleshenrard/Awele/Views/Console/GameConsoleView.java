@@ -1,6 +1,6 @@
 /****************************************************************************************************/
 /*  Class GameConsoleView                                                                           */
-/*  Implements SystemMessage                                                                        */
+/*  Implements iNotifiable                                                                          */
 /*  Provides game console system messages methods, and thus communicates with the game controller   */
 /*  Author : Gilles Henrard                                                                         */
 /*  Last update : 27/05/2020                                                                        */
@@ -8,16 +8,16 @@
 package com.gilleshenrard.Awele.Views.Console;
 
 import com.gilleshenrard.Awele.Controllers.GameController;
-import com.gilleshenrard.Awele.Views.SystemMessage;
+import com.gilleshenrard.Awele.Views.iNotifiable;
 
-public class GameConsoleView extends SystemMessage {
+public class GameConsoleView implements iNotifiable {
 
     /**
      * Create a new GameView
      * @param g Game controller to use
      */
     public GameConsoleView(GameController g){
-        super(g);
+        g.setView(this);
     }
 
     /**

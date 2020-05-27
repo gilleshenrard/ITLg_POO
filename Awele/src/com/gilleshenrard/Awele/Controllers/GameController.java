@@ -13,7 +13,7 @@ import com.gilleshenrard.Awele.FSM.State;
 import com.gilleshenrard.Awele.Models.Game;
 import com.gilleshenrard.Awele.Models.Player;
 import com.gilleshenrard.Awele.Models.Point;
-import com.gilleshenrard.Awele.Views.SystemMessage;
+import com.gilleshenrard.Awele.Views.iNotifiable;
 
 import java.security.InvalidParameterException;
 import java.util.logging.Level;
@@ -21,7 +21,7 @@ import java.util.logging.Logger;
 
 public class GameController {
     private BoardController m_board;
-    private SystemMessage m_view;
+    private iNotifiable m_view;
     private State m_currentState;
     private int m_currentPlayer;
     private boolean m_running;
@@ -172,9 +172,9 @@ public class GameController {
      * @param gameView Game view to use
      * @throws NullPointerException
      */
-    public void setView(SystemMessage gameView) throws NullPointerException{
+    public void setView(iNotifiable gameView) throws NullPointerException{
         if(gameView == null)
-            throw new NullPointerException("GameController.setView() : NULL instance of SystemMessage");
+            throw new NullPointerException("GameController.setView() : NULL instance of iNotifiable");
         this.m_view = gameView;
     }
 
