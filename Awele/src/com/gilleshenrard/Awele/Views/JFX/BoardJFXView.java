@@ -31,7 +31,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class BoardJFXView extends BorderPane implements iObserver, Initializable {
+public class BoardJFXView extends GridPane implements iObserver, Initializable {
     private Scene m_scene = null;
     private BoardController m_controller;
     private int[][] m_slots;
