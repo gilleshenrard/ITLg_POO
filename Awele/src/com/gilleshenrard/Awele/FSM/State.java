@@ -13,7 +13,7 @@ public enum State{
     PLAYING(new PlayingState()),
     STORING(new StoringState()),
     SWITCHING(new SwitchingPlayerState()),
-    OPTIONS(new OptionState());
+    MENU(new MenuState());
 
     private iGameState m_state;
 

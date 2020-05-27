@@ -35,9 +35,9 @@ public class PromptingState implements iGameState {
         Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Player " + controller.getCurrentPlayer() + " : selectSlot() returned " + choice);
 
         if(choice == 0){
-            //plug in the Options state
+            //plug in the Menu state
             Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : next state -> Options");
-            controller.setNextState(State.OPTIONS);
+            controller.setNextState(State.MENU);
         }
         else if(choice > 0) {
             if (controller.isPlayerAI(controller.getCurrentPlayer())) {
