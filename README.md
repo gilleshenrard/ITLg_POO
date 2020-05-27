@@ -114,6 +114,7 @@ It consists of four classes (plus the base class and an enumeration to hold them
 - PromptingState : Deals with prompting the user for a slot selection
 - PlayingState : Performs the scattering (+capture) and eventual error management, plus determines if a player forfeits
 - StoringState : Performs the eventual storage of captured seeds and determines if a player wins
+- MenuState : Displays a menu panel, allowing the player to change a player name or behaviour
 
 As per the pattern rules, a state is always active and present as a member of the game controller.
 
@@ -135,6 +136,8 @@ The unit tests for each class can be found in the mirrored directory tests/ (tes
 - The Strategy design pattern for slot selection classes is now based on an abstract classe instead of an interface
 - All slot selection classes now check if a legal slot is available before doing anything
 - slot selection classes constructors have been simplified
+- Title banner has been redesigned
+- The Menu button now leads to the Menu State
 
 ---
 ### 5. Known issues
