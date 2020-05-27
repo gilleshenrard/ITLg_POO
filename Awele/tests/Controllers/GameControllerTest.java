@@ -221,7 +221,7 @@ public class GameControllerTest {
     @DisplayName("selectSlot() - should not fail")
     @Test
     void selectSlot_shouldnot_fail() {
-        Game.getInstance().setPlayer(new Player(2, "", new RandomSelect(g.getBoardController(), 2)));
+        Game.getInstance().setPlayer(new Player(2, "", new RandomSelect(g.getBoardController())));
         int ret = g.selectSlot(2);
         Assertions.assertTrue(ret > 0 && ret <= 6);
     }

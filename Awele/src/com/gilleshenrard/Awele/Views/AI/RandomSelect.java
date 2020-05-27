@@ -8,10 +8,8 @@
 package com.gilleshenrard.Awele.Views.AI;
 
 import com.gilleshenrard.Awele.Controllers.BoardController;
-import com.gilleshenrard.Awele.Models.Point;
 import com.gilleshenrard.Awele.Views.Selectable;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class RandomSelect extends Selectable {
@@ -19,10 +17,10 @@ public class RandomSelect extends Selectable {
     /**
      * Create a new RandomSelect
      * @param board Game board on which use this behaviour
-     * @param ID ID of the player using this behaviour
+     *
      */
-    public RandomSelect(BoardController board, int ID){
-        super(board, ID);
+    public RandomSelect(BoardController board){
+        super(board);
     }
 
     /**

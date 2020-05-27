@@ -8,10 +8,8 @@
 package com.gilleshenrard.Awele.Views.Console;
 
 import com.gilleshenrard.Awele.Controllers.BoardController;
-import com.gilleshenrard.Awele.Models.Point;
 import com.gilleshenrard.Awele.Views.Selectable;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class KeyboardSelect extends Selectable {
@@ -19,8 +17,8 @@ public class KeyboardSelect extends Selectable {
     /**
      * Create a new Keyboard slot selector
      */
-    public KeyboardSelect(BoardController controller, int ID){
-        super(controller, ID);
+    public KeyboardSelect(BoardController controller){
+        super(controller);
     }
 
     /**

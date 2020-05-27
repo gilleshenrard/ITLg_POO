@@ -26,8 +26,8 @@ public class PromptingStateTest {
     @DisplayName("handleState() - should not fail")
     @Test
     void handleState_shouldnot_fail() {
-        Game.getInstance().setPlayer(new Player(1, "Test", new RandomSelect(g.getBoardController(), 1)));
-        Game.getInstance().setPlayer(new Player(2, "Test", new RandomSelect(g.getBoardController(), 2)));
+        Game.getInstance().setPlayer(new Player(1, "Test", new RandomSelect(g.getBoardController())));
+        Game.getInstance().setPlayer(new Player(2, "Test", new RandomSelect(g.getBoardController())));
         g.setNextState(State.PROMPTING);
         g.setRunning(true);
         g.handleState();
@@ -43,8 +43,8 @@ public class PromptingStateTest {
     void handleState_Forfeit_shouldnot_fail() {
         g.getBoardController().getBoard().setStoredSeeds(1, 0);
         g.getBoardController().getBoard().setStoredSeeds(2, 0);
-        Game.getInstance().setPlayer(new Player(1, "Test", new KeyboardSelect(g.getBoardController(), 1)));
-        Game.getInstance().setPlayer(new Player(2, "Test", new RandomSelect(g.getBoardController(), 2)));
+        Game.getInstance().setPlayer(new Player(1, "Test", new KeyboardSelect(g.getBoardController())));
+        Game.getInstance().setPlayer(new Player(2, "Test", new RandomSelect(g.getBoardController())));
         g.getBoardController().getBoard().emptySlotSeeds(new Point(0, 0));
         g.getBoardController().getBoard().emptySlotSeeds(new Point(1, 0));
         g.getBoardController().getBoard().emptySlotSeeds(new Point(2, 0));
@@ -66,8 +66,8 @@ public class PromptingStateTest {
     void handleState_selfStarvationNoForfeit_otherRow_shouldnot_fail() {
         g.getBoardController().getBoard().setStoredSeeds(1, 0);
         g.getBoardController().getBoard().setStoredSeeds(2, 0);
-        Game.getInstance().setPlayer(new Player(1, "Test", new RandomSelect(g.getBoardController(), 1)));
-        Game.getInstance().setPlayer(new Player(2, "Test", new RandomSelect(g.getBoardController(), 2)));
+        Game.getInstance().setPlayer(new Player(1, "Test", new RandomSelect(g.getBoardController())));
+        Game.getInstance().setPlayer(new Player(2, "Test", new RandomSelect(g.getBoardController())));
         g.getBoardController().getBoard().emptySlotSeeds(new Point(0, 0));
         g.getBoardController().getBoard().emptySlotSeeds(new Point(1, 0));
         g.getBoardController().getBoard().emptySlotSeeds(new Point(2, 0));
@@ -90,8 +90,8 @@ public class PromptingStateTest {
     void handleState_Forfeit_otherRow_shouldnot_fail() {
         g.getBoardController().getBoard().setStoredSeeds(1, 0);
         g.getBoardController().getBoard().setStoredSeeds(2, 0);
-        Game.getInstance().setPlayer(new Player(1, "Test", new KeyboardSelect(g.getBoardController(), 1)));
-        Game.getInstance().setPlayer(new Player(2, "Test", new RandomSelect(g.getBoardController(), 2)));
+        Game.getInstance().setPlayer(new Player(1, "Test", new KeyboardSelect(g.getBoardController())));
+        Game.getInstance().setPlayer(new Player(2, "Test", new RandomSelect(g.getBoardController())));
         g.getBoardController().getBoard().emptySlotSeeds(new Point(0, 0));
         g.getBoardController().getBoard().emptySlotSeeds(new Point(1, 0));
         g.getBoardController().getBoard().emptySlotSeeds(new Point(2, 0));

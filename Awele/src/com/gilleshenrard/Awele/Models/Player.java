@@ -73,6 +73,7 @@ public class Player {
             throw new NullPointerException("Player.setBehaviour() : NULL instance of behaviour");
 
         this.m_behaviour = behaviour;
+        this.getBehaviour().setID(this.getID());
     }
 
     /**

@@ -60,8 +60,8 @@ public class App extends Application{
         game.getBoardController().attach(bv);
 
         //players setup
-        game.setPlayer(new Player(1, "Gilles", new JFXSelect(game.getBoardController(), 1)));
-        game.setPlayer(new Player(2, "AI", new MinimaxSelect(game.getBoardController(), 2)));
+        game.setPlayer(new Player(1, "Gilles", new JFXSelect(game.getBoardController())));
+        game.setPlayer(new Player(2, "AI", new MinimaxSelect(game.getBoardController())));
 
         //primary Stage setup
         primaryStage.setTitle("POO - App");
@@ -103,8 +103,8 @@ public class App extends Application{
         game.getBoardController().attach(bv);
 
         //players setup
-        game.setPlayer(new Player(1, "Gilles", new KeyboardSelect(game.getBoardController(), 1)));
-        game.setPlayer(new Player(2, "AI", new MinimaxSelect(game.getBoardController(), 2)));
+        game.setPlayer(new Player(1, "Gilles", new KeyboardSelect(game.getBoardController())));
+        game.setPlayer(new Player(2, "AI", new MinimaxSelect(game.getBoardController())));
 
         //display the board
         game.displayGame();

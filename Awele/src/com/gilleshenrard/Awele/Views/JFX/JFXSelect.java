@@ -11,7 +11,6 @@ import com.gilleshenrard.Awele.Controllers.BoardController;
 import com.gilleshenrard.Awele.Models.Point;
 import com.gilleshenrard.Awele.Views.Selectable;
 
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,10 +19,10 @@ public class JFXSelect extends Selectable {
     /**
      * Create a new JFXSelect
      * @param controller Board controller to use
-     * @param ID ID of the player selecting the slot
+     *
      */
-    public JFXSelect(BoardController controller, int ID){
-        super(controller, ID);
+    public JFXSelect(BoardController controller){
+        super(controller);
     }
 
     /**

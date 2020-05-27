@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 class KeyboardSelectTest {
     BoardController b = new BoardController(new Board());
-    KeyboardSelect k = new KeyboardSelect(b, 1);
+    KeyboardSelect k = new KeyboardSelect(b);
 
     /**
      * Check if selectSlot() properly returns the value set by the user on the keyboard

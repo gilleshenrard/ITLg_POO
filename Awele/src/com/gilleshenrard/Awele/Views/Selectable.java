@@ -9,6 +9,7 @@ package com.gilleshenrard.Awele.Views;
 import com.gilleshenrard.Awele.Controllers.BoardController;
 import com.gilleshenrard.Awele.Models.Point;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 
 public abstract class Selectable {
@@ -19,14 +20,12 @@ public abstract class Selectable {
     /**
      * Create a new Selectable (selection behaviour base class)
      * @param boardController Board controller to use
-     * @param ID ID of the player to which the behaviour is assigned
      */
-    public Selectable(BoardController boardController, int ID){
+    public Selectable(BoardController boardController){
         if(boardController == null)
             throw new NullPointerException("Selectable() : NULL instance of BoardController");
 
         this.m_controller = boardController;
-        this.m_id = ID;
         this.m_array = new ArrayList<>();
     }
 
@@ -68,6 +67,18 @@ public abstract class Selectable {
      */
     protected BoardController getController(){
         return this.m_controller;
+    }
+
+    /**
+     * Set the ID of the player to which the behaviour is assigned
+     * @param ID ID of the player
+     * @throws InvalidParameterException
+     */
+    public void setID(int ID) throws InvalidParameterException{
+        if (ID != 1 && ID != 2)
+            throw new InvalidParameterException("Selectable.setID() : Invalid ID (" + ID + ")");
+
+        this.m_id = ID;
     }
 
     /**

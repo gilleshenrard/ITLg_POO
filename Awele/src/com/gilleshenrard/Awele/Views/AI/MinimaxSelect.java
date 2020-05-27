@@ -22,11 +22,10 @@ public class MinimaxSelect extends Selectable {
     /**
      * Create a new Minimax selection behaviour
      * @param controller The board controller to use
-     * @param ID The ID of the player to which set the behaviour
      * @throws NullPointerException
      */
-    public MinimaxSelect(BoardController controller, int ID) throws NullPointerException{
-        super(controller, ID);
+    public MinimaxSelect(BoardController controller) throws NullPointerException{
+        super(controller);
         this.setMaxDepth(10);
     }
 
