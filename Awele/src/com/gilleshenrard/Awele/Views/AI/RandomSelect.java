@@ -3,21 +3,18 @@
 /*  Implementation of the Strategy design pattern                                                   */
 /*  Allows a player to select a slot randomly among all legal slots he owns                         */
 /*  Author : Gilles Henrard                                                                         */
-/*  Last update : 11/05/2020                                                                        */
+/*  Last update : 27/05/2020                                                                        */
 /****************************************************************************************************/
 package com.gilleshenrard.Awele.Views.AI;
 
 import com.gilleshenrard.Awele.Controllers.BoardController;
 import com.gilleshenrard.Awele.Models.Point;
-import com.gilleshenrard.Awele.Views.iSelectable;
+import com.gilleshenrard.Awele.Views.Selectable;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class RandomSelect implements iSelectable {
-    private int m_id;
-    private BoardController m_board;
-    private ArrayList<Integer> m_legal;
+public class RandomSelect extends Selectable {
 
     /**
      * Create a new RandomSelect
@@ -25,9 +22,7 @@ public class RandomSelect implements iSelectable {
      * @param ID ID of the player using this behaviour
      */
     public RandomSelect(BoardController board, int ID){
-        this.m_id = ID;
-        this.m_board = board;
-        this.m_legal = new ArrayList<>();
+        super(board, ID);
     }
 
     /**
@@ -45,23 +40,15 @@ public class RandomSelect implements iSelectable {
      */
     @Override
     public int selectSlot(){
-        //create an array with all the legal shots the player can take
-        this.m_legal.clear();
-        Point tmp = new Point(0, 0);
-        for(int i = 0 ; i<6 ; i++){
-            tmp.setCoordinates(i, this.m_id - 1);
-            if (this.m_board.isLegal(tmp))
-                this.m_legal.add(i);
-        }
+        //check if there are any legal slots left
+        int ret = super.selectSlot();
+        if (ret < 0)
+            return ret;
 
-        //if there are any legal shots
-        if (this.m_legal.size() > 0) {
-            Random r = new Random();
-            //randomly pick a slot
-            Integer index = this.m_legal.get(r.nextInt(this.m_legal.size()));
-            return 1 + index.intValue();
-        }
-        else
-            return -2;
+        Random r = new Random();
+        //randomly pick a slot
+        Integer index = this.getLegal().get(r.nextInt(this.getLegal().size()));
+        ret = 1 + index.intValue();
+        return ret;
     }
 }

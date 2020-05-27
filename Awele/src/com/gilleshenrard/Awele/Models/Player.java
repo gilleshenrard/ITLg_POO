@@ -7,7 +7,7 @@
 /****************************************************************************************************/
 package com.gilleshenrard.Awele.Models;
 
-import com.gilleshenrard.Awele.Views.iSelectable;
+import com.gilleshenrard.Awele.Views.Selectable;
 
 import java.security.InvalidParameterException;
 import java.util.Objects;
@@ -15,7 +15,7 @@ import java.util.Objects;
 public class Player {
     private int m_id;
     private String m_name;
-    private iSelectable m_behaviour;
+    private Selectable m_behaviour;
 
     /**
      * Creates a new Player
@@ -37,7 +37,7 @@ public class Player {
      * @throws InvalidParameterException
      * @throws NullPointerException
      */
-    public Player(int id, String name, iSelectable behaviour) throws InvalidParameterException, NullPointerException{
+    public Player(int id, String name, Selectable behaviour) throws InvalidParameterException, NullPointerException{
         this.setID(id);
         this.m_name = name;
         this.setBehaviour(behaviour);
@@ -68,7 +68,7 @@ public class Player {
      * @param behaviour Behaviour to adopt
      * @throws NullPointerException
      */
-    public void setBehaviour(iSelectable behaviour) throws NullPointerException{
+    public void setBehaviour(Selectable behaviour) throws NullPointerException{
         if(behaviour == null)
             throw new NullPointerException("Player.setBehaviour() : NULL instance of behaviour");
 
@@ -79,7 +79,7 @@ public class Player {
      * Get the behaviour selected for the current Player
      * @return Behaviour
      */
-    public iSelectable getBehaviour() {
+    public Selectable getBehaviour() {
         return this.m_behaviour;
     }
 
@@ -90,7 +90,7 @@ public class Player {
      */
     public boolean isPlayerAI() throws NullPointerException {
         if (this.getBehaviour() == null)
-            throw new NullPointerException("Player.isPlayerAI() : NULL instance of iSelectable");
+            throw new NullPointerException("Player.isPlayerAI() : NULL instance of Selectable");
 
         return this.getBehaviour().isAI();
     }

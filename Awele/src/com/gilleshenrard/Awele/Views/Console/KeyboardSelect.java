@@ -3,29 +3,24 @@
 /*  Implementation of the Strategy design pattern                                                   */
 /*  Allows a player to select a slot via a keyboard in console mode                                 */
 /*  Author : Gilles Henrard                                                                         */
-/*  Last update : 11/05/2020                                                                        */
+/*  Last update : 27/05/2020                                                                        */
 /****************************************************************************************************/
 package com.gilleshenrard.Awele.Views.Console;
 
 import com.gilleshenrard.Awele.Controllers.BoardController;
 import com.gilleshenrard.Awele.Models.Point;
-import com.gilleshenrard.Awele.Views.iSelectable;
+import com.gilleshenrard.Awele.Views.Selectable;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class KeyboardSelect implements iSelectable {
-    private int m_id;
-    private Scanner m_scanner;
-    private BoardController m_controller;
+public class KeyboardSelect extends Selectable {
 
     /**
      * Create a new Keyboard slot selector
      */
     public KeyboardSelect(BoardController controller, int ID){
-        this.m_id = ID;
-        this.m_scanner = new Scanner(System.in);
-        this.m_controller = controller;
+        super(controller, ID);
     }
 
     /**
@@ -43,21 +38,15 @@ public class KeyboardSelect implements iSelectable {
      */
     @Override
     public int selectSlot() {
-        //fill an array with legal shots available
-        ArrayList<Integer> legalArray = new ArrayList<>();
-        Point p = new Point(0, this.m_id - 1);
-        for(int i=0 ; i<6 ; i++) {
-            p.setX(i);
-            if (this.m_controller.isLegal(p))
-                legalArray.add(i);
-        }
+        //check if there are any legal slots available
+        int ret = super.selectSlot();
+        if (ret < 0)
+            return ret;
 
-        //if no shots available, return code
-        if (legalArray.size() == 0)
-            return -2;
-
-        //prompt the user and return its choice
+        //prompt the user and return its keyboard choice
         System.out.println("Select which slot to harvest :");
-        return this.m_scanner.nextInt();
+        Scanner scanner = new Scanner(System.in);
+        ret = scanner.nextInt();
+        return ret;
     }
 }

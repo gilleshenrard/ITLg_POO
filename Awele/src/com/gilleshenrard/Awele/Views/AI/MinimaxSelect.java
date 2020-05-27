@@ -3,17 +3,15 @@
 /*  Implementation of the Strategy design pattern                                                   */
 /*  Allows a player to select a slot via the minimax algorithm                                      */
 /*  Author : Gilles Henrard                                                                         */
-/*  Last update : 11/05/2020                                                                        */
+/*  Last update : 27/05/2020                                                                        */
 /****************************************************************************************************/
 package com.gilleshenrard.Awele.Views.AI;
 
 import com.gilleshenrard.Awele.Controllers.BoardController;
 import com.gilleshenrard.Awele.Models.Point;
-import com.gilleshenrard.Awele.Views.iSelectable;
+import com.gilleshenrard.Awele.Views.Selectable;
 
-public class MinimaxSelect implements iSelectable {
-    private BoardController m_controller;
-    private int m_id;
+public class MinimaxSelect extends Selectable {
     private int m_maxDepth;
     private final static int INFINITE_POS = 200000;
     private final static int INFINITE_NEG = -INFINITE_POS;
@@ -26,11 +24,7 @@ public class MinimaxSelect implements iSelectable {
      * @throws NullPointerException
      */
     public MinimaxSelect(BoardController controller, int ID) throws NullPointerException{
-        if(controller == null)
-            throw new NullPointerException("MinimaxSelect() : NULL instance of BoardController");
-
-        this.m_controller = controller;
-        this.m_id = ID;
+        super(controller, ID);
         this.m_maxDepth = 10;
     }
 
@@ -50,20 +44,21 @@ public class MinimaxSelect implements iSelectable {
      */
     @Override
     public int selectSlot() throws NullPointerException{
-        if (this.m_controller == null)
-            throw new NullPointerException("MinimaxSelect.SelectSlot() : Board controller is not instantiated");
-
-        int bestVal = ERROR;
-        int bestShot = -3;  //initialised with error code - 1
+        //check if there are any legal slots available
+        int bestShot = super.selectSlot();
+        if (bestShot < 0)
+            return bestShot;
 
         try {
+            int bestVal = ERROR;
+
             //test each legal slots for the best value
             Point slot = new Point(0, 0);
             for (int x = 0; x < 6; x++) {
-                slot.setCoordinates(x, this.m_id - 1);
+                slot.setCoordinates(x, this.getID() - 1);
 
                 //if slot is legal, get its minimax value (AI is the maximiser, the opponent is the minimiser)
-                if (this.m_controller.isLegal(slot)) {
+                if (this.getController().isLegal(slot)) {
                     int val = miniMax(slot, this.m_maxDepth, INFINITE_NEG, INFINITE_POS, true);
 
                     //if no error, update the best value and the best slot
@@ -76,7 +71,7 @@ public class MinimaxSelect implements iSelectable {
         }
         catch (Exception e){
             //empty the BoardController stack, then rethrow the exception caught
-            while (this.m_controller != null && this.m_controller.popStack() > 0){}
+            while (this.getController() != null && this.getController().popStack() > 0){}
             throw e;
         }
 
@@ -95,23 +90,23 @@ public class MinimaxSelect implements iSelectable {
      * @throws NullPointerException
      */
     private int miniMax(Point slot, int depth, int alpha, int beta, boolean maximiser) throws NullPointerException{
-        if (this.m_controller == null)
+        if (this.getController() == null)
             throw new NullPointerException("MinimaxSelect.miniMax() : Board controller is not instantiated");
 
         //save a copy of the parent node state
-        this.m_controller.pushStack();
+        this.getController().pushStack();
 
         //play the current node slot and, if error,
         //  restore the parent board and return error code
-        if (this.m_controller.playSlot(slot) < 0 ) {
-            this.m_controller.popStack();
+        if (this.getController().playSlot(slot) < 0 ) {
+            this.getController().popStack();
             return ERROR;
         }
 
         //evaluate the current node and return its value if tree leaf reached or game won
         int evaluation = evaluateState();
         if (depth == 0 || evaluation == INFINITE_POS || evaluation == INFINITE_NEG) {
-            this.m_controller.popStack();
+            this.getController().popStack();
             return evaluation;
         }
 
@@ -120,7 +115,7 @@ public class MinimaxSelect implements iSelectable {
         int x = 0;
         do{
             //AI is the maximiser, opponent is the minimiser, each evaluate on its side
-            Point childSlot = new Point(x, (maximiser ? this.m_id-1 : 2-this.m_id));
+            Point childSlot = new Point(x, (maximiser ? this.getID()-1 : 2-this.getID()));
             evaluation = miniMax(childSlot, depth - 1, alpha, beta, !maximiser);
 
             //if no error, update the best evaluation, alpha and beta values
@@ -138,7 +133,7 @@ public class MinimaxSelect implements iSelectable {
         }while(x<6 && beta > alpha);
 
         //restore the parent status and return the current node best evaluation
-        this.m_controller.popStack();
+        this.getController().popStack();
         return bestEvaluation;
     }
 
@@ -148,33 +143,33 @@ public class MinimaxSelect implements iSelectable {
      * @throws NullPointerException
      */
     private int evaluateState() throws NullPointerException{
-        if (this.m_controller == null)
+        if (this.getController() == null)
             throw new NullPointerException("MinimaxSelect.evaluateState() : Board controller is not instantiated");
 
         int[] eval = new int[2];
         Point p = new Point(0, 0);
 
         //if minimiser (opponent) won the game
-        if (this.m_controller.getStoredSeeds(3 - this.m_id) > 24)
+        if (this.getController().getStoredSeeds(3 - this.getID()) > 24)
             return INFINITE_NEG;
 
         //if maximiser (AI) won the game
-        if (this.m_controller.getStoredSeeds(this.m_id) > 24)
+        if (this.getController().getStoredSeeds(this.getID()) > 24)
             return INFINITE_POS;
 
         //process the evaluation for both players
         for (int player=0 ; player < 2 ; player++){
             //initialise the evaluation with the amount of seeds captured and add a lot of weight to it
-            eval[player] = 300 * this.m_controller.getStoredSeeds(player + 1);
+            eval[player] = 300 * this.getController().getStoredSeeds(player + 1);
 
             //add the content of the player's slots, each weighted depending on their place (right more weighted)
             for (int slot=0 ; slot < 6 ; slot++) {
                 p.setCoordinates(slot, player);
-                eval[player] += this.m_controller.getSlotSeeds(p) * (slot+1);
+                eval[player] += this.getController().getSlotSeeds(p) * (slot+1);
             }
         }
 
         //return the evaluation code
-        return eval[this.m_id - 1] - eval[2 - this.m_id];
+        return eval[this.getID() - 1] - eval[2 - this.getID()];
     }
 }
