@@ -37,7 +37,7 @@
                    GridPane.columnSpan="6" styleClass="titlepane">
             <children>
                 <Label prefHeight="Infinity" prefWidth="Infinity" styleClass="title" text="Awele"/>
-                <Button prefHeight="40" prefWidth="80" mnemonicParsing="false" text="MENU">
+                <Button fx:id="b_menu" prefHeight="40" prefWidth="80" mnemonicParsing="false" text="MENU">
                     <StackPane.margin>
                         <Insets right="100.0" />
                     </StackPane.margin></Button>

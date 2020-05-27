@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -41,6 +42,7 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
     @FXML Label l_namePl2;
     @FXML Label l_scorePl1;
     @FXML Label l_scorePl2;
+    @FXML Button b_menu;
 
     /**
      * Create a new Board Java FX view
@@ -76,6 +78,9 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
 
         //set the click handler to the grid panel
         this.m_grid.setOnMouseClicked(this::onSlotClicked);
+
+        //set the click handler to the menu button
+        this.b_menu.setOnMouseClicked(this::onMenuClicked);
 
         //set a default value for the message
         this.l_message.setText("");
@@ -185,7 +190,21 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
     }
 
     /**
-     * When a slot is clicked, play a non-AI player season.
+     * When the menu button is clicked, notify the Board controller that the menu is requested
+     * @param mouseEvent Menu button click event
+     */
+    public void onMenuClicked(MouseEvent mouseEvent) {
+        Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + this.m_controller.getCurrentPlayer() + " : click on the Menu button");
+
+        //notify JFXSelect that a click has been handled
+        synchronized (this.m_controller){
+            Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + this.m_controller.getCurrentPlayer() + " : sends a notification");
+            this.m_controller.notify();
+        }
+    }
+
+    /**
+     * When a slot is clicked, notify the Board controller it can carry on with the player's season.
      * If the next player is an AI, play its season as well
      * @param mouseEvent Slot click event
      */
@@ -215,7 +234,7 @@ public class BoardJFXView extends BorderPane implements iObserver, Initializable
             //set the coordinates selected by the player, and play its season
             this.m_controller.setLastSelected(p);
 
-            //notify JFXSelect that a slot has been clicked
+            //notify JFXSelect that a click has been handled
             synchronized (this.m_controller){
                 Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + this.m_controller.getCurrentPlayer() + " : sends a notification");
                 this.m_controller.notify();
