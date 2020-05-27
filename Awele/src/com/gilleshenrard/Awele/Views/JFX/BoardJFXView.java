@@ -3,7 +3,7 @@
 /*  Implements the Observer design pattern                                                          */
 /*  Provides game board JavaFX display methods, and thus communicates with the board controller     */
 /*  Author : Gilles Henrard                                                                         */
-/*  Last update : 11/05/2020                                                                        */
+/*  Last update : 27/05/2020                                                                        */
 /****************************************************************************************************/
 package com.gilleshenrard.Awele.Views.JFX;
 
