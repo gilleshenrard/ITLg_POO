@@ -32,7 +32,7 @@
     <!-- Actual body of the pane -->
     <children>
         <!-- Title pane -->
-        <StackPane prefHeight="Infinity" prefWidth="Infinity" GridPane.rowIndex="0" GridPane.columnIndex="0"
+        <StackPane alignment="CENTER_RIGHT" prefHeight="Infinity" prefWidth="Infinity" GridPane.rowIndex="0" GridPane.columnIndex="0"
                    GridPane.columnSpan="6" styleClass="titlepane">
             <children>
                 <Label prefHeight="Infinity" prefWidth="Infinity" styleClass="title" text="Awele"/>
