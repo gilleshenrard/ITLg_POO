@@ -12,7 +12,8 @@ public enum State{
     PROMPTING(new PromptingState()),
     PLAYING(new PlayingState()),
     STORING(new StoringState()),
-    SWITCHING(new SwitchingPlayerState());
+    SWITCHING(new SwitchingPlayerState()),
+    OPTIONS(new OptionState());
 
     private iGameState m_state;
 
