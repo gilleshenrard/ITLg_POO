@@ -36,7 +36,6 @@ public class PromptingState implements iGameState {
 
         if(choice == 0){
             //plug in the Menu state
-            Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : next state -> Options");
             controller.setNextState(State.MENU);
         }
         else if(choice > 0) {
@@ -46,7 +45,6 @@ public class PromptingState implements iGameState {
             }
 
             //plug in the Playing state
-            Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : next state -> Playing");
             controller.setNextState(State.PLAYING);
             ((PlayingState)State.PLAYING.getState()).setInput(choice);
         }

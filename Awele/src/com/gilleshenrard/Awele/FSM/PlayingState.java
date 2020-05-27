@@ -37,12 +37,10 @@ public class PlayingState implements iGameState {
         Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Player " + controller.getCurrentPlayer() + " : playSlot() returned " + outcome);
 
         if (outcome < 0) {  //player starved or empty slot, get back to prompting state and display forfeit
-            Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : next state -> Prompting");
             controller.setNextState(State.PROMPTING);
             handleOutcome(controller, outcome);
         }
         else {  //Go to the Storing state
-            Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : next state -> Storing");
             controller.setNextState(State.STORING);
         }
     }

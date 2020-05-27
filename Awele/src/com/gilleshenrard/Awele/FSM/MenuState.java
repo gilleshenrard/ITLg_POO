@@ -16,7 +16,6 @@ public class MenuState implements iGameState {
     @Override
     public void handleState(GameController controller) {
         //plug in the Prompting state
-        Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : next state -> Prompting");
         controller.setNextState(State.PROMPTING);
     }
 }

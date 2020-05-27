@@ -33,7 +33,6 @@ public class StoringState implements iGameState {
         }
         else {
             //Go to the player switching state
-            Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : next state -> Switching");
             controller.setNextState(State.SWITCHING);
         }
     }

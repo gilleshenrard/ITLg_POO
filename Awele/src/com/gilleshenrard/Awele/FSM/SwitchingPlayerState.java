@@ -28,7 +28,6 @@ public class SwitchingPlayerState implements iGameState {
         Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Player " + controller.getCurrentPlayer() + "'s turn");
 
         //plug in the Prompting state
-        Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : next state -> Prompting");
         controller.setNextState(State.PROMPTING);
     }
 }

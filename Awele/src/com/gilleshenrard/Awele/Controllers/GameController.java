@@ -58,6 +58,7 @@ public class GameController {
      * @param nextState Next state to join
      */
     public void setNextState(State nextState){
+        Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + this.getCurrentPlayer() + " : next state -> " + nextState);
         this.m_currentState = nextState;
     }
 
