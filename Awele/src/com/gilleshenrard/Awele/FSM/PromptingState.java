@@ -21,6 +21,8 @@ public class PromptingState implements iGameState {
      */
     @Override
     public void handleState(GameController controller){
+        //update the game board
+        controller.displayGame();
 
         //make any AI player wait for 1s before choosing
         if (controller.isPlayerAI(controller.getCurrentPlayer())) {

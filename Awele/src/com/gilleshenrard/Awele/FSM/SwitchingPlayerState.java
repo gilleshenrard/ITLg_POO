@@ -20,9 +20,6 @@ public class SwitchingPlayerState implements iGameState {
      */
     @Override
     public void handleState(GameController controller){
-        //update the game board
-        controller.displayGame();
-
         //switch user
         controller.setCurrentPlayer(controller.getOpponent());
         Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Player " + controller.getCurrentPlayer() + "'s turn");
