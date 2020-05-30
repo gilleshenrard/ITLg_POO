@@ -34,7 +34,7 @@ public class GameController {
         this.m_board.setGameController(this);
         this.m_view = null;
         this.m_currentPlayer = 1;
-        this.m_currentState = State.PROMPTING;
+        this.m_currentState = State.MENU;
     }
 
     /**
