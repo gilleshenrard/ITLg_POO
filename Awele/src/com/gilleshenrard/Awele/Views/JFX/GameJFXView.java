@@ -31,7 +31,7 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
     private Stage m_stage;
     private Scene m_menuscene = null;
     private GameController m_controller;
-    @FXML Button b_exit;
+    @FXML Button b_cancel;
 
     /**
      * Create a new Game Java FX view
@@ -70,7 +70,7 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //log the main scene initialisation
         Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Menu scene initialisation");
-        this.b_exit.setOnMouseClicked(this::onExitButtonClicked);
+        this.b_cancel.setOnMouseClicked(this::onExitButtonClicked);
     }
 
     /**

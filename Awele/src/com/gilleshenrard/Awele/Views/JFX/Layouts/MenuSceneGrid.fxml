@@ -4,18 +4,17 @@
 <?import javafx.scene.layout.*?>
 
 <!-- Menu scene (6X6 gridPane) -->
+<?import javafx.geometry.Insets?>
 <GridPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="998.0" maxWidth="1744.0" minHeight="998.0" minWidth="1744.0"
           prefHeight="998.0" prefWidth="1744.0" styleClass="main"
           stylesheets="@../Styles/neon_sm.css" xmlns="http://javafx.com/javafx/11.0.1">
 
     <!-- Column constraints (6 equal columns) -->
     <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" percentWidth="16.666"/>
-        <ColumnConstraints hgrow="SOMETIMES" percentWidth="16.667"/>
-        <ColumnConstraints hgrow="SOMETIMES" percentWidth="16.667"/>
-        <ColumnConstraints hgrow="SOMETIMES" percentWidth="16.667"/>
-        <ColumnConstraints hgrow="SOMETIMES" percentWidth="16.667"/>
-        <ColumnConstraints hgrow="SOMETIMES" percentWidth="16.666"/>
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0"/>
+        <ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0"/>
     </columnConstraints>
 
     <!-- Row constraints (5 rows) -->
@@ -23,13 +22,61 @@
         <RowConstraints percentHeight="15.0" vgrow="SOMETIMES"/>
         <RowConstraints percentHeight="5.0" vgrow="SOMETIMES"/>
         <RowConstraints percentHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints percentHeight="30.0" vgrow="SOMETIMES"/>
         <RowConstraints percentHeight="5.0" vgrow="SOMETIMES"/>
+        <RowConstraints percentHeight="30.0" vgrow="SOMETIMES"/>
         <RowConstraints percentHeight="15.0" vgrow="SOMETIMES"/>
     </rowConstraints>
 
     <!-- Actual body of the pane -->
     <children>
-        <Button fx:id="b_exit" prefHeight="40" prefWidth="80" mnemonicParsing="false" text="Cancel" GridPane.rowIndex="0" GridPane.columnIndex="0" />
+        <!-- Title pane -->
+        <StackPane alignment="CENTER_RIGHT" prefHeight="Infinity" prefWidth="Infinity" GridPane.rowIndex="0" GridPane.columnIndex="0"
+                   GridPane.columnSpan="6" styleClass="titlepane">
+            <children>
+                <Label prefHeight="Infinity" prefWidth="Infinity" styleClass="title" text="MENU"/>
+                <Button fx:id="b_exit" prefHeight="40" prefWidth="80" mnemonicParsing="false" text="EXIT">
+                    <StackPane.margin>
+                        <Insets right="100.0" />
+                    </StackPane.margin></Button>
+            </children>
+        </StackPane>
+
+        <!-- Player 1 configuration -->
+        <Label text="Player 1" GridPane.rowIndex="1" GridPane.columnIndex="0"  prefWidth="Infinity" prefHeight="Infinity" />
+        <Label text="Name" GridPane.rowIndex="2" GridPane.columnIndex="0" prefWidth="Infinity" prefHeight="Infinity" />
+        <TextField text="Player 1" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+        <VBox GridPane.rowIndex="2" GridPane.columnIndex="2" GridPane.columnSpan="2">
+            <children>
+                <RadioButton text="None" selected="true">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="pl1AI" />
+                    </toggleGroup>
+                </RadioButton>
+                <RadioButton toggleGroup="$pl1AI" text="Easy" />
+                <RadioButton toggleGroup="$pl1AI" text="Medium" />
+                <RadioButton toggleGroup="$pl1AI" text="Hard" />
+            </children>
+        </VBox>
+
+        <!-- Player 2 configuration -->
+        <Label text="Player 2" GridPane.rowIndex="3" GridPane.columnIndex="0"  prefWidth="Infinity" prefHeight="Infinity" />
+        <Label text="Name" GridPane.rowIndex="4" GridPane.columnIndex="0" prefWidth="Infinity" prefHeight="Infinity" />
+        <TextField text="AI" GridPane.rowIndex="4" GridPane.columnIndex="1" />
+        <VBox GridPane.rowIndex="4" GridPane.columnIndex="2" GridPane.columnSpan="2">
+            <children>
+                <RadioButton text="None">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="pl2AI" />
+                    </toggleGroup>
+                </RadioButton>
+                <RadioButton toggleGroup="$pl2AI" text="Easy" />
+                <RadioButton toggleGroup="$pl2AI" text="Medium" />
+                <RadioButton toggleGroup="$pl2AI" text="Hard" selected="true" />
+            </children>
+        </VBox>
+
+
+        <!-- Cancel button-->
+        <Button fx:id="b_cancel" prefHeight="40" prefWidth="80" mnemonicParsing="false" text="Cancel" GridPane.rowIndex="5" GridPane.columnIndex="3" />
     </children>
 </GridPane>
