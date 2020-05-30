@@ -49,12 +49,12 @@
             <children>
                 <RadioButton text="None" selected="true">
                     <toggleGroup>
-                        <ToggleGroup fx:id="pl1AI" />
+                        <ToggleGroup fx:id="tg_pl1AI" />
                     </toggleGroup>
                 </RadioButton>
-                <RadioButton toggleGroup="$pl1AI" text="Easy" />
-                <RadioButton toggleGroup="$pl1AI" text="Medium" />
-                <RadioButton toggleGroup="$pl1AI" text="Hard" />
+                <RadioButton toggleGroup="$tg_pl1AI" text="Easy" />
+                <RadioButton toggleGroup="$tg_pl1AI" text="Medium" />
+                <RadioButton toggleGroup="$tg_pl1AI" text="Hard" />
             </children>
         </VBox>
 
@@ -66,12 +66,12 @@
             <children>
                 <RadioButton text="None">
                     <toggleGroup>
-                        <ToggleGroup fx:id="pl2AI" />
+                        <ToggleGroup fx:id="tg_pl2AI" />
                     </toggleGroup>
                 </RadioButton>
-                <RadioButton toggleGroup="$pl2AI" text="Easy" />
-                <RadioButton toggleGroup="$pl2AI" text="Medium" />
-                <RadioButton toggleGroup="$pl2AI" text="Hard" selected="true" />
+                <RadioButton toggleGroup="$tg_pl2AI" text="Easy" />
+                <RadioButton toggleGroup="$tg_pl2AI" text="Medium" />
+                <RadioButton toggleGroup="$tg_pl2AI" text="Hard" selected="true" />
             </children>
         </VBox>
 
