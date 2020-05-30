@@ -7,7 +7,6 @@
 /****************************************************************************************************/
 package com.gilleshenrard.Awele.Views.JFX;
 
-import com.gilleshenrard.Awele.App;
 import com.gilleshenrard.Awele.Controllers.GameController;
 import com.gilleshenrard.Awele.Views.iNotifiable;
 import javafx.application.Platform;
