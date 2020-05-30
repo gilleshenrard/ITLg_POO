@@ -56,7 +56,7 @@ public class App extends Application{
         GameJFXView gameView = new GameJFXView(game, primaryStage);
 
         //Board setup
-        BoardJFXView bv = new BoardJFXView();
+        BoardJFXView bv = new BoardJFXView(primaryStage);
         game.getBoardController().attach(bv);
 
         //players setup
@@ -65,8 +65,6 @@ public class App extends Application{
 
         //primary Stage setup
         primaryStage.setTitle("POO - App");
-        primaryStage.setScene((Scene)bv.getContent());
-        game.displayGame();
         primaryStage.setResizable(false);
         primaryStage.setWidth(1024);
         primaryStage.setHeight(576);

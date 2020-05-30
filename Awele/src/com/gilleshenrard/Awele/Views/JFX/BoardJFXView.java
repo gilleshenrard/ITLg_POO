@@ -23,6 +23,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -32,6 +33,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class BoardJFXView extends GridPane implements iObserver, Initializable {
+    private Stage m_stage = null;
     private Scene m_scene = null;
     private BoardController m_controller;
     private int[][] m_slots;
@@ -47,7 +49,8 @@ public class BoardJFXView extends GridPane implements iObserver, Initializable {
     /**
      * Create a new Board Java FX view
      */
-    public BoardJFXView() {
+    public BoardJFXView(Stage stage) {
+        this.m_stage = stage;
         try {
             this.m_slots = new int[2][6];
             this.m_scores = new int[2];
@@ -130,6 +133,9 @@ public class BoardJFXView extends GridPane implements iObserver, Initializable {
         //launch scene update as a runlater task to avoid concurrency issues
         Platform.runLater(() -> {
             Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + this.m_controller.getCurrentPlayer() + " updates the main scene");
+
+            //display the game scene
+            this.m_stage.setScene(this.m_scene);
 
             //update all the slots with the values from the Board
             Point p = new Point(0, 0);

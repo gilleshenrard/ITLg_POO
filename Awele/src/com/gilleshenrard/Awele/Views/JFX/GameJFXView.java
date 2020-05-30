@@ -30,7 +30,6 @@ import java.util.logging.Logger;
 public class GameJFXView extends GridPane implements Initializable, iNotifiable {
     private Stage m_stage;
     private Scene m_menuscene = null;
-    private Scene m_mainscene = null;
     private GameController m_controller;
     @FXML Button b_exit;
 
@@ -94,12 +93,11 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
      */
     @Override
     public void displayMenu() {
-        //switch the scenes to the menu pane
+        //switch the scenes to the menu pane (in separate thread)
         Platform.runLater(() -> {
             Logger.getLogger(this.getClass().getName()).log(Level.FINE, "GameJFXView.DisplayMenu() : display the Menu pane");
 
             //switch the scenes to display the menu pane
-            this.m_mainscene = this.m_stage.getScene();
             this.m_stage.setScene(this.m_menuscene);
         });
 
@@ -121,9 +119,6 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
     private void onExitButtonClicked(Event event){
         Platform.runLater(() -> {
             Logger.getLogger(this.getClass().getName()).log(Level.FINE, "GameJFXView.onExitButton() : display Main screen");
-
-            //display the game scene
-            this.m_stage.setScene(this.m_mainscene);
 
             //notify the game loop thread to resume the game loop
             synchronized (this.m_controller) {
