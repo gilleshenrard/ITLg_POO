@@ -97,7 +97,7 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
     public void displayMenu() {
         //switch the scenes to the menu pane
         Platform.runLater(() -> {
-            Logger.getLogger(App.class.getName()).log(Level.FINE, "GameJFXView.DisplayMenu() : display the Menu pane");
+            Logger.getLogger(this.getClass().getName()).log(Level.FINE, "GameJFXView.DisplayMenu() : display the Menu pane");
 
             //switch the scenes to display the menu pane
             this.m_mainscene = this.m_stage.getScene();
@@ -107,9 +107,9 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
         //make the game loop thread wait
         synchronized (this.m_controller){
             try {
-                Logger.getLogger(App.class.getName()).log(Level.FINE, "GameJFXView.DisplayMenu() : game loop thread waiting");
+                Logger.getLogger(this.getClass().getName()).log(Level.FINE, "GameJFXView.DisplayMenu() : game loop thread waiting");
                 this.m_controller.wait();
-                Logger.getLogger(App.class.getName()).log(Level.FINE, "GameJFXView.DisplayMenu() : game loop resumed");
+                Logger.getLogger(this.getClass().getName()).log(Level.FINE, "GameJFXView.DisplayMenu() : game loop resumed");
             }
             catch (InterruptedException e){}
         }
@@ -121,7 +121,7 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
      */
     private void onExitButtonClicked(Event event){
         Platform.runLater(() -> {
-            Logger.getLogger(App.class.getName()).log(Level.FINE, "GameJFXView.onExitButton() : display Main screen");
+            Logger.getLogger(this.getClass().getName()).log(Level.FINE, "GameJFXView.onExitButton() : display Main screen");
 
             //display the game scene
             this.m_stage.setScene(this.m_mainscene);
