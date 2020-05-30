@@ -44,7 +44,7 @@
         <!-- Player 1 configuration -->
         <Label text="Player 1" GridPane.rowIndex="1" GridPane.columnIndex="0"  prefWidth="Infinity" prefHeight="Infinity" />
         <Label text="Name" GridPane.rowIndex="2" GridPane.columnIndex="0" prefWidth="Infinity" prefHeight="Infinity" />
-        <TextField text="Player 1" GridPane.rowIndex="2" GridPane.columnIndex="1" />
+        <TextField fx:id="tf_name1" text="Player 1" GridPane.rowIndex="2" GridPane.columnIndex="1" />
         <VBox GridPane.rowIndex="2" GridPane.columnIndex="2" GridPane.columnSpan="2">
             <children>
                 <RadioButton text="None" selected="true">
@@ -61,7 +61,7 @@
         <!-- Player 2 configuration -->
         <Label text="Player 2" GridPane.rowIndex="3" GridPane.columnIndex="0"  prefWidth="Infinity" prefHeight="Infinity" />
         <Label text="Name" GridPane.rowIndex="4" GridPane.columnIndex="0" prefWidth="Infinity" prefHeight="Infinity" />
-        <TextField text="AI" GridPane.rowIndex="4" GridPane.columnIndex="1" />
+        <TextField fx:id="tf_name2" text="AI" GridPane.rowIndex="4" GridPane.columnIndex="1" />
         <VBox GridPane.rowIndex="4" GridPane.columnIndex="2" GridPane.columnSpan="2">
             <children>
                 <RadioButton text="None">

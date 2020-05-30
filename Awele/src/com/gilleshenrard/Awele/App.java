@@ -60,7 +60,7 @@ public class App extends Application{
         game.getBoardController().attach(bv);
 
         //players setup
-        game.setPlayer(new Player(1, "Gilles", new JFXSelect(game.getBoardController())));
+        game.setPlayer(new Player(1, "Player 1", new JFXSelect(game.getBoardController())));
         game.setPlayer(new Player(2, "AI", new MinimaxSelect(game.getBoardController())));
 
         //primary Stage setup

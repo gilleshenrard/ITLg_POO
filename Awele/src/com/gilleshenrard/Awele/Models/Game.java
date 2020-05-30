@@ -114,6 +114,21 @@ public class Game {
     }
 
     /**
+     * Set the name of a player
+     * @param ID ID of the player to which assign the name
+     * @param name Name to assign to the player
+     * @throws InvalidParameterException
+     * @throws NullPointerException
+     */
+    public void setName(int ID, String name) throws InvalidParameterException, NullPointerException {
+        Game.validateID(ID, "Game.setName()");
+        if(Game.getInstance().getPlayer(ID) == null)
+            throw new NullPointerException("Game.setName() : Player " + ID + " not instantiated");
+
+        Game.getInstance().getPlayer(ID).setName(name);
+    }
+
+    /**
      * Make a player select a slot
      * @param ID ID of the player to play the slot
      * @return Slot selected

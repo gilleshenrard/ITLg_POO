@@ -190,6 +190,17 @@ public class GameController {
     }
 
     /**
+     * Assign a name to a player
+     * @param ID ID of the player to which assign the name
+     * @param name Name to assign
+     * @throws InvalidParameterException
+     * @throws NullPointerException
+     */
+    public void setName(int ID, String name) throws InvalidParameterException, NullPointerException {
+        Game.getInstance().setName(ID, name);
+    }
+
+    /**
      * Tell if the player is an AI or not (instance of RandomSelect)
      * @param ID ID of the player to check
      * @return true if RandomSelect, false otherwise

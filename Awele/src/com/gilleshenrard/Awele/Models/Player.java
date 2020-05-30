@@ -25,7 +25,7 @@ public class Player {
      */
     public Player(int id, String name) throws InvalidParameterException{
         this.setID(id);
-        this.m_name = name;
+        this.setName(name);
         this.m_behaviour = null;
     }
 
@@ -39,7 +39,7 @@ public class Player {
      */
     public Player(int id, String name, Selectable behaviour) throws InvalidParameterException, NullPointerException{
         this.setID(id);
-        this.m_name = name;
+        this.setName(name);
         this.setBehaviour(behaviour);
     }
 
@@ -102,6 +102,18 @@ public class Player {
      */
     public String getName() {
         return this.m_name;
+    }
+
+    /**
+     * Set the name of the player
+     * @param name Name to give to the player
+     * @throws NullPointerException
+     */
+    public void setName(String name) throws NullPointerException {
+        if (name == null)
+            throw new NullPointerException("Player.setName() : name is not instanciated");
+
+        this.m_name = name;
     }
 
     /**
