@@ -85,6 +85,22 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
      */
     @Override
     public void displayMenu() {
-        Logger.getLogger(App.class.getName()).log(Level.FINE, "Displaying the menu pane");
+        //switch the scenes to the menu pane
+        Platform.runLater(() -> {
+            Logger.getLogger(App.class.getName()).log(Level.FINE, "GameJFXView.DisplayMenu() : display the Menu pane");
+            synchronized (this.m_controller){
+                this.m_controller.notify();
+            }
+        });
+
+        //make the game loop thread wait
+        synchronized (this.m_controller){
+            try {
+                Logger.getLogger(App.class.getName()).log(Level.FINE, "GameJFXView.DisplayMenu() : game loop thread waiting");
+                this.m_controller.wait();
+            }
+            catch (InterruptedException e){}
+            Logger.getLogger(App.class.getName()).log(Level.FINE, "GameJFXView.DisplayMenu() : game loop resumed");
+        }
     }
 }
