@@ -45,7 +45,6 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
         this.m_controller = controller;
         this.m_controller.setView(this);
         this.m_stage = stage;
-        this.m_mainscene = this.m_stage.getScene();
 
         try {
             //load the FXML document
@@ -101,6 +100,7 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
             Logger.getLogger(App.class.getName()).log(Level.FINE, "GameJFXView.DisplayMenu() : display the Menu pane");
 
             //switch the scenes to display the menu pane
+            this.m_mainscene = this.m_stage.getScene();
             this.m_stage.setScene(this.m_menuscene);
         });
 
