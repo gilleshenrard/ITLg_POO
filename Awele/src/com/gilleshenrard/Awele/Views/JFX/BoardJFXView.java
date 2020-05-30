@@ -178,15 +178,6 @@ public class BoardJFXView extends GridPane implements iObserver, Initializable {
     }
 
     /**
-     * Get the current Board scene
-     * @return Current scene
-     */
-    @Override
-    public Object getContent() {
-        return this.m_scene;
-    }
-
-    /**
      * Set the board controller to use in this scene
      * @param controller Board controller to use
      */
