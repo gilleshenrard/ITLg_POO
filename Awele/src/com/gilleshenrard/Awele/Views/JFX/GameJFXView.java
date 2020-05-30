@@ -34,7 +34,7 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
     private Scene m_menuscene = null;
     private GameController m_controller;
     private String m_pl1AI;
-    @FXML Button b_cancel;
+    @FXML Button b_ok;
     @FXML ToggleGroup tg_pl1AI;
 
     /**
@@ -75,7 +75,7 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //log the main scene initialisation
         Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Menu scene initialisation");
-        this.b_cancel.setOnMouseClicked(this::onExitButtonClicked);
+        this.b_ok.setOnMouseClicked(this::onOKButtonClicked);
 
         RadioButton tmp_radio = (RadioButton) this.tg_pl1AI.getSelectedToggle();
         this.m_pl1AI = tmp_radio.getText();
@@ -124,7 +124,7 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
      * Handle a click on the Exit Menu button
      * @param event JavaFX click event
      */
-    private void onExitButtonClicked(Event event){
+    private void onOKButtonClicked(Event event){
         Platform.runLater(() -> {
             Logger.getLogger(this.getClass().getName()).log(Level.FINE, "GameJFXView.onExitButton() : display Main screen");
 

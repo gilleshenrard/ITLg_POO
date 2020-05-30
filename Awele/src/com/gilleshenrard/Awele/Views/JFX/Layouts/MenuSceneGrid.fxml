@@ -77,6 +77,6 @@
 
 
         <!-- Cancel button-->
-        <Button fx:id="b_cancel" prefHeight="40" prefWidth="80" mnemonicParsing="false" text="Cancel" GridPane.rowIndex="5" GridPane.columnIndex="3" />
+        <Button fx:id="b_ok" prefHeight="40" prefWidth="80" mnemonicParsing="false" text="OK" GridPane.rowIndex="5" GridPane.columnIndex="3" />
     </children>
 </GridPane>
