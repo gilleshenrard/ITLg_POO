@@ -138,6 +138,7 @@ The unit tests for each class can be found in the mirrored directory tests/ (tes
 - slot selection classes constructors have been simplified
 - Title banner has been redesigned
 - The Menu button now leads to the Menu State
+- The game loop now starts with the Menu State
 
 ---
 ### 5. Known issues
