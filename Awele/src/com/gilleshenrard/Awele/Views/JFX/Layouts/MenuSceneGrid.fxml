@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 
 <!-- Menu scene (6X6 gridPane) -->
-<GridPane xmlns:fx="http://javafx.com/fxml/1" fx:id="m_grid" maxHeight="998.0" maxWidth="1744.0" minHeight="998.0" minWidth="1744.0"
+<GridPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="998.0" maxWidth="1744.0" minHeight="998.0" minWidth="1744.0"
           prefHeight="998.0" prefWidth="1744.0" styleClass="main"
           stylesheets="@../Styles/neon_sm.css" xmlns="http://javafx.com/javafx/11.0.1">
 
