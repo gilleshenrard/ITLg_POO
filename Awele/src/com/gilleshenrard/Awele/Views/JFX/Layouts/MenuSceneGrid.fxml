@@ -33,6 +33,6 @@
 
     <!-- Actual body of the pane -->
     <children>
-
+        <Button fx:id="b_exit" prefHeight="40" prefWidth="80" mnemonicParsing="false" text="Cancel" GridPane.rowIndex="0" GridPane.columnIndex="0" />
     </children>
 </GridPane>

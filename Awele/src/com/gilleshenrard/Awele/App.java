@@ -53,7 +53,7 @@ public class App extends Application{
     public void start(Stage primaryStage) {
         //game setup
         GameController game = new GameController();
-        GameJFXView gameView = new GameJFXView(game);
+        GameJFXView gameView = new GameJFXView(game, primaryStage);
 
         //Board setup
         BoardJFXView bv = new BoardJFXView();
