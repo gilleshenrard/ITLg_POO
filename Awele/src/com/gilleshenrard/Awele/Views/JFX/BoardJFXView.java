@@ -218,12 +218,18 @@ public class BoardJFXView extends GridPane implements iObserver, Initializable {
             return;
         }
 
-        //compute the coordinates of the click on the slots area
+        //compute the Y coordinates of the click on the slots area
         double coordY = (this.m_grid.getHeight() * 0.6) / 2.0;
         coordY = (mouseEvent.getY() - this.m_grid.getHeight() * 0.15) / coordY;
+        coordY = (double)(1 - (int)coordY);
 
-        //retrieve the slot coordinates from the mouse click coordinates
-        Point p = new Point((int)(mouseEvent.getX()/(this.m_grid.getWidth()/6)), 1 - (int)coordY);
+        //compute the X coordinates of the click on the slots area
+        double coordX = mouseEvent.getX()/(this.m_grid.getWidth()/6);
+        if ((int)coordY == 1)
+            coordX = (double)(5 - (int)coordX);
+
+        //create the point from the click coordinates
+        Point p = new Point((int)coordX, (int)coordY);
 
         //check if the current player is owner of the slot clicked
         Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Player " + this.m_controller.getCurrentPlayer() + " : clicked on " + p);
