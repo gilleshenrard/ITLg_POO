@@ -8,6 +8,8 @@
 package com.gilleshenrard.Awele.Views.JFX;
 
 import com.gilleshenrard.Awele.Controllers.GameController;
+import com.gilleshenrard.Awele.Views.AI.MinimaxSelect;
+import com.gilleshenrard.Awele.Views.AI.RandomSelect;
 import com.gilleshenrard.Awele.Views.iNotifiable;
 import javafx.application.Platform;
 import javafx.event.Event;
@@ -22,6 +24,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.security.InvalidParameterException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,10 +36,12 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
     private String m_name1;
     private String m_name2;
     private String m_pl1AI;
+    private String m_pl2AI;
     @FXML Button b_ok;
     @FXML TextField tf_name1;
     @FXML TextField tf_name2;
     @FXML ToggleGroup tg_pl1AI;
+    @FXML ToggleGroup tg_pl2AI;
 
     /**
      * Create a new Game Java FX view
@@ -76,9 +81,6 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
         //log the main scene initialisation
         Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Menu scene initialisation");
         this.b_ok.setOnMouseClicked(this::onOKButtonClicked);
-
-        RadioButton tmp_radio = (RadioButton) this.tg_pl1AI.getSelectedToggle();
-        this.m_pl1AI = tmp_radio.getText();
     }
 
     /**
@@ -122,6 +124,44 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
         //update the players' names in the game
         this.m_controller.setName(1, this.m_name1);
         this.m_controller.setName(2, this.m_name2);
+
+        //update the players' behaviours with the ones selected
+        this.setBehaviour(1, this.m_pl1AI);
+        this.setBehaviour(2, this.m_pl2AI);
+    }
+
+    /**
+     * Assign a behaviour to a player
+     * @param ID ID of the player to which assign the behaviour
+     * @param behaviour Behaviour to assign to the player
+     * @throws InvalidParameterException
+     * @throws NullPointerException
+     */
+    private void setBehaviour(int ID, String behaviour) throws InvalidParameterException, NullPointerException {
+        switch (behaviour) {
+            case "None":
+                this.m_controller.setBehaviour(ID, new JFXSelect(this.m_controller.getBoardController()));
+                break;
+
+            case "Easy":
+                this.m_controller.setBehaviour(ID, new RandomSelect(this.m_controller.getBoardController()));
+                break;
+
+            case "Medium":
+                MinimaxSelect tmp = new MinimaxSelect(this.m_controller.getBoardController());
+                tmp.setMaxDepth(4);
+                this.m_controller.setBehaviour(ID, tmp);
+                break;
+
+            case "Hard":
+                tmp = new MinimaxSelect(this.m_controller.getBoardController());
+                tmp.setMaxDepth(10);
+                this.m_controller.setBehaviour(ID, tmp);
+                break;
+
+            default:
+                throw new InvalidParameterException("GameJFXView.setBehaviour() : invalid value of behaviour : " + behaviour);
+        }
     }
 
     /**
@@ -134,6 +174,14 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
         //get the players' names written in the options pane
         this.m_name1 = this.tf_name1.getText();
         this.m_name2 = this.tf_name2.getText();
+
+        //get the behaviour selected for the player 1
+        RadioButton tmp_radio = (RadioButton) this.tg_pl1AI.getSelectedToggle();
+        this.m_pl1AI = tmp_radio.getText();
+
+        //get the behaviour selected for the player 2
+        tmp_radio = (RadioButton) this.tg_pl2AI.getSelectedToggle();
+        this.m_pl2AI = tmp_radio.getText();
 
         //notify the game loop thread to resume the game loop
         synchronized (this.m_controller) {

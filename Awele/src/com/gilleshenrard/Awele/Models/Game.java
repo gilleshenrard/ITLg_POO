@@ -8,6 +8,8 @@
 /****************************************************************************************************/
 package com.gilleshenrard.Awele.Models;
 
+import com.gilleshenrard.Awele.Views.Selectable;
+
 import java.security.InvalidParameterException;
 
 public class Game {
@@ -126,6 +128,23 @@ public class Game {
             throw new NullPointerException("Game.setName() : Player " + ID + " not instantiated");
 
         Game.getInstance().getPlayer(ID).setName(name);
+    }
+
+    /**
+     * Set the behaviour of a Player
+     * @param ID ID of the player to which assign the behaviour
+     * @param behaviour Behaviour to assign to the Player
+     * @throws InvalidParameterException
+     * @throws NullPointerException
+     */
+    public void setBehaviour(int ID, Selectable behaviour) throws InvalidParameterException, NullPointerException {
+        Game.validateID(ID, "Game.setBehaviour()");
+        if(Game.getInstance().getPlayer(ID) == null)
+            throw new NullPointerException("Game.setBehaviour() : Player " + ID + " not instantiated");
+        if(behaviour == null)
+            throw new NullPointerException("Game.setBehaviour() : NULL instance of Selectable");
+
+        Game.getInstance().getPlayer(ID).setBehaviour(behaviour);
     }
 
     /**

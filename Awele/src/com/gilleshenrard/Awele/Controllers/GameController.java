@@ -13,6 +13,7 @@ import com.gilleshenrard.Awele.FSM.State;
 import com.gilleshenrard.Awele.Models.Game;
 import com.gilleshenrard.Awele.Models.Player;
 import com.gilleshenrard.Awele.Models.Point;
+import com.gilleshenrard.Awele.Views.Selectable;
 import com.gilleshenrard.Awele.Views.iNotifiable;
 
 import java.security.InvalidParameterException;
@@ -197,7 +198,24 @@ public class GameController {
      * @throws NullPointerException
      */
     public void setName(int ID, String name) throws InvalidParameterException, NullPointerException {
+        Game.validateID(ID, "GameController.setName()");
+
         Game.getInstance().setName(ID, name);
+    }
+
+    /**
+     * Set the behaviour of a Player
+     * @param ID ID of the player to which assign the behaviour
+     * @param behaviour Behaviour to assign to the Player
+     * @throws InvalidParameterException
+     * @throws NullPointerException
+     */
+    public void setBehaviour(int ID, Selectable behaviour) throws InvalidParameterException, NullPointerException {
+        Game.validateID(ID, "GameController.setBehaviour()");
+        if (behaviour == null)
+            throw new NullPointerException("GameController.setBehaviour() : NULL instance of Selectable");
+
+        Game.getInstance().setBehaviour(ID, behaviour);
     }
 
     /**
