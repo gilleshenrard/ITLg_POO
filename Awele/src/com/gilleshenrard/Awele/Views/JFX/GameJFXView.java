@@ -119,6 +119,31 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
     }
 
     /**
+     * Handle a click on the Exit Menu button
+     * @param event JavaFX click event
+     */
+    private void onOKButtonClicked(Event event){
+        Logger.getLogger(this.getClass().getName()).log(Level.FINE, "GameJFXView.onExitButton() : display Main screen");
+
+        //get the players' names written in the options pane
+        this.m_controller.setName(1, this.tf_name1.getText());
+        this.m_controller.setName(2, this.tf_name2.getText());
+
+        //get the behaviour selected for the player 1
+        RadioButton tmp_radio = (RadioButton) this.tg_pl1AI.getSelectedToggle();
+        this.setBehaviour(1, tmp_radio.getText());
+
+        //get the behaviour selected for the player 2
+        tmp_radio = (RadioButton) this.tg_pl2AI.getSelectedToggle();
+        this.setBehaviour(2, tmp_radio.getText());
+
+        //notify the game loop thread to resume the game loop
+        synchronized (this.m_controller) {
+            this.m_controller.notify();
+        }
+    }
+
+    /**
      * Assign a behaviour to a player
      * @param ID ID of the player to which assign the behaviour
      * @param behaviour Behaviour to assign to the player
@@ -153,31 +178,6 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
 
             default:
                 throw new InvalidParameterException("GameJFXView.setBehaviour() : invalid value of behaviour : " + behaviour);
-        }
-    }
-
-    /**
-     * Handle a click on the Exit Menu button
-     * @param event JavaFX click event
-     */
-    private void onOKButtonClicked(Event event){
-        Logger.getLogger(this.getClass().getName()).log(Level.FINE, "GameJFXView.onExitButton() : display Main screen");
-
-        //get the players' names written in the options pane
-        this.m_controller.setName(1, this.tf_name1.getText());
-        this.m_controller.setName(2, this.tf_name2.getText());
-
-        //get the behaviour selected for the player 1
-        RadioButton tmp_radio = (RadioButton) this.tg_pl1AI.getSelectedToggle();
-        this.setBehaviour(1, tmp_radio.getText());
-
-        //get the behaviour selected for the player 2
-        tmp_radio = (RadioButton) this.tg_pl2AI.getSelectedToggle();
-        this.setBehaviour(2, tmp_radio.getText());
-
-        //notify the game loop thread to resume the game loop
-        synchronized (this.m_controller) {
-            this.m_controller.notify();
         }
     }
 }
