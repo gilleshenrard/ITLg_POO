@@ -34,7 +34,7 @@
                    GridPane.columnSpan="6" styleClass="titlepane">
             <children>
                 <Label prefHeight="Infinity" prefWidth="Infinity" styleClass="title" text="MENU"/>
-                <Button fx:id="b_exit" prefHeight="40" prefWidth="80" mnemonicParsing="false" text="EXIT">
+                <Button fx:id="b_exit" prefHeight="40" prefWidth="80" mnemonicParsing="false" text="EXIT" styleClass="systembutton">
                     <StackPane.margin>
                         <Insets right="100.0" />
                     </StackPane.margin></Button>
@@ -43,7 +43,7 @@
 
         <!-- Player 1 configuration -->
         <Label text="Player 1" GridPane.rowIndex="1" GridPane.columnIndex="0"  prefWidth="Infinity" prefHeight="Infinity" />
-        <Label text="Name" GridPane.rowIndex="2" GridPane.columnIndex="0" prefWidth="Infinity" prefHeight="Infinity" />
+        <Label text="Name" GridPane.rowIndex="2" GridPane.columnIndex="0" prefWidth="Infinity" prefHeight="Infinity" styleClass="nametag" />
         <TextField fx:id="tf_name1" text="Player 1" GridPane.rowIndex="2" GridPane.columnIndex="1" />
         <VBox GridPane.rowIndex="2" GridPane.columnIndex="2" GridPane.columnSpan="2">
             <children>
@@ -60,7 +60,7 @@
 
         <!-- Player 2 configuration -->
         <Label text="Player 2" GridPane.rowIndex="3" GridPane.columnIndex="0"  prefWidth="Infinity" prefHeight="Infinity" />
-        <Label text="Name" GridPane.rowIndex="4" GridPane.columnIndex="0" prefWidth="Infinity" prefHeight="Infinity" />
+        <Label text="Name" GridPane.rowIndex="4" GridPane.columnIndex="0" prefWidth="Infinity" prefHeight="Infinity" styleClass="nametag" />
         <TextField fx:id="tf_name2" text="AI" GridPane.rowIndex="4" GridPane.columnIndex="1" />
         <VBox GridPane.rowIndex="4" GridPane.columnIndex="2" GridPane.columnSpan="2">
             <children>
@@ -77,6 +77,6 @@
 
 
         <!-- Cancel button-->
-        <Button fx:id="b_ok" prefHeight="40" prefWidth="80" mnemonicParsing="false" text="OK" GridPane.rowIndex="5" GridPane.columnIndex="3" />
+        <Button fx:id="b_ok" prefHeight="40" prefWidth="80" mnemonicParsing="false" text="OK" GridPane.rowIndex="5" GridPane.columnIndex="3" styleClass="generalbutton" />
     </children>
 </GridPane>

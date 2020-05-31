@@ -8,9 +8,41 @@
 
     /*general text rules*/
     -fx-text-alignment : center;
-    -fx-text-fill: #DA4FDE;
     -fx-font-weight: bold;
     -fx-font-family: 'FTY DELIRIUM NEON NCV';
+}
+
+/*all labels*/
+.label {
+    -fx-alignment : center;
+    -fx-text-fill: #DA4FDE;
+    -fx-effect: dropshadow(one-pass-box, #DA4FDE, 80, 0, 0, 0);
+}
+
+/*all buttons*/
+.button {
+    -fx-background-color: null;
+    -fx-font-size: 20;
+    -fx-border-width: 3px;
+}
+
+/*buttons when hovered*/
+.button:hover {
+    -fx-border-width: 5px;
+}
+
+/*red glowing button*/
+.systembutton {
+    -fx-text-fill: #E8232D;
+    -fx-border-color: #E8232D;
+    -fx-effect: dropshadow(one-pass-box, #E8232D, 80, 0, 0, 0);
+}
+
+/*teal glowing button*/
+.generalbutton {
+    -fx-text-fill: #5AF2ED;
+    -fx-border-color: #5AF2ED;
+    -fx-effect: dropshadow(one-pass-box, #5AF2ED, 80, 0, 0, 0);
 }
 
 /*
@@ -19,45 +51,19 @@
 
 /*title section*/
 .titlepane .label {
-    -fx-text-fill: #DA4FDE;
     -fx-font-size: 90;
-    -fx-alignment: center;
-    -fx-effect: dropshadow(one-pass-box, #DA4FDE, 80, 0, 0, 0);
-}
-
-/*menu button*/
-.titlepane .button {
-    -fx-font-size: 20;
-    -fx-text-fill: #E8232D;
-    -fx-background-color: null;
-    -fx-border-color: #E8232D;
-    -fx-border-width: 3px;
-    -fx-effect: dropshadow(one-pass-box, #E8232D, 80, 0, 0, 0);
-}
-
-/*menu button when hovered*/
-.titlepane .button:hover {
-    -fx-border-width: 5px;
 }
 
 /*
 //  MESSAGE
 */
 .message{
-    -fx-alignment: center;
-    -fx-text-fill: #DA4FDE;
     -fx-font-size: 30;
 }
 
 /*
 //  SLOTS
 */
-
-/*Slots*/
-.slots .label{
-    -fx-background-color : null;
-    -fx-alignment : center;
-}
 
 /*slots circles*/
 .slots Circle{
@@ -75,22 +81,6 @@
     -fx-stroke-width: 10px;
 }
 
-/*Slots player 2*/
-.slotpl2 {
-    -fx-effect: dropshadow(one-pass-box, #5AF2ED, 80, 0, 0, 0);
-}
-
-/*score in player 2's slot*/
-.slotpl2 .label{
-    -fx-font-size: 100;
-    -fx-text-fill: #5AF2ED;
-}
-
-/*circle of player 2's slot*/
-.slotpl2 Circle{
-    -fx-stroke: #5AF2ED;
-}
-
 /*Slots player 1*/
 .slotpl1 {
     -fx-effect: dropshadow(one-pass-box, #9CFF9C, 80, 0, 0, 0);
@@ -105,6 +95,22 @@
 /*circle of player 1's slot*/
 .slotpl1 Circle{
     -fx-stroke: #9CFF9C;
+}
+
+/*Slots player 2*/
+.slotpl2 {
+    -fx-effect: dropshadow(one-pass-box, #5AF2ED, 80, 0, 0, 0);
+}
+
+/*score in player 2's slot*/
+.slotpl2 .label{
+    -fx-font-size: 100;
+    -fx-text-fill: #5AF2ED;
+}
+
+/*circle of player 2's slot*/
+.slotpl2 Circle{
+    -fx-stroke: #5AF2ED;
 }
 
 /*Slots player 1*/
@@ -126,12 +132,6 @@
 //  SCORE PANELS
 */
 
-/*Boards indicating player name and score*/
-.scores{
-    -fx-background-color : rgba(0,0,0,0);
-    -fx-alignment : center;
-}
-
 /*Player 1's whole scorepanel*/
 .scorepanel1{
     -fx-text-fill: yellow;
@@ -152,4 +152,35 @@
 /*Scoreboard score tags*/
 .scoretag{
     -fx-font-size: 80;
+}
+
+/*
+//  TEXTFIELDS
+*/
+
+TextField {
+    -fx-background-color: null;
+    -fx-font-size: 40;
+    -fx-text-fill: #DA4FDE;
+    -fx-effect: dropshadow(one-pass-box, #DA4FDE, 80, 0, 0, 0);
+}
+
+/*
+//  RADIO BUTTONS
+*/
+
+.radio-button {
+    -fx-alignment : center;
+    -fx-font-size: 20;
+    -fx-text-fill: #DA4FDE;
+    -fx-effect: dropshadow(one-pass-box, #DA4FDE, 80, 0, 0, 0);
+}
+
+.radio-button .radio {
+    -fx-background-color: null;
+}
+
+.radio-button:selected .radio {
+    -fx-background-color: #DA4FDE;
+    -fx-border-radius: 130px;
 }
