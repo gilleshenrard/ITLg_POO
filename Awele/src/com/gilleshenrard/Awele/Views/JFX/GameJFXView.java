@@ -141,22 +141,26 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
         switch (behaviour) {
             case "None":
                 this.m_controller.setBehaviour(ID, new JFXSelect(this.m_controller.getBoardController()));
+                Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + ID + " : JFXSelect behaviour set");
                 break;
 
             case "Easy":
                 this.m_controller.setBehaviour(ID, new RandomSelect(this.m_controller.getBoardController()));
+                Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + ID + " : RandomSelect behaviour set");
                 break;
 
             case "Medium":
                 MinimaxSelect tmp = new MinimaxSelect(this.m_controller.getBoardController());
                 tmp.setMaxDepth(4);
                 this.m_controller.setBehaviour(ID, tmp);
+                Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + ID + " : Minimax (depth 4) behaviour set");
                 break;
 
             case "Hard":
                 tmp = new MinimaxSelect(this.m_controller.getBoardController());
                 tmp.setMaxDepth(10);
                 this.m_controller.setBehaviour(ID, tmp);
+                Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + ID + " : Minimax (depth 10) behaviour set");
                 break;
 
             default:
