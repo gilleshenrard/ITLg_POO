@@ -33,10 +33,6 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
     private Stage m_stage;
     private Scene m_menuscene = null;
     private GameController m_controller;
-    private String m_name1;
-    private String m_name2;
-    private String m_pl1AI;
-    private String m_pl2AI;
     @FXML Button b_ok;
     @FXML TextField tf_name1;
     @FXML TextField tf_name2;
@@ -120,14 +116,6 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
             }
             catch (InterruptedException e){}
         }
-
-        //update the players' names in the game
-        this.m_controller.setName(1, this.m_name1);
-        this.m_controller.setName(2, this.m_name2);
-
-        //update the players' behaviours with the ones selected
-        this.setBehaviour(1, this.m_pl1AI);
-        this.setBehaviour(2, this.m_pl2AI);
     }
 
     /**
@@ -176,16 +164,16 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
         Logger.getLogger(this.getClass().getName()).log(Level.FINE, "GameJFXView.onExitButton() : display Main screen");
 
         //get the players' names written in the options pane
-        this.m_name1 = this.tf_name1.getText();
-        this.m_name2 = this.tf_name2.getText();
+        this.m_controller.setName(1, this.tf_name1.getText());
+        this.m_controller.setName(2, this.tf_name2.getText());
 
         //get the behaviour selected for the player 1
         RadioButton tmp_radio = (RadioButton) this.tg_pl1AI.getSelectedToggle();
-        this.m_pl1AI = tmp_radio.getText();
+        this.setBehaviour(1, tmp_radio.getText());
 
         //get the behaviour selected for the player 2
         tmp_radio = (RadioButton) this.tg_pl2AI.getSelectedToggle();
-        this.m_pl2AI = tmp_radio.getText();
+        this.setBehaviour(2, tmp_radio.getText());
 
         //notify the game loop thread to resume the game loop
         synchronized (this.m_controller) {
