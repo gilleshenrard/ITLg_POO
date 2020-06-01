@@ -34,9 +34,8 @@ public class StoringState implements iGameState {
             }catch (InterruptedException e){}
             controller.setMenuRequested(true);
         }
-        else {
-            //Go to the player switching state
-            controller.setNextState(State.SWITCHING);
-        }
+
+        //Go to the player switching state
+        controller.setNextState(State.SWITCHING);
     }
 }
