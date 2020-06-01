@@ -45,7 +45,7 @@
         <Label text="Player 1" GridPane.rowIndex="1" GridPane.columnIndex="0"  prefWidth="Infinity" prefHeight="Infinity" />
         <Label text="Name" GridPane.rowIndex="2" GridPane.columnIndex="0" prefWidth="Infinity" prefHeight="Infinity" styleClass="nametag" />
         <TextField fx:id="tf_name1" text="Player 1" GridPane.rowIndex="2" GridPane.columnIndex="1" />
-        <VBox GridPane.rowIndex="2" GridPane.columnIndex="2" GridPane.columnSpan="2">
+        <VBox GridPane.rowIndex="2" GridPane.columnIndex="3"  styleClass="nametag">
             <children>
                 <RadioButton text="None" selected="true">
                     <toggleGroup>
@@ -61,8 +61,8 @@
         <!-- Player 2 configuration -->
         <Label text="Player 2" GridPane.rowIndex="3" GridPane.columnIndex="0"  prefWidth="Infinity" prefHeight="Infinity" />
         <Label text="Name" GridPane.rowIndex="4" GridPane.columnIndex="0" prefWidth="Infinity" prefHeight="Infinity" styleClass="nametag" />
-        <TextField fx:id="tf_name2" text="AI" GridPane.rowIndex="4" GridPane.columnIndex="1" />
-        <VBox GridPane.rowIndex="4" GridPane.columnIndex="2" GridPane.columnSpan="2">
+        <TextField fx:id="tf_name2" text="AI" GridPane.rowIndex="4" GridPane.columnIndex="1"  styleClass="nametag"/>
+        <VBox GridPane.rowIndex="4" GridPane.columnIndex="3" >
             <children>
                 <RadioButton text="None">
                     <toggleGroup>
