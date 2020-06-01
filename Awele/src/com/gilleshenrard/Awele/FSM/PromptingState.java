@@ -51,7 +51,7 @@ public class PromptingState implements iGameState {
             ((PlayingState)State.PLAYING.getState()).setInput(choice);
         }
         else{
-            Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Player " + controller.getCurrentPlayer() + " chose the slot " + choice);
+            Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Player " + controller.getCurrentPlayer() + " forfeits");
             controller.displayMessage(controller.getName(controller.getCurrentPlayer()) + " can't make any move. He forfeits !");
 
             //make the main thread wait for 2s
@@ -67,7 +67,7 @@ public class PromptingState implements iGameState {
             }
 
             //return to menu
-            Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Main loop stops");
+            Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Return to menu");
             controller.setNextState(State.MENU);
         }
     }
