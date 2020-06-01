@@ -22,7 +22,7 @@
 /*all buttons*/
 .button {
     -fx-background-color: null;
-    -fx-font-size: 20;
+    -fx-font-size: 25;
     -fx-border-width: 3px;
 }
 
