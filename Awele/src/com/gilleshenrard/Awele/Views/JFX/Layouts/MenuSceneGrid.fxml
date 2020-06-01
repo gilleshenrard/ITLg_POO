@@ -101,8 +101,10 @@
             </children>
         </VBox>
 
+        <!-- Reset button-->
+        <Button fx:id="b_reset" prefHeight="40" prefWidth="80" mnemonicParsing="false" text="Reset" GridPane.rowIndex="3" GridPane.columnIndex="2" styleClass="generalbutton" />
 
-        <!-- Cancel button-->
+        <!-- OK button-->
         <Button fx:id="b_ok" prefHeight="40" prefWidth="80" mnemonicParsing="false" text="OK" GridPane.rowIndex="3" GridPane.columnIndex="3" styleClass="generalbutton" />
     </children>
 </GridPane>

@@ -35,6 +35,7 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
     private GameController m_controller;
     @FXML Button b_ok;
     @FXML Button b_exit;
+    @FXML Button b_reset;
     @FXML TextField tf_name1;
     @FXML TextField tf_name2;
     @FXML ToggleGroup tg_pl1AI;
@@ -79,6 +80,7 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
         Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Menu scene initialisation");
         this.b_ok.setOnMouseClicked(this::onOKButtonClicked);
         this.b_exit.setOnMouseClicked(this::onExitButtonClicked);
+        this.b_reset.setOnMouseClicked(this::onResetButtonClicked);
     }
 
     /**
@@ -156,6 +158,22 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
         //flag the game loop as stopped and close the main stage
         this.m_controller.setRunning(false);
         this.m_stage.close();
+
+        //notify the game loop thread to resume the game loop
+        synchronized (this.m_controller) {
+            this.m_controller.notify();
+        }
+    }
+
+    /**
+     * Handle a click on the Exit Game button
+     * @param event JavaFX click event
+     */
+    private void onResetButtonClicked(Event event){
+        Logger.getLogger(this.getClass().getName()).log(Level.FINE, "GameJFXView.onExitButton() : flag the main loop as not running");
+
+        //reset the game
+        this.m_controller.resetGame();
 
         //notify the game loop thread to resume the game loop
         synchronized (this.m_controller) {
