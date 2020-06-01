@@ -67,18 +67,18 @@
     -fx-stroke: #9CFF9C;
 }
 
-/* general radio buttons styling*/
+/* player 1 radio buttons styling*/
 .player1 .radio-button {
     -fx-text-fill: #9CFF9C;
     -fx-effect: dropshadow(one-pass-box, #9CFF9C, 80, 0, 0, 0);
 }
 
-/*radiobuttons buttons when selected*/
+/*player 1 radiobuttons buttons when selected*/
 .player1 .radio-button:selected .radio {
     -fx-background-color: #9CFF9C;
 }
 
-/*radiobuttons buttons when hovered*/
+/*player 1 radiobuttons buttons when hovered*/
 .player1 .radio-button:hover .radio {
     -fx-background-color: #9CFF9C;
 }
@@ -105,18 +105,18 @@
     -fx-stroke: #5AF2ED;
 }
 
-/* general radio buttons styling*/
+/* player 2 radio buttons styling*/
 .player2 .radio-button {
     -fx-text-fill: #5AF2ED;
     -fx-effect: dropshadow(one-pass-box, #5AF2ED, 80, 0, 0, 0);
 }
 
-/*radiobuttons buttons when selected*/
+/*player 2 radiobuttons buttons when selected*/
 .player2 .radio-button:selected .radio {
     -fx-background-color: #5AF2ED;
 }
 
-/*radiobuttons buttons when hovered*/
+/*player 2 radiobuttons buttons when hovered*/
 .player2 .radio-button:hover .radio {
     -fx-background-color: #5AF2ED;
 }
