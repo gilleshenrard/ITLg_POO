@@ -95,6 +95,7 @@
 .player1 .label{
     -fx-font-size: 100;
     -fx-text-fill: #9CFF9C;
+    -fx-effect: dropshadow(one-pass-box, #9CFF9C, 80, 0, 0, 0);
 }
 
 /*circle of player 1's slot*/
@@ -112,6 +113,7 @@
 .player2 .label{
     -fx-font-size: 100;
     -fx-text-fill: #5AF2ED;
+    -fx-effect: dropshadow(one-pass-box, #5AF2ED, 80, 0, 0, 0);
 }
 
 /*circle of player 2's slot*/
@@ -128,6 +130,7 @@
 /*score in player 1's slot*/
 .legal .label{
     -fx-text-fill: #F09F1D;
+    -fx-effect: dropshadow(one-pass-box, #F09F1D, 80, 0, 0, 0);
 }
 
 /*circle of player 1's slot*/
