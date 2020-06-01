@@ -278,6 +278,7 @@ public class GameController {
      */
     public void resetGame(){
         Game.getInstance().reset();
+        this.setCurrentPlayer(1);
         this.getBoardController().resetBoard();
     }
     /**
