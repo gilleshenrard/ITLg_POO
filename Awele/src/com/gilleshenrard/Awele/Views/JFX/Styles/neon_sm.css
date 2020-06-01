@@ -24,6 +24,7 @@
     -fx-background-color: null;
     -fx-font-size: 25;
     -fx-border-width: 3px;
+    -fx-border-radius: 10px;
 }
 
 /*buttons when hovered*/
