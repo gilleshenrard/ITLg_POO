@@ -41,7 +41,7 @@
 
         <!-- Player 1 configuration -->
         <Label text="Player 1" GridPane.rowIndex="1" GridPane.columnIndex="0"  prefWidth="Infinity" prefHeight="Infinity" styleClass="nametag" />
-        <TextField fx:id="tf_name1" text="Player 1" GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="player1" />
+        <TextField fx:id="tf_name1" text="Player 1" GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="player1,nametag" />
         <VBox GridPane.rowIndex="1" GridPane.columnIndex="2"  styleClass="player1">
             <children>
                 <RadioButton text="None" selected="true">
