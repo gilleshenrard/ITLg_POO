@@ -13,6 +13,7 @@ import com.gilleshenrard.Awele.Models.Player;
 import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 import java.util.logging.ConsoleHandler;
@@ -64,7 +65,7 @@ public class App extends Application{
         game.setPlayer(new Player(2, "AI", new MinimaxSelect(game.getBoardController())));
 
         //primary Stage setup
-        primaryStage.setTitle("POO - App");
+        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.setResizable(false);
         primaryStage.show();
 
