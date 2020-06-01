@@ -139,6 +139,11 @@ The unit tests for each class can be found in the mirrored directory tests/ (tes
 - Title banner has been redesigned
 - The Menu button now leads to the Menu State
 - The game loop now starts with the Menu State
+- The menu panel has now been implemented, allowing to edit players names and behaviours, exit and reinitialise the game
+- resizing has been done to match lower resolution screens
+- scenes management is now done in each JFX View controller
+- colouring has been made easier to understand on the board, and bugs have been fixed
+- victory now make the game finish the loop and get to the menu panel
 
 ---
 ### 5. Known issues
@@ -148,9 +153,7 @@ n/a
 ### 6. To do
 
 - Add seasons history
-- Make the JavaFX interface responsive
-- Implement an Options panel
 - Optimise the unit tests
 - Check if every method throws an exception if supposed to
-- Improve logging (+ disable it in console mode)
+- Improve logging
 - Add UML diagram links to README.md
