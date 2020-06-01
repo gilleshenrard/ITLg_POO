@@ -45,6 +45,7 @@ public class GameController {
      * @param running flag to tell if the main loop is running
      */
     public void setRunning(boolean running) {
+        Logger.getLogger(App.class.getName()).log(Level.FINE, "Game loop set as " + (running ? "running" : "stopped"));
         this.m_running = running;
     }
 
@@ -162,6 +163,8 @@ public class GameController {
             this.displayError(e.getMessage());
             System.exit(-1);
         }
+
+        Logger.getLogger(App.class.getName()).log(Level.INFO, "Game loop exited");
     }
 
     /**

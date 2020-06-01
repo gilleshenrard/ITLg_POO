@@ -34,6 +34,7 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
     private Scene m_menuscene = null;
     private GameController m_controller;
     @FXML Button b_ok;
+    @FXML Button b_exit;
     @FXML TextField tf_name1;
     @FXML TextField tf_name2;
     @FXML ToggleGroup tg_pl1AI;
@@ -77,6 +78,7 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
         //log the main scene initialisation
         Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Menu scene initialisation");
         this.b_ok.setOnMouseClicked(this::onOKButtonClicked);
+        this.b_exit.setOnMouseClicked(this::onExitButtonClicked);
     }
 
     /**
@@ -120,11 +122,11 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
     }
 
     /**
-     * Handle a click on the Exit Menu button
+     * Handle a click on the OK button
      * @param event JavaFX click event
      */
     private void onOKButtonClicked(Event event){
-        Logger.getLogger(this.getClass().getName()).log(Level.FINE, "GameJFXView.onExitButton() : display Main screen");
+        Logger.getLogger(this.getClass().getName()).log(Level.FINE, "GameJFXView.onOKButton() : display Main screen");
 
         //get the players' names written in the options pane
         this.m_controller.setName(1, this.tf_name1.getText());
@@ -137,6 +139,23 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
         //get the behaviour selected for the player 2
         tmp_radio = (RadioButton) this.tg_pl2AI.getSelectedToggle();
         this.setBehaviour(2, tmp_radio.getText());
+
+        //notify the game loop thread to resume the game loop
+        synchronized (this.m_controller) {
+            this.m_controller.notify();
+        }
+    }
+
+    /**
+     * Handle a click on the Exit Game button
+     * @param event JavaFX click event
+     */
+    private void onExitButtonClicked(Event event){
+        Logger.getLogger(this.getClass().getName()).log(Level.FINE, "GameJFXView.onExitButton() : flag the main loop as not running");
+
+        //flag the game loop as stopped and close the main stage
+        this.m_controller.setRunning(false);
+        this.m_stage.close();
 
         //notify the game loop thread to resume the game loop
         synchronized (this.m_controller) {
