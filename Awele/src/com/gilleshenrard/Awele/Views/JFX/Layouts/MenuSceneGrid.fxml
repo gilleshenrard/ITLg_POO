@@ -20,10 +20,8 @@
     <!-- Row constraints (5 rows) -->
     <rowConstraints>
         <RowConstraints percentHeight="15.0" vgrow="SOMETIMES"/>
-        <RowConstraints percentHeight="5.0" vgrow="SOMETIMES"/>
-        <RowConstraints percentHeight="30.0" vgrow="SOMETIMES"/>
-        <RowConstraints percentHeight="5.0" vgrow="SOMETIMES"/>
-        <RowConstraints percentHeight="30.0" vgrow="SOMETIMES"/>
+        <RowConstraints percentHeight="35.0" vgrow="SOMETIMES"/>
+        <RowConstraints percentHeight="35.0" vgrow="SOMETIMES"/>
         <RowConstraints percentHeight="15.0" vgrow="SOMETIMES"/>
     </rowConstraints>
 
@@ -43,9 +41,8 @@
 
         <!-- Player 1 configuration -->
         <Label text="Player 1" GridPane.rowIndex="1" GridPane.columnIndex="0"  prefWidth="Infinity" prefHeight="Infinity" styleClass="nametag" />
-        <Label text="Name" GridPane.rowIndex="2" GridPane.columnIndex="0" prefWidth="Infinity" prefHeight="Infinity" styleClass="player1,nametag" />
-        <TextField fx:id="tf_name1" text="Player 1" GridPane.rowIndex="2" GridPane.columnIndex="1" styleClass="player1" />
-        <VBox GridPane.rowIndex="2" GridPane.columnIndex="3"  styleClass="player1">
+        <TextField fx:id="tf_name1" text="Player 1" GridPane.rowIndex="1" GridPane.columnIndex="1" styleClass="player1" />
+        <VBox GridPane.rowIndex="1" GridPane.columnIndex="2"  styleClass="player1">
             <children>
                 <RadioButton text="None" selected="true">
                     <toggleGroup>
@@ -74,10 +71,9 @@
         </VBox>
 
         <!-- Player 2 configuration -->
-        <Label text="Player 2" GridPane.rowIndex="3" GridPane.columnIndex="0"  prefWidth="Infinity" prefHeight="Infinity" styleClass="nametag" />
-        <Label text="Name" GridPane.rowIndex="4" GridPane.columnIndex="0" prefWidth="Infinity" prefHeight="Infinity" styleClass="player2,nametag" />
-        <TextField fx:id="tf_name2" text="AI" GridPane.rowIndex="4" GridPane.columnIndex="1"  styleClass="player2,nametag"/>
-        <VBox GridPane.rowIndex="4" GridPane.columnIndex="3" styleClass="player2">
+        <Label text="Player 2" GridPane.rowIndex="2" GridPane.columnIndex="0"  prefWidth="Infinity" prefHeight="Infinity" styleClass="nametag" />
+        <TextField fx:id="tf_name2" text="AI" GridPane.rowIndex="2" GridPane.columnIndex="1"  styleClass="player2,nametag"/>
+        <VBox GridPane.rowIndex="2" GridPane.columnIndex="2" styleClass="player2">
             <children>
                 <RadioButton text="None">
                     <toggleGroup>
@@ -107,6 +103,6 @@
 
 
         <!-- Cancel button-->
-        <Button fx:id="b_ok" prefHeight="40" prefWidth="80" mnemonicParsing="false" text="OK" GridPane.rowIndex="5" GridPane.columnIndex="3" styleClass="generalbutton" />
+        <Button fx:id="b_ok" prefHeight="40" prefWidth="80" mnemonicParsing="false" text="OK" GridPane.rowIndex="3" GridPane.columnIndex="3" styleClass="generalbutton" />
     </children>
 </GridPane>
