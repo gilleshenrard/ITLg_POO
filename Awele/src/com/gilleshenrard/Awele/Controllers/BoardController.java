@@ -375,4 +375,12 @@ public class BoardController {
             o.sendMessage(msg);
         }
     }
+
+    /**
+     * Set the flag telling if the menu state is requested
+     * @param flag true if menu requested, false otherwise
+     */
+    public void setMenuRequested(boolean flag) {
+        this.m_game.setMenuRequested(flag);
+    }
 }

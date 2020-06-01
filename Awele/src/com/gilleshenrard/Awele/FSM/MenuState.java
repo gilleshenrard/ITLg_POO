@@ -16,6 +16,7 @@ public class MenuState implements iGameState {
         controller.displayMenu();
 
         //plug in the Prompting state
+        controller.setMenuRequested(false);
         controller.setNextState(State.PROMPTING);
     }
 }

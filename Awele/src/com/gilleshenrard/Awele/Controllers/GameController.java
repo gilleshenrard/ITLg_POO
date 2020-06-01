@@ -26,6 +26,7 @@ public class GameController {
     private State m_currentState;
     private int m_currentPlayer;
     private boolean m_running;
+    private boolean m_menu;
 
     /**
      * Create a new Game Controller
@@ -36,6 +37,7 @@ public class GameController {
         this.m_view = null;
         this.m_currentPlayer = 1;
         this.m_currentState = State.MENU;
+        this.m_menu = true;
     }
 
     /**
@@ -69,6 +71,22 @@ public class GameController {
      */
     public State getNextState(){
         return this.m_currentState;
+    }
+
+    /**
+     * Tell if the menu state has been requested
+     * @return true if requested, false otherwise
+     */
+    public boolean isMenuRequested() {
+        return this.m_menu;
+    }
+
+    /**
+     * Set the flag telling if the menu state is requested
+     * @param flag true if menu requested, false otherwise
+     */
+    public void setMenuRequested(boolean flag) {
+        this.m_menu = flag;
     }
 
     /**
