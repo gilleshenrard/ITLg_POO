@@ -204,6 +204,7 @@ public class BoardJFXView extends GridPane implements iObserver, Initializable {
     public void onMenuClicked(MouseEvent mouseEvent) {
         Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + this.m_controller.getCurrentPlayer() + " : click on the Menu button");
 
+        //set the flag to request the menu
         this.m_controller.setMenuRequested(true);
 
         //notify JFXSelect that a click has been handled
