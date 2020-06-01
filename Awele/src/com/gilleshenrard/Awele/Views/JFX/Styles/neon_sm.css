@@ -46,10 +46,8 @@
 }
 
 /*
-//  TITLE AND MENU BUTTON
+//  TITLE
 */
-
-/*title section*/
 .titlepane {
     -fx-font-size: 90;
 }
@@ -85,7 +83,7 @@
 //  PLAYER 1 colouring
 */
 
-/*Slots player 1*/
+/*player 1 general styling*/
 .player1 {
     -fx-text-fill: #9CFF9C;
     -fx-effect: dropshadow(one-pass-box, #9CFF9C, 80, 0, 0, 0);
@@ -103,7 +101,11 @@
     -fx-stroke: #9CFF9C;
 }
 
-/*Slots player 2*/
+/*
+//  PLAYER 2 colouring
+*/
+
+/*player 2 general styling*/
 .player2 {
     -fx-text-fill: #5AF2ED;
     -fx-effect: dropshadow(one-pass-box, #5AF2ED, 80, 0, 0, 0);
@@ -121,19 +123,23 @@
     -fx-stroke: #5AF2ED;
 }
 
-/*Slots player 1*/
+/*
+//  LEGAL colouring
+*/
+
+/*legal general styling*/
 .legal {
     -fx-text-fill: #F09F1D;
     -fx-effect: dropshadow(one-pass-box, #F09F1D, 80, 0, 0, 0);
 }
 
-/*score in player 1's slot*/
+/*score in legal slot*/
 .legal .label{
     -fx-text-fill: #F09F1D;
     -fx-effect: dropshadow(one-pass-box, #F09F1D, 80, 0, 0, 0);
 }
 
-/*circle of player 1's slot*/
+/*circle of legal slot*/
 .legal Circle{
     -fx-stroke: #F09F1D;
 }
@@ -155,7 +161,6 @@
 /*
 //  TEXTFIELDS
 */
-
 TextField {
     -fx-background-color: null;
     -fx-font-size: 40;
@@ -167,6 +172,7 @@ TextField {
 //  RADIO BUTTONS
 */
 
+/* general radio buttons styling*/
 .radio-button {
     -fx-alignment : center;
     -fx-font-size: 20;
@@ -174,19 +180,23 @@ TextField {
     -fx-effect: dropshadow(one-pass-box, #DA4FDE, 80, 0, 0, 0);
 }
 
+/*Radio buttons labels when hovered*/
 .radio-button:hover {
     -fx-font-size: 25;
 }
 
+/*general radiobuttons buttons styling*/
 .radio-button .radio {
     -fx-background-color: null;
 }
 
+/*radiobuttons buttons when selected*/
 .radio-button:selected .radio {
     -fx-background-color: #DA4FDE;
     -fx-border-radius: 130px;
 }
 
+/*radiobuttons buttons when hovered*/
 .radio-button:hover .radio {
     -fx-background-color: #DA4FDE;
     -fx-border-radius: 130px;
