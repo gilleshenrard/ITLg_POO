@@ -54,15 +54,21 @@ public class PromptingState implements iGameState {
             Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Player " + controller.getCurrentPlayer() + " chose the slot " + choice);
             controller.displayMessage(controller.getName(controller.getCurrentPlayer()) + " can't make any move. He forfeits !");
 
+            //make the main thread wait for 2s
+            Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Game waits for 2s");
+            try {
+                Thread.sleep(2000);
+            }catch (InterruptedException e){}
+
             //Easter egg : when both players play randomly and one of them forfeits, he says the last quote of the W.P.O.R. in the movie Wargames
             if(controller.isPlayerAI(1) && controller.isPlayerAI(2)) {
                 controller.displayMessage("\n" + controller.getName(controller.getCurrentPlayer()) + " : 'A strange game... The only winning move is not to play...'");
                 controller.displayMessage(controller.getName(controller.getCurrentPlayer()) + " : '......................... How about a nice game of chess?'");
             }
 
-            //stop the main loop
+            //return to menu
             Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Main loop stops");
-            controller.setRunning(false);
+            controller.setNextState(State.MENU);
         }
     }
 }
