@@ -173,6 +173,20 @@ public class BoardJFXView extends GridPane implements iObserver, Initializable {
             this.l_namePl1.setText(this.m_controller.getName(1));
             this.l_namePl2.setText(this.m_controller.getName(2));
 
+            //highlight the current player scoreboard with the same colour as legal slots
+            if (this.m_controller.getCurrentPlayer() == 1){
+                this.l_scorePl1.getStyleClass().add("legal");
+                this.l_scorePl2.getStyleClass().remove("legal");
+                this.l_namePl1.getStyleClass().add("legal");
+                this.l_namePl2.getStyleClass().remove("legal");
+            }
+            else {
+                this.l_scorePl2.getStyleClass().add("legal");
+                this.l_scorePl1.getStyleClass().remove("legal");
+                this.l_namePl2.getStyleClass().add("legal");
+                this.l_namePl1.getStyleClass().remove("legal");
+            }
+
             Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + this.m_controller.getCurrentPlayer() + " finished updating the scene");
         });
     }
