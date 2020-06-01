@@ -158,7 +158,7 @@ public class BoardJFXView extends GridPane implements iObserver, Initializable {
                     if (this.m_controller.isOwner(this.m_controller.getCurrentPlayer(), p) && this.m_controller.isLegal(p))
                         tmp.getStyleClass().add("legal");
                     else
-                        tmp.getStyleClass().remove("legal");
+                        tmp.getStyleClass().removeAll("legal");
                 }
             }
 
@@ -173,15 +173,15 @@ public class BoardJFXView extends GridPane implements iObserver, Initializable {
             //highlight the current player scoreboard with the same colour as legal slots
             if (this.m_controller.getCurrentPlayer() == 1){
                 this.l_scorePl1.getStyleClass().add("legal");
-                this.l_scorePl2.getStyleClass().remove("legal");
+                this.l_scorePl2.getStyleClass().removeAll("legal");
                 this.l_namePl1.getStyleClass().add("legal");
-                this.l_namePl2.getStyleClass().remove("legal");
+                this.l_namePl2.getStyleClass().removeAll("legal");
             }
             else {
                 this.l_scorePl2.getStyleClass().add("legal");
-                this.l_scorePl1.getStyleClass().remove("legal");
+                this.l_scorePl1.getStyleClass().removeAll("legal");
                 this.l_namePl2.getStyleClass().add("legal");
-                this.l_namePl1.getStyleClass().remove("legal");
+                this.l_namePl1.getStyleClass().removeAll("legal");
             }
 
             Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + this.m_controller.getCurrentPlayer() + " finished updating the scene");
