@@ -193,11 +193,14 @@
 /*
 //  TEXTFIELDS
 */
-TextField {
+.text-field {
     -fx-background-color: null;
     -fx-font-size: 40;
-    -fx-text-fill: #DA4FDE;
-    -fx-effect: dropshadow(one-pass-box, #DA4FDE, 80, 0, 0, 0);
+}
+
+/*text fields when hovered*/
+.text-field:hover {
+    -fx-font-size: 45;
 }
 
 /*
