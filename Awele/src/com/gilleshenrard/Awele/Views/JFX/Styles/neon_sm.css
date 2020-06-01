@@ -176,11 +176,20 @@ TextField {
     -fx-effect: dropshadow(one-pass-box, #DA4FDE, 80, 0, 0, 0);
 }
 
+.radio-button:hover {
+    -fx-font-size: 25;
+}
+
 .radio-button .radio {
     -fx-background-color: null;
 }
 
 .radio-button:selected .radio {
+    -fx-background-color: #DA4FDE;
+    -fx-border-radius: 130px;
+}
+
+.radio-button:hover .radio {
     -fx-background-color: #DA4FDE;
     -fx-border-radius: 130px;
 }
