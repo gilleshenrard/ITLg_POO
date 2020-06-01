@@ -50,7 +50,7 @@
 */
 
 /*title section*/
-.titlepane .label {
+.titlepane {
     -fx-font-size: 90;
 }
 
@@ -81,40 +81,47 @@
     -fx-stroke-width: 10px;
 }
 
+/*
+//  PLAYER 1 colouring
+*/
+
 /*Slots player 1*/
-.slotpl1 {
+.player1 {
+    -fx-text-fill: #9CFF9C;
     -fx-effect: dropshadow(one-pass-box, #9CFF9C, 80, 0, 0, 0);
 }
 
 /*score in player 1's slot*/
-.slotpl1 .label{
+.player1 .label{
     -fx-font-size: 100;
     -fx-text-fill: #9CFF9C;
 }
 
 /*circle of player 1's slot*/
-.slotpl1 Circle{
+.player1 Circle{
     -fx-stroke: #9CFF9C;
 }
 
 /*Slots player 2*/
-.slotpl2 {
+.player2 {
+    -fx-text-fill: #5AF2ED;
     -fx-effect: dropshadow(one-pass-box, #5AF2ED, 80, 0, 0, 0);
 }
 
 /*score in player 2's slot*/
-.slotpl2 .label{
+.player2 .label{
     -fx-font-size: 100;
     -fx-text-fill: #5AF2ED;
 }
 
 /*circle of player 2's slot*/
-.slotpl2 Circle{
+.player2 Circle{
     -fx-stroke: #5AF2ED;
 }
 
 /*Slots player 1*/
 .legal {
+    -fx-text-fill: #F09F1D;
     -fx-effect: dropshadow(one-pass-box, #F09F1D, 80, 0, 0, 0);
 }
 
@@ -131,18 +138,6 @@
 /*
 //  SCORE PANELS
 */
-
-/*Player 1's whole scorepanel*/
-.scorepanel1{
-    -fx-text-fill: yellow;
-    -fx-effect: dropshadow(one-pass-box, yellow, 80, 0, 0, 0);
-}
-
-/*Player 2's whole scorepanel*/
-.scorepanel2{
-    -fx-text-fill: #7F24E0;
-    -fx-effect: dropshadow(one-pass-box, #7F24E0, 80, 0, 0, 0);
-}
 
 /*Scoreboard name tags*/
 .nametag{
