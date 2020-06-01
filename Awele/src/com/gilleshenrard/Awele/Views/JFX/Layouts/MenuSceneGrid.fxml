@@ -51,10 +51,25 @@
                     <toggleGroup>
                         <ToggleGroup fx:id="tg_pl1AI" />
                     </toggleGroup>
+                    <VBox.margin>
+                        <Insets bottom="5.0" />
+                    </VBox.margin>
                 </RadioButton>
-                <RadioButton toggleGroup="$tg_pl1AI" text="Easy" />
-                <RadioButton toggleGroup="$tg_pl1AI" text="Medium" />
-                <RadioButton toggleGroup="$tg_pl1AI" text="Hard" />
+                <RadioButton toggleGroup="$tg_pl1AI" text="Easy">
+                    <VBox.margin>
+                        <Insets bottom="5.0" />
+                    </VBox.margin>
+                </RadioButton>
+                <RadioButton toggleGroup="$tg_pl1AI" text="Medium">
+                    <VBox.margin>
+                        <Insets bottom="5.0" />
+                    </VBox.margin>
+                </RadioButton>
+                <RadioButton toggleGroup="$tg_pl1AI" text="Hard">
+                    <VBox.margin>
+                        <Insets bottom="5.0" />
+                    </VBox.margin>
+                </RadioButton>
             </children>
         </VBox>
 
@@ -68,10 +83,25 @@
                     <toggleGroup>
                         <ToggleGroup fx:id="tg_pl2AI" />
                     </toggleGroup>
+                    <VBox.margin>
+                        <Insets bottom="5.0" />
+                    </VBox.margin>
                 </RadioButton>
-                <RadioButton toggleGroup="$tg_pl2AI" text="Easy" />
-                <RadioButton toggleGroup="$tg_pl2AI" text="Medium" />
-                <RadioButton toggleGroup="$tg_pl2AI" text="Hard" selected="true" />
+                <RadioButton toggleGroup="$tg_pl2AI" text="Easy">
+                    <VBox.margin>
+                        <Insets bottom="5.0" />
+                    </VBox.margin>
+                </RadioButton>
+                <RadioButton toggleGroup="$tg_pl2AI" text="Medium">
+                    <VBox.margin>
+                        <Insets bottom="5.0" />
+                    </VBox.margin>
+                </RadioButton>
+                <RadioButton toggleGroup="$tg_pl2AI" text="Hard" selected="true">
+                    <VBox.margin>
+                        <Insets bottom="5.0" />
+                    </VBox.margin>
+                </RadioButton>
             </children>
         </VBox>
 
