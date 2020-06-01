@@ -5,8 +5,8 @@
 
 <!-- Menu scene (6X6 gridPane) -->
 <?import javafx.geometry.Insets?>
-<GridPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="998.0" maxWidth="1744.0" minHeight="998.0" minWidth="1744.0"
-          prefHeight="998.0" prefWidth="1744.0" styleClass="main"
+<GridPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="612.0" maxWidth="1150.0" minHeight="612.0" minWidth="1150.0"
+          prefHeight="612.0" prefWidth="1150.0" styleClass="main"
           stylesheets="@../Styles/neon_sm.css" xmlns="http://javafx.com/javafx/11.0.1">
 
     <!-- Column constraints (6 equal columns) -->

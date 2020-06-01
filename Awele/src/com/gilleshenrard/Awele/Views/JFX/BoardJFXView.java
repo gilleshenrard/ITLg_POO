@@ -136,6 +136,7 @@ public class BoardJFXView extends GridPane implements iObserver, Initializable {
 
             //display the game scene
             this.m_stage.setScene(this.m_scene);
+            this.m_stage.sizeToScene();
 
             //update all the slots with the values from the Board
             Point p = new Point(0, 0);

@@ -66,8 +66,6 @@ public class App extends Application{
         //primary Stage setup
         primaryStage.setTitle("POO - App");
         primaryStage.setResizable(false);
-        primaryStage.setWidth(1024);
-        primaryStage.setHeight(576);
         primaryStage.show();
 
         //make closing the primary stage exit the game

@@ -105,6 +105,7 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
 
             //switch the scenes to display the menu pane
             this.m_stage.setScene(this.m_menuscene);
+            this.m_stage.sizeToScene();
         });
 
         //make the game loop thread wait
