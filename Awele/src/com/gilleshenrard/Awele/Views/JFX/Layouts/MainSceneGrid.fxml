@@ -51,41 +51,41 @@
 
         <!-- Slots grid (6X2 stackPanel grid) -->
         <!-- Player 2's row -->
-        <StackPane prefHeight="Infinity" prefWidth="Infinity" styleClass="slots,player2,illegal" GridPane.rowIndex="2">
+        <StackPane prefHeight="Infinity" prefWidth="Infinity" styleClass="slots,player2" GridPane.rowIndex="2">
             <children>
                 <Circle radius="70.0"/>
                 <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
             </children>
         </StackPane>
-        <StackPane prefHeight="Infinity" prefWidth="Infinity" styleClass="slots,player2,illegal"
+        <StackPane prefHeight="Infinity" prefWidth="Infinity" styleClass="slots,player2"
                    GridPane.columnIndex="1" GridPane.rowIndex="2">
             <children>
                 <Circle radius="70.0"/>
                 <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
             </children>
         </StackPane>
-        <StackPane prefHeight="Infinity" prefWidth="Infinity" styleClass="slots,player2,illegal"
+        <StackPane prefHeight="Infinity" prefWidth="Infinity" styleClass="slots,player2"
                    GridPane.columnIndex="2" GridPane.rowIndex="2">
             <children>
                 <Circle radius="70.0"/>
                 <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
             </children>
         </StackPane>
-        <StackPane prefHeight="Infinity" prefWidth="Infinity" styleClass="slots,player2,illegal"
+        <StackPane prefHeight="Infinity" prefWidth="Infinity" styleClass="slots,player2"
                    GridPane.columnIndex="3" GridPane.rowIndex="2">
             <children>
                 <Circle radius="70.0"/>
                 <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
             </children>
         </StackPane>
-        <StackPane prefHeight="Infinity" prefWidth="Infinity" styleClass="slots,player2,illegal"
+        <StackPane prefHeight="Infinity" prefWidth="Infinity" styleClass="slots,player2"
                    GridPane.columnIndex="4" GridPane.rowIndex="2">
             <children>
                 <Circle radius="70.0"/>
                 <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
             </children>
         </StackPane>
-        <StackPane prefHeight="Infinity" prefWidth="Infinity" styleClass="slots,player2,illegal"
+        <StackPane prefHeight="Infinity" prefWidth="Infinity" styleClass="slots,player2"
                    GridPane.columnIndex="5" GridPane.rowIndex="2">
             <children>
                 <Circle radius="70.0"/>
@@ -94,41 +94,41 @@
         </StackPane>
 
         <!-- Player 1's row -->
-        <StackPane prefHeight="Infinity" prefWidth="Infinity" styleClass="slots,player1,illegal" GridPane.rowIndex="3">
+        <StackPane prefHeight="Infinity" prefWidth="Infinity" styleClass="slots,player1" GridPane.rowIndex="3">
             <children>
                 <Circle radius="70.0"/>
                 <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
             </children>
         </StackPane>
-        <StackPane prefHeight="Infinity" prefWidth="Infinity" styleClass="slots,player1,illegal"
+        <StackPane prefHeight="Infinity" prefWidth="Infinity" styleClass="slots,player1"
                    GridPane.columnIndex="1" GridPane.rowIndex="3">
             <children>
                 <Circle radius="70.0"/>
                 <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
             </children>
         </StackPane>
-        <StackPane prefHeight="Infinity" prefWidth="Infinity" styleClass="slots,player1,illegal"
+        <StackPane prefHeight="Infinity" prefWidth="Infinity" styleClass="slots,player1"
                    GridPane.columnIndex="2" GridPane.rowIndex="3">
             <children>
                 <Circle radius="70.0"/>
                 <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
             </children>
         </StackPane>
-        <StackPane prefHeight="Infinity" prefWidth="Infinity" styleClass="slots,player1,illegal"
+        <StackPane prefHeight="Infinity" prefWidth="Infinity" styleClass="slots,player1"
                    GridPane.columnIndex="3" GridPane.rowIndex="3">
             <children>
                 <Circle radius="70.0"/>
                 <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
             </children>
         </StackPane>
-        <StackPane prefHeight="Infinity" prefWidth="Infinity" styleClass="slots,player1,illegal"
+        <StackPane prefHeight="Infinity" prefWidth="Infinity" styleClass="slots,player1"
                    GridPane.columnIndex="4" GridPane.rowIndex="3">
             <children>
                 <Circle radius="70.0"/>
                 <Label prefHeight="Infinity" prefWidth="Infinity" text="Label"/>
             </children>
         </StackPane>
-        <StackPane prefHeight="Infinity" prefWidth="Infinity" styleClass="slots,player1,illegal"
+        <StackPane prefHeight="Infinity" prefWidth="Infinity" styleClass="slots,player1"
                    GridPane.columnIndex="5" GridPane.rowIndex="3">
             <children>
                 <Circle radius="70.0"/>

@@ -154,14 +154,10 @@ public class BoardJFXView extends GridPane implements iObserver, Initializable {
 
                     //update the CSS class of the whole Stackpane element
                     p.setCoordinates(c, l);
-                    if (this.m_controller.isOwner(this.m_controller.getCurrentPlayer(), p) && this.m_controller.isLegal(p)){
-                        tmp.getStyleClass().remove("illegal");
+                    if (this.m_controller.isOwner(this.m_controller.getCurrentPlayer(), p) && this.m_controller.isLegal(p))
                         tmp.getStyleClass().add("legal");
-                    }
-                    else {
+                    else
                         tmp.getStyleClass().remove("legal");
-                        tmp.getStyleClass().add("illegal");
-                    }
                 }
             }
 
