@@ -27,9 +27,12 @@ public class StoringState implements iGameState {
             controller.displayMessage(controller.getName(controller.getCurrentPlayer()) + " won the game !");
             Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : message displayed");
 
-            //stop the main loop
-            Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Main loop stops");
-            controller.setRunning(false);
+            //Wait for 2 seconds and request menu
+            Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Wait for 2s");
+            try {
+                Thread.sleep(2000);
+            }catch (InterruptedException e){}
+            controller.setMenuRequested(true);
         }
         else {
             //Go to the player switching state
