@@ -10,6 +10,7 @@ package com.gilleshenrard.Awele.Controllers;
 
 import com.gilleshenrard.Awele.App;
 import com.gilleshenrard.Awele.FSM.State;
+import com.gilleshenrard.Awele.Models.DBSQLite;
 import com.gilleshenrard.Awele.Models.Game;
 import com.gilleshenrard.Awele.Models.Player;
 import com.gilleshenrard.Awele.Models.Point;
@@ -24,6 +25,7 @@ public class GameController {
     private BoardController m_board;
     private iNotifiable m_view;
     private State m_currentState;
+    private DBSQLite m_database;
     private int m_currentPlayer;
     private boolean m_running;
     private boolean m_menu;
@@ -40,6 +42,10 @@ public class GameController {
         this.m_currentState = State.MENU;
         this.m_menu = true;
         this.m_pause = false;
+
+        //connect to the database
+        this.m_database = new DBSQLite("db.sqlite");
+        this.m_database.connect();
     }
 
     /**

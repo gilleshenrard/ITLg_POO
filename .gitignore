@@ -32,3 +32,6 @@ out/
 *.ttf
 *.jpg
 *.png
+
+#Database items
+*.sqlite
