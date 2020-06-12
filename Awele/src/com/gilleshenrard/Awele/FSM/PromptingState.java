@@ -70,7 +70,7 @@ public class PromptingState implements iGameState {
                 controller.displayMessage(controller.getName(controller.getCurrentPlayer()) + " : '......................... How about a nice game of chess?'");
             }
 
-            //return to menu
+            //request a pause at the end of the season
             Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Pause the season");
             controller.pauseSeason();
         }
