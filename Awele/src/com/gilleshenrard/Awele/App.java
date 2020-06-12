@@ -1,9 +1,6 @@
 package com.gilleshenrard.Awele;
 
 import com.gilleshenrard.Awele.Views.AI.MinimaxSelect;
-import com.gilleshenrard.Awele.Views.Console.BoardConsoleView;
-import com.gilleshenrard.Awele.Views.Console.GameConsoleView;
-import com.gilleshenrard.Awele.Views.Console.KeyboardSelect;
 import com.gilleshenrard.Awele.Views.JFX.BoardJFXView;
 import com.gilleshenrard.Awele.Views.JFX.GameJFXView;
 import com.gilleshenrard.Awele.Views.JFX.JFXSelect;
@@ -11,7 +8,6 @@ import com.gilleshenrard.Awele.Controllers.GameController;
 import javafx.application.Application;
 import com.gilleshenrard.Awele.Models.Player;
 import javafx.concurrent.Task;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
@@ -36,14 +32,9 @@ public class App extends Application{
         ConsoleHandler cHandler = new ConsoleHandler();
         logger.addHandler(cHandler);
 
-        if (args.length > 0 && args[0].equals("console")) {
-            cHandler.setLevel(Level.OFF);
-            startConsole();
-        }
-        else{
-            cHandler.setLevel(Level.FINE);
-            launch(args);
-        }
+        //setup the logger console handler and launch the application
+        cHandler.setLevel(Level.FINE);
+        launch(args);
     }
 
     /**
@@ -85,28 +76,5 @@ public class App extends Application{
 
         //Launch the game loop thread
         new Thread(mainLoop).start();
-    }
-
-    /**
-     * Start the game with a console UI
-     */
-    public static void startConsole() {
-        //game setup
-        GameController game = new GameController();
-        GameConsoleView gameConsoleView = new GameConsoleView(game);
-
-        //Board setup
-        BoardConsoleView bv = new BoardConsoleView();
-        game.getBoardController().attach(bv);
-
-        //players setup
-        game.setPlayer(new Player(1, "Gilles", new KeyboardSelect(game.getBoardController())));
-        game.setPlayer(new Player(2, "AI", new MinimaxSelect(game.getBoardController())));
-
-        //display the board
-        game.displayGame();
-
-        //launch the game loop
-        game.gameLoop();
     }
 }
