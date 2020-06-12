@@ -1,5 +1,5 @@
 # ITLg_POO
-## Project Awele - Part 2 - v4.1
+## Project Awele - Part 2 - v4.2
 
 ---
 ### 1. Introduction
@@ -129,21 +129,9 @@ instead of just updating the UI directly.
 The unit tests for each class can be found in the mirrored directory tests/ (tests/Models, tests/Views, tests/Controllers).
 
 ---
-### 4. Change list (since v4.0)
+### 4. Change list (since v4.1)
 
-- Remaining Seeds counter is now longer used
-- checkOutcome() and playSlot() have been changed to match the rules changes
-- The Strategy design pattern for slot selection classes is now based on an abstract classe instead of an interface
-- All slot selection classes now check if a legal slot is available before doing anything
-- slot selection classes constructors have been simplified
-- Title banner has been redesigned
-- The Menu button now leads to the Menu State
-- The game loop now starts with the Menu State
-- The menu panel has now been implemented, allowing to edit players names and behaviours, exit and reinitialise the game
-- resizing has been done to match lower resolution screens
-- scenes management is now done in each JFX View controller
-- colouring has been made easier to understand on the board, and bugs have been fixed
-- victory now make the game finish the loop and get to the menu panel
+- The game now waits for a user input after a victory or a concession (e.g. A click on the Menu button)
 
 ---
 ### 5. Known issues
