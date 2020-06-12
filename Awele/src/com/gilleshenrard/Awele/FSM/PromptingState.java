@@ -36,7 +36,11 @@ public class PromptingState implements iGameState {
         int choice = controller.selectSlot(controller.getCurrentPlayer());
         Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Player " + controller.getCurrentPlayer() + " : selectSlot() returned " + choice);
 
-        if(choice == 0 || controller.isMenuRequested()){
+        if (controller.isPauseRequested()){
+            controller.pauseSeason();
+        }
+
+        if(controller.isMenuRequested()){
             //plug in the Menu state
             controller.setNextState(State.MENU);
         }

@@ -13,4 +13,5 @@ public interface iObserver {
     void update();
     void setController(BoardController controller);
     void sendMessage(String msg);
+    void pauseSeason();
 }

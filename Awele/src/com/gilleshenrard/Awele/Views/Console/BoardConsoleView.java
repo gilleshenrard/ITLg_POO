@@ -76,4 +76,8 @@ public class BoardConsoleView implements iObserver {
     public void sendMessage(String msg) {
         System.out.println(msg);
     }
+
+    @Override
+    public void pauseSeason() {
+    }
 }

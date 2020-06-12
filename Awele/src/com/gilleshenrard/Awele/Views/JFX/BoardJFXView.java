@@ -215,6 +215,20 @@ public class BoardJFXView extends GridPane implements iObserver, Initializable {
     }
 
     /**
+     * Wait for a notification
+     */
+    @Override
+    public void pauseSeason() {
+        synchronized (this.m_controller) {
+            try {
+                Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Game loop thread waits for a notification");
+                this.m_controller.wait();
+            }
+            catch (InterruptedException e){}
+        }
+    }
+
+    /**
      * When a slot is clicked, notify the Board controller it can carry on with the player's season.
      * If the next player is an AI, play its season as well
      * @param mouseEvent Slot click event

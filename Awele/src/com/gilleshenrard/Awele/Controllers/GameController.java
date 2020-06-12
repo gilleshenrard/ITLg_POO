@@ -27,6 +27,7 @@ public class GameController {
     private int m_currentPlayer;
     private boolean m_running;
     private boolean m_menu;
+    private boolean m_pause;
 
     /**
      * Create a new Game Controller
@@ -38,6 +39,7 @@ public class GameController {
         this.m_currentPlayer = 1;
         this.m_currentState = State.MENU;
         this.m_menu = true;
+        this.m_pause = false;
     }
 
     /**
@@ -88,6 +90,22 @@ public class GameController {
      */
     public void setMenuRequested(boolean flag) {
         this.m_menu = flag;
+    }
+
+    /**
+     * Tell if a pause has been requested
+     * @return true if requested, false otherwise
+     */
+    public boolean isPauseRequested() {
+        return this.m_pause;
+    }
+
+    /**
+     * Set the flag telling if a pause is requested
+     * @param flag true if pause requested, false otherwise
+     */
+    public void setPauseRequested(boolean flag) {
+        this.m_pause = flag;
     }
 
     /**
@@ -291,6 +309,17 @@ public class GameController {
             throw new NullPointerException("GameController.sendMessage() : BoardController not instantiated");
 
         this.m_board.displayMessage(msg);
+    }
+
+    /**
+     * Do a pause in the game
+     * @throws NullPointerException
+     */
+    public void pauseSeason() throws NullPointerException {
+        if (this.m_board == null)
+            throw new NullPointerException("GameController.pauseSeason() : BoardController not instantiated");
+
+        this.m_board.pauseSeason();
     }
 
     /**

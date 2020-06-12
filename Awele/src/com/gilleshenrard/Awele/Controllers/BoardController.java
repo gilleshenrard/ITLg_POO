@@ -377,6 +377,16 @@ public class BoardController {
     }
 
     /**
+     * Request the views observers to pause the season
+     * @throws NullPointerException
+     */
+    public void pauseSeason() throws NullPointerException{
+        for (iObserver o:this.m_observers) {
+            o.pauseSeason();
+        }
+    }
+
+    /**
      * Set the flag telling if the menu state is requested
      * @param flag true if menu requested, false otherwise
      */
