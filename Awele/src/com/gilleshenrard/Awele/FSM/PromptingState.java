@@ -71,8 +71,8 @@ public class PromptingState implements iGameState {
             }
 
             //return to menu
-            Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Return to menu");
-            controller.setNextState(State.MENU);
+            Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Pause the season");
+            controller.pauseSeason();
         }
     }
 }
