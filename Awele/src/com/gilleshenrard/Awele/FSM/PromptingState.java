@@ -55,6 +55,10 @@ public class PromptingState implements iGameState {
             ((PlayingState)State.PLAYING.getState()).setInput(choice);
         }
         else{
+            //save the current game
+            controller.saveGame();
+
+            //display forfeiture message
             Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Player " + controller.getCurrentPlayer() + " forfeits");
             controller.displayMessage(controller.getName(controller.getCurrentPlayer()) + " can't make any move. He forfeits !");
 

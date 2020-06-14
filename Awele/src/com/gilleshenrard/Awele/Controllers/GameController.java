@@ -45,7 +45,6 @@ public class GameController {
 
         //connect to the database
         this.m_database = new DBSQLite("db.sqlite");
-        this.m_database.connect();
     }
 
     /**
@@ -174,6 +173,7 @@ public class GameController {
     public void gameLoop(){
         try {
             //flag the main loop as running
+            this.m_database.connect();
             this.setRunning(true);
 
             //main game loop, while no victory
@@ -188,6 +188,7 @@ public class GameController {
             System.exit(-1);
         }
 
+        this.m_database.close();
         Logger.getLogger(App.class.getName()).log(Level.INFO, "Game loop exited");
     }
 
@@ -295,6 +296,13 @@ public class GameController {
      */
     public int playSlot(Point p) throws InvalidParameterException{
       return this.getBoardController().playSlot(p);
+    }
+
+    /**
+     * Save the current game in the database
+     */
+    public void saveGame() {
+        this.m_database.saveGame();
     }
 
     /**
