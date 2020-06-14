@@ -60,11 +60,6 @@ public class App extends Application{
         primaryStage.setResizable(false);
         primaryStage.show();
 
-        //make closing the primary stage exit the game
-        primaryStage.setOnCloseRequest((WindowEvent event) -> {
-            System.exit(0);
-        });
-
         //Parallel Task holding the game loop
         Task<Void> mainLoop = new Task<Void>() {
             @Override
