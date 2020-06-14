@@ -300,9 +300,10 @@ public class GameController {
 
     /**
      * Save the current game in the database
+     * @param winner Name of the winner
      */
-    public void saveGame() {
-        this.m_database.saveGame();
+    public void saveGame(String winner) {
+        this.m_database.saveGame(winner);
     }
 
     /**

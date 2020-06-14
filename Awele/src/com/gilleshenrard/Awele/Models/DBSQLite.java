@@ -12,7 +12,7 @@ import com.gilleshenrard.Awele.App;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.PreparedStatement;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 public class DBSQLite {
     private String m_path;
     private Connection m_connection;
-    private Statement m_saveStatement;
+    private PreparedStatement m_saveStatement;
 
     /**
      * Create a new SQLite DB manipulation object
@@ -58,7 +58,7 @@ public class DBSQLite {
      */
     private void setupStatements() throws SQLException {
         //create the "save game" prepared statement
-        String saveQuery = "INSERT INTO " + this.m_path + "(startTime, duration, winner, seedsPlayer1, seedsPlayer2)" +
+        String saveQuery = "INSERT INTO Game (startTime, duration, winner, seedsPlayer1, seedsPlayer2)" +
                             "VALUES (?,?,?,?,?);";
         this.m_saveStatement = this.m_connection.prepareStatement(saveQuery);
         Logger.getLogger(App.class.getName()).log(Level.FINE, "'Save game' prepared statement created");
@@ -71,6 +71,7 @@ public class DBSQLite {
         try {
             this.m_saveStatement.close();
             this.m_connection.close();
+            Logger.getLogger(App.class.getName()).log(Level.FINE, "Database closed");
         } catch (SQLException e) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, e.getMessage());
         }
@@ -78,8 +79,24 @@ public class DBSQLite {
 
     /**
      * Save the current game in the DB
+     * @param winner Name of the winner
      */
-    public void saveGame() {
+    public void saveGame(String winner) {
+        try {
+            //fill up the prepared statement parameters
+            //startTime, duration, winner, seedsPlayer1, seedsPlayer2
+            this.m_saveStatement.setString(1, "0");
+            this.m_saveStatement.setInt(2, 0);
+            this.m_saveStatement.setString(3, winner);
+            this.m_saveStatement.setInt(4, Game.getInstance().getBoard().getStoredSeeds(1));
+            this.m_saveStatement.setInt(5, Game.getInstance().getBoard().getStoredSeeds(2));
 
+            //execute the query on the DB
+            this.m_saveStatement.execute();
+            Logger.getLogger(App.class.getName()).log(Level.INFO, "Current game saved in the DB");
+        }
+        catch (SQLException e) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, e.getMessage());
+        }
     }
 }
