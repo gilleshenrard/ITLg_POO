@@ -15,7 +15,7 @@ import java.security.InvalidParameterException;
 public class Game {
     private Board m_board;
     private Player[] m_player;
-    private static Game m_instance;
+    private static Game m_instance = null;
 
     /**
      * Create a new Game

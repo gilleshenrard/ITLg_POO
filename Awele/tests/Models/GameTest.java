@@ -96,5 +96,6 @@ class GameTest {
     void getInstance_shouldnot_fail() {
         Game g2 = Game.getInstance();
         Assertions.assertEquals(g.getInstance(), g2.getInstance());
+        Assertions.assertEquals(g, g2);
     }
 }
