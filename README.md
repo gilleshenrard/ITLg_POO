@@ -1,5 +1,5 @@
 # ITLg_POO
-## Project Awele - Part 3 - v5.0
+## Project Awele - Part 3 - v5.1
 
 ---
 ### 1. Introduction
@@ -130,15 +130,13 @@ instead of just updating the UI directly.
 The unit tests for each class can be found in the mirrored directory tests/ (tests/Models, tests/Views, tests/Controllers).
 
 ---
-### 4. Change list (since v4.2)
+### 4. Change list (since v5.0)
 
-- Console mode is not available anymore in the Main
-- method to save the game outcome in a SQLite database is now available
-- A game concession from a player doesn't make the loop wait for 2 seconds anymore
+- Values sent to the database are now accurate
 
 ---
 ### 5. Known issues
-- In DBSQLite.saveGame(), Game.getInstance().getBoard().getStoredSeeds() always returns 0
+n/a
 
 ---
 ### 6. To do
