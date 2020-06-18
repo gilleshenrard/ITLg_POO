@@ -118,7 +118,8 @@ public class BoardController {
             throw new NullPointerException("BoardController.setBoardView() : Stack not instantiated");
 
         if (this.m_stack.size() > 0) {
-            this.setBoard(this.m_stack.pop());
+            Board b = this.m_stack.pop();
+            this.m_board.copy(b);
             return 1;
         }
         else

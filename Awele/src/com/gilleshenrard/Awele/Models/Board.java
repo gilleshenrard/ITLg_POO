@@ -35,16 +35,28 @@ public class Board {
      * @param board Board to copy
      */
     public Board(Board board){
-        this.m_storedSeeds = new int[2];
+        this();
+        this.copy(board);
+    }
+
+    /**
+     * Copy board values in the current board
+     * @param board Board from which copy the values
+     * @throws NullPointerException
+     */
+    public void copy(Board board) throws NullPointerException {
+        if (board == null)
+            throw new NullPointerException("Board.copy() : NULL instance of Board");
+
+        //copy the stored seeds values
         this.setStoredSeeds(1, board.getStoredSeeds(1));
         this.setStoredSeeds(2, board.getStoredSeeds(2));
 
+        //copy each slot value
         Point p = new Point(0, 0);
-        this.m_slots = new Slot[2][6];
         for (int l = 0 ; l < 2 ; l++){
             for (int c = 0 ; c < 6 ; c++){
                 p.setCoordinates(c, l);
-                this.m_slots[l][c] = new Slot(p);
                 this.m_slots[l][c].setNbSeeds(board.getSlot(p).getNbSeeds());
             }
         }
