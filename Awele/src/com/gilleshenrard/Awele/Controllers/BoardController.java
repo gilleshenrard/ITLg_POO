@@ -249,8 +249,7 @@ public class BoardController {
 
     /**
      * Harvest the seeds from a slot and, if necessary, scatter them
-     * @param id ID of the player harvesting
-     * @param slot Slot being harvested
+     * @param p Coordinates of the slot to play
      * @return -1 if starvation, -2 if empty slot selected, amount of seeds captured otherwise
      * @throws InvalidParameterException
      * @throws NullPointerException
@@ -342,7 +341,6 @@ public class BoardController {
 
     /**
      * Update all the attached observers
-     * @param ID ID of the current player
      */
     public void updateObservers(){
         for (iObserver o:this.m_observers) {
