@@ -1,5 +1,5 @@
 # ITLg_POO
-## Project Awele - Part 2 - v5.0
+## Project Awele - Part 3 - v5.0
 
 ---
 ### 1. Introduction
@@ -138,7 +138,7 @@ The unit tests for each class can be found in the mirrored directory tests/ (tes
 
 ---
 ### 5. Known issues
-- While trying to save the game, Game.getInstance().getStoredSeeds() always returns 0
+- In DBSQLite.saveGame(), Game.getInstance().getBoard().getStoredSeeds() always returns 0
 
 ---
 ### 6. To do
