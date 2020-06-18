@@ -1,5 +1,5 @@
 # ITLg_POO
-## Project Awele - Part 2 - v4.2
+## Project Awele - Part 2 - v4.3
 
 ---
 ### 1. Introduction
@@ -75,6 +75,7 @@ They are as following :
 - Slot : This represents a slot. It contains coordinates (x,y) and the amount of seeds contained.
 - Game : This is a Singleton Pattern which contains all the game-wise information (players, board)
 - Board : This represents the board. It contains the board (an ArrayList of Slot, seeds stored, seeds remaining for each player)
+- DBSQLite : Allows for SQLite databases manipulations
 
 #### 2. Views
 Views classes can be found in src/Views/. They hold all the methods to interact with the user.
@@ -129,19 +130,21 @@ instead of just updating the UI directly.
 The unit tests for each class can be found in the mirrored directory tests/ (tests/Models, tests/Views, tests/Controllers).
 
 ---
-### 4. Change list (since v4.1)
+### 4. Change list (since v4.2)
 
-- The game now waits for a user input after a victory or a concession (e.g. A click on the Menu button)
+- Console mode is not available anymore in the Main
+- method to save the game outcome in a SQLite database is now available
+- A game concession from a player doesn't make the loop wait for 2 seconds anymore
 
 ---
 ### 5. Known issues
-n/a
+- While trying to save the game, Game.getInstance().getStoredSeeds() always returns 0
 
 ---
 ### 6. To do
 
 - Add seasons history
-- Optimise the unit tests
+- Optimise/complete the unit tests
 - Check if every method throws an exception if supposed to
 - Improve logging
 - Add UML diagram links to README.md
