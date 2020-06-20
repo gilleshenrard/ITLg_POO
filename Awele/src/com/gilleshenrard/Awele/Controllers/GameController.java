@@ -10,14 +10,12 @@ package com.gilleshenrard.Awele.Controllers;
 
 import com.gilleshenrard.Awele.App;
 import com.gilleshenrard.Awele.FSM.State;
-import com.gilleshenrard.Awele.Models.DBSQLite;
-import com.gilleshenrard.Awele.Models.Game;
-import com.gilleshenrard.Awele.Models.Player;
-import com.gilleshenrard.Awele.Models.Point;
+import com.gilleshenrard.Awele.Models.*;
 import com.gilleshenrard.Awele.Views.Selectable;
 import com.gilleshenrard.Awele.Views.iNotifiable;
 
 import java.security.InvalidParameterException;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -371,6 +369,31 @@ public class GameController {
      */
     public void resetClock() {
         Game.getInstance().resetClock();
+    }
+
+
+    /**
+     * Fill the local Result Set with all the games saved in the DB
+     */
+    public void selectGames() {
+        this.m_database.selectGames();
+    }
+
+    /**
+     * Select the next row in the database
+     * @return true if row has been selected, false if no more rows
+     */
+    public boolean selectNext() {
+        return this.m_database.selectNext();
+    }
+
+    /**
+     * Get the value of the current database row at the column specified
+     * @param column Column from which get the value
+     * @return Value of the field located in the current database row and the column specified
+     */
+    public String getField(DBFields column) {
+        return this.m_database.getField(column);
     }
 
     /**

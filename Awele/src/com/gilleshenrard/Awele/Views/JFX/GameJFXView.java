@@ -8,6 +8,7 @@
 package com.gilleshenrard.Awele.Views.JFX;
 
 import com.gilleshenrard.Awele.Controllers.GameController;
+import com.gilleshenrard.Awele.Models.DBFields;
 import com.gilleshenrard.Awele.Views.AI.MinimaxSelect;
 import com.gilleshenrard.Awele.Views.AI.RandomSelect;
 import com.gilleshenrard.Awele.Views.iNotifiable;
@@ -205,6 +206,15 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
      */
     private void onScoresButtonClicked(Event event){
         Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Scores window requested");
+
+        this.m_controller.selectGames();
+        while (this.m_controller.selectNext()) {
+            System.out.println(this.m_controller.getField(DBFields.TIME));
+            System.out.println(this.m_controller.getField(DBFields.CLOCK));
+            System.out.println(this.m_controller.getField(DBFields.WINNER));
+            System.out.println(this.m_controller.getField(DBFields.PLAYER1));
+            System.out.println(this.m_controller.getField(DBFields.PLAYER2));
+        }
     }
 
     /**
