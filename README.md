@@ -133,6 +133,8 @@ The unit tests for each class can be found in the mirrored directory tests/ (tes
 ### 4. Change list (since v5.0)
 
 - Values sent to the database are now accurate
+- Start date and time of each game is now saved in the DB
+- Games duration timing is now saved in the DB
 
 ---
 ### 5. Known issues
