@@ -102,6 +102,9 @@
         </VBox>
 
         <!-- Reset button-->
+        <Button fx:id="b_scores" prefHeight="40" prefWidth="80" mnemonicParsing="false" text="Scores" GridPane.rowIndex="3" GridPane.columnIndex="1" styleClass="generalbutton" />
+
+        <!-- Reset button-->
         <Button fx:id="b_reset" prefHeight="40" prefWidth="80" mnemonicParsing="false" text="Reset" GridPane.rowIndex="3" GridPane.columnIndex="2" styleClass="generalbutton" />
 
         <!-- OK button-->

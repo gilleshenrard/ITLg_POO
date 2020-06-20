@@ -36,6 +36,7 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
     @FXML Button b_ok;
     @FXML Button b_exit;
     @FXML Button b_reset;
+    @FXML Button b_scores;
     @FXML TextField tf_name1;
     @FXML TextField tf_name2;
     @FXML ToggleGroup tg_pl1AI;
@@ -81,6 +82,7 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
         this.b_ok.setOnMouseClicked(this::onOKButtonClicked);
         this.b_exit.setOnMouseClicked(this::onExitButtonClicked);
         this.b_reset.setOnMouseClicked(this::onResetButtonClicked);
+        this.b_scores.setOnMouseClicked(this::onScoresButtonClicked);
     }
 
     /**
@@ -195,6 +197,14 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
 
         //update all the game fields
         this.onOKButtonClicked(event);
+    }
+
+    /**
+     * Handle a click on the Scores button
+     * @param event JavaFX click event
+     */
+    private void onScoresButtonClicked(Event event){
+        Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Scores window requested");
     }
 
     /**
