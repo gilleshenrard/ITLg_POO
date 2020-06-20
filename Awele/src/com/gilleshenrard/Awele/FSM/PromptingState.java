@@ -24,6 +24,12 @@ public class PromptingState implements iGameState {
         //update the game board
         controller.displayGame();
 
+        //initialise the date and time of the game
+        if (controller.getTime() == null) {
+            controller.setTimeNow();
+            Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Date and time of the game set");
+        }
+
         //make any AI player wait for 1s before choosing
         if (controller.isPlayerAI(controller.getCurrentPlayer())) {
             Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Player " + controller.getCurrentPlayer() + " : waits for 1s");

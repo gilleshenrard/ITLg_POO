@@ -11,10 +11,12 @@ package com.gilleshenrard.Awele.Models;
 import com.gilleshenrard.Awele.Views.Selectable;
 
 import java.security.InvalidParameterException;
+import java.time.LocalDateTime;
 
 public class Game {
     private Board m_board;
     private Player[] m_player;
+    private LocalDateTime m_time;
     private static Game m_instance = null;
 
     /**
@@ -25,6 +27,7 @@ public class Game {
         this.m_player = new Player[2];
         this.m_player[0] = null;
         this.m_player[1] = null;
+        this.m_time = null;
         this.m_instance = null;
     }
 
@@ -163,9 +166,24 @@ public class Game {
     }
 
     /**
-     * Reset the Game to an inial value
+     * Reset the Game to an initial value
      */
     public void reset(){
         this.m_board.reset();
+    }
+
+    /**
+     * Set the date and time of the beginning of the game
+     */
+    public void setTimeNow() {
+        this.m_time = LocalDateTime.now();
+    }
+
+    /**
+     * Get the date and time of the beginning of the game
+     * @return Date and time of the beginning of the game
+     */
+    public LocalDateTime getTime() {
+        return this.m_time;
     }
 }

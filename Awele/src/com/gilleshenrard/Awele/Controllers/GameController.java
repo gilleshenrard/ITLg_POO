@@ -18,6 +18,7 @@ import com.gilleshenrard.Awele.Views.Selectable;
 import com.gilleshenrard.Awele.Views.iNotifiable;
 
 import java.security.InvalidParameterException;
+import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -334,6 +335,21 @@ public class GameController {
             throw new NullPointerException("GameController.pauseSeason() : BoardController not instantiated");
 
         this.m_board.pauseSeason();
+    }
+
+    /**
+     * Set the time member to Now
+     */
+    public void setTimeNow() {
+        Game.getInstance().setTimeNow();
+    }
+
+    /**
+     * Get the date and time of the beginning of the game
+     * @return Date and time of the beginning of the game
+     */
+    public LocalDateTime getTime() {
+        return Game.getInstance().getTime();
     }
 
     /**

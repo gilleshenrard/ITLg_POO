@@ -14,6 +14,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 
+import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -83,9 +84,13 @@ public class DBSQLite {
      */
     public void saveGame(String winner) {
         try {
+            //format the game start time to a string 'yyyy-MM-dd HH:mm:ss'
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            String formatDateTime = Game.getInstance().getTime().format(formatter);
+
             //fill up the prepared statement parameters
             //startTime, duration, winner, seedsPlayer1, seedsPlayer2
-            this.m_saveStatement.setString(1, "0");
+            this.m_saveStatement.setString(1, formatDateTime);
             this.m_saveStatement.setInt(2, 0);
             this.m_saveStatement.setString(3, winner);
             this.m_saveStatement.setInt(4, Game.getInstance().getBoard().getStoredSeeds(1));

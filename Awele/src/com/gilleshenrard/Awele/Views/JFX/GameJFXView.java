@@ -175,6 +175,9 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
         //reset the game
         this.m_controller.resetGame();
 
+        //reset the game start time
+        this.m_controller.setTimeNow();
+
         //update all the game fields
         this.onOKButtonClicked(event);
     }
