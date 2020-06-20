@@ -146,5 +146,5 @@ n/a
 - Add seasons history
 - Optimise/complete the unit tests
 - Check if every method throws an exception if supposed to
-- Improve logging
+- Improve logging (log file for FINE level and lower, console for INFO and higher + add FINER everywhere for verbose)
 - Add UML diagram links to README.md
