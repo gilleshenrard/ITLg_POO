@@ -11,7 +11,7 @@ import com.gilleshenrard.Awele.Views.iObserver;
 import com.gilleshenrard.Awele.Models.Point;
 
 public class BoardConsoleView implements iObserver {
-    private BoardController m_boardctrl;
+    private BoardController m_board;
 
     /**
      * create a new Board View
@@ -19,7 +19,7 @@ public class BoardConsoleView implements iObserver {
      * @throws NullPointerException
      */
     public BoardConsoleView() throws NullPointerException{
-        this.m_boardctrl = null;
+        this.m_board = null;
     }
 
     /**
@@ -44,22 +44,22 @@ public class BoardConsoleView implements iObserver {
         //|  0 |
         //PLAYER
 
-        System.out.println(this.m_boardctrl.getName(2));
-        this.displaySlot(this.m_boardctrl.getStoredSeeds(2), false);
+        System.out.println(this.m_board.getName(2));
+        this.displaySlot(this.m_board.getStoredSeeds(2), false);
         System.out.println();
 
         Point p = new Point(0, 0);
         for(int l=1 ; l>=0 ; l--) {
             for (int c = 0; c < 6; c++) {
                 p.setCoordinates((l > 0 ? 5 - c : c), l);
-                this.displaySlot(this.m_boardctrl.getSlotSeeds(p),  l == this.m_boardctrl.getCurrentPlayer()-1 && this.m_boardctrl.isLegal(p));
+                this.displaySlot(this.m_board.getSlotSeeds(p),  l == this.m_board.getCurrentPlayer()-1 && this.m_board.isLegal(p));
             }
             System.out.println();
         }
 
-        this.displaySlot(this.m_boardctrl.getStoredSeeds(1), false);
+        this.displaySlot(this.m_board.getStoredSeeds(1), false);
         System.out.println();
-        System.out.println(this.m_boardctrl.getName(1));
+        System.out.println(this.m_board.getName(1));
 
     }
     @Override
@@ -69,7 +69,7 @@ public class BoardConsoleView implements iObserver {
 
     @Override
     public void setController(BoardController controller) {
-        this.m_boardctrl = controller;
+        this.m_board = controller;
     }
 
     @Override
