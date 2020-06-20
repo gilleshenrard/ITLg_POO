@@ -82,7 +82,7 @@ public class DBSQLite {
      * Save the current game in the DB
      * @param winner Name of the winner
      */
-    public void saveGame(String winner) {
+    public void saveGame(int winner) {
         try {
             //format the game start time to a string 'yyyy-MM-dd HH:mm:ss'
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -92,7 +92,7 @@ public class DBSQLite {
             //startTime, duration, winner, seedsPlayer1, seedsPlayer2
             this.m_saveStatement.setString(1, formatDateTime);
             this.m_saveStatement.setString(2, Game.getInstance().getClock().toString());
-            this.m_saveStatement.setString(3, winner);
+            this.m_saveStatement.setString(3, Game.getInstance().getName(winner));
             this.m_saveStatement.setInt(4, Game.getInstance().getBoard().getStoredSeeds(1));
             this.m_saveStatement.setInt(5, Game.getInstance().getBoard().getStoredSeeds(2));
 

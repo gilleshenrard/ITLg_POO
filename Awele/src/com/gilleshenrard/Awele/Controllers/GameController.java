@@ -303,8 +303,8 @@ public class GameController {
     /**
      * Save the current game in the database
      */
-    public void saveGame() {
-        this.m_database.saveGame(this.getName(this.getCurrentPlayer()));
+    public void saveGame(int ID) {
+        this.m_database.saveGame(ID);
     }
 
     /**

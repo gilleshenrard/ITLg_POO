@@ -25,7 +25,7 @@ public class StoringState implements iGameState {
         if (controller.getStoredSeeds(controller.getCurrentPlayer()) > 24) {
             //stop the clock and save the current game in the database
             controller.stopClock();
-            controller.saveGame();
+            controller.saveGame(controller.getCurrentPlayer());
 
             //display the game board
             controller.displayGame();

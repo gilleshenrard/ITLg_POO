@@ -73,7 +73,7 @@ public class PromptingState implements iGameState {
         else{
             //save the current game
             controller.stopClock();
-            controller.saveGame();
+            controller.saveGame(3 - controller.getCurrentPlayer());
 
             //display forfeiture message
             Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Player " + controller.getCurrentPlayer() + " forfeits");
