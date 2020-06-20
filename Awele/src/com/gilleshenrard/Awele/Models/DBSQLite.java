@@ -62,7 +62,8 @@ public class DBSQLite {
      */
     private void setupStatements() throws SQLException {
         //create the "save game" prepared statement
-        String saveQuery = "INSERT INTO Game (startTime, duration, winner, seedsPlayer1, seedsPlayer2)" +
+        //startTime, duration, winner, seedsPlayer1, seedsPlayer2
+        String saveQuery = "INSERT INTO Game (" + DBFields.TIME.toString() + ", " + DBFields.CLOCK.toString() + ", " + DBFields.WINNER.toString() + ", " + DBFields.PLAYER1.toString() + ", " + DBFields.PLAYER2.toString() + ")" +
                             "VALUES (?,?,?,?,?);";
         this.m_saveStatement = this.m_connection.prepareStatement(saveQuery);
         Logger.getLogger(App.class.getName()).log(Level.FINE, "'Save game' prepared statement created");
@@ -146,21 +147,21 @@ public class DBSQLite {
      * @param column Column from which get the value
      * @return Value of the field located in the current database row and the column specified
      */
-    public String getField(String column) {
+    public String getField(DBFields column) {
         if (this.m_rowsremaining) {
             try {
                 switch (column) {
-                    case "startTime":
-                    case "duration":
-                    case "winner":
-                        return this.m_gamesResultSet.getString(column);
+                    case TIME:
+                    case CLOCK:
+                    case WINNER:
+                        return this.m_gamesResultSet.getString(column.toString());
 
-                    case "seedsPlayer1":
-                    case "seedsPlayer2":
-                        return Integer.toString(this.m_gamesResultSet.getInt(column));
+                    case PLAYER1:
+                    case PLAYER2:
+                        return Integer.toString(this.m_gamesResultSet.getInt(column.toString()));
 
                     default:
-                        throw new SQLException("Invalid database column name ('" + column + "')");
+                        throw new SQLException("Invalid database column name ('" + column.toString() + "')");
                 }
             }
             catch (SQLException e) {
