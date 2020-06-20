@@ -145,6 +145,12 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
         //notify the game loop thread to resume the game loop
         synchronized (this.m_controller) {
             this.m_controller.notify();
+            this.m_controller.getBoardController().notify();
+        }
+
+        //notify the game loop thread to resume the game loop (in the event of a pause)
+        synchronized (this.m_controller.getBoardController()) {
+            this.m_controller.getBoardController().notify();
         }
     }
 

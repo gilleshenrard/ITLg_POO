@@ -44,6 +44,7 @@ public class PromptingState implements iGameState {
 
         if (controller.isPauseRequested()){
             controller.pauseSeason();
+            controller.setPauseRequested(false);
         }
 
         if(controller.isMenuRequested()){
