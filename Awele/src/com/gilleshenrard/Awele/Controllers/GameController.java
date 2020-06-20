@@ -19,12 +19,11 @@ import com.gilleshenrard.Awele.Views.iNotifiable;
 
 import java.security.InvalidParameterException;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class GameController {
-    private BoardController m_board;
+    private BoardController m_boardctrl;
     private iNotifiable m_view;
     private State m_currentState;
     private DBSQLite m_database;
@@ -37,8 +36,8 @@ public class GameController {
      * Create a new Game Controller
      */
     public GameController(){
-        this.m_board = new BoardController(Game.getInstance().getBoard());
-        this.m_board.setGameController(this);
+        this.m_boardctrl = new BoardController(Game.getInstance().getBoard());
+        this.m_boardctrl.setGameController(this);
         this.m_view = null;
         this.m_currentPlayer = 1;
         this.m_currentState = State.MENU;
@@ -199,7 +198,7 @@ public class GameController {
      * @return Board to return
      */
     public BoardController getBoardController(){
-        return this.m_board;
+        return this.m_boardctrl;
     }
 
     /**
@@ -321,10 +320,10 @@ public class GameController {
      * @throws NullPointerException
      */
     public void displayMessage(String msg) throws NullPointerException{
-        if (this.m_board == null)
+        if (this.m_boardctrl == null)
             throw new NullPointerException("GameController.sendMessage() : BoardController not instantiated");
 
-        this.m_board.displayMessage(msg);
+        this.m_boardctrl.displayMessage(msg);
     }
 
     /**
@@ -332,10 +331,10 @@ public class GameController {
      * @throws NullPointerException
      */
     public void pauseSeason() throws NullPointerException {
-        if (this.m_board == null)
+        if (this.m_boardctrl == null)
             throw new NullPointerException("GameController.pauseSeason() : BoardController not instantiated");
 
-        this.m_board.pauseSeason();
+        this.m_boardctrl.pauseSeason();
     }
 
     /**
@@ -380,10 +379,10 @@ public class GameController {
      * @throws NullPointerException
      */
     public void displayWarning(String msg) throws NullPointerException{
-        if (this.m_board == null)
+        if (this.m_boardctrl == null)
             throw new NullPointerException("GameController.sendWarning() : BoardController not instantiated");
 
-        this.m_board.displayMessage(msg);
+        this.m_boardctrl.displayMessage(msg);
     }
 
     /**
