@@ -77,6 +77,15 @@ They are as following :
 - Board : This represents the board. It contains the board (an ArrayList of Slot, seeds stored, seeds remaining for each player)
 - DBSQLite : Allows for SQLite databases manipulations
 
+##### 1.a SQLite database
+A simple table database is kept updated by the game. SQLite has been chosen as the technology used for its simplicity.
+The table holds the following columns : 
+- Start date and time
+- Duration of a game
+- Name of the winner
+- Seeds the player 1 has stored
+- Seeds the player 2 has stored
+
 #### 2. Views
 Views classes can be found in src/Views/. They hold all the methods to interact with the user.
 
