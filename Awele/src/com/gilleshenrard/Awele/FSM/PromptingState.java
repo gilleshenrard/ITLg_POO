@@ -43,11 +43,20 @@ public class PromptingState implements iGameState {
         Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Player " + controller.getCurrentPlayer() + " : selectSlot() returned " + choice);
 
         if (controller.isPauseRequested()){
+            //stop the game clock
+            Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Game clock stopped");
+            controller.stopClock();
+
+            //pause the game thread loop
             controller.pauseSeason();
             controller.setPauseRequested(false);
         }
 
         if(controller.isMenuRequested()){
+            //stop the game clock
+            Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Game clock stopped");
+            controller.stopClock();
+
             //plug in the Menu state
             controller.setNextState(State.MENU);
         }
@@ -63,6 +72,7 @@ public class PromptingState implements iGameState {
         }
         else{
             //save the current game
+            controller.stopClock();
             controller.saveGame();
 
             //display forfeiture message

@@ -91,7 +91,7 @@ public class DBSQLite {
             //fill up the prepared statement parameters
             //startTime, duration, winner, seedsPlayer1, seedsPlayer2
             this.m_saveStatement.setString(1, formatDateTime);
-            this.m_saveStatement.setInt(2, 0);
+            this.m_saveStatement.setString(2, Game.getInstance().getClock().toString());
             this.m_saveStatement.setString(3, winner);
             this.m_saveStatement.setInt(4, Game.getInstance().getBoard().getStoredSeeds(1));
             this.m_saveStatement.setInt(5, Game.getInstance().getBoard().getStoredSeeds(2));

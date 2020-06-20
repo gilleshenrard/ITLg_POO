@@ -142,6 +142,10 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
         tmp_radio = (RadioButton) this.tg_pl2AI.getSelectedToggle();
         this.setBehaviour(2, tmp_radio.getText());
 
+        Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Game clock started");
+        //start the game clock
+        this.m_controller.startClock();
+
         //notify the game loop thread to resume the game loop
         synchronized (this.m_controller) {
             this.m_controller.notify();
@@ -182,7 +186,12 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
         this.m_controller.resetGame();
 
         //reset the game start time
+        Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Game start time resetted");
         this.m_controller.setTimeNow();
+
+        //reset the game clock
+        Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Game clock resetted");
+        this.m_controller.resetClock();
 
         //update all the game fields
         this.onOKButtonClicked(event);

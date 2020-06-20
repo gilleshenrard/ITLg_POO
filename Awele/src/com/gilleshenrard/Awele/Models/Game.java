@@ -12,11 +12,14 @@ import com.gilleshenrard.Awele.Views.Selectable;
 
 import java.security.InvalidParameterException;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class Game {
     private Board m_board;
     private Player[] m_player;
     private LocalDateTime m_time;
+    private LocalTime m_startClock;
+    private LocalTime m_finalClock;
     private static Game m_instance = null;
 
     /**
@@ -28,7 +31,11 @@ public class Game {
         this.m_player[0] = null;
         this.m_player[1] = null;
         this.m_time = null;
+        this.m_startClock = null;
         this.m_instance = null;
+
+        //set the final clock to its initial value
+        this.resetClock();
     }
 
     /**
@@ -185,5 +192,38 @@ public class Game {
      */
     public LocalDateTime getTime() {
         return this.m_time;
+    }
+
+    /**
+     * (re-)Start the game timer
+     */
+    public void startClock() {
+        this.m_startClock = LocalTime.now();
+    }
+
+    /**
+     * Add the elapsed time between now and the start timer to the final clock
+     */
+    public void stopClock() {
+        LocalTime stop = LocalTime.now();
+
+        this.m_finalClock = this.m_finalClock.plusHours(stop.getHour() - this.m_startClock.getHour());
+        this.m_finalClock = this.m_finalClock.plusMinutes(stop.getMinute() - this.m_startClock.getMinute());
+        this.m_finalClock = this.m_finalClock.plusSeconds(stop.getSecond() - this.m_startClock.getSecond());
+    }
+
+    /**
+     * Reset the final game clock to 00:00:00
+     */
+    public void resetClock() {
+        this.m_finalClock = LocalTime.of(0, 0, 0);
+    }
+
+    /**
+     * Get the final game clock
+     * @return Final game clock
+     */
+    public LocalTime getClock() {
+        return this.m_finalClock;
     }
 }

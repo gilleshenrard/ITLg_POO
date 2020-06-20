@@ -19,6 +19,7 @@ import com.gilleshenrard.Awele.Views.iNotifiable;
 
 import java.security.InvalidParameterException;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -350,6 +351,27 @@ public class GameController {
      */
     public LocalDateTime getTime() {
         return Game.getInstance().getTime();
+    }
+
+    /**
+     * (re-)Start the game timer
+     */
+    public void startClock() {
+        Game.getInstance().startClock();
+    }
+
+    /**
+     * Add the elapsed time between now and the start timer to the final clock
+     */
+    public void stopClock() {
+        Game.getInstance().stopClock();
+    }
+
+    /**
+     * Reset the final game clock to 00:00:00
+     */
+    public void resetClock() {
+        Game.getInstance().resetClock();
     }
 
     /**
