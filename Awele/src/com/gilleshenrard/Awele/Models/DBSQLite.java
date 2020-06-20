@@ -9,10 +9,7 @@ package com.gilleshenrard.Awele.Models;
 
 import com.gilleshenrard.Awele.App;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.PreparedStatement;
+import java.sql.*;
 
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
@@ -22,6 +19,9 @@ public class DBSQLite {
     private String m_path;
     private Connection m_connection;
     private PreparedStatement m_saveStatement;
+    private PreparedStatement m_selectStatement;
+    private ResultSet m_gamesResultSet;
+    private boolean m_rowsremaining;
 
     /**
      * Create a new SQLite DB manipulation object
@@ -31,6 +31,9 @@ public class DBSQLite {
         this.m_path = dBPath;
         this.m_connection = null;
         this.m_saveStatement = null;
+        this.m_selectStatement = null;
+        this.m_gamesResultSet = null;
+        this.m_rowsremaining = false;
     }
 
     /**
@@ -63,6 +66,11 @@ public class DBSQLite {
                             "VALUES (?,?,?,?,?);";
         this.m_saveStatement = this.m_connection.prepareStatement(saveQuery);
         Logger.getLogger(App.class.getName()).log(Level.FINE, "'Save game' prepared statement created");
+
+        //create the "select scores" prepared statement
+        String SelectQuery = "SELECT * FROM Game;";
+        this.m_selectStatement = this.m_connection.prepareStatement(SelectQuery);
+        Logger.getLogger(App.class.getName()).log(Level.FINE, "'Select scores' prepared statement created");
     }
 
     /**
@@ -71,6 +79,7 @@ public class DBSQLite {
     public void close() {
         try {
             this.m_saveStatement.close();
+            this.m_selectStatement.close();
             this.m_connection.close();
             Logger.getLogger(App.class.getName()).log(Level.FINE, "Database closed");
         } catch (SQLException e) {
@@ -103,5 +112,62 @@ public class DBSQLite {
         catch (SQLException e) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, e.getMessage());
         }
+    }
+
+    /**
+     * Fill the local Result Set with all the games saved in the DB
+     */
+    public void selectGames() {
+        try {
+            this.m_gamesResultSet = this.m_selectStatement.executeQuery();
+        }
+        catch (SQLException e) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, e.getMessage());
+        }
+    }
+
+    /**
+     * Select the next row in the database
+     * @return true if row has been selected, false if no more rows
+     */
+    public boolean selectNext() {
+        try {
+            this.m_rowsremaining = this.m_gamesResultSet.next();
+        }
+        catch (SQLException e) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, e.getMessage());
+        }
+
+        return this.m_rowsremaining;
+    }
+
+    /**
+     * Get the value of the current database row at the column specified
+     * @param column Column from which get the value
+     * @return Value of the field located in the current database row and the column specified
+     */
+    public String getField(String column) {
+        if (this.m_rowsremaining) {
+            try {
+                switch (column) {
+                    case "startTime":
+                    case "duration":
+                    case "winner":
+                        return this.m_gamesResultSet.getString(column);
+
+                    case "seedsPlayer1":
+                    case "seedsPlayer2":
+                        return Integer.toString(this.m_gamesResultSet.getInt(column));
+
+                    default:
+                        throw new SQLException("Invalid database column name ('" + column + "')");
+                }
+            }
+            catch (SQLException e) {
+                Logger.getLogger(App.class.getName()).log(Level.SEVERE, e.getMessage());
+            }
+        }
+
+        return null;
     }
 }
