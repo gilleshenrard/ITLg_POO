@@ -161,7 +161,6 @@ The Minimax algorithm is predictable and will make invalid choices (letting the 
 ### 6. To do
 
 - Make the main stage moveable
-- Make java determine the working directory to locate the database
 - build a custom window (with a console animation) for the easter egg
 - Add seasons history
 - Update the last edit dates on the files to make it accurate
