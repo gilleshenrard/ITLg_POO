@@ -152,11 +152,13 @@ The unit tests for each class can be found in the mirrored directory tests/ (tes
 
 ---
 ### 5. Known issues
-n/a
+The Minimax algorithm is predictable and will make invalid choices (letting the opponent starve)
 
 ---
 ### 6. To do
 
+- Make java determine the working directory to locate the database
+- build a custom window (with a console animation) for the easter egg
 - Add seasons history
 - Optimise/complete the unit tests
 - Check if every method throws an exception if supposed to
