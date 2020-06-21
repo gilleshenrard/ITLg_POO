@@ -8,7 +8,6 @@
 package com.gilleshenrard.Awele.Views.JFX;
 
 import com.gilleshenrard.Awele.Controllers.GameController;
-import com.gilleshenrard.Awele.Models.DBFields;
 import com.gilleshenrard.Awele.Views.AI.MinimaxSelect;
 import com.gilleshenrard.Awele.Views.AI.RandomSelect;
 import com.gilleshenrard.Awele.Views.iNotifiable;
@@ -34,6 +33,7 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
     private Stage m_stage;
     private Scene m_menuscene = null;
     private GameController m_controller;
+    private ScoresDBDataView m_dbView;
     @FXML Button b_ok;
     @FXML Button b_exit;
     @FXML Button b_reset;
@@ -45,13 +45,15 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
 
     /**
      * Create a new Game Java FX view
+     *
      * @param controller Game controller to use
-     * @param stage Primary stage hosting the JavaFX scenes
+     * @param stage      Primary stage hosting the JavaFX scenes
      * @throws NullPointerException
      */
     public GameJFXView(GameController controller, Stage stage) throws NullPointerException {
         this.m_controller = controller;
         this.m_controller.setView(this);
+        this.m_dbView = new ScoresDBDataView(controller);
         this.m_stage = stage;
 
         try {
@@ -65,14 +67,14 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
 
             //create a new scene from the graph
             this.m_menuscene = new Scene(graph);
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             System.err.println(e.getMessage());
         }
     }
 
     /**
      * Initialise the JavaFX elements of the Menu pane
+     *
      * @param url
      * @param resourceBundle
      */
@@ -88,6 +90,7 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
 
     /**
      * Display an Alert pane with an error message
+     *
      * @param msg Message to display
      */
     @Override
@@ -116,21 +119,22 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
         });
 
         //make the game loop thread wait
-        synchronized (this.m_controller){
+        synchronized (this.m_controller) {
             try {
                 Logger.getLogger(this.getClass().getName()).log(Level.FINE, "GameJFXView.DisplayMenu() : game loop thread waiting");
                 this.m_controller.wait();
                 Logger.getLogger(this.getClass().getName()).log(Level.FINE, "GameJFXView.DisplayMenu() : game loop resumed");
+            } catch (InterruptedException e) {
             }
-            catch (InterruptedException e){}
         }
     }
 
     /**
      * Handle a click on the OK button
+     *
      * @param event JavaFX click event
      */
-    private void onOKButtonClicked(Event event){
+    private void onOKButtonClicked(Event event) {
         Logger.getLogger(this.getClass().getName()).log(Level.FINE, "GameJFXView.onOKButton() : display Main screen");
 
         //get the players' names written in the options pane
@@ -163,9 +167,10 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
 
     /**
      * Handle a click on the Exit Game button
+     *
      * @param event JavaFX click event
      */
-    private void onExitButtonClicked(Event event){
+    private void onExitButtonClicked(Event event) {
         Logger.getLogger(this.getClass().getName()).log(Level.FINE, "GameJFXView.onExitButton() : flag the main loop as not running");
 
         //flag the game loop as stopped and close the main stage
@@ -180,9 +185,10 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
 
     /**
      * Handle a click on the Exit Game button
+     *
      * @param event JavaFX click event
      */
-    private void onResetButtonClicked(Event event){
+    private void onResetButtonClicked(Event event) {
         Logger.getLogger(this.getClass().getName()).log(Level.FINE, "GameJFXView.onExitButton() : flag the main loop as not running");
 
         //reset the game
@@ -202,24 +208,21 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
 
     /**
      * Handle a click on the Scores button
+     *
      * @param event JavaFX click event
      */
-    private void onScoresButtonClicked(Event event){
+    private void onScoresButtonClicked(Event event) {
         Logger.getLogger(this.getClass().getName()).log(Level.FINE, "Scores window requested");
 
+        //retrieve all the rows in the database and show the scores modal window
         this.m_controller.selectGames();
-        while (this.m_controller.selectNext()) {
-            System.out.println(this.m_controller.getField(DBFields.TIME));
-            System.out.println(this.m_controller.getField(DBFields.CLOCK));
-            System.out.println(this.m_controller.getField(DBFields.WINNER));
-            System.out.println(this.m_controller.getField(DBFields.PLAYER1));
-            System.out.println(this.m_controller.getField(DBFields.PLAYER2));
-        }
+        this.m_dbView.show();
     }
 
     /**
      * Assign a behaviour to a player
-     * @param ID ID of the player to which assign the behaviour
+     *
+     * @param ID        ID of the player to which assign the behaviour
      * @param behaviour Behaviour to assign to the player
      * @throws InvalidParameterException
      * @throws NullPointerException
