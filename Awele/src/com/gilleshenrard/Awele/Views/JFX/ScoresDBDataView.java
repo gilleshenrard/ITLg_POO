@@ -15,6 +15,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class ScoresDBDataView {
@@ -47,6 +48,7 @@ public class ScoresDBDataView {
         //Create the stage which will show the whole scene
         this.m_modal = new Stage();
         this.m_modal.setTitle("Scores");
+        this.m_modal.initModality(Modality.APPLICATION_MODAL);
         this.m_modal.setScene(new Scene(this.m_pane, 450, 450));
     }
 
@@ -92,6 +94,6 @@ public class ScoresDBDataView {
         }
 
         //display the final stage
-        this.m_modal.show();
+        this.m_modal.showAndWait();
     }
 }
