@@ -10,8 +10,8 @@ import com.gilleshenrard.Awele.Models.Player;
 import javafx.concurrent.Task;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
 
+import java.io.File;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,6 +46,10 @@ public class App extends Application{
         //game setup
         GameController game = new GameController();
         GameJFXView gameView = new GameJFXView(game, primaryStage);
+
+        //setup the SQLite DB path
+        String path = System.getProperty("user.dir") + File.separator + "db.sqlite";
+        game.setDBPath(path);
 
         //Board setup
         BoardJFXView bv = new BoardJFXView(primaryStage);

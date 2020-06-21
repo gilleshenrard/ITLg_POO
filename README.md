@@ -151,6 +151,7 @@ The unit tests for each class can be found in the mirrored directory tests/ (tes
 - Games duration timing is now saved in the DB
 - The scores button in the menu now shows a new window with all rows (also in the console)
 - The DB window is now modal
+- The DB can now be used by placing it either at the project root directory or the same one as the .JAR
 
 ---
 ### 5. Known issues

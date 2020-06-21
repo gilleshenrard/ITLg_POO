@@ -43,7 +43,7 @@ public class GameController {
         this.m_pause = false;
 
         //connect to the database
-        this.m_database = new DBSQLite("db.sqlite");
+        this.m_database = new DBSQLite();
     }
 
     /**
@@ -312,6 +312,15 @@ public class GameController {
         this.setCurrentPlayer(1);
         this.getBoardController().resetBoard();
     }
+
+    /**
+     * Set the path to the DB file
+     * @param path Path to the DB file
+     */
+    public void setDBPath(String path) {
+        this.m_database.setPath(path);
+    }
+
     /**
      * Display a message
      * @param msg Message to display

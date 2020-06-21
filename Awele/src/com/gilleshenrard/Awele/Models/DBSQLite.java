@@ -25,10 +25,9 @@ public class DBSQLite {
 
     /**
      * Create a new SQLite DB manipulation object
-     * @param dBPath
      */
-    public DBSQLite(String dBPath) {
-        this.m_path = dBPath;
+    public DBSQLite() {
+        this.m_path = null;
         this.m_connection = null;
         this.m_saveStatement = null;
         this.m_selectStatement = null;
@@ -50,10 +49,20 @@ public class DBSQLite {
         }
         catch (ClassNotFoundException e) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, e.getMessage());
+            e.printStackTrace();
         }
         catch (SQLException e) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, e.getMessage());
+            e.printStackTrace();
         }
+    }
+
+    /**
+     * Set the path to the DB file
+     * @param path Path to the DB file
+     */
+    public void setPath(String path) {
+        this.m_path = path;
     }
 
     /**
