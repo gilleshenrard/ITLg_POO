@@ -79,6 +79,11 @@ They are as following :
 
 ##### 1.a SQLite database
 A simple table database is kept updated by the game. SQLite has been chosen as the technology used for its simplicity.
+
+Ideally, the database should contain two tables (Game and Board), and a DB view would conceal the information needed,
+but for the sake of simplicity and to keep only one table in the database, the information from both tables will be
+inserted and retrieved manually, one at a time.
+
 The table holds the following columns : 
 - Start date and time
 - Duration of a game
