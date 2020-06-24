@@ -150,8 +150,9 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
         this.setBehaviour(2, tmp_radio.getText());
 
         Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Game clock started");
-        //start the game clock
-        this.m_controller.startClock();
+        //if game not over, start the game clock
+        if (!this.m_controller.isGameOver())
+            this.m_controller.startClock();
 
         //notify the game loop thread to resume the game loop
         synchronized (this.m_controller) {
@@ -201,6 +202,9 @@ public class GameJFXView extends GridPane implements Initializable, iNotifiable 
         //reset the game clock
         Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Game clock resetted");
         this.m_controller.resetClock();
+
+        //set the game as not over
+        this.m_controller.setGameOver(false);
 
         //update all the game fields
         this.onOKButtonClicked(event);
