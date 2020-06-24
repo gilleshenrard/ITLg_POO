@@ -28,7 +28,7 @@ public class GameController {
     private int m_currentPlayer;
     private boolean m_running;
     private boolean m_menu;
-    private boolean m_pause;
+    private boolean m_gameover;
 
     /**
      * Create a new Game Controller
@@ -40,7 +40,7 @@ public class GameController {
         this.m_currentPlayer = 1;
         this.m_currentState = State.MENU;
         this.m_menu = true;
-        this.m_pause = false;
+        this.m_gameover = false;
 
         //connect to the database
         this.m_database = new DBSQLite();
@@ -100,16 +100,16 @@ public class GameController {
      * Tell if a pause has been requested
      * @return true if requested, false otherwise
      */
-    public boolean isPauseRequested() {
-        return this.m_pause;
+    public boolean isGameOver() {
+        return this.m_gameover;
     }
 
     /**
      * Set the flag telling if a pause is requested
      * @param flag true if pause requested, false otherwise
      */
-    public void setPauseRequested(boolean flag) {
-        this.m_pause = flag;
+    public void setGameOver(boolean flag) {
+        this.m_gameover = flag;
     }
 
     /**

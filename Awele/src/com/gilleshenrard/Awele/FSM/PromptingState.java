@@ -42,14 +42,14 @@ public class PromptingState implements iGameState {
         int choice = controller.selectSlot(controller.getCurrentPlayer());
         Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Player " + controller.getCurrentPlayer() + " : selectSlot() returned " + choice);
 
-        if (controller.isPauseRequested()){
+        if (controller.isGameOver()){
             //stop the game clock
             Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Game clock stopped");
             controller.stopClock();
 
             //pause the game thread loop
             controller.pauseSeason();
-            controller.setPauseRequested(false);
+            //controller.setGameOver(false);
         }
 
         if(controller.isMenuRequested()){
@@ -87,7 +87,7 @@ public class PromptingState implements iGameState {
 
             //request a pause at the end of the season
             Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Pause the season");
-            controller.setPauseRequested(true);
+            controller.setGameOver(true);
         }
     }
 }

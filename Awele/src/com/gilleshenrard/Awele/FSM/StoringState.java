@@ -34,7 +34,7 @@ public class StoringState implements iGameState {
 
             //request a pause at the end of current season
             Logger.getLogger(this.getClass().getName()).log(Level.INFO, "Pause requested at next season");
-            controller.setPauseRequested(true);
+            controller.setGameOver(true);
         }
 
         //Go to the player switching state
