@@ -1,5 +1,5 @@
 # ITLg_POO
-## Project Awele - Part 3 - v5.1
+## Project Awele - Part 3 - v5.2
 
 ---
 ### 1. Introduction
@@ -144,14 +144,10 @@ instead of just updating the UI directly.
 The unit tests for each class can be found in the mirrored directory tests/ (tests/Models, tests/Views, tests/Controllers).
 
 ---
-### 4. Change list (since v5.0)
+### 4. Change list (since v5.1)
 
-- Values sent to the database are now accurate
-- Start date and time of each game is now saved in the DB
-- Games duration timing is now saved in the DB
-- The scores button in the menu now shows a new window with all rows (also in the console)
-- The DB window is now modal
-- The DB can now be used by placing it either at the project root directory or the same one as the .JAR
+- clock bug on ok button in menu fixed
+- Bug concerning game continuing after a victory or concession fixed
 
 ---
 ### 5. Known issues
